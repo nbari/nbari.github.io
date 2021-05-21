@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Git Web Deployment Workflow &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-web-deployment-workflow/">Git Web Deployment Workflow</a></h2>
+          <span class="post-date">Mar 25, 2018 </span>
+          <div class="post-content">
+            <p>The idea behind is to push to a remote repository on the same web/service server
+and a <code>post-receive</code> hook will checkout the files to the public directory.</p>
+<h2 id="configuring-the-server">Configuring the server</h2>
+<p>Create the repository:</p>
+<pre><code>$ cd $HOME
+$ mkdir my-site.git
+$ cd my-site.git
+$ git init --bare
+</code></pre>
+<p>The idea of using <code>.git</code> as a suffix is just to distinguish between other
+directories.</p>
+<p>Crate the directory where you would like to deploy, for example:</p>
+<pre><code>$ mkdir /home/sites/my-site
+</code></pre>
+<h3 id="create-a-post-receive-hook">Create a post-receive hook</h3>
+<p>When you create a <strong>bare</strong> repo, normally you get this structure:</p>
+<pre><code> my-site.git
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+</code></pre>
+<p>The <code>post-receive</code> hook (located within the <code>hooks</code> directory) will
+be called after git has received commits, for example create the file
+<code>$HOME/my-site.git/hooks/post-receive</code> with this contents:</p>
+<pre><code>#!/bin/sh
+git --work-tree=/home/sites/my-site checkout -f
+</code></pre>
+<p>Set <code>exec</code> permissions to the hook:</p>
+<pre><code>chmod +x hooks/post-receive
+</code></pre>
+<h2 id="configure-your-local-machine">Configure your local machine</h2>
+<p>Once you have setup your remote repository and the <code>post-receive</code> hook, you
+could add a second origin, something like:</p>
+<pre><code>$ git remote add live ssh://username@your-host.tld/~/my-site.git
+</code></pre>
+<p>Normally your project already has a remote named &ldquo;origin&rdquo; in where you can
+continue pushing your changes, branches etc; this new remote named <code>live</code> will
+be only used to checkout/publish your changes after receiving a commit.</p>
+<h2 id="deploy">Deploy</h2>
+<p>Just need to push to your remote named <strong>live</strong> in this example:</p>
+<pre><code>$ git push live master
+</code></pre>
+<p>After doing this, you could check your remote server and check the contents of
+<code>/home/sites/my-site</code> it should be updated to your latest changes.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/objc_disable_initialize_fork_safety/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/git/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

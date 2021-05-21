@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> freebsd &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/freebsd/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vultr-shutdown-o-n/">vultr shutdown -o -n -r now</a></h2>
+          <span class="post-date">May 21, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/shutdown">shutdown</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vultr">vultr</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To prevent the system to hang on &ldquo;detaching uhub0&rdquo; reboot using the flag -n:
+shutdown -o -n -r now  
+				<a class="read-more" href="/post/vultr-shutdown-o-n/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/start-2-xs-sata/">Start 2 XS SATA</a></h2>
+          <span class="post-date">Sep 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/online.net">online.net</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/rescue">rescue</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install FreeBSD using the rescue system on a Start-2-XS-SATA from online.net:
+#!/bin/sh -x USER=monkey PASSWORD=secret gpart destroy -F ada0 gpart create -s gpt ada0 gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 ada0 gpart add -t freebsd-boot -l boot -s 128K ada0 gpart add -t freebsd-swap -l swap -s 4g ada0 gpart add -t freebsd-ufs -l root ada0 gpart set -a active ada0 newfs /dev/gpt/root mount /dev/gpt/root /mnt cd /tmp fetch http://ftp.
+				<a class="read-more" href="/post/start-2-xs-sata/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/kld_list/">kld_list</a></h2>
+          <span class="post-date">Jun 15, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/kernel">kernel</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/kldload">kldload</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To load kernel modules after local disks are mounted add this to /etc/rc.conf:
+kld_list=&quot;fuse&quot;   in this case module fuse will be loaded
+ 
+				<a class="read-more" href="/post/kld_list/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/hw-machine-model-ncpu/">hw.(machine|model|ncpu)</a></h2>
+          <span class="post-date">Jun 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ncpu">ncpu</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sysctl">sysctl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To get an overview of the system:
+# sysctl -a | egrep -i 'hw.machine|hw.model|hw.ncpu' hw.machine: amd64 hw.model: Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz hw.ncpu: 16 hw.machine_arch: amd64  
+				<a class="read-more" href="/post/hw-machine-model-ncpu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/manifest-no-such-file-or-directory/">MANIFEST No Such File or Directory</a></h2>
+          <span class="post-date">Jun 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/manifest">MANIFEST</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsdinstall">bsdinstall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hetzner">hetzner</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If when trying to install FreeBSD using bsdinstall you get:
+&quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&quot; - no such file or directory  Try to:
+root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again
+				<a class="read-more" href="/post/manifest-no-such-file-or-directory/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sockstat/">sockstat</a></h2>
+          <span class="post-date">May 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sockstat">sockstat</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				The sockstat command list open Internet or UNIX domain sockets.
+List open tcp in ipv4:
+# sockstat -4l  Show connectd sockets in port 443 and tcp:
+# sockstat -P tcp -p 443 -c  List unix sockets:
+# sockstat -u  
+				<a class="read-more" href="/post/sockstat/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/freebsd-update/">freebsd-update</a></h2>
+          <span class="post-date">May 5, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/update">update</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Update Freebsd using freebsd-update:
+Set in /etc/rc.conf:
+kern_securelevel_enable=&quot;NO&quot; kern_securelevel=&quot;0&quot;  reboot and then:
+# freebsd-update upgrade -r 10.4-RELEASE # freebsd-update install # reboot # freebsd-update install   Repeate then to upgrade to 11.1 freebsd-update upgrade -r 11.1-RELEASE
+ Only security patches:
+# freebsd-update fetch # freebsd-update install  To update the packages:
+# pkg-static upgrade -f # freebsd-update install   A forced upgrade of all installed packages will replace the packages with fresh versions from the repository even if the version number has not increased.
+				<a class="read-more" href="/post/freebsd-update/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pkg-osversion/">pkg -o OSVERSION</a></h2>
+          <span class="post-date">Apr 21, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pkg">pkg</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When updating if get something like this:
+pkg: Newer FreeBSD version for package jsoncpp: - package: 1101503 - running kernel: 1100506  Try uname -KU to get the version, and then:
+pkg -o OSVERSION=1100506 update -f pkg -o OSVERSION=1100506 upgrade  
+				<a class="read-more" href="/post/pkg-osversion/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/update-port/">update port</a></h2>
+          <span class="post-date">Dec 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/port">port</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Make a copy of the current port:
+cp -R &lt;port-name&gt; &lt;port-name&gt;.orig  Work on the port:
+make makesum make checksum make stage make check-orphans make package make install make deinstall make clean  Crete the diff, first change one level up:
+diff -u port-name.orig port-name &gt; port-name.diff  Submit the patch.
+				<a class="read-more" href="/post/update-port/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/80/">80</a></h2>
+          <span class="post-date">Dec 11, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/80">80</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/port">port</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To start an application on port 80 being not root:
+sysctl net.inet.ip.portrange.reservedhigh=79  That will allow to bind an application in any port &gt; 79, to allow any port:
+sysctl net.inet.ip.portrange.reservedhigh=0  Add this to /etc/sysctl.conf to keep changes persistent across reboots:
+net.inet.ip.portrange.reservedhigh=79  
+				<a class="read-more" href="/post/80/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bsdinstall-manifest/">bsdinstall MANIFEST</a></h2>
+          <span class="post-date">Oct 13, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/manifest">MANIFEST</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsdinstall">bsdinstall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hetzner">hetzner</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When installing FreeBSD from an ftp/http it may complain that MANIFEST file is missing, to solve the problem try this:
+export DISTRIBUTIONS=&quot;kernel.txz base.txz&quot; mkdir /usr/freebsd-dist export BSDINSTALL_DISTDIR=&quot;/usr/freebsd-dist/&quot; export BSDINSTALL_DISTSITE=&quot;https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/&quot; bsdinstall distfetch cd /usr/freebsd-dist fetch https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/MANIFEST  Then run bsdinstall
+				<a class="read-more" href="/post/bsdinstall-manifest/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/syslogd-8-bit/">Syslogd 8 bit</a></h2>
+          <span class="post-date">Jul 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">FreeBSD</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslogd">syslogd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/utf8">utf8</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If want to log full utf-8 strings &ldquo;emoji&rsquo;s&rdquo; use the option -8, example on /etc/rc.conf:
+syslogd_flags=&quot;-ssC8&quot;  The optiosn are:
+ -s Operate in secure mode. Do not log messages from remote machines. If specified twice, no network socket will be opened at all, which also disables logging to remote machines. -C Create log files that do not exist (permission is set to 0600). -8 Tells syslogd not to interfere with 8-bit data.
+				<a class="read-more" href="/post/syslogd-8-bit/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vm-tools/">vm tools</a></h2>
+          <span class="post-date">Dec 19, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/vmware">vmware</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				vmware tools guest FreeBSD While running FreeBSD as a guest on VMWARE the vm-tools can be installed with this:
+$ pkg install open-vm-tools-nox11  Later enable them on /etc/rc.conf:
+vmware_guest_vmblock_enable=&#34;YES&#34; vmware_guest_vmhgfs_enable=&#34;YES&#34; vmware_guest_vmmemctl_enable=&#34;YES&#34; vmware_guest_vmxnet_enable=&#34;YES&#34; vmware_guestd_enable=&#34;YES&#34; 
+				<a class="read-more" href="/post/vm-tools/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/zfs/">zfs</a></h2>
+          <span class="post-date">Dec 10, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/raw">raw</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/image">image</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				FreeBSD zfs disk image Use VirtualBox to install FreeBSD using UFS.
+After having FreeBSD installed, update your sources and build a custom world and kernel based on your needs for the new image to be created:
+# cd /usr/src # make -j4 buildworld buildkernel   adjust -j4 to the number or cpu cores
+ Use this script to create the image: https://github.com/nbari/freebsd/blob/master/zfs/zfs.sh
+$ mkdir /raw &amp;&amp; cd /raw $ fetch --no-verify-peer https://raw.
+				<a class="read-more" href="/post/zfs/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ipv6-tunnelbroker/">ipv6 tunnelbroker</a></h2>
+          <span class="post-date">Dec 1, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ipv6">ipv6</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/he">he</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				6in4  6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets whose IP headers have the IP protocol number set to 41. https://en.wikipedia.org/wiki/6in4
+ &ldquo;6to4&rdquo; is a tunneling method that is only interesting for reaching IPv6-only services. And 6to4 makes sense only if one has a public IPv4 address. As a rule, you only need to enable &ldquo;6to4&rdquo; if you want to access services that are only IPv6.
+				<a class="read-more" href="/post/ipv6-tunnelbroker/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/observability-tools/">observability tools</a></h2>
+          <span class="post-date">Nov 14, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/linxu">linxu</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tools">tools</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				FreeBSD Linux src: http://www.brendangregg.com/blog/2015-03-06/performance-analysis-bsd.html
+				<a class="read-more" href="/post/observability-tools/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql_tzinfo_to_sql/">mysql_tzinfo_to_sql</a></h2>
+          <span class="post-date">Nov 7, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/utc">UTC</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				FreeBSD &amp; MySQL UTC After doing a fresh install, load the UTC zone:
+$ cd /usr/share/zoneinfo $ mysql_tzinfo_to_sql UTC UTC | mysql -u root mysql  Edit the /etc/my.cnf:
+[mysqld] default-time-zone='UTC'  This will set the default timezone on the server to be UTC
+To get current timezone of the mysql you can do following things:
+mysql&gt; SELECT @@global.time_zone, @@session.time_zone;  
+				<a class="read-more" href="/post/mysql_tzinfo_to_sql/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/convertfromraw/">convertfromraw</a></h2>
+          <span class="post-date">Nov 7, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">FreeBSD</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mkimg">mkimg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/virtualbox">VirtualBox</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vboxmanage">VBoxManage</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Convert from RAW to VDI When creating custom &ldquo;RAW&rdquo; images using mkimg they can be use in VirtualBox by converting them to &ldquo;VDI&rdquo; format, example:
+$ VBoxManage convertfromraw ec2.raw ec2.vdi --format VDI Converting from raw image file=&quot;ec2.raw&quot; to file=&quot;ec2.vdi&quot;... Creating dynamic image with size 3221292544 bytes (3073MB)...  Once the image is in &ldquo;VDI&rdquo; format it can be resized using:
+$ VBoxManage modifyhd ec2.vdi --resize 8192 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%  The above command will resize the image to 8GB.
+				<a class="read-more" href="/post/convertfromraw/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rpi/">Raspberry Pi 1 Model B</a></h2>
+          <span class="post-date">Sep 24, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/wifi">wifi</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/raspberry">raspberry</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Raspberry Pi 1 Model B, FreeBSD + wifi cat /var/run/dmesg.boot:
+KDB: debugger backends: ddb KDB: current backend: ddb Copyright (c) 1992-2016 The FreeBSD Project. Copyright (c) 1979, 1980, 1983, 1986, 1988, 1989, 1991, 1992, 1993, 1994 The Regents of the University of California. All rights reserved. FreeBSD is a registered trademark of The FreeBSD Foundation. FreeBSD 10.3-RELEASE #0 r297264: Fri Mar 25 08:01:14 UTC 2016 root@releng1.nyi.freebsd.org:/usr/obj/arm.armv6/usr/src/sys/RPI-B arm FreeBSD clang version 3.
+				<a class="read-more" href="/post/rpi/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/1000/">uptime 1000 days</a></h2>
+          <span class="post-date">Sep 21, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/uptime">uptime</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				uptime &gt;= 1000 days  OS: FreeBSD + ZFS + Jails Server: Dell PowerEdge 2900 2xE5420 24GB RAM Colocation: https://iweb.com/  Time to reboot after 4 years:
+I need to rebuild the RAID and can&rsquo;t mix SAS drives with SATA on an living array:
+				<a class="read-more" href="/post/1000/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+  <a class="btn next" href="/tags/freebsd/page/2/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>terms on IT notes</title>
+    <link>https://nbari.com/tags/terms/</link>
+    <description>Recent content in terms on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Mar 2018 22:10:55 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/terms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>terms</title>
+      <link>https://nbari.com/post/terms/</link>
+      <pubDate>Sun, 18 Mar 2018 22:10:55 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/terms/</guid>
+      <description>Some common terms and definition
+ IT is full of buzzwords &amp;hellip;
+ SRE &amp;ndash; Site Reliability Engineering Site Reliability Engineering (SRE) is a discipline that incorporates aspects of software engineering and applies that to IT operations problems. The main goals are to create ultra-scalable and highly reliable software systems.
+A site reliability engineer (SRE) will spend up to 50% of their time doing &amp;ldquo;ops&amp;rdquo; related work and spend the other 50% of their time on development</description>
+    </item>
+    
+  </channel>
+</rss>

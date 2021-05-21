@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> openssl &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/openssl/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/openssl-sha1-hmac/">openssl SHA1 HMAC</a></h2>
+          <span class="post-date">Mar 5, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sha1">sha1</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hmac">hmac</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an HMAC-SHA1:
+$ echo -n &quot;string&quot; | openssl sha1 -hmac &quot;shared_secret&quot;  or
+$ echo -n &quot;string&quot; | openssl dgst -sha1 -hmac &quot;shared_secret&quot;  
+				<a class="read-more" href="/post/openssl-sha1-hmac/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/htpasswd/">htpasswd</a></h2>
+          <span class="post-date">Sep 2, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/htpasswd">htpasswd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an htpasswd file (for htaccess &ldquo;authentication&rdquo;) using openssl:
+$ printf &quot;foo:$(openssl passwd -apr1 PASSWORD)\n&quot; &gt;&gt; .htpasswd  If need to use crypt:
+$ printf &quot;foo:$(openssl passwd -crypt PASSWORD)\n&quot; &gt;&gt; .htpasswd  
+				<a class="read-more" href="/post/htpasswd/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-backup/">mysql backup</a></h2>
+          <span class="post-date">Apr 11, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/xz">xz</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:
+				<a class="read-more" href="/post/mysql-backup/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-rsa-public-key-encryption/">ssh rsa public key encryption</a></h2>
+          <span class="post-date">Sep 29, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Encrypt a file using ssh public keys.
+Create ssh public key in PEM format:
+ ssh-keygen -f id_rsa.pub -e -m PKCS8 &gt; id_rsa.pem.pub  Use openssl to encrypt/decrypt
+Encrypt:
+openssl rsautl -encrypt -pubin -inkey ~/.ssh/id_rsa.pem.pub -ssl -in test.txt -out test.txt.enc  Decrypt:
+openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in test.txt.enc -out test.txt.enc.txt  
+				<a class="read-more" href="/post/ssh-rsa-public-key-encryption/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/openssl-cheat-sheet/">openssl cheat sheet</a></h2>
+          <span class="post-date">Jun 22, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To display the contents of a PEM formatted certificate:
+$ openssl x509 -in the-cert.pm -text  Connecting to the server:
+$ openssl s_client -showcerts -connect imap.ejemplo.org:993 &lt; /dev/null  Test smtp 587:
+$ openssl s_client -host smtp.gmail.com -port 587 -starttls smtp -crlf  Checking the Validity Date:
+$ openssl s_client -showcerts -connect nbari.com:443 2&gt;/dev/null | openssl x509 -noout -dates  Encode base64 a file:
+$ openssl enc -base64 -in file.txt -out file.
+				<a class="read-more" href="/post/openssl-cheat-sheet/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

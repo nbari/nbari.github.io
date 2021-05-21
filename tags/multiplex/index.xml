@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>multiplex on IT notes</title>
+    <link>https://nbari.com/tags/multiplex/</link>
+    <description>Recent content in multiplex on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Apr 2017 11:57:07 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/multiplex/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bastion ssh</title>
+      <link>https://nbari.com/post/bastion-ssh/</link>
+      <pubDate>Fri, 28 Apr 2017 11:57:07 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bastion-ssh/</guid>
+      <description>ProxyJump This is the easiest (new) way:
+Host 10.* ProxyJump user@bastion.tld:2222  Using ProxyCommand Replace your.bastion.tld with your bastion server and set your bastion username in the ProxyCommand:
+Host bastion Hostname your.bastion.tld ForwardAgent yes Host 10.10.* ProxyCommand ssh &amp;lt;your-username&amp;gt;@bastion -W %h:%p  example To login with user devops to server 10.10.3.4:
+$ ssh -l devops 10.10.3.4  or
+$ ssh devops@10.10.3.4  SSH sockets To speed up more when using the bastion host things this can be added at the top of the ~/.</description>
+    </item>
+    
+  </channel>
+</rss>

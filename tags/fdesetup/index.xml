@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fdesetup on IT notes</title>
+    <link>https://nbari.com/tags/fdesetup/</link>
+    <description>Recent content in fdesetup on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Apr 2021 17:09:06 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/fdesetup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fdesetup</title>
+      <link>https://nbari.com/post/fdesetup/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/fdesetup/</guid>
+      <description>To remove a user from the login screen when booting and login from the first time:
+sudo fdesetup remove -user monkey  The user will not be listed any more in the login screen, but you will need first logging with a user that can decrypt the disk and then switch to your user.
+ Note this will not delete or remove the user account
+ </description>
+    </item>
+    
+  </channel>
+</rss>

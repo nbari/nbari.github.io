@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sh on IT notes</title>
+    <link>https://nbari.com/tags/sh/</link>
+    <description>Recent content in sh on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Nov 2017 18:46:11 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sh loop</title>
+      <link>https://nbari.com/post/sh-loop/</link>
+      <pubDate>Thu, 23 Nov 2017 18:46:11 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sh-loop/</guid>
+      <description>Easy shell sh loop within a range:
+$ for i in $(seq 1 3); do echo $i; done 1 2 3  </description>
+    </item>
+    
+  </channel>
+</rss>

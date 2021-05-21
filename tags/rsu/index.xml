@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RSU on IT notes</title>
+    <link>https://nbari.com/tags/rsu/</link>
+    <description>Recent content in RSU on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Jan 2019 22:50:24 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/rsu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>galera alter</title>
+      <link>https://nbari.com/post/galera-alter/</link>
+      <pubDate>Tue, 29 Jan 2019 22:50:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/galera-alter/</guid>
+      <description>To prevent bloking the cluster while doing ALTERS (SCHEMA UPGRADES), do this per node:
+SET wsrep_OSU_method=&#39;RSU&#39;;  Then Run the ALTER statement once done reset the Schema Upgrade method back to Total Order Isolation.
+SET wsrep_OSU_method=&#39;TOI&#39;;  http://galeracluster.com/documentation-webpages/clusterstallonalter.html http://galeracluster.com/documentation-webpages/schemaupgrades.html</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sudo on IT notes</title>
+    <link>https://nbari.com/tags/sudo/</link>
+    <description>Recent content in sudo on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jul 2019 13:31:32 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/sudo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sudo SSH_CONNECTION</title>
+      <link>https://nbari.com/post/sudo-ssh_connection/</link>
+      <pubDate>Wed, 17 Jul 2019 13:31:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sudo-ssh_connection/</guid>
+      <description>When using ssh, if then doing something like sudo -i the environment vars are gone, to preserve modify your sudoers (/usr/local/etc/sudoers or /usr/local/etc/sudoers.d/devops) and add something like:
+Defaults env_keep += &amp;quot;SSH_TTY SSH_CONNECTION SSH_CLIENT&amp;quot;  In this case, it will preserve your SSH environment vars.</description>
+    </item>
+    
+  </channel>
+</rss>

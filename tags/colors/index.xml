@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>colors on IT notes</title>
+    <link>https://nbari.com/tags/colors/</link>
+    <description>Recent content in colors on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Sep 2018 13:41:33 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/colors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LS_COLORS</title>
+      <link>https://nbari.com/post/ls_colors/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ls_colors/</guid>
+      <description>To remove the blinking of symbolic links when doing ls in Linux:
+LS_COLORS=&amp;quot;ln=35&amp;quot; export LS_COLORS  That will set the ln=35 symbolic links to color purple.
+Params for LS_COLORS:
+di Directory fi File ln Symbolic Link pi Fifo file so Socket file bd Block (buffered) special file cd Character (unbuffered) special file or Symbolic Link pointing to a non-existent file (orphan) mi Non-existent file pointed to by a symbolic link (visible when you type ls -l) ex File which is executable (ie.</description>
+    </item>
+    
+  </channel>
+</rss>

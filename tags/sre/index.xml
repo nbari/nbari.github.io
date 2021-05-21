@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SRE on IT notes</title>
+    <link>https://nbari.com/tags/sre/</link>
+    <description>Recent content in SRE on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Jan 2017 15:12:56 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sre/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>perfomance checklist</title>
+      <link>https://nbari.com/post/perfomance-checklist/</link>
+      <pubDate>Tue, 24 Jan 2017 15:12:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/perfomance-checklist/</guid>
+      <description>Perfomance checklist for SRE&amp;rsquo;s Linux Perf Analysis in 60s  uptime load averages dmesg -T | tail kernel errors vmstat 1 overall stats by time mpstat -P ALL 1 CPU balance pidstat 1 process usage iostat -xz 1 disk I/O free -m memory usage sar -n DEV 1 network I/O sar -n TCP,ETCP 1 TCP stats top check overview  Linux Disk Checklist  iostat -xz 1 any disk I/O? if not, stop looking vmstat 1 is this swapping?</description>
+    </item>
+    
+  </channel>
+</rss>

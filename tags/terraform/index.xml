@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>terraform on IT notes</title>
+    <link>https://nbari.com/tags/terraform/</link>
+    <description>Recent content in terraform on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Aug 2017 09:31:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Merge Terraform States</title>
+      <link>https://nbari.com/post/merge-terraform-states/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/merge-terraform-states/</guid>
+      <description>If states are being stored in S3, after importing a resource, for example:
+$ terraform import aws_customer_gateway.main cgw-b4dc3961  You will end with a terraform.tfstate that differs from the one in the S3 bucket.
+To merge the remote and local state do this:
+$ terraform state pull &amp;gt; terraform.tfstate $ terraform import aws_customer_gateway.main cgw-b4dc3961 $ terraform state push terraform.tfstate  First get the current s3 state:
+$ terraform state pull &amp;gt; terraform.</description>
+    </item>
+    
+    <item>
+      <title>Terraform Full Vpc</title>
+      <link>https://nbari.com/post/terraform-full-vpc/</link>
+      <pubDate>Sat, 12 Aug 2017 04:07:54 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/terraform-full-vpc/</guid>
+      <description>Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &amp;#34;aws_vpc&amp;#34; &amp;#34;test&amp;#34; { cidr_block = &amp;#34;10.100.0.0/16&amp;#34; enable_dns_hostnames = &amp;#34;true&amp;#34; enable_dns_support = &amp;#34;true&amp;#34; tags { Name = &amp;#34;test&amp;#34; } } output &amp;#34;vpc_id&amp;#34; { value = &amp;#34;${aws_vpc.test.id}&amp;#34; } resource &amp;#34;aws_internet_gateway&amp;#34; &amp;#34;igw&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; tags { Name = &amp;#34;internet gateway&amp;#34; } } resource &amp;#34;aws_subnet&amp;#34; &amp;#34;public-a&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; cidr_block = &amp;#34;10.100.0.0/24&amp;#34; availability_zone = &amp;#34;eu-central-1a&amp;#34; tags { Name = &amp;#34;public A&amp;#34; } } output &amp;#34;subnet-public-a&amp;#34; { value = &amp;#34;${aws_subnet.</description>
+    </item>
+    
+  </channel>
+</rss>

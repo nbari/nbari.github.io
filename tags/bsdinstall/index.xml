@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bsdinstall on IT notes</title>
+    <link>https://nbari.com/tags/bsdinstall/</link>
+    <description>Recent content in bsdinstall on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Jun 2018 12:28:36 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/bsdinstall/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MANIFEST No Such File or Directory</title>
+      <link>https://nbari.com/post/manifest-no-such-file-or-directory/</link>
+      <pubDate>Tue, 12 Jun 2018 12:28:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/manifest-no-such-file-or-directory/</guid>
+      <description>If when trying to install FreeBSD using bsdinstall you get:
+&amp;quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&amp;quot; - no such file or directory  Try to:
+root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again</description>
+    </item>
+    
+    <item>
+      <title>bsdinstall MANIFEST</title>
+      <link>https://nbari.com/post/bsdinstall-manifest/</link>
+      <pubDate>Fri, 13 Oct 2017 17:05:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bsdinstall-manifest/</guid>
+      <description>When installing FreeBSD from an ftp/http it may complain that MANIFEST file is missing, to solve the problem try this:
+export DISTRIBUTIONS=&amp;quot;kernel.txz base.txz&amp;quot; mkdir /usr/freebsd-dist export BSDINSTALL_DISTDIR=&amp;quot;/usr/freebsd-dist/&amp;quot; export BSDINSTALL_DISTSITE=&amp;quot;https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/&amp;quot; bsdinstall distfetch cd /usr/freebsd-dist fetch https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/MANIFEST  Then run bsdinstall</description>
+    </item>
+    
+  </channel>
+</rss>

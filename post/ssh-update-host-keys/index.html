@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> ssh update Host Keys &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-update-host-keys/">ssh update Host Keys</a></h2>
+          <span class="post-date">Dec 26, 2017 </span>
+          <div class="post-content">
+            <p>To create new ssh keys on the server:</p>
+<pre><code>ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa -b 521
+</code></pre>
+<p>To check the fingerprint:</p>
+<pre><code>ssh-keygen -lf ssh_host_ecdsa_key
+</code></pre>
+<p>On the client side:</p>
+<pre><code>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:kY/TymCiskD0nhhyWaovohYvfCyZ7ymrEsmujeawaww.
+Please contact your system administrator.
+Add correct host key in /Users/monkey/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /Users/monkey/.ssh/known_hosts:236
+ECDSA host key for [76.9.57.82]:2222 has changed and you have requested strict checking.
+Host key verification failed.
+</code></pre><p>To see the key on line 236:</p>
+<pre><code>awk 'NR==236' know_hosts
+</code></pre>
+<p>To remove the key:</p>
+<pre><code>ssh-keygen -R &quot;[76.9.57.82]:2222&quot;
+</code></pre>
+<p>Try to ssh again and veriy the key matches the one on the server.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/mysql-sha512-crypt/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/drac5-update/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

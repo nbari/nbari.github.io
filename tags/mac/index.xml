@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mac on IT notes</title>
+    <link>https://nbari.com/tags/mac/</link>
+    <description>Recent content in mac on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Apr 2021 17:09:06 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fdesetup</title>
+      <link>https://nbari.com/post/fdesetup/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/fdesetup/</guid>
+      <description>To remove a user from the login screen when booting and login from the first time:
+sudo fdesetup remove -user monkey  The user will not be listed any more in the login screen, but you will need first logging with a user that can decrypt the disk and then switch to your user.
+ Note this will not delete or remove the user account
+ </description>
+    </item>
+    
+    <item>
+      <title>Flush DNS</title>
+      <link>https://nbari.com/post/flush-dns/</link>
+      <pubDate>Fri, 29 Jan 2021 20:34:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/flush-dns/</guid>
+      <description>To flush DNS on macOS:
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache  </description>
+    </item>
+    
+    <item>
+      <title>Prevent Mac to Sleep</title>
+      <link>https://nbari.com/post/prevent-mac-to-sleep/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/prevent-mac-to-sleep/</guid>
+      <description>To stop sleep entirely:
+sudo pmset -a disablesleep 1  To revert, allow sleep again:
+sudo pmset -a disablesleep 0  To display global power settings:
+pmset -g  </description>
+    </item>
+    
+    <item>
+      <title>osascript</title>
+      <link>https://nbari.com/post/osascript/</link>
+      <pubDate>Fri, 08 Feb 2019 08:55:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osascript/</guid>
+      <description>In macOS, to find a path of an application, for example Chromium:
+$ osascript -e &#39;POSIX path of (path to application &amp;quot;Chromium&amp;quot;)&#39;  </description>
+    </item>
+    
+    <item>
+      <title>jamf</title>
+      <link>https://nbari.com/post/jamf/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/jamf/</guid>
+      <description>softwareupdate -l to see if there are macOS updates available.
+softwareupdate -ia to install all updates.
+sudo jamf policy to run all outstanding policies and updates for the apps,
+sudo jamf recon to update the inventory on the server.</description>
+    </item>
+    
+    <item>
+      <title>OBJC_DISABLE_INITIALIZE_FORK_SAFETY</title>
+      <link>https://nbari.com/post/objc_disable_initialize_fork_safety/</link>
+      <pubDate>Thu, 22 Mar 2018 15:28:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/objc_disable_initialize_fork_safety/</guid>
+      <description>In macOS High Sierra if getting this:
+objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.  Define:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES  This will fix temporally fix the problem and allow program to continue executing, more about this issue here: http://sealiesoftware.</description>
+    </item>
+    
+    <item>
+      <title>Linux Mac Address</title>
+      <link>https://nbari.com/post/linux-mac-address/</link>
+      <pubDate>Wed, 14 Mar 2018 14:51:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/linux-mac-address/</guid>
+      <description>To get the MAC address from an interface in linux:
+cat /sys/class/net/eth1/address  </description>
+    </item>
+    
+    <item>
+      <title>dsymutil golang</title>
+      <link>https://nbari.com/post/dsymutil-golang/</link>
+      <pubDate>Tue, 04 Apr 2017 14:02:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dsymutil-golang/</guid>
+      <description>Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  </description>
+    </item>
+    
+    <item>
+      <title>ipv6 off</title>
+      <link>https://nbari.com/post/ipv6-off/</link>
+      <pubDate>Fri, 02 Dec 2016 14:52:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-off/</guid>
+      <description>Turn off IPv6 on mac First list interfaces:
+$ networksetup -listallnetworkservices An asterisk (*) denotes that a network service is disabled. Thunderbolt Ethernet Wi-Fi Bluetooth PAN Thunderbolt Bridge  Next:
+$ networksetup -setv6off &amp;#34;Thunderbolt Ethernet&amp;#34; For Wi-Fi:
+$ networksetup -setv6off Wi-Fi </description>
+    </item>
+    
+    <item>
+      <title>brew macos</title>
+      <link>https://nbari.com/post/brew/</link>
+      <pubDate>Sat, 30 Jul 2016 16:35:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew/</guid>
+      <description>Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:</description>
+    </item>
+    
+  </channel>
+</rss>

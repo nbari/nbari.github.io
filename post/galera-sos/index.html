@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> galera SOS &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/galera-sos/">galera SOS</a></h2>
+          <span class="post-date">Apr 10, 2019 </span>
+          <div class="post-content">
+            <p>Check status of cluster: <a href="https://nbari.com/post/galera/">https://nbari.com/post/galera/</a></p>
+<p>Find process list not sleeping:</p>
+<pre><code>SELECT user, time, state, info FROM information_schema.processlist WHERE command != 'Sleep' AND time &gt;= 2 ORDER BY time DESC, id;
+</code></pre>
+<p>Doing a heavy <code>DDL</code> (<code>ALTER</code>):</p>
+<pre><code>SELECT * FROM information_schema.processlist WHERE command != 'Sleep' AND info LIKE 'alter%' AND time &gt;= 2 ORDER BY time DESC, id LIMIT 1;
+</code></pre>
+<blockquote>
+<p>DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row. Create, alter, and drop are elements of this language.</p>
+</blockquote>
+<p>Get locked tables:</p>
+<pre><code>show open tables where in_use &gt; 0;
+</code></pre>
+<p>Finding locks:</p>
+<pre><code>show engine innodb status;
+</code></pre>
+<p>At the end:</p>
+<pre><code>---TRANSACTION 1135701157, ACTIVE 6768 sec
+MySQL thread id 5208136, OS thread handle 0x7f2982e91700, query id 882213399 xxxIPxxx 82.235.36.49 my_user cleaning up
+</code></pre>
+<p>kill the transaction thread:</p>
+<pre><code> KILL 5208136;
+</code></pre>
+<p>Information about all locks transactions are waiting for:</p>
+<pre><code>select * from information_schema.innodb_lock_waits;
+</code></pre>
+<p>A list of blocking transactions:</p>
+<pre><code>SELECT * FROM information_schema.INNODB_LOCKS WHERE LOCK_TRX_ID IN (SELECT BLOCKING_TRX_ID FROM INNODB_LOCK_WAITS);
+</code></pre>
+<p>Or:</p>
+<pre><code>SELECT INNODB_LOCKS.* FROM information_schema.INNODB_LOCKS JOIN INNODB_LOCK_WAITS ON (INNODB_LOCKS.LOCK_TRX_ID = INNODB_LOCK_WAITS.BLOCKING_TRX_ID);
+</code></pre>
+<p>A list of transactions waiting for locks:</p>
+<pre><code>SELECT TRX_ID, TRX_REQUESTED_LOCK_ID, TRX_MYSQL_THREAD_ID, TRX_QUERY FROM information_schema.INNODB_TRX WHERE TRX_STATE = 'LOCK WAIT';
+</code></pre>
+<p>To check logs with <code>pt-query-digest</code>, first get the binlog and do:</p>
+<pre><code>mysqlbinlog --start-datetime=&quot;2019-04-10 10:40:00&quot; --stop-datetime=&quot;2019-04-10 11:00:00&quot; mysql-bin.0013* &gt; out.sql
+</code></pre>
+<p>Then:</p>
+<pre><code>pt-query-digest --type binlog --group-by fingerprint --limit &quot;100%&quot; out.sql &gt; report.txt
+</code></pre>
+<blockquote>
+<p>in macOS if getting a segmentation fault use the full path
+<code>/usr/local/Cellar/percona-toolkit/3.0.13/libexec/bin/pt-query-digest</code> or download
+the lates version from <a href="https://www.percona.com/get/pt-query-digest">https://www.percona.com/get/pt-query-digest</a></p>
+</blockquote>
+<p>Get all table sizes for specific database in MB:</p>
+<pre><code>SELECT
+    table_schema 'Database Name',
+    SUM(data_length + index_length) 'Size in Bytes',
+    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) 'Size in MiB'
+FROM information_schema.tables
+GROUP BY table_schema
+ORDER BY 2 DESC limit 10;
+</code></pre>
+<p>For a specific database:</p>
+<pre><code>SELECT
+    table_schema 'Database Name',
+    SUM(data_length + index_length) 'Size in Bytes',
+    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) 'Size in MiB'
+FROM information_schema.tables
+WHERE table_schema = 'your_db_name';
+</code></pre>
+<p>Get a specific table size for a database in MB:</p>
+<pre><code>SELECT table_name AS &quot;Table&quot;,
+ROUND(((data_length + index_length) / 1024 / 1024), 2) AS &quot;Size (MB)&quot;
+FROM information_schema.TABLES
+WHERE table_schema = &quot;database_name&quot;
+ORDER BY (data_length + index_length) DESC;
+</code></pre>
+<p>How to calculate a good InnoDB log file size: (<a href="http://code.openark.org/blog/mysql/how-to-calculate-a-good-innodb-log-file-size-recap">http://code.openark.org/blog/mysql/how-to-calculate-a-good-innodb-log-file-size-recap</a>)</p>
+<pre><code>SELECT
+  innodb_os_log_written_per_minute*60
+    AS estimated_innodb_os_log_written_per_hour,
+  CONCAT(ROUND(innodb_os_log_written_per_minute*60/1024/1024, 1), 'MB')
+    AS estimated_innodb_os_log_written_per_hour_mb
+FROM
+  (SELECT SUM(value) AS innodb_os_log_written_per_minute FROM (
+    SELECT -VARIABLE_VALUE AS value
+      FROM INFORMATION_SCHEMA.GLOBAL_STATUS
+      WHERE VARIABLE_NAME = 'innodb_os_log_written'
+    UNION ALL
+    SELECT SLEEP(60)
+      FROM DUAL
+    UNION ALL
+    SELECT VARIABLE_VALUE
+      FROM INFORMATION_SCHEMA.GLOBAL_STATUS
+      WHERE VARIABLE_NAME = 'innodb_os_log_written'
+  ) s1
+) s2;
+</code></pre>
+<p>Find if a <code>mysqldump</code> is running:</p>
+<pre><code>SELECT * FROM information_schema.processlist WHERE info LIKE 'SELECT /*!40001 SQL_NO_CACHE */%';
+</code></pre>
+<p>Free some space in case <code>--log-bin</code> is enabled:</p>
+<pre><code>PURGE BINARY LOGS BEFORE NOW();
+</code></pre>
+<p>Or for an specific date:</p>
+<pre><code>PURGE BINARY LOGS BEFORE '20XX-01-01 00:00:00';
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/pigz/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/delete-file/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

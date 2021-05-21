@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pip on IT notes</title>
+    <link>https://nbari.com/tags/pip/</link>
+    <description>Recent content in pip on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 May 2021 07:55:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pip upgrade</title>
+      <link>https://nbari.com/post/pip-upgrade/</link>
+      <pubDate>Wed, 05 May 2021 07:55:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pip-upgrade/</guid>
+      <description>Upgrade using:
+pip list --outdated --format=freeze | grep -v &#39;^\-e&#39; | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --user  </description>
+    </item>
+    
+    <item>
+      <title>macOs catalina &amp; python</title>
+      <link>https://nbari.com/post/catalina-python/</link>
+      <pubDate>Tue, 12 Nov 2019 16:20:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/catalina-python/</guid>
+      <description>Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F&#39;[=]&#39; &#39;{print $1}&#39;)  </description>
+    </item>
+    
+  </channel>
+</rss>

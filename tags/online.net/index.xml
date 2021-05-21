@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>online.net on IT notes</title>
+    <link>https://nbari.com/tags/online.net/</link>
+    <description>Recent content in online.net on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Sep 2019 20:18:00 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/online.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>online.net IPv6</title>
+      <link>https://nbari.com/post/online-net-ipv6/</link>
+      <pubDate>Tue, 03 Sep 2019 20:18:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/online-net-ipv6/</guid>
+      <description>Configure IPv6 using dhcp6c for servers from online.net:
+pkg install dhcp6  Transform the DUID into a binary file (needed for dhcp6c):
+echo &amp;lt;DUID&amp;gt; | awk &#39;{ gsub(&amp;quot;:&amp;quot;,&amp;quot; &amp;quot;); printf &amp;quot;0: 0a 00 %s\n&amp;quot;, $0 }&#39; | xxd -r &amp;gt; /var/db/dhcp6c_duid  Add this in /usr/local/etc/dhcp6c.conf:
+id-assoc pd { prefix-interface igb0 { }; }; id-assoc na { }; interface igb0 { send ia-pd 0; send ia-na 0; };  Add this to /etc/rc.</description>
+    </item>
+    
+    <item>
+      <title>Start 2 XS SATA</title>
+      <link>https://nbari.com/post/start-2-xs-sata/</link>
+      <pubDate>Tue, 03 Sep 2019 09:04:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/start-2-xs-sata/</guid>
+      <description>To install FreeBSD using the rescue system on a Start-2-XS-SATA from online.net:
+#!/bin/sh -x USER=monkey PASSWORD=secret gpart destroy -F ada0 gpart create -s gpt ada0 gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 ada0 gpart add -t freebsd-boot -l boot -s 128K ada0 gpart add -t freebsd-swap -l swap -s 4g ada0 gpart add -t freebsd-ufs -l root ada0 gpart set -a active ada0 newfs /dev/gpt/root mount /dev/gpt/root /mnt cd /tmp fetch http://ftp.</description>
+    </item>
+    
+  </channel>
+</rss>

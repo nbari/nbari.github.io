@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sysctl on IT notes</title>
+    <link>https://nbari.com/tags/sysctl/</link>
+    <description>Recent content in sysctl on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Jun 2018 15:27:01 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/sysctl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hw.(machine|model|ncpu)</title>
+      <link>https://nbari.com/post/hw-machine-model-ncpu/</link>
+      <pubDate>Wed, 13 Jun 2018 15:27:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/hw-machine-model-ncpu/</guid>
+      <description>To get an overview of the system:
+# sysctl -a | egrep -i &#39;hw.machine|hw.model|hw.ncpu&#39; hw.machine: amd64 hw.model: Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz hw.ncpu: 16 hw.machine_arch: amd64  </description>
+    </item>
+    
+    <item>
+      <title>Measuring the Listen Queue</title>
+      <link>https://nbari.com/post/measuring-the-listen-queue/</link>
+      <pubDate>Fri, 01 Dec 2017 11:46:32 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/measuring-the-listen-queue/</guid>
+      <description>Run the command:
+netstat -Lan  The command output may be the following:
+Current listen queue sizes (qlen/incqlen/maxqlen) Proto Listen Local Address tcp46 1863/0/32768 *.80 tcp4 0/0/128 *.31025 tcp6 0/0/128 *.31025 Some tcp sockets may have been deleted. unix 0/0/32768 /var/run/immortal/tuip/immortal.sock unix 0/0/255 /var/db/syslog-ng.ctl unix 0/0/4 /var/run/devd.pipe unix 0/0/4 /var/run/devd.seqpacket.pipe The command output shows that there are 1863 unaccepted connections in the listen queue on Port 80, while the connection limit is 32768 connections, and this situation is normal.</description>
+    </item>
+    
+  </channel>
+</rss>

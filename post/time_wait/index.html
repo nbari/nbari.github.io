@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Time wait &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/time_wait/">Time wait</a></h2>
+          <span class="post-date">Sep 5, 2017 </span>
+          <div class="post-content">
+            <p>Reduce TIME_WAIT connections</p>
+<p>How many TIME_WAITs you have hanging out (run this like root):</p>
+<pre><code>netstat -na -p tcp | awk '{print $6}' | sort | uniq -c | sort -n
+</code></pre>
+<p>On Linux:</p>
+<pre><code>netstat -nat | awk '{print $6}' | sort | uniq -c | sort -n
+</code></pre>
+<p>Output will be something like:</p>
+<pre><code># netstat -na -p tcp | awk '{print $6}' | sort | uniq -c | sort -n
+   1
+   1 Foreign
+   1 LAST_ACK
+   1 been
+   3 LISTEN
+  25 SYN_RCVD
+1455 CLOSE_WAIT
+17518 ESTABLISHED
+</code></pre>
+<p>The formula to calculate the value (net.inet.tcp.msl) to time of seconds is 2
+times of the net.inet.tcp.msl value. which means the value of net.inet.tcp.msl
+with 30000 means 60000ms (because 2x30000), thus 60 seconds. In order set
+net.inet.tcp.msl to 15 seconds, change the value of net.inet.tcp.msl to 7500.
+for example:</p>
+<pre><code>sysctl net.inet.tcp.msl=7500
+</code></pre>
+<p>This will cause the TIME_WAIT sockets to terminate after waiting for 15 seconds,
+if no reply from the destination that this connection can be terminated.</p>
+<p>This  can be added to the <code>/etc/sysctl.conf</code>:</p>
+<pre><code>net.inet.tcp.fast_finwait2_recycle=1 # recycle FIN/WAIT states quickly
+net.inet.tcp.finwait2_timeout=15000  # TCP FIN_WAIT_2 timeout waiting for client FIN packet before state close (default 60000, 60 sec)
+net.inet.tcp.msl=2500                # Maximum Segment Lifetime, time the connection spends in TIME_WAIT state (default 30000, 2*MSL = 60 sec)
+</code></pre>
+<blockquote>
+<p>notice the <strong>2500</strong> it will be set to 5 seconds</p>
+</blockquote>
+<p>On Linux edit <code>/etc/sysctl.conf</code>:</p>
+<pre><code># Decrease TIME_WAIT seconds
+net.ipv4.tcp_fin_timeout = 15
+
+net.ipv4.tcp_tw_reuse = 1
+</code></pre>
+<blockquote>
+<p>net.ipv4.tcp_tw_recycle has been removed from Linux 4.12. <a href="https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux">https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux</a></p>
+</blockquote>
+<p><img src="/img/tcp_state_diagram.png" alt="tcp state diagram"></p>
+<p>Transmission Control Protocol (TCP) is designed to be a bidirectional, ordered,
+and reliable data transmission protocol between two end points (programs). In
+this context, the term reliable means that it will retransmit the packets if
+it gets lost in the middle. TCP guarantees the reliability by sending back
+Acknowledgment (ACK) packets back for a single or a range of packets received
+from the peer.</p>
+<p>This goes same for the control signals such as termination request/response.
+[RFC 793][1] defines the TIME-WAIT state to be as follows:</p>
+<blockquote>
+<p>TIME-WAIT - represents waiting for enough time to pass to be sure the remote
+TCP received the acknowledgment of its connection termination request.</p>
+</blockquote>
+<p>TCP is a bidirectional communication protocol, so when the connection is
+established, there is not a difference between the client and the server. Also,
+either one can call quits, and both peers needs to agree on closing to fully
+close an established TCP connection.</p>
+<p>Let&rsquo;s call the first one to call the quits as the active closer, and the other
+peer the passive closer. When the active closer sends FIN, the state goes to
+FIN-WAIT-1. Then it receives an ACK for the sent FIN and the state goes to
+FIN-WAIT-2. Once it receives FIN also from the passive closer, the active closer
+sends the ACK to the FIN and the state goes to TIME-WAIT. In case the passive
+closer did not received the ACK to the second FIN, it will retransmit the FIN
+packet.</p>
+<p><a href="https://tools.ietf.org/html/rfc793">RFC 793</a> sets the TIME-OUT to be twice the
+Maximum Segment Lifetime, or 2MSL. Since MSL, the maximum time a packet can
+wander around Internet, is set to 2 minutes, 2MSL is 4 minutes. Since there is
+no ACK to an ACK, the active closer can&rsquo;t do anything but to wait 4 minutes if
+it adheres to the TCP/IP protocol correctly, just in case the passive sender has
+not received the ACK to its FIN (theoretically).</p>
+<p>In reality, missing packets are probably rare, and very rare if it&rsquo;s all
+happening within the LAN or within a single machine.</p>
+<p>See also:</p>
+<ul>
+<li><a href="https://calomel.org/freebsd_network_tuning.html">https://calomel.org/freebsd_network_tuning.html</a></li>
+<li><a href="http://www.linuxbrigade.com/reduce-time_wait-socket-connections/">http://www.linuxbrigade.com/reduce-time_wait-socket-connections/</a></li>
+<li><a href="https://serverfault.com/a/329846/94862">https://serverfault.com/a/329846/94862</a></li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/strace/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/aws-policy-access-by-ip/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>timeout on IT notes</title>
+    <link>https://nbari.com/tags/timeout/</link>
+    <description>Recent content in timeout on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2017 20:00:24 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/timeout/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang HTTP Timeouts</title>
+      <link>https://nbari.com/post/golang-http-timeouts/</link>
+      <pubDate>Fri, 01 Dec 2017 20:00:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/golang-http-timeouts/</guid>
+      <description>If this:
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms  Check that your go server is using proper timeouts, example:
+srv := &amp;amp;http.Server{ Addr: &amp;#34;:80&amp;#34;, Handler: router, ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.Fatal(srv.ListenAndServe()) https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</description>
+    </item>
+    
+  </channel>
+</rss>

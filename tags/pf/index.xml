@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pf on IT notes</title>
+    <link>https://nbari.com/tags/pf/</link>
+    <description>Recent content in pf on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Dec 2018 09:44:00 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/pf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Block SSH on MacOS</title>
+      <link>https://nbari.com/post/block-ssh-mac/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/block-ssh-mac/</guid>
+      <description>To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &amp;quot;echo &#39;block in log quick proto tcp from any to any port 22&#39; &amp;gt;&amp;gt; /etc/pf.conf&amp;quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.</description>
+    </item>
+    
+    <item>
+      <title>Port knocking</title>
+      <link>https://nbari.com/post/portknocking/</link>
+      <pubDate>Sun, 19 Jun 2016 01:02:10 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/portknocking/</guid>
+      <description>In computer networking, port knocking is a method of externally opening ports on a firewall by generating a connection attempt on a set of prespecified closed ports. Once a correct sequence of connection attempts is received, the firewall rules are dynamically modified to allow the host which sent the connection attempts to connect over specific port(s).
+ For example, Using PF on FreeBSD to only open port 22 after X number of attempts to connect on port 1234:</description>
+    </item>
+    
+  </channel>
+</rss>

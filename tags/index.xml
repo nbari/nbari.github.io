@@ -1,0 +1,3539 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on IT notes</title>
+    <link>https://nbari.com/tags/</link>
+    <description>Recent content in Tags on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 May 2021 20:17:41 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>freebsd</title>
+      <link>https://nbari.com/tags/freebsd/</link>
+      <pubDate>Fri, 21 May 2021 20:17:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/freebsd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shutdown</title>
+      <link>https://nbari.com/tags/shutdown/</link>
+      <pubDate>Fri, 21 May 2021 20:17:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/shutdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vultr</title>
+      <link>https://nbari.com/tags/vultr/</link>
+      <pubDate>Fri, 21 May 2021 20:17:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/vultr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pip</title>
+      <link>https://nbari.com/tags/pip/</link>
+      <pubDate>Wed, 05 May 2021 07:55:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://nbari.com/tags/python/</link>
+      <pubDate>Wed, 05 May 2021 07:55:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gpg</title>
+      <link>https://nbari.com/tags/gpg/</link>
+      <pubDate>Tue, 27 Apr 2021 20:24:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/gpg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yubico</title>
+      <link>https://nbari.com/tags/yubico/</link>
+      <pubDate>Tue, 27 Apr 2021 20:24:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/yubico/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yubikey</title>
+      <link>https://nbari.com/tags/yubikey/</link>
+      <pubDate>Tue, 27 Apr 2021 20:24:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/yubikey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flask</title>
+      <link>https://nbari.com/tags/flask/</link>
+      <pubDate>Sat, 24 Apr 2021 16:25:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/flask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pipenv</title>
+      <link>https://nbari.com/tags/pipenv/</link>
+      <pubDate>Sat, 24 Apr 2021 16:25:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pipenv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pyinstaller</title>
+      <link>https://nbari.com/tags/pyinstaller/</link>
+      <pubDate>Sat, 24 Apr 2021 16:25:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pyinstaller/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>encryption</title>
+      <link>https://nbari.com/tags/encryption/</link>
+      <pubDate>Thu, 22 Apr 2021 10:52:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/encryption/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zfs</title>
+      <link>https://nbari.com/tags/zfs/</link>
+      <pubDate>Thu, 22 Apr 2021 10:52:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/zfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>comment</title>
+      <link>https://nbari.com/tags/comment/</link>
+      <pubDate>Sat, 17 Apr 2021 17:32:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/comment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://nbari.com/tags/ssh/</link>
+      <pubDate>Sat, 17 Apr 2021 17:32:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fdesetup</title>
+      <link>https://nbari.com/tags/fdesetup/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/fdesetup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>login</title>
+      <link>https://nbari.com/tags/login/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/login/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mac</title>
+      <link>https://nbari.com/tags/mac/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>password</title>
+      <link>https://nbari.com/tags/password/</link>
+      <pubDate>Wed, 14 Apr 2021 17:03:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/password/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>centos8</title>
+      <link>https://nbari.com/tags/centos8/</link>
+      <pubDate>Wed, 07 Apr 2021 16:30:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/centos8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpm</title>
+      <link>https://nbari.com/tags/rpm/</link>
+      <pubDate>Wed, 07 Apr 2021 16:30:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/rpm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>client</title>
+      <link>https://nbari.com/tags/client/</link>
+      <pubDate>Sat, 06 Mar 2021 17:04:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/client/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://nbari.com/tags/postgres/</link>
+      <pubDate>Sat, 06 Mar 2021 17:04:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>psql</title>
+      <link>https://nbari.com/tags/psql/</link>
+      <pubDate>Sat, 06 Mar 2021 17:04:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/psql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dns</title>
+      <link>https://nbari.com/tags/dns/</link>
+      <pubDate>Fri, 29 Jan 2021 20:34:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/dns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ipv6</title>
+      <link>https://nbari.com/tags/ipv6/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ipv6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://nbari.com/tags/linux/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coin</title>
+      <link>https://nbari.com/tags/coin/</link>
+      <pubDate>Sun, 18 Oct 2020 18:59:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/coin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crytp</title>
+      <link>https://nbari.com/tags/crytp/</link>
+      <pubDate>Sun, 18 Oct 2020 18:59:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/crytp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>storj</title>
+      <link>https://nbari.com/tags/storj/</link>
+      <pubDate>Sun, 18 Oct 2020 18:59:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/storj/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ffmpeg</title>
+      <link>https://nbari.com/tags/ffmpeg/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ffmpeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mov</title>
+      <link>https://nbari.com/tags/mov/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mov/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mp4</title>
+      <link>https://nbari.com/tags/mp4/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mp4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>favicon</title>
+      <link>https://nbari.com/tags/favicon/</link>
+      <pubDate>Tue, 28 Jul 2020 19:19:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/favicon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ico</title>
+      <link>https://nbari.com/tags/ico/</link>
+      <pubDate>Tue, 28 Jul 2020 19:19:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ico/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csplit</title>
+      <link>https://nbari.com/tags/csplit/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/csplit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dump</title>
+      <link>https://nbari.com/tags/dump/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dump/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://nbari.com/tags/mysql/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>source</title>
+      <link>https://nbari.com/tags/source/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/source/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chunks</title>
+      <link>https://nbari.com/tags/chunks/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/chunks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>delete</title>
+      <link>https://nbari.com/tags/delete/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/delete/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nc</title>
+      <link>https://nbari.com/tags/nc/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/nc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>portforward</title>
+      <link>https://nbari.com/tags/portforward/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/portforward/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>socat</title>
+      <link>https://nbari.com/tags/socat/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/socat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://nbari.com/tags/rust/</link>
+      <pubDate>Fri, 08 May 2020 21:46:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>strip</title>
+      <link>https://nbari.com/tags/strip/</link>
+      <pubDate>Fri, 08 May 2020 21:46:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/strip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>append</title>
+      <link>https://nbari.com/tags/append/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/append/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bsd</title>
+      <link>https://nbari.com/tags/bsd/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bsd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macOS</title>
+      <link>https://nbari.com/tags/macos/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sed</title>
+      <link>https://nbari.com/tags/sed/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fat16</title>
+      <link>https://nbari.com/tags/fat16/</link>
+      <pubDate>Mon, 23 Mar 2020 16:26:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/fat16/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fat32</title>
+      <link>https://nbari.com/tags/fat32/</link>
+      <pubDate>Mon, 23 Mar 2020 16:26:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/fat32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>size</title>
+      <link>https://nbari.com/tags/size/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/size/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>video</title>
+      <link>https://nbari.com/tags/video/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/video/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vlc</title>
+      <link>https://nbari.com/tags/vlc/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vlc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ip</title>
+      <link>https://nbari.com/tags/ip/</link>
+      <pubDate>Wed, 26 Feb 2020 14:33:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>route</title>
+      <link>https://nbari.com/tags/route/</link>
+      <pubDate>Wed, 26 Feb 2020 14:33:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/route/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>proxy</title>
+      <link>https://nbari.com/tags/proxy/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/proxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>https://nbari.com/tags/redis/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tls</title>
+      <link>https://nbari.com/tags/tls/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tls/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://nbari.com/tags/vim/</link>
+      <pubDate>Fri, 07 Feb 2020 19:47:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://nbari.com/tags/windows/</link>
+      <pubDate>Fri, 07 Feb 2020 19:47:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ansible</title>
+      <link>https://nbari.com/tags/ansible/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quit</title>
+      <link>https://nbari.com/tags/quit/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/quit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postfix</title>
+      <link>https://nbari.com/tags/postfix/</link>
+      <pubDate>Sat, 23 Nov 2019 17:19:02 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/postfix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>version</title>
+      <link>https://nbari.com/tags/version/</link>
+      <pubDate>Sat, 23 Nov 2019 17:19:02 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/version/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>catalina</title>
+      <link>https://nbari.com/tags/catalina/</link>
+      <pubDate>Tue, 12 Nov 2019 16:20:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/catalina/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>resume</title>
+      <link>https://nbari.com/tags/resume/</link>
+      <pubDate>Thu, 26 Sep 2019 18:26:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/resume/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tar</title>
+      <link>https://nbari.com/tags/tar/</link>
+      <pubDate>Thu, 26 Sep 2019 18:26:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/tar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>convert</title>
+      <link>https://nbari.com/tags/convert/</link>
+      <pubDate>Sun, 15 Sep 2019 17:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/convert/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>svg</title>
+      <link>https://nbari.com/tags/svg/</link>
+      <pubDate>Sun, 15 Sep 2019 17:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/svg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>canvas</title>
+      <link>https://nbari.com/tags/canvas/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/canvas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crop</title>
+      <link>https://nbari.com/tags/crop/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/crop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>imagemagick</title>
+      <link>https://nbari.com/tags/imagemagick/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/imagemagick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>resize</title>
+      <link>https://nbari.com/tags/resize/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/resize/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crc32</title>
+      <link>https://nbari.com/tags/crc32/</link>
+      <pubDate>Sun, 08 Sep 2019 11:04:38 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/crc32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grep</title>
+      <link>https://nbari.com/tags/grep/</link>
+      <pubDate>Sat, 07 Sep 2019 18:41:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/grep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dhcp6c</title>
+      <link>https://nbari.com/tags/dhcp6c/</link>
+      <pubDate>Tue, 03 Sep 2019 20:18:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dhcp6c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>online.net</title>
+      <link>https://nbari.com/tags/online.net/</link>
+      <pubDate>Tue, 03 Sep 2019 20:18:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/online.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rescue</title>
+      <link>https://nbari.com/tags/rescue/</link>
+      <pubDate>Tue, 03 Sep 2019 09:04:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/rescue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pmset</title>
+      <link>https://nbari.com/tags/pmset/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pmset/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sleep</title>
+      <link>https://nbari.com/tags/sleep/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sleep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>environment</title>
+      <link>https://nbari.com/tags/environment/</link>
+      <pubDate>Wed, 17 Jul 2019 13:31:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/environment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sudo</title>
+      <link>https://nbari.com/tags/sudo/</link>
+      <pubDate>Wed, 17 Jul 2019 13:31:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sudo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>headless</title>
+      <link>https://nbari.com/tags/headless/</link>
+      <pubDate>Wed, 17 Jul 2019 10:38:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/headless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VirtualBox</title>
+      <link>https://nbari.com/tags/virtualbox/</link>
+      <pubDate>Wed, 17 Jul 2019 10:38:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/virtualbox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dpi</title>
+      <link>https://nbari.com/tags/dpi/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dpi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hdmi</title>
+      <link>https://nbari.com/tags/hdmi/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/hdmi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>monitor</title>
+      <link>https://nbari.com/tags/monitor/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/monitor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>screen</title>
+      <link>https://nbari.com/tags/screen/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/screen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sharing</title>
+      <link>https://nbari.com/tags/sharing/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sharing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>date</title>
+      <link>https://nbari.com/tags/date/</link>
+      <pubDate>Mon, 03 Jun 2019 21:47:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/date/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>timestamp</title>
+      <link>https://nbari.com/tags/timestamp/</link>
+      <pubDate>Mon, 03 Jun 2019 21:47:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/timestamp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unix</title>
+      <link>https://nbari.com/tags/unix/</link>
+      <pubDate>Mon, 03 Jun 2019 21:47:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/unix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://nbari.com/tags/docker/</link>
+      <pubDate>Wed, 29 May 2019 00:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pager</title>
+      <link>https://nbari.com/tags/pager/</link>
+      <pubDate>Wed, 15 May 2019 10:35:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pager/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>build</title>
+      <link>https://nbari.com/tags/build/</link>
+      <pubDate>Tue, 14 May 2019 19:10:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/build/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>disable</title>
+      <link>https://nbari.com/tags/disable/</link>
+      <pubDate>Tue, 14 May 2019 19:10:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/disable/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://nbari.com/tags/go/</link>
+      <pubDate>Tue, 14 May 2019 19:10:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>files</title>
+      <link>https://nbari.com/tags/files/</link>
+      <pubDate>Mon, 06 May 2019 14:44:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/files/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rm</title>
+      <link>https://nbari.com/tags/rm/</link>
+      <pubDate>Mon, 06 May 2019 14:44:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/rm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cluster</title>
+      <link>https://nbari.com/tags/cluster/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cluster/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>galera</title>
+      <link>https://nbari.com/tags/galera/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/galera/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mariadb</title>
+      <link>https://nbari.com/tags/mariadb/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mariadb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gzip</title>
+      <link>https://nbari.com/tags/gzip/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/gzip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parallel</title>
+      <link>https://nbari.com/tags/parallel/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/parallel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pigz</title>
+      <link>https://nbari.com/tags/pigz/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pigz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>https://nbari.com/tags/zsh/</link>
+      <pubDate>Sat, 23 Mar 2019 18:32:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>functions</title>
+      <link>https://nbari.com/tags/functions/</link>
+      <pubDate>Wed, 13 Mar 2019 20:12:57 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gcf</title>
+      <link>https://nbari.com/tags/gcf/</link>
+      <pubDate>Wed, 13 Mar 2019 20:12:57 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/gcf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>google cloud</title>
+      <link>https://nbari.com/tags/google-cloud/</link>
+      <pubDate>Wed, 13 Mar 2019 20:12:57 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/google-cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tcpdump</title>
+      <link>https://nbari.com/tags/tcpdump/</link>
+      <pubDate>Sun, 10 Mar 2019 15:42:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tcpdump/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wireshark</title>
+      <link>https://nbari.com/tags/wireshark/</link>
+      <pubDate>Sun, 10 Mar 2019 15:42:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/wireshark/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>elasticsearch</title>
+      <link>https://nbari.com/tags/elasticsearch/</link>
+      <pubDate>Thu, 07 Mar 2019 23:52:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ISODATE</title>
+      <link>https://nbari.com/tags/isodate/</link>
+      <pubDate>Thu, 07 Mar 2019 23:52:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/isodate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hmac</title>
+      <link>https://nbari.com/tags/hmac/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/hmac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openssl</title>
+      <link>https://nbari.com/tags/openssl/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/openssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sha1</title>
+      <link>https://nbari.com/tags/sha1/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sha1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>https://nbari.com/tags/http/</link>
+      <pubDate>Fri, 15 Feb 2019 15:26:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>path</title>
+      <link>https://nbari.com/tags/path/</link>
+      <pubDate>Fri, 08 Feb 2019 08:55:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/path/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>script</title>
+      <link>https://nbari.com/tags/script/</link>
+      <pubDate>Fri, 08 Feb 2019 08:55:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/script/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RSU</title>
+      <link>https://nbari.com/tags/rsu/</link>
+      <pubDate>Tue, 29 Jan 2019 22:50:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/rsu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TOI</title>
+      <link>https://nbari.com/tags/toi/</link>
+      <pubDate>Tue, 29 Jan 2019 22:50:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/toi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iso</title>
+      <link>https://nbari.com/tags/iso/</link>
+      <pubDate>Thu, 13 Dec 2018 20:47:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/iso/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mojave</title>
+      <link>https://nbari.com/tags/mojave/</link>
+      <pubDate>Thu, 13 Dec 2018 20:47:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/mojave/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jamf</title>
+      <link>https://nbari.com/tags/jamf/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/jamf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>managed</title>
+      <link>https://nbari.com/tags/managed/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/managed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reset</title>
+      <link>https://nbari.com/tags/reset/</link>
+      <pubDate>Mon, 10 Dec 2018 11:02:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/reset/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stty</title>
+      <link>https://nbari.com/tags/stty/</link>
+      <pubDate>Mon, 10 Dec 2018 11:02:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/stty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terminal</title>
+      <link>https://nbari.com/tags/terminal/</link>
+      <pubDate>Mon, 10 Dec 2018 11:02:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tmux</title>
+      <link>https://nbari.com/tags/tmux/</link>
+      <pubDate>Fri, 07 Dec 2018 13:57:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>firewall</title>
+      <link>https://nbari.com/tags/firewall/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/firewall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pf</title>
+      <link>https://nbari.com/tags/pf/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/pf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>processlist</title>
+      <link>https://nbari.com/tags/processlist/</link>
+      <pubDate>Mon, 12 Nov 2018 20:10:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/processlist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>watch</title>
+      <link>https://nbari.com/tags/watch/</link>
+      <pubDate>Mon, 12 Nov 2018 20:10:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/watch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>osi</title>
+      <link>https://nbari.com/tags/osi/</link>
+      <pubDate>Wed, 07 Nov 2018 18:49:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/osi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>irc</title>
+      <link>https://nbari.com/tags/irc/</link>
+      <pubDate>Fri, 02 Nov 2018 11:18:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/irc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>converg</title>
+      <link>https://nbari.com/tags/converg/</link>
+      <pubDate>Wed, 17 Oct 2018 12:39:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/converg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>colors</title>
+      <link>https://nbari.com/tags/colors/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/colors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ls</title>
+      <link>https://nbari.com/tags/ls/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ls/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>https://nbari.com/tags/shell/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>htpasswd</title>
+      <link>https://nbari.com/tags/htpasswd/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/htpasswd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://nbari.com/tags/nginx/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bare</title>
+      <link>https://nbari.com/tags/bare/</link>
+      <pubDate>Wed, 29 Aug 2018 16:26:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bare/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://nbari.com/tags/git/</link>
+      <pubDate>Wed, 29 Aug 2018 16:26:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ca</title>
+      <link>https://nbari.com/tags/ca/</link>
+      <pubDate>Mon, 27 Aug 2018 12:33:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>self-signed</title>
+      <link>https://nbari.com/tags/self-signed/</link>
+      <pubDate>Mon, 27 Aug 2018 12:33:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/self-signed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bosh</title>
+      <link>https://nbari.com/tags/bosh/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bosh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cheat</title>
+      <link>https://nbari.com/tags/cheat/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cheat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cheatsheet</title>
+      <link>https://nbari.com/tags/cheatsheet/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cheatsheet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sheet</title>
+      <link>https://nbari.com/tags/sheet/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sheet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swap</title>
+      <link>https://nbari.com/tags/swap/</link>
+      <pubDate>Mon, 20 Aug 2018 20:51:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/swap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>history</title>
+      <link>https://nbari.com/tags/history/</link>
+      <pubDate>Sat, 11 Aug 2018 15:59:53 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/history/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>install</title>
+      <link>https://nbari.com/tags/install/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/install/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sparse</title>
+      <link>https://nbari.com/tags/sparse/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sparse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vmware</title>
+      <link>https://nbari.com/tags/vmware/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/vmware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>alphabet</title>
+      <link>https://nbari.com/tags/alphabet/</link>
+      <pubDate>Sat, 28 Jul 2018 07:19:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/alphabet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nato</title>
+      <link>https://nbari.com/tags/nato/</link>
+      <pubDate>Sat, 28 Jul 2018 07:19:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/nato/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>receive</title>
+      <link>https://nbari.com/tags/receive/</link>
+      <pubDate>Thu, 21 Jun 2018 12:00:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/receive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>root</title>
+      <link>https://nbari.com/tags/root/</link>
+      <pubDate>Thu, 21 Jun 2018 12:00:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/root/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>send</title>
+      <link>https://nbari.com/tags/send/</link>
+      <pubDate>Thu, 21 Jun 2018 12:00:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/send/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chrome</title>
+      <link>https://nbari.com/tags/chrome/</link>
+      <pubDate>Tue, 19 Jun 2018 19:55:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/chrome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>paste</title>
+      <link>https://nbari.com/tags/paste/</link>
+      <pubDate>Tue, 19 Jun 2018 19:55:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/paste/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kernel</title>
+      <link>https://nbari.com/tags/kernel/</link>
+      <pubDate>Fri, 15 Jun 2018 09:46:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/kernel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kldload</title>
+      <link>https://nbari.com/tags/kldload/</link>
+      <pubDate>Fri, 15 Jun 2018 09:46:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/kldload/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ncpu</title>
+      <link>https://nbari.com/tags/ncpu/</link>
+      <pubDate>Wed, 13 Jun 2018 15:27:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ncpu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sysctl</title>
+      <link>https://nbari.com/tags/sysctl/</link>
+      <pubDate>Wed, 13 Jun 2018 15:27:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sysctl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dfs</title>
+      <link>https://nbari.com/tags/dfs/</link>
+      <pubDate>Tue, 12 Jun 2018 21:29:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>moosefs</title>
+      <link>https://nbari.com/tags/moosefs/</link>
+      <pubDate>Tue, 12 Jun 2018 21:29:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/moosefs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bsdinstall</title>
+      <link>https://nbari.com/tags/bsdinstall/</link>
+      <pubDate>Tue, 12 Jun 2018 12:28:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bsdinstall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hetzner</title>
+      <link>https://nbari.com/tags/hetzner/</link>
+      <pubDate>Tue, 12 Jun 2018 12:28:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/hetzner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MANIFEST</title>
+      <link>https://nbari.com/tags/manifest/</link>
+      <pubDate>Tue, 12 Jun 2018 12:28:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/manifest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ctrl</title>
+      <link>https://nbari.com/tags/ctrl/</link>
+      <pubDate>Mon, 11 Jun 2018 17:49:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ctrl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kill</title>
+      <link>https://nbari.com/tags/kill/</link>
+      <pubDate>Mon, 11 Jun 2018 17:49:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/kill/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>site-packages</title>
+      <link>https://nbari.com/tags/site-packages/</link>
+      <pubDate>Thu, 07 Jun 2018 14:22:46 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/site-packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tcp</title>
+      <link>https://nbari.com/tags/tcp/</link>
+      <pubDate>Fri, 01 Jun 2018 07:25:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/tcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unbound</title>
+      <link>https://nbari.com/tags/unbound/</link>
+      <pubDate>Fri, 01 Jun 2018 07:25:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/unbound/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CanonicalDomains</title>
+      <link>https://nbari.com/tags/canonicaldomains/</link>
+      <pubDate>Wed, 30 May 2018 12:22:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/canonicaldomains/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pfsense</title>
+      <link>https://nbari.com/tags/pfsense/</link>
+      <pubDate>Tue, 29 May 2018 21:40:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pfsense/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deb</title>
+      <link>https://nbari.com/tags/deb/</link>
+      <pubDate>Mon, 28 May 2018 11:22:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/deb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>led</title>
+      <link>https://nbari.com/tags/led/</link>
+      <pubDate>Tue, 15 May 2018 01:06:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/led/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>odroid</title>
+      <link>https://nbari.com/tags/odroid/</link>
+      <pubDate>Tue, 15 May 2018 01:06:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/odroid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>exec</title>
+      <link>https://nbari.com/tags/exec/</link>
+      <pubDate>Mon, 14 May 2018 11:46:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/exec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>syscall</title>
+      <link>https://nbari.com/tags/syscall/</link>
+      <pubDate>Mon, 14 May 2018 11:46:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/syscall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sockstat</title>
+      <link>https://nbari.com/tags/sockstat/</link>
+      <pubDate>Sun, 13 May 2018 17:32:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/sockstat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ad-hoc</title>
+      <link>https://nbari.com/tags/ad-hoc/</link>
+      <pubDate>Wed, 09 May 2018 10:24:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ad-hoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>update</title>
+      <link>https://nbari.com/tags/update/</link>
+      <pubDate>Sat, 05 May 2018 15:58:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/update/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>collectd</title>
+      <link>https://nbari.com/tags/collectd/</link>
+      <pubDate>Sat, 05 May 2018 10:55:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/collectd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>influxdb</title>
+      <link>https://nbari.com/tags/influxdb/</link>
+      <pubDate>Sat, 05 May 2018 10:55:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/influxdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>time-series</title>
+      <link>https://nbari.com/tags/time-series/</link>
+      <pubDate>Sat, 05 May 2018 10:55:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/time-series/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WOL</title>
+      <link>https://nbari.com/tags/wol/</link>
+      <pubDate>Fri, 04 May 2018 17:34:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/wol/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>womp</title>
+      <link>https://nbari.com/tags/womp/</link>
+      <pubDate>Fri, 04 May 2018 17:34:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/womp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cdn</title>
+      <link>https://nbari.com/tags/cdn/</link>
+      <pubDate>Wed, 02 May 2018 12:42:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cdn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>domain</title>
+      <link>https://nbari.com/tags/domain/</link>
+      <pubDate>Wed, 02 May 2018 12:42:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/domain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fronting</title>
+      <link>https://nbari.com/tags/fronting/</link>
+      <pubDate>Wed, 02 May 2018 12:42:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/fronting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>decode</title>
+      <link>https://nbari.com/tags/decode/</link>
+      <pubDate>Sun, 29 Apr 2018 13:35:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/decode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>encode</title>
+      <link>https://nbari.com/tags/encode/</link>
+      <pubDate>Sun, 29 Apr 2018 13:35:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/encode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>idna</title>
+      <link>https://nbari.com/tags/idna/</link>
+      <pubDate>Sun, 29 Apr 2018 13:35:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/idna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>key</title>
+      <link>https://nbari.com/tags/key/</link>
+      <pubDate>Thu, 26 Apr 2018 15:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/key/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productkey</title>
+      <link>https://nbari.com/tags/productkey/</link>
+      <pubDate>Thu, 26 Apr 2018 15:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/productkey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xargs</title>
+      <link>https://nbari.com/tags/xargs/</link>
+      <pubDate>Thu, 26 Apr 2018 15:18:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/xargs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mktmp</title>
+      <link>https://nbari.com/tags/mktmp/</link>
+      <pubDate>Tue, 24 Apr 2018 18:20:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mktmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tmp</title>
+      <link>https://nbari.com/tags/tmp/</link>
+      <pubDate>Tue, 24 Apr 2018 18:20:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/tmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pkg</title>
+      <link>https://nbari.com/tags/pkg/</link>
+      <pubDate>Sat, 21 Apr 2018 20:38:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pkg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hosts</title>
+      <link>https://nbari.com/tags/hosts/</link>
+      <pubDate>Thu, 19 Apr 2018 21:56:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/hosts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mtu</title>
+      <link>https://nbari.com/tags/mtu/</link>
+      <pubDate>Tue, 10 Apr 2018 21:16:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mtu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wifi</title>
+      <link>https://nbari.com/tags/wifi/</link>
+      <pubDate>Tue, 10 Apr 2018 21:16:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/wifi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>radius</title>
+      <link>https://nbari.com/tags/radius/</link>
+      <pubDate>Mon, 26 Mar 2018 14:23:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/radius/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>radtest</title>
+      <link>https://nbari.com/tags/radtest/</link>
+      <pubDate>Mon, 26 Mar 2018 14:23:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/radtest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deployment</title>
+      <link>https://nbari.com/tags/deployment/</link>
+      <pubDate>Sun, 25 Mar 2018 12:28:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hooks</title>
+      <link>https://nbari.com/tags/hooks/</link>
+      <pubDate>Sun, 25 Mar 2018 12:28:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/hooks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fork</title>
+      <link>https://nbari.com/tags/fork/</link>
+      <pubDate>Thu, 22 Mar 2018 15:28:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/fork/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>https://nbari.com/tags/bash/</link>
+      <pubDate>Tue, 20 Mar 2018 22:28:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prompt</title>
+      <link>https://nbari.com/tags/prompt/</link>
+      <pubDate>Tue, 20 Mar 2018 22:28:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/prompt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terms</title>
+      <link>https://nbari.com/tags/terms/</link>
+      <pubDate>Sun, 18 Mar 2018 22:10:55 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/terms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HWADDR</title>
+      <link>https://nbari.com/tags/hwaddr/</link>
+      <pubDate>Wed, 14 Mar 2018 14:51:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/hwaddr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chmod</title>
+      <link>https://nbari.com/tags/chmod/</link>
+      <pubDate>Mon, 12 Mar 2018 20:41:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/chmod/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>find</title>
+      <link>https://nbari.com/tags/find/</link>
+      <pubDate>Mon, 12 Mar 2018 20:41:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/find/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>disown</title>
+      <link>https://nbari.com/tags/disown/</link>
+      <pubDate>Sat, 10 Mar 2018 16:07:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/disown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nohup</title>
+      <link>https://nbari.com/tags/nohup/</link>
+      <pubDate>Sat, 10 Mar 2018 16:07:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/nohup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reboot</title>
+      <link>https://nbari.com/tags/reboot/</link>
+      <pubDate>Wed, 07 Mar 2018 20:46:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/reboot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>guest</title>
+      <link>https://nbari.com/tags/guest/</link>
+      <pubDate>Wed, 28 Feb 2018 09:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/guest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>centos</title>
+      <link>https://nbari.com/tags/centos/</link>
+      <pubDate>Tue, 27 Feb 2018 12:33:49 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/centos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sssd</title>
+      <link>https://nbari.com/tags/sssd/</link>
+      <pubDate>Wed, 21 Feb 2018 15:38:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sssd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>selinux</title>
+      <link>https://nbari.com/tags/selinux/</link>
+      <pubDate>Wed, 21 Feb 2018 09:39:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keychain</title>
+      <link>https://nbari.com/tags/keychain/</link>
+      <pubDate>Tue, 13 Feb 2018 10:01:54 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/keychain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nmap</title>
+      <link>https://nbari.com/tags/nmap/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/nmap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scanssl</title>
+      <link>https://nbari.com/tags/scanssl/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/scanssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
+      <link>https://nbari.com/tags/ssl/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>console</title>
+      <link>https://nbari.com/tags/console/</link>
+      <pubDate>Wed, 03 Jan 2018 10:50:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/console/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mail</title>
+      <link>https://nbari.com/tags/mail/</link>
+      <pubDate>Wed, 03 Jan 2018 10:50:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/mail/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>port</title>
+      <link>https://nbari.com/tags/port/</link>
+      <pubDate>Sat, 30 Dec 2017 11:25:34 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/port/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mfi</title>
+      <link>https://nbari.com/tags/mfi/</link>
+      <pubDate>Thu, 28 Dec 2017 22:20:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/mfi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raid</title>
+      <link>https://nbari.com/tags/raid/</link>
+      <pubDate>Thu, 28 Dec 2017 22:20:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/raid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keys</title>
+      <link>https://nbari.com/tags/keys/</link>
+      <pubDate>Tue, 26 Dec 2017 16:19:15 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/keys/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crypt</title>
+      <link>https://nbari.com/tags/crypt/</link>
+      <pubDate>Sat, 23 Dec 2017 10:41:29 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/crypt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sha512</title>
+      <link>https://nbari.com/tags/sha512/</link>
+      <pubDate>Sat, 23 Dec 2017 10:41:29 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sha512/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>https://nbari.com/tags/java/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>syslog-ng</title>
+      <link>https://nbari.com/tags/syslog-ng/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/syslog-ng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://nbari.com/tags/ubuntu/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>80</title>
+      <link>https://nbari.com/tags/80/</link>
+      <pubDate>Mon, 11 Dec 2017 19:09:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ntp</title>
+      <link>https://nbari.com/tags/ntp/</link>
+      <pubDate>Mon, 11 Dec 2017 10:56:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ntp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>time</title>
+      <link>https://nbari.com/tags/time/</link>
+      <pubDate>Mon, 11 Dec 2017 10:56:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/time/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lua</title>
+      <link>https://nbari.com/tags/lua/</link>
+      <pubDate>Wed, 06 Dec 2017 17:15:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/lua/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>timeout</title>
+      <link>https://nbari.com/tags/timeout/</link>
+      <pubDate>Fri, 01 Dec 2017 20:00:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/timeout/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netstat</title>
+      <link>https://nbari.com/tags/netstat/</link>
+      <pubDate>Fri, 01 Dec 2017 11:46:32 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/netstat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>appengine</title>
+      <link>https://nbari.com/tags/appengine/</link>
+      <pubDate>Fri, 01 Dec 2017 10:33:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/appengine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cost</title>
+      <link>https://nbari.com/tags/cost/</link>
+      <pubDate>Fri, 01 Dec 2017 10:33:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/cost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>https</title>
+      <link>https://nbari.com/tags/https/</link>
+      <pubDate>Tue, 28 Nov 2017 15:55:03 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meta</title>
+      <link>https://nbari.com/tags/meta/</link>
+      <pubDate>Tue, 28 Nov 2017 15:55:03 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/meta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fuse</title>
+      <link>https://nbari.com/tags/fuse/</link>
+      <pubDate>Sun, 26 Nov 2017 09:26:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/fuse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sshfs</title>
+      <link>https://nbari.com/tags/sshfs/</link>
+      <pubDate>Sun, 26 Nov 2017 09:26:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sshfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>loop</title>
+      <link>https://nbari.com/tags/loop/</link>
+      <pubDate>Thu, 23 Nov 2017 18:46:11 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/loop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sh</title>
+      <link>https://nbari.com/tags/sh/</link>
+      <pubDate>Thu, 23 Nov 2017 18:46:11 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>patch</title>
+      <link>https://nbari.com/tags/patch/</link>
+      <pubDate>Sun, 19 Nov 2017 20:34:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/patch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>5242</title>
+      <link>https://nbari.com/tags/5242/</link>
+      <pubDate>Thu, 16 Nov 2017 17:21:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/5242/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rsyslog</title>
+      <link>https://nbari.com/tags/rsyslog/</link>
+      <pubDate>Thu, 16 Nov 2017 17:21:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/rsyslog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>syslog</title>
+      <link>https://nbari.com/tags/syslog/</link>
+      <pubDate>Thu, 16 Nov 2017 17:21:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/syslog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>du</title>
+      <link>https://nbari.com/tags/du/</link>
+      <pubDate>Tue, 14 Nov 2017 10:19:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/du/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>space</title>
+      <link>https://nbari.com/tags/space/</link>
+      <pubDate>Tue, 14 Nov 2017 10:19:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/space/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>2fa</title>
+      <link>https://nbari.com/tags/2fa/</link>
+      <pubDate>Mon, 13 Nov 2017 18:36:27 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/2fa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openvpn</title>
+      <link>https://nbari.com/tags/openvpn/</link>
+      <pubDate>Mon, 13 Nov 2017 18:36:27 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/openvpn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vpn</title>
+      <link>https://nbari.com/tags/vpn/</link>
+      <pubDate>Mon, 13 Nov 2017 18:36:27 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vpn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pam</title>
+      <link>https://nbari.com/tags/pam/</link>
+      <pubDate>Mon, 13 Nov 2017 18:06:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/pam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lsoft</title>
+      <link>https://nbari.com/tags/lsoft/</link>
+      <pubDate>Sat, 11 Nov 2017 09:27:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/lsoft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ps</title>
+      <link>https://nbari.com/tags/ps/</link>
+      <pubDate>Sat, 11 Nov 2017 09:27:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pwait</title>
+      <link>https://nbari.com/tags/pwait/</link>
+      <pubDate>Sat, 11 Nov 2017 09:27:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/pwait/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netcat</title>
+      <link>https://nbari.com/tags/netcat/</link>
+      <pubDate>Fri, 10 Nov 2017 20:50:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/netcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>telnet</title>
+      <link>https://nbari.com/tags/telnet/</link>
+      <pubDate>Fri, 10 Nov 2017 20:50:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/telnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clock</title>
+      <link>https://nbari.com/tags/clock/</link>
+      <pubDate>Sun, 29 Oct 2017 11:35:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/clock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rf</title>
+      <link>https://nbari.com/tags/rf/</link>
+      <pubDate>Sun, 29 Oct 2017 11:35:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/rf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>boto</title>
+      <link>https://nbari.com/tags/boto/</link>
+      <pubDate>Mon, 16 Oct 2017 17:21:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/boto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bench</title>
+      <link>https://nbari.com/tags/bench/</link>
+      <pubDate>Sun, 24 Sep 2017 22:43:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bench/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ffmeg</title>
+      <link>https://nbari.com/tags/ffmeg/</link>
+      <pubDate>Sun, 24 Sep 2017 16:09:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ffmeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plex</title>
+      <link>https://nbari.com/tags/plex/</link>
+      <pubDate>Sun, 24 Sep 2017 16:09:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/plex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archive</title>
+      <link>https://nbari.com/tags/archive/</link>
+      <pubDate>Sun, 17 Sep 2017 09:47:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/archive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zip</title>
+      <link>https://nbari.com/tags/zip/</link>
+      <pubDate>Sun, 17 Sep 2017 09:47:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/zip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>https://nbari.com/tags/aws/</link>
+      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>policy</title>
+      <link>https://nbari.com/tags/policy/</link>
+      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/policy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>msl</title>
+      <link>https://nbari.com/tags/msl/</link>
+      <pubDate>Tue, 05 Sep 2017 14:45:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/msl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>socket</title>
+      <link>https://nbari.com/tags/socket/</link>
+      <pubDate>Tue, 05 Sep 2017 14:45:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/socket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>time_wait</title>
+      <link>https://nbari.com/tags/time_wait/</link>
+      <pubDate>Tue, 05 Sep 2017 14:45:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/time_wait/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>strace</title>
+      <link>https://nbari.com/tags/strace/</link>
+      <pubDate>Thu, 31 Aug 2017 11:25:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/strace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aesgcm</title>
+      <link>https://nbari.com/tags/aesgcm/</link>
+      <pubDate>Thu, 17 Aug 2017 18:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/aesgcm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crypto</title>
+      <link>https://nbari.com/tags/crypto/</link>
+      <pubDate>Thu, 17 Aug 2017 18:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/crypto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>S3</title>
+      <link>https://nbari.com/tags/s3/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/s3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>state</title>
+      <link>https://nbari.com/tags/state/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/state/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terraform</title>
+      <link>https://nbari.com/tags/terraform/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VPC</title>
+      <link>https://nbari.com/tags/vpc/</link>
+      <pubDate>Sat, 12 Aug 2017 04:07:54 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/vpc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>syslogd</title>
+      <link>https://nbari.com/tags/syslogd/</link>
+      <pubDate>Sun, 23 Jul 2017 10:12:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/syslogd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>utf8</title>
+      <link>https://nbari.com/tags/utf8/</link>
+      <pubDate>Sun, 23 Jul 2017 10:12:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/utf8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>curl</title>
+      <link>https://nbari.com/tags/curl/</link>
+      <pubDate>Wed, 28 Jun 2017 18:11:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/curl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grpc</title>
+      <link>https://nbari.com/tags/grpc/</link>
+      <pubDate>Fri, 23 Jun 2017 20:10:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/grpc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>protobuf</title>
+      <link>https://nbari.com/tags/protobuf/</link>
+      <pubDate>Fri, 23 Jun 2017 20:10:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/protobuf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network ACL</title>
+      <link>https://nbari.com/tags/network-acl/</link>
+      <pubDate>Wed, 31 May 2017 16:41:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/network-acl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haproxy</title>
+      <link>https://nbari.com/tags/haproxy/</link>
+      <pubDate>Tue, 30 May 2017 14:47:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/haproxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meta-data</title>
+      <link>https://nbari.com/tags/meta-data/</link>
+      <pubDate>Tue, 30 May 2017 10:38:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/meta-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bg</title>
+      <link>https://nbari.com/tags/bg/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fstab</title>
+      <link>https://nbari.com/tags/fstab/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/fstab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>late</title>
+      <link>https://nbari.com/tags/late/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/late/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nfs</title>
+      <link>https://nbari.com/tags/nfs/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/nfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aax</title>
+      <link>https://nbari.com/tags/aax/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/aax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>audible</title>
+      <link>https://nbari.com/tags/audible/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/audible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>m4a</title>
+      <link>https://nbari.com/tags/m4a/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/m4a/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>m4b</title>
+      <link>https://nbari.com/tags/m4b/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/m4b/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>beanstalkd</title>
+      <link>https://nbari.com/tags/beanstalkd/</link>
+      <pubDate>Thu, 18 May 2017 20:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/beanstalkd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jobs</title>
+      <link>https://nbari.com/tags/jobs/</link>
+      <pubDate>Thu, 18 May 2017 20:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/jobs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>queue</title>
+      <link>https://nbari.com/tags/queue/</link>
+      <pubDate>Thu, 18 May 2017 20:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/queue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>qemu</title>
+      <link>https://nbari.com/tags/qemu/</link>
+      <pubDate>Sun, 30 Apr 2017 21:43:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/qemu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raw</title>
+      <link>https://nbari.com/tags/raw/</link>
+      <pubDate>Sun, 30 Apr 2017 21:43:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/raw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vmdk</title>
+      <link>https://nbari.com/tags/vmdk/</link>
+      <pubDate>Sun, 30 Apr 2017 21:43:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/vmdk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>brew</title>
+      <link>https://nbari.com/tags/brew/</link>
+      <pubDate>Sun, 30 Apr 2017 12:40:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/brew/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bastion</title>
+      <link>https://nbari.com/tags/bastion/</link>
+      <pubDate>Fri, 28 Apr 2017 11:57:07 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bastion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>multiplex</title>
+      <link>https://nbari.com/tags/multiplex/</link>
+      <pubDate>Fri, 28 Apr 2017 11:57:07 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/multiplex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smarthost</title>
+      <link>https://nbari.com/tags/smarthost/</link>
+      <pubDate>Wed, 26 Apr 2017 10:38:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/smarthost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smtp</title>
+      <link>https://nbari.com/tags/smtp/</link>
+      <pubDate>Wed, 26 Apr 2017 10:38:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/smtp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mtr</title>
+      <link>https://nbari.com/tags/mtr/</link>
+      <pubDate>Tue, 25 Apr 2017 17:52:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mtr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>traceroute</title>
+      <link>https://nbari.com/tags/traceroute/</link>
+      <pubDate>Tue, 25 Apr 2017 17:52:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/traceroute/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xz</title>
+      <link>https://nbari.com/tags/xz/</link>
+      <pubDate>Tue, 11 Apr 2017 10:28:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/xz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dsymutil</title>
+      <link>https://nbari.com/tags/dsymutil/</link>
+      <pubDate>Tue, 04 Apr 2017 14:02:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dsymutil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netbsd</title>
+      <link>https://nbari.com/tags/netbsd/</link>
+      <pubDate>Thu, 30 Mar 2017 01:00:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/netbsd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pkgin</title>
+      <link>https://nbari.com/tags/pkgin/</link>
+      <pubDate>Thu, 30 Mar 2017 01:00:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/pkgin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlite</title>
+      <link>https://nbari.com/tags/sqlite/</link>
+      <pubDate>Thu, 23 Mar 2017 14:43:09 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sqlite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jq</title>
+      <link>https://nbari.com/tags/jq/</link>
+      <pubDate>Thu, 23 Mar 2017 12:22:05 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/jq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>json</title>
+      <link>https://nbari.com/tags/json/</link>
+      <pubDate>Thu, 23 Mar 2017 12:22:05 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>txt</title>
+      <link>https://nbari.com/tags/txt/</link>
+      <pubDate>Thu, 23 Mar 2017 12:22:05 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/txt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ed25519</title>
+      <link>https://nbari.com/tags/ed25519/</link>
+      <pubDate>Wed, 08 Mar 2017 21:00:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/ed25519/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EdDSA</title>
+      <link>https://nbari.com/tags/eddsa/</link>
+      <pubDate>Wed, 08 Mar 2017 21:00:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/eddsa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>random</title>
+      <link>https://nbari.com/tags/random/</link>
+      <pubDate>Wed, 08 Mar 2017 15:04:59 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/random/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bitwise</title>
+      <link>https://nbari.com/tags/bitwise/</link>
+      <pubDate>Thu, 02 Mar 2017 16:37:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/bitwise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>permissions</title>
+      <link>https://nbari.com/tags/permissions/</link>
+      <pubDate>Thu, 02 Mar 2017 16:37:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/permissions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mkv</title>
+      <link>https://nbari.com/tags/mkv/</link>
+      <pubDate>Mon, 20 Feb 2017 20:49:14 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/mkv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>srt</title>
+      <link>https://nbari.com/tags/srt/</link>
+      <pubDate>Mon, 20 Feb 2017 20:49:14 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/srt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>master</title>
+      <link>https://nbari.com/tags/master/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/master/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rds</title>
+      <link>https://nbari.com/tags/rds/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/rds/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>slave</title>
+      <link>https://nbari.com/tags/slave/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/slave/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>htaccess</title>
+      <link>https://nbari.com/tags/htaccess/</link>
+      <pubDate>Thu, 09 Feb 2017 13:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/htaccess/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tunnel</title>
+      <link>https://nbari.com/tags/tunnel/</link>
+      <pubDate>Tue, 07 Feb 2017 11:54:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tunnel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hsts</title>
+      <link>https://nbari.com/tags/hsts/</link>
+      <pubDate>Mon, 06 Feb 2017 15:01:22 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/hsts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SRE</title>
+      <link>https://nbari.com/tags/sre/</link>
+      <pubDate>Tue, 24 Jan 2017 15:12:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/sre/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>leap</title>
+      <link>https://nbari.com/tags/leap/</link>
+      <pubDate>Wed, 11 Jan 2017 15:08:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/leap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scale</title>
+      <link>https://nbari.com/tags/scale/</link>
+      <pubDate>Sun, 18 Dec 2016 11:09:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/scale/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scale out</title>
+      <link>https://nbari.com/tags/scale-out/</link>
+      <pubDate>Sun, 18 Dec 2016 11:09:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/scale-out/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scale up</title>
+      <link>https://nbari.com/tags/scale-up/</link>
+      <pubDate>Sun, 18 Dec 2016 11:09:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/scale-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>image</title>
+      <link>https://nbari.com/tags/image/</link>
+      <pubDate>Sat, 10 Dec 2016 15:53:08 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/image/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bomb</title>
+      <link>https://nbari.com/tags/bomb/</link>
+      <pubDate>Thu, 08 Dec 2016 11:11:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/bomb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>email</title>
+      <link>https://nbari.com/tags/email/</link>
+      <pubDate>Tue, 06 Dec 2016 22:50:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/email/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>images</title>
+      <link>https://nbari.com/tags/images/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/images/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tso</title>
+      <link>https://nbari.com/tags/tso/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tso/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vps</title>
+      <link>https://nbari.com/tags/vps/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>he</title>
+      <link>https://nbari.com/tags/he/</link>
+      <pubDate>Thu, 01 Dec 2016 16:50:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/he/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>toe</title>
+      <link>https://nbari.com/tags/toe/</link>
+      <pubDate>Tue, 29 Nov 2016 19:15:23 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/toe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vtnet</title>
+      <link>https://nbari.com/tags/vtnet/</link>
+      <pubDate>Tue, 29 Nov 2016 19:15:23 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vtnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudfront</title>
+      <link>https://nbari.com/tags/cloudfront/</link>
+      <pubDate>Tue, 22 Nov 2016 12:43:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/cloudfront/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>token</title>
+      <link>https://nbari.com/tags/token/</link>
+      <pubDate>Tue, 22 Nov 2016 12:43:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/token/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linxu</title>
+      <link>https://nbari.com/tags/linxu/</link>
+      <pubDate>Mon, 14 Nov 2016 18:45:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/linxu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://nbari.com/tags/tools/</link>
+      <pubDate>Mon, 14 Nov 2016 18:45:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>UTC</title>
+      <link>https://nbari.com/tags/utc/</link>
+      <pubDate>Mon, 07 Nov 2016 16:58:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/utc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mkimg</title>
+      <link>https://nbari.com/tags/mkimg/</link>
+      <pubDate>Mon, 07 Nov 2016 16:20:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/mkimg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VBoxManage</title>
+      <link>https://nbari.com/tags/vboxmanage/</link>
+      <pubDate>Mon, 07 Nov 2016 16:20:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/vboxmanage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>img</title>
+      <link>https://nbari.com/tags/img/</link>
+      <pubDate>Tue, 01 Nov 2016 21:00:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/img/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>alpha</title>
+      <link>https://nbari.com/tags/alpha/</link>
+      <pubDate>Sun, 30 Oct 2016 17:36:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/tags/alpha/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scraper</title>
+      <link>https://nbari.com/tags/scraper/</link>
+      <pubDate>Thu, 27 Oct 2016 21:37:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/scraper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>selenium</title>
+      <link>https://nbari.com/tags/selenium/</link>
+      <pubDate>Thu, 27 Oct 2016 21:37:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/selenium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>12factor</title>
+      <link>https://nbari.com/tags/12factor/</link>
+      <pubDate>Tue, 25 Oct 2016 20:56:30 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/12factor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>heroku</title>
+      <link>https://nbari.com/tags/heroku/</link>
+      <pubDate>Tue, 25 Oct 2016 20:56:30 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/heroku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dnsmasq</title>
+      <link>https://nbari.com/tags/dnsmasq/</link>
+      <pubDate>Fri, 30 Sep 2016 12:27:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/dnsmasq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>qnap</title>
+      <link>https://nbari.com/tags/qnap/</link>
+      <pubDate>Wed, 28 Sep 2016 22:53:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/qnap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xterm</title>
+      <link>https://nbari.com/tags/xterm/</link>
+      <pubDate>Wed, 28 Sep 2016 22:02:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/xterm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uptime</title>
+      <link>https://nbari.com/tags/uptime/</link>
+      <pubDate>Tue, 27 Sep 2016 16:12:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/uptime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>debian</title>
+      <link>https://nbari.com/tags/debian/</link>
+      <pubDate>Mon, 26 Sep 2016 15:38:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/debian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parted</title>
+      <link>https://nbari.com/tags/parted/</link>
+      <pubDate>Mon, 26 Sep 2016 15:38:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/parted/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CD</title>
+      <link>https://nbari.com/tags/cd/</link>
+      <pubDate>Mon, 26 Sep 2016 14:08:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI</title>
+      <link>https://nbari.com/tags/ci/</link>
+      <pubDate>Mon, 26 Sep 2016 14:08:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberry</title>
+      <link>https://nbari.com/tags/raspberry/</link>
+      <pubDate>Sat, 24 Sep 2016 15:25:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/raspberry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>autoscaling</title>
+      <link>https://nbari.com/tags/autoscaling/</link>
+      <pubDate>Tue, 30 Aug 2016 12:27:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/autoscaling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>remap</title>
+      <link>https://nbari.com/tags/remap/</link>
+      <pubDate>Tue, 30 Aug 2016 12:27:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/remap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudfare</title>
+      <link>https://nbari.com/tags/cloudfare/</link>
+      <pubDate>Mon, 22 Aug 2016 12:25:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cloudfare/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>letsencrypt</title>
+      <link>https://nbari.com/tags/letsencrypt/</link>
+      <pubDate>Mon, 22 Aug 2016 12:25:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/letsencrypt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>set</title>
+      <link>https://nbari.com/tags/set/</link>
+      <pubDate>Thu, 11 Aug 2016 11:28:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/set/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mosh</title>
+      <link>https://nbari.com/tags/mosh/</link>
+      <pubDate>Wed, 10 Aug 2016 22:25:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mosh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>n26</title>
+      <link>https://nbari.com/tags/n26/</link>
+      <pubDate>Mon, 08 Aug 2016 23:50:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/n26/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unit testing</title>
+      <link>https://nbari.com/tags/unit-testing/</link>
+      <pubDate>Mon, 08 Aug 2016 23:50:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/unit-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tips</title>
+      <link>https://nbari.com/tags/tips/</link>
+      <pubDate>Mon, 08 Aug 2016 11:27:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/tips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>asciiname</title>
+      <link>https://nbari.com/tags/asciiname/</link>
+      <pubDate>Wed, 20 Jul 2016 15:14:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/asciiname/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cron</title>
+      <link>https://nbari.com/tags/cron/</link>
+      <pubDate>Mon, 11 Jul 2016 14:23:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/cron/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ipsec</title>
+      <link>https://nbari.com/tags/ipsec/</link>
+      <pubDate>Sun, 26 Jun 2016 14:21:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ipsec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>l2tp</title>
+      <link>https://nbari.com/tags/l2tp/</link>
+      <pubDate>Sun, 26 Jun 2016 14:21:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/l2tp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mpd5</title>
+      <link>https://nbari.com/tags/mpd5/</link>
+      <pubDate>Sun, 26 Jun 2016 14:21:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/mpd5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jails</title>
+      <link>https://nbari.com/tags/jails/</link>
+      <pubDate>Sun, 19 Jun 2016 17:24:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/jails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>https://nbari.com/tags/github/</link>
+      <pubDate>Sun, 19 Jun 2016 00:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://nbari.com/tags/hugo/</link>
+      <pubDate>Sun, 19 Jun 2016 00:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

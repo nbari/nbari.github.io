@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>raid on IT notes</title>
+    <link>https://nbari.com/tags/raid/</link>
+    <description>Recent content in raid on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Dec 2017 22:20:37 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/raid/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>raidz2</title>
+      <link>https://nbari.com/post/raidz2/</link>
+      <pubDate>Thu, 28 Dec 2017 22:20:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/raidz2/</guid>
+      <description>If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:
+&amp;gt; mfiutil show config mfi0 Configuration: 8 arrays, 8 volumes, 1 spares array 0 of 2 drives: drive 1 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&amp;gt; SATA drive 6 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY35&amp;gt; SATA array 1 of 1 drives: drive 0 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ0&amp;gt; SCSI-6 array 2 of 1 drives: drive 2 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&amp;gt; SCSI-6 array 3 of 1 drives: drive 3 ( 932G) ONLINE &amp;lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&amp;gt; SCSI-6 array 4 of 1 drives: drive 4 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&amp;gt; SAS array 5 of 1 drives: drive 5 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C4&amp;gt; SAS array 6 of 1 drives: drive 8 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&amp;gt; SAS array 7 of 1 drives: drive 9 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L824&amp;gt; SAS volume mfid0 (1863G) RAID-1 64K OPTIMAL &amp;lt;raid1&amp;gt; spans: array 0 volume mfid1 (465G) RAID-0 64K OPTIMAL &amp;lt;r0&amp;gt; spans: array 1 volume mfid2 (465G) RAID-0 64K OPTIMAL &amp;lt;r2&amp;gt; spans: array 2 volume mfid3 (931G) RAID-0 64K OPTIMAL &amp;lt;r3&amp;gt; spans: array 3 volume mfid4 (465G) RAID-0 64K OPTIMAL &amp;lt;r4&amp;gt; spans: array 4 volume mfid5 (465G) RAID-0 64K OPTIMAL &amp;lt;r5&amp;gt; spans: array 5 volume mfid6 (465G) RAID-0 64K OPTIMAL &amp;lt;r8&amp;gt; spans: array 6 volume mfid7 (465G) RAID-0 64K OPTIMAL &amp;lt;r9&amp;gt; spans: array 7 dedicated spare 7 ( 1863G) HOT SPARE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&amp;gt; SATA backs: array 0 Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume</description>
+    </item>
+    
+  </channel>
+</rss>

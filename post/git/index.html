@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> git basics &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git/">git basics</a></h2>
+          <span class="post-date">Mar 25, 2018 </span>
+          <div class="post-content">
+            <h3 id="git-branch--a">git branch -a</h3>
+<p>This will print all branches, local or remote, to see only local branches:</p>
+<pre><code>$ git branch
+</code></pre>
+<p>To only see remote branches:</p>
+<pre><code>$ git branch -r
+</code></pre>
+<p>When you clone a repo after typing <code>git branch -a</code> the output will look
+something like this:</p>
+<pre><code>$ git branch -a
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+</code></pre>
+<p><code>master</code> is a branch in the local repository, <code>remotes/origin/master</code> is a branch named master on the remote named <code>origin</code>:</p>
+<pre><code>remotes/origin/master
+          |      |
+          |    name of branch
+   name of remote
+</code></pre>
+<p>The branch can be referred as either <code>orign/master</code> or <code>remotes/origin/master</code></p>
+<p><code>remotes/origin/HEAD</code> is the default branch for the remote named <code>origin</code></p>
+<h2 id="clean-extra-files">Clean extra files</h2>
+<p>For testing within your repository do this:</p>
+<pre><code>$ touch foo{001..100}.tmp
+</code></pre>
+<p>To remove all the files and untracked directories you can do:</p>
+<pre><code>$ git clean -fd
+</code></pre>
+<h2 id="search-for-commit-content">Search for commit content</h2>
+<p>To search for commit content, actual lines of source:</p>
+<pre><code>$ git grep &lt;regexp&gt; $(git rev-list --all)
+</code></pre>
+<p>or in case you get &ldquo;Argument list too long&rdquo;:</p>
+<pre><code>$ git rev-list --all | xargs git grep expression
+</code></pre>
+<h2 id="merge-squash-rebase">merge, squash, rebase</h2>
+<p>So you are working on branch <code>master</code> haven&rsquo;t add &amp; commit your changes but
+there has been an update on the origin/master, you would like to keep your
+changes, update master to be in sync with the origin and later in in one single
+commit once you are done working submit your changes.</p>
+<p>So if you are in <code>master</code> branch:</p>
+<pre><code>$ git fetch -p
+</code></pre>
+<blockquote>
+<p>The -p is for prune and clean unused branches</p>
+</blockquote>
+<p>Now save your changes by creating a new branch:</p>
+<pre><code>$ git checkout -b my-changes
+</code></pre>
+<p>Add and commit your changes:</p>
+<pre><code>$ git add .
+</code></pre>
+<p>or</p>
+<pre><code>$ git commit -a -m &quot;some changes&quot;
+</code></pre>
+<p>To update master:</p>
+<pre><code>$ git checkout master
+</code></pre>
+<p>And then:</p>
+<pre><code>$ git pull
+</code></pre>
+<p>To continue working on your changes go back to your branch:</p>
+<pre><code>$ git checkout my-changes
+</code></pre>
+<p>You can work here commit etc, but once you are done if you would like to just
+have 1 single commit, you can <code>squash</code> your commits, for example to squash your
+latest 6 commits, run this <code>git log --pretty=oneline --abbrev-commit</code>:</p>
+<pre><code> 1	    * 2018-03-28 dd34521 (HEAD -&gt; my-changes) 5 &lt;nbari&gt; (1 second ago)
+ 2	    * 2018-03-28 f31a830 4 &lt;nbari&gt; (8 seconds ago)
+ 3	    * 2018-03-28 15a6af0 3 &lt;nbari&gt; (18 seconds ago)
+ 4	    * 2018-03-28 9aaf8b3 2 &lt;nbari&gt; (24 seconds ago)
+ 5	    * 2018-03-28 452b764 1 &lt;nbari&gt; (29 seconds ago)
+ 6	    * 2018-03-28 447dae2 my changes for foo bar &lt;nbari&gt; (42 seconds ago)
+      | * 2018-03-28 4dcbf9b (origin/master, origin/HEAD) --- remote origin master --- &lt;nbari&gt; (9 minutes ago)
+      | * 2018-03-28 b8c35f4 Update date.txt &lt;nbari&gt; (37 minutes ago)
+      | * 2018-03-28 fae7a75 udpate &lt;nbari&gt; (49 minutes ago)
+      | * 2018-03-28 7ff5384 Update date.txt &lt;nbari&gt; (77 minutes ago)
+      |/
+</code></pre>
+<p>Create an alias <code>gl</code> with this:</p>
+<pre><code>git log --decorate --graph --oneline --all --date=short --pretty=format:'%C(bold blue)%ad%Creset %C(yellow)%h%Creset%C(auto)%d%Creset %s %C(dim magenta)&lt;%an    &gt;%Creset %C(dim green)(%ar)%Creset'&quot;
+</code></pre>
+<p>To squash the latest commits:</p>
+<pre><code>$ git rebase -i HEAD~6
+</code></pre>
+<p>This will open your editor probably with something like this:</p>
+<pre><code>pick 447dae2 my changes for foo bar
+s 452b764 1
+s 9aaf8b3 2
+s 15a6af0 3
+s f31a830 4
+s dd34521 5
+
+# Rebase 5302aa0..dd34521 onto 5302aa0 (6 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like &quot;squash&quot;, but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+</code></pre>
+<p>Once you are done if you would like to merge (fast forward) you could rebase
+your <code>my-changes</code> branch with <code>master</code>, so beeing in <code>my-changes</code> branch, do:</p>
+<pre><code>$ git rebase master
+</code></pre>
+<p>If you have conflics fix them  <code>git rebase --continue</code></p>
+<p>Then to merge your changes on master:</p>
+<pre><code>$ git checkout master
+</code></pre>
+<p>And finally:</p>
+<pre><code>$ git merge my-changes
+</code></pre>
+<h2 id="git-pull---rebase">git pull &ndash;rebase</h2>
+<p>In some cases you may not want to create a branch to keep your changes and just
+would like to have the lates changes, so if some cases this can be achived by
+doing:</p>
+<pre><code>$ git  pull --rebase
+</code></pre>
+<h2 id="reset-local-repository-branch-to-be-just-like-remote-repository">reset local repository branch to be just like remote repository</h2>
+<p>In case you want have the repositories in sync:</p>
+<pre><code>$ git fetch origin
+$ git reset --hard origin/master
+</code></pre>
+<p>You can do the same for a local branch:</p>
+<pre><code>$ git reset --hard master
+</code></pre>
+<p>Set fork to be the same as upstream:</p>
+<pre><code>git remote add upstream https://github.com/some_user/some_repo
+git fetch upstream
+git checkout master
+git reset --hard upstream/master
+git push origin master --force
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/git-web-deployment-workflow/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/radtest/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

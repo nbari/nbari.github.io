@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tmux on IT notes</title>
+    <link>https://nbari.com/tags/tmux/</link>
+    <description>Recent content in tmux on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Dec 2018 13:57:16 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tmux</title>
+      <link>https://nbari.com/post/tmux/</link>
+      <pubDate>Fri, 07 Dec 2018 13:57:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/tmux/</guid>
+      <description>Set window title:
+&amp;lt;c-b&amp;gt;,  Get pannel number:
+&amp;lt;c-b&amp;gt;q  Show clock:
+&amp;lt;c-b&amp;gt;t  Move pane to a new window:
+&amp;lt;c-b&amp;gt;!  Join panes:
+&amp;lt;c-b&amp;gt;: join-pane -s 0 -t 3 move pane 1 to window 3 &amp;lt;c-b&amp;gt;: join-pane -t :1 move current pane to window 1  Create a new session:
+&amp;lt;c-b&amp;gt;: new -s &amp;lt;name&amp;gt;  List sessions:
+&amp;lt;c-b&amp;gt;s &amp;lt;c-b&amp;gt;w expanded  Move pane to a another session:
+&amp;lt;c-b&amp;gt;m mark the pane &amp;lt;c-b&amp;gt;w go to the destination window/session &amp;lt;c-b&amp;gt;: join-pane  or go to the pane you want to move, check the session name and windows you would like to move and try:</description>
+    </item>
+    
+    <item>
+      <title>tmux ssh</title>
+      <link>https://nbari.com/post/tmux-ssh/</link>
+      <pubDate>Fri, 19 May 2017 22:03:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/tmux-ssh/</guid>
+      <description>Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
+tmux script #!/bin/sh  TARGET=&amp;#34;tmux-ssh&amp;#34; SSH_USER=&amp;#34;devops&amp;#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &amp;#34;ssh -l ${SSH_USER}${line}&amp;#34; else tmux split-window -t &amp;#34;${TARGET}&amp;#34; &amp;#34;ssh -l ${SSH_USER}${line}&amp;#34; &amp;amp;&amp;amp; \  tmux select-layout -t &amp;#34;${TARGET}&amp;#34; tiled fi let i++ done &amp;lt; &amp;#34;${1:-/dev/stdin}&amp;#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:</description>
+    </item>
+    
+    <item>
+      <title>asciinema</title>
+      <link>https://nbari.com/post/asciinema/</link>
+      <pubDate>Wed, 20 Jul 2016 15:14:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/asciinema/</guid>
+      <description>asciinema [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+Install FreeBSD:
+pkg install asciiname  OS X:
+brew update &amp;amp;&amp;amp; brew install asciinema  Recording tmux session Setup your tmux session create windows, splits, start processes in them:
+tmux new -s name  Detach (prefix+d) and start recording with:
+asciinema rec -c &amp;quot;tmux attach -t name&amp;quot; /tmp/play.json  When you&amp;rsquo;re finished, just detach the session again and play it with:</description>
+    </item>
+    
+  </channel>
+</rss>

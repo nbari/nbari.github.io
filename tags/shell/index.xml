@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell on IT notes</title>
+    <link>https://nbari.com/tags/shell/</link>
+    <description>Recent content in shell on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Sep 2018 13:41:33 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LS_COLORS</title>
+      <link>https://nbari.com/post/ls_colors/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ls_colors/</guid>
+      <description>To remove the blinking of symbolic links when doing ls in Linux:
+LS_COLORS=&amp;quot;ln=35&amp;quot; export LS_COLORS  That will set the ln=35 symbolic links to color purple.
+Params for LS_COLORS:
+di Directory fi File ln Symbolic Link pi Fifo file so Socket file bd Block (buffered) special file cd Character (unbuffered) special file or Symbolic Link pointing to a non-existent file (orphan) mi Non-existent file pointed to by a symbolic link (visible when you type ls -l) ex File which is executable (ie.</description>
+    </item>
+    
+    <item>
+      <title>No history</title>
+      <link>https://nbari.com/post/no-history/</link>
+      <pubDate>Sat, 11 Aug 2018 15:59:53 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/no-history/</guid>
+      <description>To avoid having command in history just prefix them with an empty space:
+$⎵ uname  If using zsh:
+$ echo &amp;quot;&amp;quot; &amp;gt; ~/.zsh_history &amp;amp; exec $SHELL -l  </description>
+    </item>
+    
+    <item>
+      <title>exec</title>
+      <link>https://nbari.com/post/exec/</link>
+      <pubDate>Mon, 14 May 2018 11:46:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/exec/</guid>
+      <description>exec is a functionality of an operating system that runs an executable file in the context of an already existing process, replacing the previous executable. https://en.wikipedia.org/wiki/Exec_(system_call)
+exec replaces the current program in the current process, without forking a new process.
+Examples to use:
+exec csh   This will just replace the existing shell with csh and only need to type exit once
+ Within a script to startup python scripts, for example:</description>
+    </item>
+    
+    <item>
+      <title>/bin/sh shell set</title>
+      <link>https://nbari.com/post/shell-set/</link>
+      <pubDate>Thu, 11 Aug 2016 11:28:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/shell-set/</guid>
+      <description>The Bourne shell (sh) is a shell, or command-line interpreter, for computer operating systems.
+ The Bourne shell was the default shell for Unix Version 7. Most Unix-like systems continue to have /bin/sh—which will be the Bourne shell, or a symbolic link or hard link to a compatible shell even when other shells are used by most users. https://en.wikipedia.org/wiki/Bourne_shell
+ set options In sh, the set built-in command has the following options:</description>
+    </item>
+    
+  </channel>
+</rss>

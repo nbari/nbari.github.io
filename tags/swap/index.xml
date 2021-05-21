@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>swap on IT notes</title>
+    <link>https://nbari.com/tags/swap/</link>
+    <description>Recent content in swap on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Aug 2018 20:51:31 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/swap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ZFS swap</title>
+      <link>https://nbari.com/post/zfs-swap/</link>
+      <pubDate>Mon, 20 Aug 2018 20:51:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-swap/</guid>
+      <description>To add more swap on a ZFS system:
+# zfs create -V 64G -o org.freebsd:swap=on -o checksum=off -o compression=off -o dedup=off -o sync=disabled -o primarycache=none tank/swap2  To add it:
+# swapon /dev/zvol/tank/swap2  To resize you could first remove it:
+# swapoff /dev/zvol/tank/swap  Then destroy it:
+# zfs destroy tank/swap  </description>
+    </item>
+    
+  </channel>
+</rss>

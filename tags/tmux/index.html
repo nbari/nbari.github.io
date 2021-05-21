@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> tmux &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/tmux/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux/">tmux</a></h2>
+          <span class="post-date">Dec 7, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Set window title:
+&lt;c-b&gt;,  Get pannel number:
+&lt;c-b&gt;q  Show clock:
+&lt;c-b&gt;t  Move pane to a new window:
+&lt;c-b&gt;!  Join panes:
+&lt;c-b&gt;: join-pane -s 0 -t 3 move pane 1 to window 3 &lt;c-b&gt;: join-pane -t :1 move current pane to window 1  Create a new session:
+&lt;c-b&gt;: new -s &lt;name&gt;  List sessions:
+&lt;c-b&gt;s &lt;c-b&gt;w expanded  Move pane to a another session:
+&lt;c-b&gt;m mark the pane &lt;c-b&gt;w go to the destination window/session &lt;c-b&gt;: join-pane  or go to the pane you want to move, check the session name and windows you would like to move and try:
+				<a class="read-more" href="/post/tmux/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux-ssh/">tmux ssh</a></h2>
+          <span class="post-date">May 19, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
+tmux script #!/bin/sh  TARGET=&#34;tmux-ssh&#34; SSH_USER=&#34;devops&#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &#34;ssh -l ${SSH_USER}${line}&#34; else tmux split-window -t &#34;${TARGET}&#34; &#34;ssh -l ${SSH_USER}${line}&#34; &amp;&amp; \  tmux select-layout -t &#34;${TARGET}&#34; tiled fi let i++ done &lt; &#34;${1:-/dev/stdin}&#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:
+				<a class="read-more" href="/post/tmux-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/asciinema/">asciinema</a></h2>
+          <span class="post-date">Jul 20, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/video">video</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/asciiname">asciiname</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				asciinema [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+Install FreeBSD:
+pkg install asciiname  OS X:
+brew update &amp;&amp; brew install asciinema  Recording tmux session Setup your tmux session create windows, splits, start processes in them:
+tmux new -s name  Detach (prefix+d) and start recording with:
+asciinema rec -c &quot;tmux attach -t name&quot; /tmp/play.json  When you&rsquo;re finished, just detach the session again and play it with:
+				<a class="read-more" href="/post/asciinema/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

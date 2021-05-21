@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ca on IT notes</title>
+    <link>https://nbari.com/tags/ca/</link>
+    <description>Recent content in ca on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Aug 2018 12:33:05 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ca/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>self CA</title>
+      <link>https://nbari.com/post/self-ca/</link>
+      <pubDate>Mon, 27 Aug 2018 12:33:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/self-ca/</guid>
+      <description>Create a self signed CA (Certificate Authority)
+Generate private key:
+$ openssl genrsa -des3 -out CA.key 4096  To create a private key without password:
+$ openssl genrsa -out CA.key 4096  Create a root certificate:
+$ openssl req -x509 -new -nodes -key CA.key -sha256 -out CA.pem -subj &amp;quot;/CN=example.com&amp;quot; -days 365  In one single command create the private key and the certificate:
+$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout CA.</description>
+    </item>
+    
+  </channel>
+</rss>

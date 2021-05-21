@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vmware on IT notes</title>
+    <link>https://nbari.com/tags/vmware/</link>
+    <description>Recent content in vmware on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Aug 2018 11:55:08 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/vmware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>macOs sparseimage</title>
+      <link>https://nbari.com/post/macos-sparseimage/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/macos-sparseimage/</guid>
+      <description>To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &amp;quot;macOS_installmedia&amp;quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  </description>
+    </item>
+    
+    <item>
+      <title>vm tools</title>
+      <link>https://nbari.com/post/vm-tools/</link>
+      <pubDate>Mon, 19 Dec 2016 14:39:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vm-tools/</guid>
+      <description>vmware tools guest FreeBSD While running FreeBSD as a guest on VMWARE the vm-tools can be installed with this:
+$ pkg install open-vm-tools-nox11  Later enable them on /etc/rc.conf:
+vmware_guest_vmblock_enable=&amp;#34;YES&amp;#34; vmware_guest_vmhgfs_enable=&amp;#34;YES&amp;#34; vmware_guest_vmmemctl_enable=&amp;#34;YES&amp;#34; vmware_guest_vmxnet_enable=&amp;#34;YES&amp;#34; vmware_guestd_enable=&amp;#34;YES&amp;#34; </description>
+    </item>
+    
+    <item>
+      <title>checksum offload</title>
+      <link>https://nbari.com/post/checksum-offload/</link>
+      <pubDate>Tue, 29 Nov 2016 19:15:23 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/checksum-offload/</guid>
+      <description>TCP offload engine  TOE is a technology used in network interface cards (NIC) to offload processing of the entire TCP/IP stack to the network controller. It is primarily used with high-speed network interfaces, such as gigabit Ethernet and 10 Gigabit Ethernet, where processing overhead of the network stack becomes significant. https://en.wikipedia.org/wiki/TCP_offload_engine
+ On Virtual Guest disabling the cheksum may boost the newtork speed, for example on GCE when using FreeBSD add this to the /boot/loader.</description>
+    </item>
+    
+  </channel>
+</rss>

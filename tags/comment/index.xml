@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>comment on IT notes</title>
+    <link>https://nbari.com/tags/comment/</link>
+    <description>Recent content in comment on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Apr 2021 17:32:34 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/comment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh comment</title>
+      <link>https://nbari.com/post/ssh-comment/</link>
+      <pubDate>Sat, 17 Apr 2021 17:32:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-comment/</guid>
+      <description>Create a new pair of ssh keys RSA with a custom comment:
+ssh-keygen -C &amp;quot;monkey&amp;quot; -t rsa -b 4096 -o -a 100 -f /tmp/monkey  </description>
+    </item>
+    
+  </channel>
+</rss>

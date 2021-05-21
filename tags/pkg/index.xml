@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pkg on IT notes</title>
+    <link>https://nbari.com/tags/pkg/</link>
+    <description>Recent content in pkg on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Apr 2018 20:38:04 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pkg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pkg -o OSVERSION</title>
+      <link>https://nbari.com/post/pkg-osversion/</link>
+      <pubDate>Sat, 21 Apr 2018 20:38:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pkg-osversion/</guid>
+      <description>When updating if get something like this:
+pkg: Newer FreeBSD version for package jsoncpp: - package: 1101503 - running kernel: 1100506  Try uname -KU to get the version, and then:
+pkg -o OSVERSION=1100506 update -f pkg -o OSVERSION=1100506 upgrade  </description>
+    </item>
+    
+  </channel>
+</rss>

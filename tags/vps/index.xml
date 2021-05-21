@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vps on IT notes</title>
+    <link>https://nbari.com/tags/vps/</link>
+    <description>Recent content in vps on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Dec 2016 12:57:26 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/vps/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vps</title>
+      <link>https://nbari.com/post/vps/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vps/</guid>
+      <description>VPS providers that allow use your own image/kernel
+Google cloud (only ipv4) Allows to upload compreses raw images:
+tar --format=gnutar -Szcf disk.tar.gz disk.raw  MTU needs to be set to 1460 and in some cases disable the checksum offload
+Amazon AWS (only ipv4) Images can&amp;rsquo;t be uploaded compressed, ans disabling TSO is required:
+ifconfig_DEFAULT=&amp;quot;SYNCDHCP -tso&amp;quot;  IPV6 support vultr https://www.vultr.com/
+Instead of uploading the raw images, they will be fetched, a URL needs to be provider from where the image can be downloaded.</description>
+    </item>
+    
+  </channel>
+</rss>

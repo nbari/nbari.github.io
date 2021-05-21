@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cost on IT notes</title>
+    <link>https://nbari.com/tags/cost/</link>
+    <description>Recent content in cost on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2017 10:33:35 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/cost/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>appengine cost &gt; 150/s requests</title>
+      <link>https://nbari.com/post/appengine/</link>
+      <pubDate>Fri, 01 Dec 2017 10:33:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/appengine/</guid>
+      <description>Between $5 and $7 USD per day will cost to host in appengine a tiny go application, with an average of 150 request/second, incoming bandwidth &amp;gt; 7GB and outgoing bandwidth &amp;lt; 1GB.
+ close to $25 per month, including the network internet egress
+ Sumary:</description>
+    </item>
+    
+  </channel>
+</rss>

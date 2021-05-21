@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tcp on IT notes</title>
+    <link>https://nbari.com/tags/tcp/</link>
+    <description>Recent content in tcp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jun 2018 07:25:42 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DNS TCP</title>
+      <link>https://nbari.com/post/dns-tcp/</link>
+      <pubDate>Fri, 01 Jun 2018 07:25:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dns-tcp/</guid>
+      <description>Unbound using DNS over TCP:
+server: private-domain: &amp;quot;plex.direct&amp;quot; forward-zone: name: &amp;quot;.&amp;quot; forward-ssl-upstream: yes forward-addr: 1.1.1.1@853 forward-addr: 9.9.9.9@853 forward-addr: 1.0.0.1@853 forward-addr: 149.112.112.112@853 forward-addr: 2606:4700:4700::1111@853 forward-addr: 2606:4700:4700::1001@853 forward-addr: 2620:fe::fe@853; forward-addr: 2620:fe::9@853;  To test do:
+# unbound-control -c /var/unbound/unbound.conf lookup .  It should return something like:
+The following name servers are used for lookup of . forwarding request: Delegation with 0 names, of which 0 can be examined to query further addresses.</description>
+    </item>
+    
+  </channel>
+</rss>

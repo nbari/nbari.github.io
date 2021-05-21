@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>n26 on IT notes</title>
+    <link>https://nbari.com/tags/n26/</link>
+    <description>Recent content in n26 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Aug 2016 23:50:29 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/n26/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why is unit testing important?</title>
+      <link>https://nbari.com/post/unit-testing-important/</link>
+      <pubDate>Mon, 08 Aug 2016 23:50:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/unit-testing-important/</guid>
+      <description>Why is unit testing important? Short answer, to avoid something like this:
+
+The links are inverted
+Because of that error, people may not be available to download or install the proper app and therefore will lost credibility of the service.
+What is Unit Testing? In computer programming, unit testing is a software testing method by which individual units of source code, sets of one or more computer program modules together with associated control data, usage procedures, and operating procedures, are tested to determine whether they are fit for use.</description>
+    </item>
+    
+  </channel>
+</rss>

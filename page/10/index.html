@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta name="generator" content="Hugo 0.83.1" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> IT notes &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/raw2vmdk/">raw2vmdk</a></h2>
+          <span class="post-date">Apr 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/raw">raw</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vmdk">vmdk</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/qemu">qemu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Convert raw image to vmdk Install qemu:
+$ brew install qemu  Convert using:
+$ qemu-img convert -f raw -O vmdk disk.raw disk.vmdk  
+				<a class="read-more" href="/post/raw2vmdk/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/brew-update-formula/">brew update formula</a></h2>
+          <span class="post-date">Apr 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/brew">brew</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  
+				<a class="read-more" href="/post/brew-update-formula/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bastion-ssh/">bastion ssh</a></h2>
+          <span class="post-date">Apr 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bastion">bastion</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/multiplex">multiplex</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				ProxyJump This is the easiest (new) way:
+Host 10.* ProxyJump user@bastion.tld:2222  Using ProxyCommand Replace your.bastion.tld with your bastion server and set your bastion username in the ProxyCommand:
+Host bastion Hostname your.bastion.tld ForwardAgent yes Host 10.10.* ProxyCommand ssh &lt;your-username&gt;@bastion -W %h:%p  example To login with user devops to server 10.10.3.4:
+$ ssh -l devops 10.10.3.4  or
+$ ssh devops@10.10.3.4  SSH sockets To speed up more when using the bastion host things this can be added at the top of the ~/.
+				<a class="read-more" href="/post/bastion-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/smarthost/">smarthost</a></h2>
+          <span class="post-date">Apr 26, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/smtp">smtp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/smarthost">smarthost</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/postfix">postfix</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Smarthost with postfix  A smart host is a type of email message transfer agent that allows a Simple Mail Transfer Protocol (SMTP) server to route email to an intermediate mailserver rather than directly to the recipient&rsquo;s server
+ https://en.wikipedia.org/wiki/Smart_host
+Setup postfix to forward all emails using an external SMTP server, for example sendgrid.net, main.cf:
+smtp_sasl_auth_enable = yes smtp_sasl_password_maps = static:username:password smtp_sasl_security_options = noanonymous smtp_tls_security_level = encrypt header_size_limit = 4096000 relayhost = [smtp.
+				<a class="read-more" href="/post/smarthost/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mtr/">mtr</a></h2>
+          <span class="post-date">Apr 25, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mtr">mtr</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/traceroute">traceroute</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				mtr to create a text file report $ sudo mtr --report --report-cycles 10 immortal.run &gt; /tmp/immortal-mtr.txt  Example of output:
+Start: Tue Apr 25 17:58:11 2017 HOST: M20160001.local Loss% Snt Last Avg Best Wrst StDev 1.|-- 10.19.15.254 0.0% 10 41.7 41.2 25.1 81.6 16.8 2.|-- 10.19.0.1 0.0% 10 0.5 0.5 0.4 0.6 0.0 3.|-- 23.189.27.97 0.0% 10 1.2 8.5 1.0 74.4 23.2 4.|-- 89.27.149.117 80.0% 10 1.3 18.4 1.3 35.4 24.
+				<a class="read-more" href="/post/mtr/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-backup/">mysql backup</a></h2>
+          <span class="post-date">Apr 11, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/xz">xz</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:
+				<a class="read-more" href="/post/mysql-backup/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-root-password/">mysql root password</a></h2>
+          <span class="post-date">Apr 10, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Reset root password on mysql &gt;= 5.7.17 Edit /etc/rc.conf:
+mysql_args=&quot;--skip-grant-tables --skip-networking&quot;  Restart mysql:
+service mysql-server restart  Login like root:
+mysql&gt; UPDATE mysql.user SET authentication_string = PASSWORD('aaaa') WHERE User = 'root' AND Host = 'localhost'; mysql&gt; FLUSH PRIVILEGES; mysql&gt; quit  Remove or comment:
+# mysql_args=&quot;--skip-grant-tables --skip-networking&quot;  Restart mysql:
+service mysql-server restart  mysqldump: Couldn&rsquo;t execute &lsquo;SHOW VARIABLES LIKE &lsquo;gtid_mode&rsquo;': To fix that try this:
+# mysql_upgrade -u root -p --force  
+				<a class="read-more" href="/post/mysql-root-password/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/dsymutil-golang/">dsymutil golang</a></h2>
+          <span class="post-date">Apr 4, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dsymutil">dsymutil</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  
+				<a class="read-more" href="/post/dsymutil-golang/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pkgin/">pkgin</a></h2>
+          <span class="post-date">Mar 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/netbsd">netbsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pkgin">pkgin</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install pkgin in NetBSD:
+# export PKG_PATH=&quot;http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0.1/All/&quot;  then:
+# pkg_add -v pkgin-*  Finish by updating:
+# pkgin update  
+				<a class="read-more" href="/post/pkgin/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/diffie-hellman/">Diffie Hellman</a></h2>
+          <span class="post-date">Mar 25, 2017</span>
+		  
+		  
+		  	<div class="summary">
+				   
+				<a class="read-more" href="/post/diffie-hellman/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sqlite2file/">sqlite2file</a></h2>
+          <span class="post-date">Mar 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sqlite">sqlite</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Sqlite query to a file:
+sqlite&gt; .mode ascii sqlite&gt; .output data.txt sqlite&gt; .select * from table;  Or dump to a file:
+sqlite3 db.sqlite .dump &gt; dump  
+				<a class="read-more" href="/post/sqlite2file/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/text2json/">text2json</a></h2>
+          <span class="post-date">Mar 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/json">json</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/txt">txt</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/jq">jq</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Convert txt to json:
+ $ jq '.' -R -s file  or
+$ echo textfile | jq '.' -R -s  
+				<a class="read-more" href="/post/text2json/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/routing-flags/">routing flags</a></h2>
+          <span class="post-date">Mar 21, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/netstat">netstat</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				From netstat(1) man page:
+   Letter Flag Meaning     1 RTF_PROTO1 Protocol specific routing flag #1   2 RTF_PROTO2 Protocol specific routing flag #2   3 RTF_PROTO3 Protocol specific routing flag #3   B RTF_BLACKHOLE Just discard packets (during updates)   b RTF_BROADCAST The route represents a broadcast address   C RTF_CLONING Generate new routes on use   c RTF_PRCLONING Protocol-specified generate new routes on use   D RTF_DYNAMIC Created dynamically (by redirect)   G RTF_GATEWAY Destination requires forwarding by intermediary   H RTF_HOST Host entry (net otherwise)   I RTF_IFSCOPE Route is associated with an interface scope   i RTF_IFREF Route is holding a reference to the interface   L RTF_LLINFO Valid protocol to link address translation   M RTF_MODIFIED Modified dynamically (by redirect)   m RTF_MULTICAST The route represents a multicast address   R RTF_REJECT Host or net unreachable   r RTF_ROUTER Host is a default router   S RTF_STATIC Manually added   U RTF_UP Route usable   W RTF_WASCLONED Route was generated as a result of cloning   X RTF_XRESOLVE External daemon translates proto to link address   Y RTF_PROXY Proxying; cloned routes will not be scoped    To find current gateway when using a VPN:
+				<a class="read-more" href="/post/routing-flags/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nil-pointer/">nil pointer</a></h2>
+          <span class="post-date">Mar 17, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To check that x implements y, example:
+package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) var _ io.ReadCloser = (*os.File)(nil) func main() { fmt.Println(&#34;Hello, playground&#34;) } https://play.golang.org/p/hoi5_GQEpD
+To check that os.File is an io.ReadCloser:
+var _ io.ReadCloser = (*os.File)(nil)  package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) var _ io.ReadCloser = (*os.Process)(nil) func main() { fmt.Println(&#34;Hello, playground&#34;) } https://play.golang.org/p/7uHmjn3ggT
+The error in this case would be:
+main.go:9: cannot use (*os.
+				<a class="read-more" href="/post/nil-pointer/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-ed25519/">ssh ed25519</a></h2>
+          <span class="post-date">Mar 8, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ed25519">ed25519</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/eddsa">EdDSA</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Generate your new ssh ed25519 key:
+$ ssh-keygen -o -a 1000 -t ed25519  
+				<a class="read-more" href="/post/ssh-ed25519/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/urandom/">urandom</a></h2>
+          <span class="post-date">Mar 8, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/random">random</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/password">password</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				/dev/urandom To generate a random string/password of 32 chars using /dev/urandom:
+$ base64 /dev/urandom | head -c 32  
+				<a class="read-more" href="/post/urandom/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bitwise-chmod/">bitwise chmod</a></h2>
+          <span class="post-date">Mar 2, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/bitwise">bitwise</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/permissions">permissions</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				111 111 111          octal 777   decimal 511   binary 111 111 111   perm rwx rwx rwx    4 = r 2 = w 1 = x rwx = 4+2+1 = 7 rw = 4+2+0 = 6 r = 4+0+0 = 4 r x = 4+0+1 = 5 7 = binary 111 = rwx 6 = binary 110 = rw- 5 = binary 101 = r-x 4 = binary 100 = r-- 3 = binary 011 = -wx 2 = binary 010 = -w- 1 = binary 001 = --x 0 = binary 000 = ---  The full set of nine permission characters can then be grouped and summarized as three octal digits:
+				<a class="read-more" href="/post/bitwise-chmod/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/add-subtitles/">add subtitles</a></h2>
+          <span class="post-date">Feb 20, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mkv">mkv</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mp4">mp4</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/srt">srt</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Add subtitles to a mkv file: ffmpeg -i input.mkv -f srt -i input.srt -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy -c:s srt output.mkv  
+				<a class="read-more" href="/post/add-subtitles/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rds-slave-from-external-master/">rds slave from external master</a></h2>
+          <span class="post-date">Feb 10, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rds">rds</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/slave">slave</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/master">master</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Setup AWS MySQL RDS instance as slave of an external master Configure external mysql to become master:
+server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
+mysql&gt; create user `replica`@`%` identified by 'PASSWORD'; mysql&gt; grant replication slave on *.* to 'replica'@'%';  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:
+				<a class="read-more" href="/post/rds-slave-from-external-master/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/haproxy/">haproxy</a></h2>
+          <span class="post-date">Feb 9, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/haproxy">haproxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/htaccess">htaccess</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
+userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
+ acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:
+				<a class="read-more" href="/post/haproxy/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/page/9/">Newer</a>  
+  <a class="btn next" href="/page/11/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

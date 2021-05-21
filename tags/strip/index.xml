@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>strip on IT notes</title>
+    <link>https://nbari.com/tags/strip/</link>
+    <description>Recent content in strip on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 May 2020 21:46:13 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/strip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rust strip</title>
+      <link>https://nbari.com/post/rust-strip/</link>
+      <pubDate>Fri, 08 May 2020 21:46:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/rust-strip/</guid>
+      <description>To build &amp;amp;&amp;amp; strip a binary use:
+RUSTFLAGS=&#39;-C link-arg=-s&#39; cargo build --release   strip removes or modifies the symbol table attached to the output of the assembler and link editor. This is useful to save space after a program has been debugged and to limit dynamically bound symbols.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

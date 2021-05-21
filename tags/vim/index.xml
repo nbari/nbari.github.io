@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on IT notes</title>
+    <link>https://nbari.com/tags/vim/</link>
+    <description>Recent content in vim on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Feb 2020 19:47:46 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>removing the ^M character</title>
+      <link>https://nbari.com/post/m-character-windows/</link>
+      <pubDate>Fri, 07 Feb 2020 19:47:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/m-character-windows/</guid>
+      <description>In vim, to remove the ^M character you could do:
+:e ++ff=dos  The :e ++ff=dos command tells Vim to read the file again, forcing dos file format. Vim will remove CRLF and LF-only line endings, leaving only the text of each line in the buffer.
+Then set filetype to unix:
+:set ff=unix  And save the file:
+:x  </description>
+    </item>
+    
+    <item>
+      <title>E437 terminal capability cm required</title>
+      <link>https://nbari.com/post/e437-terminal-capability-cm-required/</link>
+      <pubDate>Wed, 28 Sep 2016 22:02:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/e437-terminal-capability-cm-required/</guid>
+      <description>When trying to open vi/vim the following message could appear:
+&amp;quot;E437: terminal capability &amp;quot;cm&amp;quot; required&amp;quot;  To fix it type:
+$ export TERM=xterm  </description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://nbari.com/post/vim/</link>
+      <pubDate>Mon, 08 Aug 2016 11:27:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vim/</guid>
+      <description>Quote/unquote words: ciw&#39;Ctrl+r&amp;quot;&#39;  or
+ciw &#39;&#39; Esc p  p paste after the cursor, P will paste before the cursor.
+Search matches (gn with the dot command) Suppose that we have a document containing several occurrences of the word ‘Normal’ and we’d like to change each occurrence to ‘Visual’. We can run /Normal to search for the word ‘Normal’, then type cgnVisual&amp;lt;Esc&amp;gt; to change the next match to the word ‘Visual’ and by pressing .</description>
+    </item>
+    
+    <item>
+      <title>brew macos</title>
+      <link>https://nbari.com/post/brew/</link>
+      <pubDate>Sat, 30 Jul 2016 16:35:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew/</guid>
+      <description>Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macOS on IT notes</title>
+    <link>https://nbari.com/tags/macos/</link>
+    <description>Recent content in macOS on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Mar 2020 18:29:39 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sed append</title>
+      <link>https://nbari.com/post/sed-append/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sed-append/</guid>
+      <description>To append a line using sed that works on macOS:
+sed -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39;  If need to do it in multiple files, you could use find:
+ find . -name &amp;quot;rc.conf&amp;quot; -exec sed -i &#39;&#39; -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39; {} \;  https://stackoverflow.com/a/48406504/1135424</description>
+    </item>
+    
+    <item>
+      <title>Python quit unexpectedly macOS Catalina</title>
+      <link>https://nbari.com/post/python-quit-unexpectedly-macos/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/python-quit-unexpectedly-macos/</guid>
+      <description>When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  </description>
+    </item>
+    
+    <item>
+      <title>macOs catalina &amp; python</title>
+      <link>https://nbari.com/post/catalina-python/</link>
+      <pubDate>Tue, 12 Nov 2019 16:20:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/catalina-python/</guid>
+      <description>Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F&#39;[=]&#39; &#39;{print $1}&#39;)  </description>
+    </item>
+    
+    <item>
+      <title>mojave Iso</title>
+      <link>https://nbari.com/post/mojave-iso/</link>
+      <pubDate>Thu, 13 Dec 2018 20:47:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mojave-iso/</guid>
+      <description>Create 12 GB tmp disk: hdiutil create -o /tmp/Mojave.cdr -size 12000m -layout SPUD -fs HFS+J
+Attach the disk:
+hdiutil attach /tmp/Mojave.cdr.dmg -noverify -mountpoint /Volumes/install_build  Extract the installer:
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build  Create the iso
+mv /tmp/Mojave.cdr.dmg ~/Desktop/InstallSystem.dmg hdiutil detach /Volumes/Install\ macOS\ Mojave hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Mojave.iso  Rename Mojave.iso.cdr to Mojave.iso</description>
+    </item>
+    
+    <item>
+      <title>Block SSH on MacOS</title>
+      <link>https://nbari.com/post/block-ssh-mac/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/block-ssh-mac/</guid>
+      <description>To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &amp;quot;echo &#39;block in log quick proto tcp from any to any port 22&#39; &amp;gt;&amp;gt; /etc/pf.conf&amp;quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.</description>
+    </item>
+    
+    <item>
+      <title>macOs sparseimage</title>
+      <link>https://nbari.com/post/macos-sparseimage/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/macos-sparseimage/</guid>
+      <description>To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &amp;quot;macOS_installmedia&amp;quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  </description>
+    </item>
+    
+    <item>
+      <title>MTU 1453</title>
+      <link>https://nbari.com/post/mtu-1453/</link>
+      <pubDate>Tue, 10 Apr 2018 21:16:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mtu-1453/</guid>
+      <description>If after upgrading macOS to 10.13.4 wifi stop working give a try to change the MTU:</description>
+    </item>
+    
+    <item>
+      <title>Delete Guest</title>
+      <link>https://nbari.com/post/delete-guest/</link>
+      <pubDate>Wed, 28 Feb 2018 09:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/delete-guest/</guid>
+      <description>To delete macOS Guest user:
+sudo dscl . -delete /Users/Guest  This will avoid showing the Guest user on the login screen</description>
+    </item>
+    
+    <item>
+      <title>ansible ImportError: No module named boto3</title>
+      <link>https://nbari.com/post/ansible-no-module-named-boto3/</link>
+      <pubDate>Mon, 16 Oct 2017 17:21:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-no-module-named-boto3/</guid>
+      <description>When using ansible 2.4.0.0 (macOS) to fix this problem update your library:
+pip install --upgrade --user boto3  notice the &amp;ndash;user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages
+ By using --upgrade it will recreate the site-packages.
+Or create PYTHONPATH system variable:
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages  paramiko In case you get this error:
+Unicode-objects must be encoded before hashing&amp;quot;, &amp;quot;unreachable&amp;quot;: true  Try:
+pip install --upgrade --user paramiko==2.0.6  To upgrade,reinstall ansible just in case:</description>
+    </item>
+    
+    <item>
+      <title>brew update formula</title>
+      <link>https://nbari.com/post/brew-update-formula/</link>
+      <pubDate>Sun, 30 Apr 2017 12:40:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew-update-formula/</guid>
+      <description>Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  </description>
+    </item>
+    
+  </channel>
+</rss>

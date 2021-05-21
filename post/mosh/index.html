@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> mosh &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mosh/">mosh</a></h2>
+          <span class="post-date">Aug 10, 2016 </span>
+          <div class="post-content">
+            <h1 id="mosh-mobile-shell">mosh (mobile shell)</h1>
+<blockquote>
+<p>Remote terminal application that allows roaming, supports intermittent
+connectivity, and provides intelligent local echo and line editing of user
+keystrokes. Mosh is a replacement for SSH. It&rsquo;s more robust and responsive,
+especially over Wi-Fi, cellular, and long-distance links.</p>
+</blockquote>
+<h2 id="how-to-install">How to install</h2>
+<h3 id="server">server</h3>
+<p>FreeBSD:</p>
+<pre><code>$ pkg install net/mosh
+</code></pre>
+<p>Edit <code>/etc/login.conf</code> and add this to the default:</p>
+<pre><code>    :charset=UTF-8:\
+    :lang=en_US.UTF-8:\
+    :setenv=LC_COLLATE=C:
+</code></pre>
+<p>After editing <code>/etc/locing.conf</code> run:</p>
+<pre><code>$ cap_mkdb /etc/login.conf
+</code></pre>
+<h3 id="client">Client</h3>
+<p>In a mac OS X;</p>
+<pre><code>$ brew install mosh
+</code></pre>
+<h2 id="how-to-use">How to use</h2>
+<p>Basically just type <code>mosh</code> instead of <code>ssh</code>, Mosh will log the user in via
+SSH, then start a connection on a UDP port between 60000 and 61000., Mosh will
+log the user in via SSH, then start a connection on a UDP port between 60000 and
+61000.</p>
+<pre><code>$ mosh your.server.tld
+</code></pre>
+<p>or</p>
+<pre><code>$ mosh user@your.server.tld
+</code></pre>
+<p>Selecting SSH port:</p>
+<pre><code>$ mosh --ssh=&quot;ssh -p 2222&quot; your.server.tld
+</code></pre>
+<p>or</p>
+<pre><code>$ mosh user@your.server.tld --ssh=&quot;ssh -p 2222&quot;
+</code></pre>
+<p>Specify ssh key:</p>
+<pre><code>$ mosh --ssh=&quot;ssh -i ./identity&quot; your.server.tld
+</code></pre>
+<p>or</p>
+<pre><code>$ mosh --ssh=&quot;ssh -i ~/.ssh/id_rsa_devops -p 2222&quot; 192.168.1.4
+</code></pre>
+<p>With tmux:</p>
+<pre><code>$ mosh host --ssh=&quot;ssh -p 3333&quot; -- sh -c &quot;tmux -2 attach -t $USER -d || tmux -2 new -s $USER&quot;
+</code></pre>
+<p>More info: <a href="https://mosh.mit.edu/">https://mosh.mit.edu/</a></p>
+<p><a href="http://www.youtube.com/watch?v=XsIxNYl0oyU"><img src="http://img.youtube.com/vi/XsIxNYl0oyU/0.jpg" alt="mosh"></a></p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/unit-testing-important/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/shell-set/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

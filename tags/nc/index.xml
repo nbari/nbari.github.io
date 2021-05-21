@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nc on IT notes</title>
+    <link>https://nbari.com/tags/nc/</link>
+    <description>Recent content in nc on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 May 2020 13:43:01 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/nc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bypass AllowTcpForwarding</title>
+      <link>https://nbari.com/post/bypass-allowtcpforwarding/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bypass-allowtcpforwarding/</guid>
+      <description>To bypass AllowTcpForwarding no try using socat and nc:
+socat TCP-LISTEN:&amp;lt;local port&amp;gt;,reuseaddr,fork &amp;quot;EXEC:ssh &amp;lt;server&amp;gt; nc localhost &amp;lt;remote port&amp;gt;&amp;quot;  For example from your desktop run:
+socat TCP-LISTEN:8080,reuseaddr,fork &amp;quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&amp;quot;  This will listen on local port 8080 connect via ssh to 1.2.3.4 and use nc to connect 10.0.1.1:3000</description>
+    </item>
+    
+    <item>
+      <title>netcat</title>
+      <link>https://nbari.com/post/netcat/</link>
+      <pubDate>Fri, 10 Nov 2017 20:50:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/netcat/</guid>
+      <description>As a replacement to telnet now that has been removed from macOS, netcat can be used.
+To test the response from a web server:
+echo -en &amp;quot;GET / HTTP/1.0\n\n\n&amp;quot; | nc google.com 80  If using HTTP/1.1 the host will be required:
+echo -en &amp;quot;GET / HTTP/1.1\nHost: google.com\n\n&amp;quot; | nc google.com 80  Test to see if port accepts connections:
+$ nc -vz google.com 80 found 0 associations found 1 connections: 1: flags=82&amp;lt;CONNECTED,PREFERRED&amp;gt; outif en1 src 192.</description>
+    </item>
+    
+    <item>
+      <title>Port knocking</title>
+      <link>https://nbari.com/post/portknocking/</link>
+      <pubDate>Sun, 19 Jun 2016 01:02:10 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/portknocking/</guid>
+      <description>In computer networking, port knocking is a method of externally opening ports on a firewall by generating a connection attempt on a set of prespecified closed ports. Once a correct sequence of connection attempts is received, the firewall rules are dynamically modified to allow the host which sent the connection attempts to connect over specific port(s).
+ For example, Using PF on FreeBSD to only open port 22 after X number of attempts to connect on port 1234:</description>
+    </item>
+    
+  </channel>
+</rss>

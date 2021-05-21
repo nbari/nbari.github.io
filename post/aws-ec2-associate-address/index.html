@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> aws ec2 associate address &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aws-ec2-associate-address/">aws ec2 associate address</a></h2>
+          <span class="post-date">Aug 30, 2016 </span>
+          <div class="post-content">
+            <p>If doing more than 100 requests implying the AWS CLI <code>associate-address</code>
+sub-command, subsequent calls will cost <strong>$0.10</strong> each, so If doing to much
+scale in/out or have a monitoring/automated tool that frecuenly make API calls using
+this sub-command, the bill is not going to be cheap:</p>
+<ul>
+<li>Scale in  (remove instances)</li>
+<li>Scale out (add instances)</li>
+</ul>
+<p><img src="/img/aws-ec2-associate-address.png" alt="additional remap"></p>
+<p>Long story short, The <code>associate-address</code> sub-command, is an idempotent
+operation, if you call &ldquo;aws ec2 associate-address&rdquo; with the same combination
+of instance and EIP as the one currently in place, it won&rsquo;t return an error;
+instead, it will return and count as successful, regardless of whether an actual
+allocation was done or not. Consequently, being it counted as a successful
+request, you&rsquo;ll be billed accordingly.</p>
+<blockquote>
+<p>Idempotent operations take an important role, basically because you expect
+that operation will not result in different results no matter how many times you
+operate the idempotent operations. (Idempotent = Re-runnable).</p>
+</blockquote>
+<p>This can be avoided by using private addresses and Load balancers, but in cases where
+you need to deal with <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP&rsquo;s</a> this maybe an issue, mainly for monitoring scripts or periodic checks, or use the <a href="http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-addresses.html">describe-address</a> and based on the result decide to use or not the <code>associate=address</code> sub-command</p>
+<h1 id="associate-address">associate-address</h1>
+<p>Associates an Elastic IP address with an instance or a network interface. This
+is an idempotent operation. If you perform the operation more than once, Amazon
+EC2 doesn&rsquo;t return an error, example:</p>
+<pre><code>$ aws ec2 associate-address --instance-id i-24ea6379 --allocation-id eipalloc-b58d24da
+{
+    &quot;AssociationId&quot;: &quot;eipassoc-b7b117df&quot;
+}
+</code></pre>
+<p><a href="http://docs.aws.amazon.com/cli/latest/reference/ec2/associate-address.html">http://docs.aws.amazon.com/cli/latest/reference/ec2/associate-address.html</a></p>
+<p>After running the previous command 100 times, the following requests will cost
+each <code>$0.10 per Elastic IP address remap</code> either the association didn&rsquo;t
+succeed or if it was made to an existing IP.</p>
+<p>Basically this means that if you have something that periodically checks your
+instances and tries to remap or ensure that your elastic IP is pointing you a
+desired instance:</p>
+<pre><code>    10.0.1.3 ---&gt; 58.41.28.32
+</code></pre>
+<p>After doing 100 calls, the following request will cost <strong>$0.10</strong> each.</p>
+<h2 id="auto-scaling">Auto scaling</h2>
+<p>While creating an auto-scaling group, could be the need to map each of the
+instances to use an Elastic IP&rsquo;s, based on the scaling in/out policies
+this would imply that after reaching the 100 limit, each reboot will cost
+<strong>$0.10</strong>.</p>
+<h1 id="example-of-how-to-use-the-associate-address-from-a-startup-script">Example of how to use the <code>associate-address</code> from a startup script</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># KEYWORD: firstboot</span>
+<span style="color:#75715e"># PROVIDE: set_hostname</span>
+<span style="color:#75715e"># REQUIRE: NETWORKING</span>
+<span style="color:#75715e"># BEFORE:  SERVERS</span>
+
+. /etc/rc.subr
+
+name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;set_hostname&#34;</span>
+rcvar<span style="color:#f92672">=</span>set_hostname_enable
+start_cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;set_hostname_run&#34;</span>
+stop_cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;:&#34;</span>
+
+export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>aws_access_key_id
+export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>aws_secret_access_key
+export AWS_DEFAULT_REGION<span style="color:#f92672">=</span>the_region
+
+TAG_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Salt&#34;</span>
+INSTANCE_ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>/usr/local/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id<span style="color:#66d9ef">)</span>
+REGION<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>/usr/local/bin/curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed <span style="color:#e6db74">&#39;s/.$//&#39;</span><span style="color:#66d9ef">)</span>
+TAG_VALUE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>/usr/local/bin/aws ec2 describe-tags --filters <span style="color:#e6db74">&#34;Name=resource-id,Values=</span><span style="color:#e6db74">${</span>INSTANCE_ID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;Name=key,Values=</span>$TAG_NAME<span style="color:#e6db74">&#34;</span> --region <span style="color:#e6db74">${</span>REGION<span style="color:#e6db74">}</span> --output<span style="color:#f92672">=</span>text | cut -f5<span style="color:#66d9ef">)</span>
+
+set_hostname_run<span style="color:#f92672">()</span>
+<span style="color:#f92672">{</span>
+	hostname <span style="color:#e6db74">${</span>INSTANCE_ID<span style="color:#e6db74">}</span>
+	sysrc hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>INSTANCE_ID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+	sysrc salt_minion_enable<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YES&#34;</span>
+	echo <span style="color:#e6db74">${</span>INSTANCE_ID<span style="color:#e6db74">}</span> &gt; /usr/local/etc/salt/minion_id
+	pw usermod root -c <span style="color:#e6db74">&#34;root on </span><span style="color:#e6db74">${</span>INSTANCE_ID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -z <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TAG_VALUE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+		echo <span style="color:#e6db74">&#34;node_type: </span><span style="color:#e6db74">${</span>TAG_VALUE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /usr/local/etc/salt/grains
+	<span style="color:#66d9ef">fi</span>
+	<span style="color:#75715e"># allocate IP X.X.X.X</span>
+	/usr/local/bin/aws ec2 associate-address --instance-id $INSTANCE_ID --allocation-id eipalloc-xxxxxxxx
+<span style="color:#f92672">}</span>
+
+load_rc_config $name
+run_rc_command <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</code></pre></div>
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/letsencrypt-cloudfare/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/1000/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

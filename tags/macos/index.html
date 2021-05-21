@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> macOS &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/macos/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sed-append/">sed append</a></h2>
+          <span class="post-date">Mar 29, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/append">append</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsd">bsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To append a line using sed that works on macOS:
+sed -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;'  If need to do it in multiple files, you could use find:
+ find . -name &quot;rc.conf&quot; -exec sed -i '' -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;' {} \;  https://stackoverflow.com/a/48406504/1135424
+				<a class="read-more" href="/post/sed-append/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/python-quit-unexpectedly-macos/">Python quit unexpectedly macOS Catalina</a></h2>
+          <span class="post-date">Jan 20, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/quit">quit</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ansible">ansible</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  
+				<a class="read-more" href="/post/python-quit-unexpectedly-macos/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/catalina-python/">macOs catalina &amp; python</a></h2>
+          <span class="post-date">Nov 12, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pip">pip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/catalina">catalina</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F'[=]' '{print $1}')  
+				<a class="read-more" href="/post/catalina-python/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mojave-iso/">mojave Iso</a></h2>
+          <span class="post-date">Dec 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/iso">iso</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mojave">mojave</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create 12 GB tmp disk: hdiutil create -o /tmp/Mojave.cdr -size 12000m -layout SPUD -fs HFS+J
+Attach the disk:
+hdiutil attach /tmp/Mojave.cdr.dmg -noverify -mountpoint /Volumes/install_build  Extract the installer:
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build  Create the iso
+mv /tmp/Mojave.cdr.dmg ~/Desktop/InstallSystem.dmg hdiutil detach /Volumes/Install\ macOS\ Mojave hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Mojave.iso  Rename Mojave.iso.cdr to Mojave.iso
+				<a class="read-more" href="/post/mojave-iso/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/block-ssh-mac/">Block SSH on MacOS</a></h2>
+          <span class="post-date">Dec 1, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pf">pf</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/firewall">firewall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/managed">managed</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &quot;echo 'block in log quick proto tcp from any to any port 22' &gt;&gt; /etc/pf.conf&quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.
+				<a class="read-more" href="/post/block-ssh-mac/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/macos-sparseimage/">macOs sparseimage</a></h2>
+          <span class="post-date">Aug 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sparse">sparse</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/install">install</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vmware">vmware</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &quot;macOS_installmedia&quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  
+				<a class="read-more" href="/post/macos-sparseimage/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mtu-1453/">MTU 1453</a></h2>
+          <span class="post-date">Apr 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/wifi">wifi</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mtu">mtu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If after upgrading macOS to 10.13.4 wifi stop working give a try to change the MTU:
+				<a class="read-more" href="/post/mtu-1453/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/delete-guest/">Delete Guest</a></h2>
+          <span class="post-date">Feb 28, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/guest">guest</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To delete macOS Guest user:
+sudo dscl . -delete /Users/Guest  This will avoid showing the Guest user on the login screen
+				<a class="read-more" href="/post/delete-guest/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ansible-no-module-named-boto3/">ansible ImportError: No module named boto3</a></h2>
+          <span class="post-date">Oct 16, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ansible">ansible</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/boto">boto</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using ansible 2.4.0.0 (macOS) to fix this problem update your library:
+pip install --upgrade --user boto3  notice the &ndash;user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages
+ By using --upgrade it will recreate the site-packages.
+Or create PYTHONPATH system variable:
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages  paramiko In case you get this error:
+Unicode-objects must be encoded before hashing&quot;, &quot;unreachable&quot;: true  Try:
+pip install --upgrade --user paramiko==2.0.6  To upgrade,reinstall ansible just in case:
+				<a class="read-more" href="/post/ansible-no-module-named-boto3/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/brew-update-formula/">brew update formula</a></h2>
+          <span class="post-date">Apr 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/brew">brew</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  
+				<a class="read-more" href="/post/brew-update-formula/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>route on IT notes</title>
+    <link>https://nbari.com/tags/route/</link>
+    <description>Recent content in route on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Feb 2020 14:33:47 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/route/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>get the Primary IP</title>
+      <link>https://nbari.com/post/get-primary-ip/</link>
+      <pubDate>Wed, 26 Feb 2020 14:33:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/get-primary-ip/</guid>
+      <description>To get the primary IP in Linux:
+ip route get 1 | awk &#39;{print $NF;exit}&#39;   In awk NF return the number of fields and by suffixing it with $ is like doing print $7
+ In macOS, to list all your interfaces:
+networksetup -listallhardwareports  If want to get the IP assigned to the Wi-FI:
+ipconfig getifaddr $(networksetup -listallhardwareports | awk &#39;/Hardware Port: Wi-Fi/{getline; print $2}&#39;)  </description>
+    </item>
+    
+  </channel>
+</rss>

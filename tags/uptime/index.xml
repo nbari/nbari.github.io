@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uptime on IT notes</title>
+    <link>https://nbari.com/tags/uptime/</link>
+    <description>Recent content in uptime on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Sep 2016 16:12:36 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/uptime/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws uptime</title>
+      <link>https://nbari.com/post/aws-uptime/</link>
+      <pubDate>Tue, 27 Sep 2016 16:12:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-uptime/</guid>
+      <description>AWS &amp;gt;= 657 days  OS: FreeBSD 8.2 AWS: us-east-1 Type: t1.micro  </description>
+    </item>
+    
+    <item>
+      <title>uptime 1000 days</title>
+      <link>https://nbari.com/post/1000/</link>
+      <pubDate>Wed, 21 Sep 2016 21:59:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/1000/</guid>
+      <description>uptime &amp;gt;= 1000 days  OS: FreeBSD + ZFS + Jails Server: Dell PowerEdge 2900 2xE5420 24GB RAM Colocation: https://iweb.com/  Time to reboot after 4 years:
+I need to rebuild the RAID and can&amp;rsquo;t mix SAS drives with SATA on an living array:</description>
+    </item>
+    
+  </channel>
+</rss>

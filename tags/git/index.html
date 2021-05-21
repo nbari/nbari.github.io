@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> git &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/git/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-ssh/">Git SSH</a></h2>
+          <span class="post-date">Aug 29, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bare">bare</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a git repository and access to it via ssh:
+$ ssh your.host $ mkdir my-new-repo $ cd my-new-repo $ git --bare init  To access your repo (clone it):
+$ git clone ssh://user@your.host:2222/~user/my-new-repo  
+				<a class="read-more" href="/post/git-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git/">git basics</a></h2>
+          <span class="post-date">Mar 25, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				git branch -a This will print all branches, local or remote, to see only local branches:
+$ git branch  To only see remote branches:
+$ git branch -r  When you clone a repo after typing git branch -a the output will look something like this:
+$ git branch -a * master remotes/origin/HEAD -&gt; origin/master remotes/origin/master  master is a branch in the local repository, remotes/origin/master is a branch named master on the remote named origin:
+				<a class="read-more" href="/post/git/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-web-deployment-workflow/">Git Web Deployment Workflow</a></h2>
+          <span class="post-date">Mar 25, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/deployment">deployment</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hooks">hooks</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				The idea behind is to push to a remote repository on the same web/service server and a post-receive hook will checkout the files to the public directory.
+Configuring the server Create the repository:
+$ cd $HOME $ mkdir my-site.git $ cd my-site.git $ git init --bare  The idea of using .git as a suffix is just to distinguish between other directories.
+Crate the directory where you would like to deploy, for example:
+				<a class="read-more" href="/post/git-web-deployment-workflow/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-format-patch/">git format-patch</a></h2>
+          <span class="post-date">Nov 19, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/patch">patch</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a patch of the latest commit:
+git format-patch -1 HEAD  The last 10 patches from head in a single patch file:
+git format-patch -10 HEAD --stdout &gt; last-10-commits.patch  Apply the patch:
+git apply path-file-name  
+				<a class="read-more" href="/post/git-format-patch/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/brew-update-formula/">brew update formula</a></h2>
+          <span class="post-date">Apr 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/brew">brew</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  
+				<a class="read-more" href="/post/brew-update-formula/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/brew/">brew macos</a></h2>
+          <span class="post-date">Jul 30, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/zsh">zsh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vim">vim</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:
+				<a class="read-more" href="/post/brew/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

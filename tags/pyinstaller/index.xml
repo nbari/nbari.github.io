@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pyinstaller on IT notes</title>
+    <link>https://nbari.com/tags/pyinstaller/</link>
+    <description>Recent content in pyinstaller on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 24 Apr 2021 16:25:34 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pyinstaller/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pipenv Pyinstaller</title>
+      <link>https://nbari.com/post/pipenv-pyinstaller/</link>
+      <pubDate>Sat, 24 Apr 2021 16:25:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pipenv-pyinstaller/</guid>
+      <description>Create a basic hello world using flask:
+mkdir /tmp/project cd /tmp/project  Create app.py:
+from flask import Flask app = Flask(__name__) @app.route(&amp;quot;/&amp;quot;) def hello(): return &#39;Hello World!&#39; if __name__ == &#39;__main__&#39;: app.run(host=&#39;0.0.0.0&#39;)  Instal flask:
+ pipenv install flask  test the app:
+pipenv shell python app.py  Install pyinstaller:
+pipenv install pyinstaller  Create the requirements.txt:
+pipenv run pip freeze &amp;gt; requirements.txt  Create the binary:
+ pyinstaller --onefile app.</description>
+    </item>
+    
+  </channel>
+</rss>

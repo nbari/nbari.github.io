@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zsh on IT notes</title>
+    <link>https://nbari.com/tags/zsh/</link>
+    <description>Recent content in zsh on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Mar 2019 18:32:47 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>zsh</title>
+      <link>https://nbari.com/post/zsh/</link>
+      <pubDate>Sat, 23 Mar 2019 18:32:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/zsh/</guid>
+      <description>Edit environment variables:
+vared PATH  Diff command output creating temporary normal files
+vimdiff =(ls /bin) =(ls /usr/bin)  Print path
+print -l $path  Run a command detached &amp;amp;! or &amp;amp;| put it in background and disown the process, exiting the shell will leave it running:
+sleep 300 &amp;amp;!  </description>
+    </item>
+    
+    <item>
+      <title>brew macos</title>
+      <link>https://nbari.com/post/brew/</link>
+      <pubDate>Sat, 30 Jul 2016 16:35:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew/</guid>
+      <description>Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:</description>
+    </item>
+    
+  </channel>
+</rss>

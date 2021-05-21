@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Galera &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/galera/">Galera</a></h2>
+          <span class="post-date">Feb 6, 2019 </span>
+          <div class="post-content">
+            <p>To periodically check status of the cluster, create a script (<code>/tmp/xx</code>):</p>
+<pre><code>#!/bin/sh
+mysql -e \
+&quot;SHOW GLOBAL STATUS WHERE Variable_name IN (
+'wsrep_cert_deps_distance',
+'wsrep_cluster_size',
+'wsrep_cluster_status',
+'wsrep_connected',
+'wsrep_evs_delayed',
+'wsrep_flow_control_paused',
+'wsrep_flow_control_paused_ns',
+'wsrep_flow_control_recv',
+'wsrep_flow_control_sent',
+'wsrep_local_index',
+'wsrep_local_state',
+'wsrep_local_state_comment',
+'wsrep_ready',
+'wsrep_replicated',
+'wsrep_replicated_bytes');&quot;
+</code></pre>
+<blockquote>
+<p>if credentials are in a custom path: <code>mysql --defaults-file=/path/to/.my.cnf -s -e</code></p>
+</blockquote>
+<p>And run it with:</p>
+<pre><code>watch sh /tmp/xx
+</code></pre>
+<p>If single node alive (ERROR 1047 WSREP has not yet prepared node for application use):</p>
+<pre><code>SET GLOBAL wsrep_provider_options='pc.bootstrap=YES';
+</code></pre>
+<p>This node can be used now has the new master so others nodes can recover from it.</p>
+<p>The below statement will give us an idea of the amount of data replicated by
+Galera. Run the following statement on one of the Galera nodes during peak hours
+(tested on MariaDB &gt;10.0 and PXC &gt;5.6, galera &gt;3.x):</p>
+<pre><code>SET @start := (SELECT SUM(VARIABLE_VALUE/1024/1024) FROM information_schema.global_status WHERE VARIABLE_NAME LIKE 'WSREP%bytes'); do sleep(60); SET @end := (SELECT SUM(VARIABLE_VALUE/1024/1024) FROM information_schema.global_status WHERE VARIABLE_NAME LIKE 'WSREP%bytes'); SET @gcache := (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(@@GLOBAL.wsrep_provider_options,'gcache.size = ',-1), 'M', 1)); SELECT ROUND((@end - @start),2) AS `MB/min`, ROUND((@end - @start),2) * 60 as `MB/hour`, @gcache as `gcache Size(MB)`, ROUND(@gcache/round((@end - @start),2),2) as `Time to full(minutes)`;
+</code></pre>
+<p>Will output something like:
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| MB/min | MB/hour | gcache Size(MB) | Time to full(minutes) |
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+|   7.95 |  477.00 |  128            |                 16.10 |
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+</p>
+<blockquote>
+<p>src: <a href="https://severalnines.com/database-blog/improve-performance-galera-cluster-mysql-or-mariadb">https://severalnines.com/database-blog/improve-performance-galera-cluster-mysql-or-mariadb</a></p>
+</blockquote>
+<h2 id="grastatedat">grastate.dat</h2>
+<p>Try to recover from the node with max <code>seqno</code>, for example this is a node that shows a graceful shutdown:</p>
+<pre><code>version: 2.1
+uuid: cbd332a9-f617-11e2-b77d-3ee9fa637069
+seqno: 43760
+</code></pre><p>This <code>grastate.dat</code> file shows <code>-1</code> in the <code>seqno</code>. This node crashed during transaction processing:</p>
+<pre><code>version: 2.1
+uuid: cbd332a9-f617-11e2-b77d-3ee9fa637069
+seqno: -1
+</code></pre><p>This node crashed during DDL:</p>
+<pre><code>version: 2.1
+uuid: 00000000-0000-0000-0000-000000000000
+seqno: -1
+</code></pre>
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/galera-alter/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/osascript/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

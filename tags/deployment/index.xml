@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deployment on IT notes</title>
+    <link>https://nbari.com/tags/deployment/</link>
+    <description>Recent content in deployment on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Mar 2018 12:28:19 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git Web Deployment Workflow</title>
+      <link>https://nbari.com/post/git-web-deployment-workflow/</link>
+      <pubDate>Sun, 25 Mar 2018 12:28:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git-web-deployment-workflow/</guid>
+      <description>The idea behind is to push to a remote repository on the same web/service server and a post-receive hook will checkout the files to the public directory.
+Configuring the server Create the repository:
+$ cd $HOME $ mkdir my-site.git $ cd my-site.git $ git init --bare  The idea of using .git as a suffix is just to distinguish between other directories.
+Crate the directory where you would like to deploy, for example:</description>
+    </item>
+    
+  </channel>
+</rss>

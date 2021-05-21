@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mkimg on IT notes</title>
+    <link>https://nbari.com/tags/mkimg/</link>
+    <description>Recent content in mkimg on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2016 16:20:26 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/mkimg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>convertfromraw</title>
+      <link>https://nbari.com/post/convertfromraw/</link>
+      <pubDate>Mon, 07 Nov 2016 16:20:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/convertfromraw/</guid>
+      <description>Convert from RAW to VDI When creating custom &amp;ldquo;RAW&amp;rdquo; images using mkimg they can be use in VirtualBox by converting them to &amp;ldquo;VDI&amp;rdquo; format, example:
+$ VBoxManage convertfromraw ec2.raw ec2.vdi --format VDI Converting from raw image file=&amp;quot;ec2.raw&amp;quot; to file=&amp;quot;ec2.vdi&amp;quot;... Creating dynamic image with size 3221292544 bytes (3073MB)...  Once the image is in &amp;ldquo;VDI&amp;rdquo; format it can be resized using:
+$ VBoxManage modifyhd ec2.vdi --resize 8192 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%  The above command will resize the image to 8GB.</description>
+    </item>
+    
+  </channel>
+</rss>

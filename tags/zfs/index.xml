@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zfs on IT notes</title>
+    <link>https://nbari.com/tags/zfs/</link>
+    <description>Recent content in zfs on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Apr 2021 10:52:20 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/zfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ZFS encryption</title>
+      <link>https://nbari.com/post/zfs-encryption/</link>
+      <pubDate>Thu, 22 Apr 2021 10:52:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-encryption/</guid>
+      <description>Create an encrypted file system:
+zfs create -o encryption=on -o keyformat=passphrase -o keylocation=prompt tank/test-enc  Check encryption:
+$ zfs get encryption tank/test-enc NAME PROPERTY VALUE SOURCE tank/test-enc encryption aes-256-gcm -  Check status:
+zfs get -p encryption,keystatus,keyformat,keylocation,encryptionroot  </description>
+    </item>
+    
+    <item>
+      <title>ZFS swap</title>
+      <link>https://nbari.com/post/zfs-swap/</link>
+      <pubDate>Mon, 20 Aug 2018 20:51:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-swap/</guid>
+      <description>To add more swap on a ZFS system:
+# zfs create -V 64G -o org.freebsd:swap=on -o checksum=off -o compression=off -o dedup=off -o sync=disabled -o primarycache=none tank/swap2  To add it:
+# swapon /dev/zvol/tank/swap2  To resize you could first remove it:
+# swapoff /dev/zvol/tank/swap  Then destroy it:
+# zfs destroy tank/swap  </description>
+    </item>
+    
+    <item>
+      <title>ZFS send receive</title>
+      <link>https://nbari.com/post/zfs-send-receive/</link>
+      <pubDate>Thu, 21 Jun 2018 12:00:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-send-receive/</guid>
+      <description>To send a zfs dataset being no root, on the origin server:
+# zfs allow -g wheel send,snapshot,hold tank/foo  On the receiver, create the dataset and allow users in group wheel:
+# zfs create -o mountpoint=/foo tank/foo # zfs allow -g wheel compression,mountpoint,create,mount,receive tank/foo # umount /foo  On the origin server create the snapshot to send:
+# zfs snapshot -r tank/foo  On the origin server send the dataset by using:</description>
+    </item>
+    
+    <item>
+      <title>moosefs</title>
+      <link>https://nbari.com/post/moosefs/</link>
+      <pubDate>Tue, 12 Jun 2018 21:29:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/moosefs/</guid>
+      <description>Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
+Install the required packages:
+pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
+pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
+X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
+MFSM NEW  Create a pool to share:</description>
+    </item>
+    
+    <item>
+      <title>raidz2</title>
+      <link>https://nbari.com/post/raidz2/</link>
+      <pubDate>Thu, 28 Dec 2017 22:20:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/raidz2/</guid>
+      <description>If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:
+&amp;gt; mfiutil show config mfi0 Configuration: 8 arrays, 8 volumes, 1 spares array 0 of 2 drives: drive 1 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&amp;gt; SATA drive 6 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY35&amp;gt; SATA array 1 of 1 drives: drive 0 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ0&amp;gt; SCSI-6 array 2 of 1 drives: drive 2 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&amp;gt; SCSI-6 array 3 of 1 drives: drive 3 ( 932G) ONLINE &amp;lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&amp;gt; SCSI-6 array 4 of 1 drives: drive 4 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&amp;gt; SAS array 5 of 1 drives: drive 5 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C4&amp;gt; SAS array 6 of 1 drives: drive 8 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&amp;gt; SAS array 7 of 1 drives: drive 9 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L824&amp;gt; SAS volume mfid0 (1863G) RAID-1 64K OPTIMAL &amp;lt;raid1&amp;gt; spans: array 0 volume mfid1 (465G) RAID-0 64K OPTIMAL &amp;lt;r0&amp;gt; spans: array 1 volume mfid2 (465G) RAID-0 64K OPTIMAL &amp;lt;r2&amp;gt; spans: array 2 volume mfid3 (931G) RAID-0 64K OPTIMAL &amp;lt;r3&amp;gt; spans: array 3 volume mfid4 (465G) RAID-0 64K OPTIMAL &amp;lt;r4&amp;gt; spans: array 4 volume mfid5 (465G) RAID-0 64K OPTIMAL &amp;lt;r5&amp;gt; spans: array 5 volume mfid6 (465G) RAID-0 64K OPTIMAL &amp;lt;r8&amp;gt; spans: array 6 volume mfid7 (465G) RAID-0 64K OPTIMAL &amp;lt;r9&amp;gt; spans: array 7 dedicated spare 7 ( 1863G) HOT SPARE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&amp;gt; SATA backs: array 0 Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume</description>
+    </item>
+    
+    <item>
+      <title>zfs</title>
+      <link>https://nbari.com/post/zfs/</link>
+      <pubDate>Sat, 10 Dec 2016 15:53:08 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/zfs/</guid>
+      <description>FreeBSD zfs disk image Use VirtualBox to install FreeBSD using UFS.
+After having FreeBSD installed, update your sources and build a custom world and kernel based on your needs for the new image to be created:
+# cd /usr/src # make -j4 buildworld buildkernel   adjust -j4 to the number or cpu cores
+ Use this script to create the image: https://github.com/nbari/freebsd/blob/master/zfs/zfs.sh
+$ mkdir /raw &amp;amp;&amp;amp; cd /raw $ fetch --no-verify-peer https://raw.</description>
+    </item>
+    
+  </channel>
+</rss>

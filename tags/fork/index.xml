@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fork on IT notes</title>
+    <link>https://nbari.com/tags/fork/</link>
+    <description>Recent content in fork on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Mar 2018 15:28:13 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/fork/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OBJC_DISABLE_INITIALIZE_FORK_SAFETY</title>
+      <link>https://nbari.com/post/objc_disable_initialize_fork_safety/</link>
+      <pubDate>Thu, 22 Mar 2018 15:28:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/objc_disable_initialize_fork_safety/</guid>
+      <description>In macOS High Sierra if getting this:
+objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.  Define:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES  This will fix temporally fix the problem and allow program to continue executing, more about this issue here: http://sealiesoftware.</description>
+    </item>
+    
+    <item>
+      <title>forkbomb</title>
+      <link>https://nbari.com/post/forkbomb/</link>
+      <pubDate>Thu, 08 Dec 2016 11:11:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forkbomb/</guid>
+      <description>forkbomb C example:
+#include &amp;lt;stdio.h&amp;gt;int main() { while(1) fork(); } To compile:
+$ clang bomg.c  Python example:
+import os while True: os.fork() How to prevent it, use RCTL for example in a jail:
+$ rctl -a jail:myJail:maxproc:deny=50  </description>
+    </item>
+    
+  </channel>
+</rss>

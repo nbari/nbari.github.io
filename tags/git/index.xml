@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on IT notes</title>
+    <link>https://nbari.com/tags/git/</link>
+    <description>Recent content in git on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Aug 2018 16:26:34 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git SSH</title>
+      <link>https://nbari.com/post/git-ssh/</link>
+      <pubDate>Wed, 29 Aug 2018 16:26:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git-ssh/</guid>
+      <description>To create a git repository and access to it via ssh:
+$ ssh your.host $ mkdir my-new-repo $ cd my-new-repo $ git --bare init  To access your repo (clone it):
+$ git clone ssh://user@your.host:2222/~user/my-new-repo  </description>
+    </item>
+    
+    <item>
+      <title>git basics</title>
+      <link>https://nbari.com/post/git/</link>
+      <pubDate>Sun, 25 Mar 2018 19:45:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git/</guid>
+      <description>git branch -a This will print all branches, local or remote, to see only local branches:
+$ git branch  To only see remote branches:
+$ git branch -r  When you clone a repo after typing git branch -a the output will look something like this:
+$ git branch -a * master remotes/origin/HEAD -&amp;gt; origin/master remotes/origin/master  master is a branch in the local repository, remotes/origin/master is a branch named master on the remote named origin:</description>
+    </item>
+    
+    <item>
+      <title>Git Web Deployment Workflow</title>
+      <link>https://nbari.com/post/git-web-deployment-workflow/</link>
+      <pubDate>Sun, 25 Mar 2018 12:28:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git-web-deployment-workflow/</guid>
+      <description>The idea behind is to push to a remote repository on the same web/service server and a post-receive hook will checkout the files to the public directory.
+Configuring the server Create the repository:
+$ cd $HOME $ mkdir my-site.git $ cd my-site.git $ git init --bare  The idea of using .git as a suffix is just to distinguish between other directories.
+Crate the directory where you would like to deploy, for example:</description>
+    </item>
+    
+    <item>
+      <title>git format-patch</title>
+      <link>https://nbari.com/post/git-format-patch/</link>
+      <pubDate>Sun, 19 Nov 2017 20:34:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/git-format-patch/</guid>
+      <description>To create a patch of the latest commit:
+git format-patch -1 HEAD  The last 10 patches from head in a single patch file:
+git format-patch -10 HEAD --stdout &amp;gt; last-10-commits.patch  Apply the patch:
+git apply path-file-name  </description>
+    </item>
+    
+    <item>
+      <title>brew update formula</title>
+      <link>https://nbari.com/post/brew-update-formula/</link>
+      <pubDate>Sun, 30 Apr 2017 12:40:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew-update-formula/</guid>
+      <description>Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  </description>
+    </item>
+    
+    <item>
+      <title>brew macos</title>
+      <link>https://nbari.com/post/brew/</link>
+      <pubDate>Sat, 30 Jul 2016 16:35:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew/</guid>
+      <description>Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:</description>
+    </item>
+    
+  </channel>
+</rss>

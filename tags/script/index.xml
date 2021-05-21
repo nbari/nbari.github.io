@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>script on IT notes</title>
+    <link>https://nbari.com/tags/script/</link>
+    <description>Recent content in script on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Feb 2019 08:55:41 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>osascript</title>
+      <link>https://nbari.com/post/osascript/</link>
+      <pubDate>Fri, 08 Feb 2019 08:55:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osascript/</guid>
+      <description>In macOS, to find a path of an application, for example Chromium:
+$ osascript -e &#39;POSIX path of (path to application &amp;quot;Chromium&amp;quot;)&#39;  </description>
+    </item>
+    
+  </channel>
+</rss>

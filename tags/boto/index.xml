@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>boto on IT notes</title>
+    <link>https://nbari.com/tags/boto/</link>
+    <description>Recent content in boto on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Oct 2017 17:21:57 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/boto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ansible ImportError: No module named boto3</title>
+      <link>https://nbari.com/post/ansible-no-module-named-boto3/</link>
+      <pubDate>Mon, 16 Oct 2017 17:21:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-no-module-named-boto3/</guid>
+      <description>When using ansible 2.4.0.0 (macOS) to fix this problem update your library:
+pip install --upgrade --user boto3  notice the &amp;ndash;user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages
+ By using --upgrade it will recreate the site-packages.
+Or create PYTHONPATH system variable:
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages  paramiko In case you get this error:
+Unicode-objects must be encoded before hashing&amp;quot;, &amp;quot;unreachable&amp;quot;: true  Try:
+pip install --upgrade --user paramiko==2.0.6  To upgrade,reinstall ansible just in case:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> go &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/go/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/build-disable/">//&#43;build disable</a></h2>
+          <span class="post-date">May 14, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/build">build</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/disable">disable</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In go if need to sketch something and end having func main() in two files, you could ignore building one by adding at the top of the file:
+// +build disable  This is a build constraint.
+A build constraint, also known as a build tag, is a line comment that begins:
+// +build  
+				<a class="read-more" href="/post/build-disable/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/golang-http-timeouts/">Golang HTTP Timeouts</a></h2>
+          <span class="post-date">Dec 1, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/timeout">timeout</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If this:
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms  Check that your go server is using proper timeouts, example:
+srv := &amp;http.Server{ Addr: &#34;:80&#34;, Handler: router, ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.Fatal(srv.ListenAndServe()) https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+				<a class="read-more" href="/post/golang-http-timeouts/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/go-bench/">Go Benchmarking</a></h2>
+          <span class="post-date">Sep 24, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bench">bench</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To exclude all the tests and just run the benchmarks:
+go test -run=^$ -bench=.  Profile:
+go test -cpuprofile=cpu.out -benchmem -memprofile=mem.out -run=^$ -bench=  Using pprof:
+CPU:
+go tool pprof &lt;your-binary&gt;.test cpu.out  MEM:
+go tool pprof -alloc_objects &lt;your-binary&gt;.test mem.out  Go Tooling in Action
+  
+				<a class="read-more" href="/post/go-bench/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/webcrypto-and-go/">Webcrypto and Go</a></h2>
+          <span class="post-date">Aug 17, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/crypto">crypto</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aesgcm">aesgcm</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Encrypt on client side using javascript WebCrypto and decrypt on backend using go:
+javascript code:
+async function aesGcmEncrypt(plaintext, password) { const pwUtf8 = new TextEncoder().encode(password); // encode password as UTF-8  const pwHash = await crypto.subtle.digest(&#39;SHA-256&#39;, pwUtf8); // hash the password  const iv = crypto.getRandomValues(new Uint8Array(12)); // get 96-bit random iv  const alg = { name: &#39;AES-GCM&#39;, iv: iv }; // specify algorithm to use  const key = await crypto.
+				<a class="read-more" href="/post/webcrypto-and-go/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/dsymutil-golang/">dsymutil golang</a></h2>
+          <span class="post-date">Apr 4, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dsymutil">dsymutil</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  
+				<a class="read-more" href="/post/dsymutil-golang/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nil-pointer/">nil pointer</a></h2>
+          <span class="post-date">Mar 17, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To check that x implements y, example:
+package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) var _ io.ReadCloser = (*os.File)(nil) func main() { fmt.Println(&#34;Hello, playground&#34;) } https://play.golang.org/p/hoi5_GQEpD
+To check that os.File is an io.ReadCloser:
+var _ io.ReadCloser = (*os.File)(nil)  package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) var _ io.ReadCloser = (*os.Process)(nil) func main() { fmt.Println(&#34;Hello, playground&#34;) } https://play.golang.org/p/7uHmjn3ggT
+The error in this case would be:
+main.go:9: cannot use (*os.
+				<a class="read-more" href="/post/nil-pointer/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

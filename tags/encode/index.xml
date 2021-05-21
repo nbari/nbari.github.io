@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>encode on IT notes</title>
+    <link>https://nbari.com/tags/encode/</link>
+    <description>Recent content in encode on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Apr 2018 13:35:43 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/encode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IDNA</title>
+      <link>https://nbari.com/post/idna/</link>
+      <pubDate>Sun, 29 Apr 2018 13:35:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/idna/</guid>
+      <description>To encode/decode a domain using &amp;ldquo;Internationalized Domain Names&amp;rdquo;
+$ python &amp;gt;&amp;gt;&amp;gt; x = u&#39;qép.com&#39; &amp;gt;&amp;gt;&amp;gt; x.encode(&#39;idna&#39;) b&#39;xn--qp-bja.com&#39; &amp;gt;&amp;gt;&amp;gt; x.encode(&#39;idna&#39;).decode(&#39;idna&#39;) &#39;qép.com&#39; &amp;gt;&amp;gt;&amp;gt; x == x.encode(&#39;idna&#39;).decode(&#39;idna&#39;) True   To prevent non-international domain names containing hyphens from being accidentally interpreted as Punycode, international domain name Punycode sequences have a so-called ASCII Compatible Encoding (ACE) prefix, &amp;ldquo;xn&amp;ndash;&amp;rdquo;, prepended.[2] Thus the domain name &amp;ldquo;bücher.tld&amp;rdquo; would be represented in ASCII as &amp;ldquo;xn&amp;ndash;bcher-kva.tld&amp;rdquo;.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

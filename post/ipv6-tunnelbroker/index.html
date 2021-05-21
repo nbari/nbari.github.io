@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> ipv6 tunnelbroker &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ipv6-tunnelbroker/">ipv6 tunnelbroker</a></h2>
+          <span class="post-date">Dec 1, 2016 </span>
+          <div class="post-content">
+            <h1 id="6in4">6in4</h1>
+<blockquote>
+<p>6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured
+IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets
+whose IP headers have the IP protocol number set to 41.
+<a href="https://en.wikipedia.org/wiki/6in4">https://en.wikipedia.org/wiki/6in4</a></p>
+</blockquote>
+<p><img src="/img/6in4.gif" alt="6in4"></p>
+<p>&ldquo;6to4&rdquo; is a tunneling method that is only interesting for reaching IPv6-only
+services. And 6to4 makes sense only if one has a public IPv4 address. As a rule,
+you only need to enable &ldquo;6to4&rdquo; if you want to access services that are only
+IPv6. <a href="http://www.elektronik-kompendium.de/sites/net/1904031.htm">http://www.elektronik-kompendium.de/sites/net/1904031.htm</a></p>
+<p>Create an account on <a href="https://tunnelbroker.net/">https://tunnelbroker.net/</a></p>
+<h1 id="seting-ip-on-freebsd">seting IP on FreeBSD</h1>
+<pre><code>ifconfig gif0 create
+ifconfig gif0 tunnel 1.2.3.4 Y.Y.Y.Y
+ifconfig gif0 inet6 2001:470:1c:35e::2
+route -n add -inet6 default 2001:470:1c:35e::1
+ifconfig gif0 up
+</code></pre>
+<p>Where <code>Y.Y.Y.Y</code> is the Server IPv4 Address and <code>1.2.3.4</code> is your lan.</p>
+<h1 id="mac-os-x-setup">mac os X setup</h1>
+<pre><code>ifconfig gif0 create
+ifconfig gif0 tunnel 56.189.27.100 216.77.86.114
+ifconfig gif0 inet6 2001:470:6c:387::2 2001:470:6c:387::1 prefixlen 128
+route -n add -inet6 default 2001:470:6c:387::1
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/postgres/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/ipv6-off/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

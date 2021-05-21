@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>crytp on IT notes</title>
+    <link>https://nbari.com/tags/crytp/</link>
+    <description>Recent content in crytp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Oct 2020 18:59:32 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/crytp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>storj</title>
+      <link>https://nbari.com/post/storj/</link>
+      <pubDate>Sun, 18 Oct 2020 18:59:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/storj/</guid>
+      <description>Setup up and configure your jail, then create user storj:
+pw useradd -n storj -m  Clone and get and install latest version:
+git clone -b v1.14.7 https://github.com/storj/storj.git storj cd storj go install -race -v storj.io/storj/cmd/...  Create a dir to contanin the identity and storage:
+mkdir /mnt/storj chown -R storj:storj /mnt/storj  In the main host create the file system to be used in the jail:
+zfs create tank/storj  Create fstat.</description>
+    </item>
+    
+  </channel>
+</rss>

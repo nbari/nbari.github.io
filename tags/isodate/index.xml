@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ISODATE on IT notes</title>
+    <link>https://nbari.com/tags/isodate/</link>
+    <description>Recent content in ISODATE on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Mar 2019 23:52:19 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/isodate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ELK  delete_by_query</title>
+      <link>https://nbari.com/post/elk-delte-by_query/</link>
+      <pubDate>Thu, 07 Mar 2019 23:52:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/elk-delte-by_query/</guid>
+      <description>To delete indexes older than X days:
+POST haproxy/_delete_by_query { &amp;#34;query&amp;#34;: { &amp;#34;range&amp;#34;: { &amp;#34;ISODATE&amp;#34;: { &amp;#34;lt&amp;#34;: &amp;#34;now-3d&amp;#34; } } } } </description>
+    </item>
+    
+  </channel>
+</rss>

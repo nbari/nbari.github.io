@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>port on IT notes</title>
+    <link>https://nbari.com/tags/port/</link>
+    <description>Recent content in port on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Dec 2017 11:25:34 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/port/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>update port</title>
+      <link>https://nbari.com/post/update-port/</link>
+      <pubDate>Sat, 30 Dec 2017 11:25:34 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/update-port/</guid>
+      <description>Make a copy of the current port:
+cp -R &amp;lt;port-name&amp;gt; &amp;lt;port-name&amp;gt;.orig  Work on the port:
+make makesum make checksum make stage make check-orphans make package make install make deinstall make clean  Crete the diff, first change one level up:
+diff -u port-name.orig port-name &amp;gt; port-name.diff  Submit the patch.</description>
+    </item>
+    
+    <item>
+      <title>80</title>
+      <link>https://nbari.com/post/80/</link>
+      <pubDate>Mon, 11 Dec 2017 19:09:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/80/</guid>
+      <description>To start an application on port 80 being not root:
+sysctl net.inet.ip.portrange.reservedhigh=79  That will allow to bind an application in any port &amp;gt; 79, to allow any port:
+sysctl net.inet.ip.portrange.reservedhigh=0  Add this to /etc/sysctl.conf to keep changes persistent across reboots:
+net.inet.ip.portrange.reservedhigh=79  </description>
+    </item>
+    
+  </channel>
+</rss>

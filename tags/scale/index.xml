@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scale on IT notes</title>
+    <link>https://nbari.com/tags/scale/</link>
+    <description>Recent content in scale on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Dec 2016 11:09:35 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/scale/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>scale</title>
+      <link>https://nbari.com/post/scale/</link>
+      <pubDate>Sun, 18 Dec 2016 11:09:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/scale/</guid>
+      <description>scale out (horizontal scaling) Refers to adding more servers with less processors and RAM. This is usually cheaper overall and can literally scale infinitely
+Pros:
+ Much cheaper than scaling vertically Easier to run fault-tolerance Easy to upgrade  Cons:
+ Bigger footprint in the Data Center Higher utility cost (Electricity and cooling) Possible need for more networking equipment (switches/routers)  scale in (vertical scaling) Refers to adding more processors and RAM, buying a more expensive and robust server.</description>
+    </item>
+    
+  </channel>
+</rss>

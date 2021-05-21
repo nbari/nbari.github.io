@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vmdk on IT notes</title>
+    <link>https://nbari.com/tags/vmdk/</link>
+    <description>Recent content in vmdk on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Apr 2017 21:43:24 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/vmdk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>raw2vmdk</title>
+      <link>https://nbari.com/post/raw2vmdk/</link>
+      <pubDate>Sun, 30 Apr 2017 21:43:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/raw2vmdk/</guid>
+      <description>Convert raw image to vmdk Install qemu:
+$ brew install qemu  Convert using:
+$ qemu-img convert -f raw -O vmdk disk.raw disk.vmdk  </description>
+    </item>
+    
+  </channel>
+</rss>

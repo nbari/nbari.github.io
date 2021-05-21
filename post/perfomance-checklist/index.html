@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> perfomance checklist &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/perfomance-checklist/">perfomance checklist</a></h2>
+          <span class="post-date">Jan 24, 2017 </span>
+          <div class="post-content">
+            <h1 id="perfomance-checklist-for-sres">Perfomance checklist for SRE&rsquo;s</h1>
+<h2 id="linux-perf-analysis-in-60s">Linux Perf Analysis in 60s</h2>
+<ul>
+<li>uptime  <code>load averages</code></li>
+<li>dmesg -T | tail <code>kernel errors</code></li>
+<li>vmstat 1 <code>overall stats by time</code></li>
+<li>mpstat -P ALL 1 <code>CPU balance</code></li>
+<li>pidstat 1 <code>process usage</code></li>
+<li>iostat -xz 1 <code>disk I/O</code></li>
+<li>free -m <code>memory usage</code></li>
+<li>sar -n DEV 1 <code>network I/O</code></li>
+<li>sar -n TCP,ETCP 1 <code>TCP stats</code></li>
+<li>top <code>check overview</code></li>
+</ul>
+<h2 id="linux-disk-checklist">Linux Disk Checklist</h2>
+<ul>
+<li>iostat -xz 1 <code>any disk I/O? if not, stop looking</code></li>
+<li>vmstat 1 <code>is this swapping? or, high sys time?</code></li>
+<li>df -h <code>are file systems nearly full?</code></li>
+<li>ext4slower 10 <code>(zfs*, xfs*, etc.) slow file system I/O?</code></li>
+<li>bioslower 10 <code>if so, check disks</code></li>
+<li>ext4dist 1 <code>check distribution and rate</code></li>
+<li>biolatency 1 <code>if interesting, check disks</code></li>
+<li>cat /sys/devices/…/ioerr_cnt <code>(if available) errors</code></li>
+<li>smartctl -l error /dev/sda1 <code>(if available) errors</code></li>
+</ul>
+<h2 id="linux-network-checklist">Linux Network Checklist</h2>
+<ul>
+<li>sar -n DEV,EDEV 1 <code>at interface limits? or use nicstat</code></li>
+<li>sar -n TCP,ETCP 1 <code>active/passive load, retransmit rate</code></li>
+<li>cat /etc/resolv.conf <code>it's always DNS</code></li>
+<li>mpstat -P ALL 1 <code>high kernel time? single hot CPU?</code></li>
+<li>tcpretrans <code>what are the retransmits? state?</code></li>
+<li>tcpconnect <code>connecting to anything unexpected?</code></li>
+<li>tcpaccept <code>unexpected workload?</code></li>
+<li>netstat -rnv <code>any inefficient routes?</code></li>
+<li>check firewall config <code>anything blocking/throttling?</code></li>
+<li>netstat -s <code>play 252 metric pickup</code></li>
+</ul>
+<h2 id="linux-cpu-checklist">Linux CPU Checklist</h2>
+<ul>
+<li>uptime <code>load averages</code></li>
+<li>vmstat 1 <code>system-wide utilization, run q length</code></li>
+<li>mpstat -P ALL 1 <code>CPU balance</code></li>
+<li>pidstat 1 <code>per-process CPU</code></li>
+<li>CPU flame graph <code>CPU profiling</code></li>
+<li>CPU subsecond offset heat map <code>look for gaps</code></li>
+<li>perf stat -a &ndash; sleep 10 <code>IPC, LLC hit ratio</code></li>
+</ul>
+<p><a href="https://nbari.com/post/observability-tools/">https://nbari.com/post/observability-tools/</a></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/zxCWXNigDpA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<blockquote>
+<p>Thanks to Brendan Gregg&rsquo;s for all this info <a href="http://www.brendangregg.com/">http://www.brendangregg.com/</a>
+<a href="http://www.brendangregg.com/blog/2016-05-04/srecon2016-perf-checklists-for-sres.html">http://www.brendangregg.com/blog/2016-05-04/srecon2016-perf-checklists-for-sres.html</a></p>
+</blockquote>
+<p>The Realities of the Job of Delivering Reliability</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Lf4RwlOdppg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/forward-proxy/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/ssh-escape-sequences/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

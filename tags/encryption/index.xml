@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>encryption on IT notes</title>
+    <link>https://nbari.com/tags/encryption/</link>
+    <description>Recent content in encryption on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Apr 2021 10:52:20 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/encryption/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ZFS encryption</title>
+      <link>https://nbari.com/post/zfs-encryption/</link>
+      <pubDate>Thu, 22 Apr 2021 10:52:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-encryption/</guid>
+      <description>Create an encrypted file system:
+zfs create -o encryption=on -o keyformat=passphrase -o keylocation=prompt tank/test-enc  Check encryption:
+$ zfs get encryption tank/test-enc NAME PROPERTY VALUE SOURCE tank/test-enc encryption aes-256-gcm -  Check status:
+zfs get -p encryption,keystatus,keyformat,keylocation,encryptionroot  </description>
+    </item>
+    
+  </channel>
+</rss>

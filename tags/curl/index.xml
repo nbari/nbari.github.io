@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>curl on IT notes</title>
+    <link>https://nbari.com/tags/curl/</link>
+    <description>Recent content in curl on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Jun 2017 18:11:20 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/curl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Curl Response Time</title>
+      <link>https://nbari.com/post/curl-response-time/</link>
+      <pubDate>Wed, 28 Jun 2017 18:11:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/curl-response-time/</guid>
+      <description>Measure response time with curl Using the following command:
+curl -o /dev/null -s -w %{time_total} http://www.google.com  In your .zshrc this can be used:
+curl_time() { curl -o /dev/null -Ls -w &amp;#34; \ time_namelookup: %{time_namelookup}\n \ time_connect: %{time_connect}\n \ time_appconnect: %{time_appconnect}\n \ time_pretransfer: %{time_pretransfer}\n \ time_redirect: %{time_redirect}\n \ time_starttransfer: %{time_starttransfer}\n \ ----------\n \ time_total: %{time_total}\n&amp;#34; &amp;#34;$1&amp;#34; } Will output something like:
+$ curl_time https://google.com time_namelookup: 0.014 time_connect: 0.024 time_appconnect: 0.072 time_pretransfer: 0.</description>
+    </item>
+    
+  </channel>
+</rss>

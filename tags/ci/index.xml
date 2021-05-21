@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CI on IT notes</title>
+    <link>https://nbari.com/tags/ci/</link>
+    <description>Recent content in CI on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 26 Sep 2016 14:08:44 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ci/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI &amp; CD</title>
+      <link>https://nbari.com/post/ci-cd/</link>
+      <pubDate>Mon, 26 Sep 2016 14:08:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ci-cd/</guid>
+      <description>Release pipeline CI &amp;amp; CD </description>
+    </item>
+    
+  </channel>
+</rss>

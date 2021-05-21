@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> rds slave from external master &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rds-slave-from-external-master/">rds slave from external master</a></h2>
+          <span class="post-date">Feb 10, 2017 </span>
+          <div class="post-content">
+            <h2 id="setup-aws-mysql-rds-instance-as-slave-of-an-external-master">Setup AWS MySQL RDS instance as slave of an external master</h2>
+<p>Configure external mysql to become master:</p>
+<pre><code>server-id=1
+binlog-format= mixed
+log-bin=mysql-bin
+binlog-do-db=databasename
+</code></pre>
+<p>Setup the master replica user:</p>
+<pre><code>mysql&gt; create user `replica`@`%` identified by 'PASSWORD';
+mysql&gt; grant replication slave on *.* to 'replica'@'%';
+</code></pre>
+<p>Use the following command to ensure that nothing can write to the master
+database during a database dump. Also note the filename and position of the
+binary log because you will need these values to complete the replication
+configuration:</p>
+<pre><code>mysql&gt; FLUSH TABLES WITH READ LOCK;
+mysql&gt; show master status;
++-------------------+-----------+--------------+--------------------------------------------------+
+| File              | Position  | Binlog_Do_DB | Binlog_Ignore_DB                                 |
++-------------------+-----------+--------------+--------------------------------------------------+
+| mysqld-bin.000205 | 207450664 | epazote      | test,information_schema,performance_schema,mysql |
++-------------------+-----------+--------------+--------------------------------------------------+
+1 row in set (0.00 sec)
+</code></pre>
+<p>If this is a replica do this:</p>
+<pre><code>mysql&gt; show slave status\G
+</code></pre>
+<p>And look for:</p>
+<pre><code>Master_Log_File: mysql-bin-changelog.023713
+Read_Master_Log_Pos: 1934704
+</code></pre>
+<p>Within AWS RDS you can also do:</p>
+<pre><code>mysql&gt; call mysql.rds_stop_replication;
+mysql&gt; show slave status\G
+</code></pre>
+<p>Take a dump:</p>
+<pre><code>mysqldump -h host.tld --user='user' --password='secret' --add-drop-database --compress --hex-blob --opt --skip-comments --skip-lock-tables --single-transaction db_name &gt; out.sql
+</code></pre>
+<blockquote>
+<p>to dump all databases use <code>--all-databases</code></p>
+</blockquote>
+<p>To get the the log position this can be used:</p>
+<pre><code>--master-data=1
+</code></pre>
+<p>example:</p>
+<pre><code>mysqldump -h host.tld --master-data=1 --compress --hex-blob --opt --skip-comments --skip-lock-tables --single-transaction db_name -u user -p &gt; out.sql
+</code></pre>
+<p>Then, lift the read lock from the master:</p>
+<pre><code>mysql&gt; UNLOCK TABLES;
+</code></pre>
+<p>or within AWS use:</p>
+<pre><code>mysql&gt; call mysql.rds_start_replication;
+</code></pre>
+<blockquote>
+<p>If you get a Last_IO_Error: Got fatal error 1236&hellip;, if you can afford it, don&rsquo;t unlock/start the replication after having the dump</p>
+</blockquote>
+<p>Load the dump:</p>
+<pre><code>mysql --compress -h host.tld -u user database &lt; out.sql
+</code></pre>
+<blockquote>
+<p>&ndash;compress seems to improve the speed</p>
+</blockquote>
+<p>After loading a full dump to RDS, Call the stored procedure <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html">mysql.rds_set_external_master</a> like this:</p>
+<pre><code>mysql&gt; call mysql.rds_set_external_master ('servername', port, 'user', 'password', 'binlog-file', binlog-offset, 0);
+</code></pre>
+<p>Example:</p>
+<pre><code>mysql&gt; call mysql.rds_set_external_master ('10.10.3.2', 3306, 'replica', 'password', 'mysql-bin-changelog.122', 108433, 0);
+</code></pre>
+<p>Then start the replication by doing:</p>
+<pre><code>mysql&gt; call mysql.rds_start_replication;
+</code></pre>
+<p>Check if slave is running:</p>
+<pre><code>mysql&gt; show slave status;
+</code></pre>
+<h2 id="promote-rds-to-master">Promote RDS to master</h2>
+<p>This will promote the slave to become master:</p>
+<pre><code>mysql&gt; call mysql.rds_stop_replication;
+mysql&gt; call mysql.rds_reset_external_master;
+</code></pre>
+<h2 id="mysqlrds_set_configuration">mysql.rds_set_configuration</h2>
+<p>In Amazon RDS, The default value of binlog retention hours is NULL (do not
+retain binary logs), to keep logs for 7 days use:</p>
+<pre><code>call mysql.rds_set_configuration('binlog retention hours', 168);
+</code></pre>
+<p>This could help to prevent getting the error:</p>
+<pre><code>Got fatal error 1236 from master when reading data from binary log: 'Could not find first log file name in binary log index file', Error_code: 1236
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/haproxy/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/add-subtitles/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

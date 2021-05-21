@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windows on IT notes</title>
+    <link>https://nbari.com/tags/windows/</link>
+    <description>Recent content in windows on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Feb 2020 19:47:46 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>removing the ^M character</title>
+      <link>https://nbari.com/post/m-character-windows/</link>
+      <pubDate>Fri, 07 Feb 2020 19:47:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/m-character-windows/</guid>
+      <description>In vim, to remove the ^M character you could do:
+:e ++ff=dos  The :e ++ff=dos command tells Vim to read the file again, forcing dos file format. Vim will remove CRLF and LF-only line endings, leaving only the text of each line in the buffer.
+Then set filetype to unix:
+:set ff=unix  And save the file:
+:x  </description>
+    </item>
+    
+    <item>
+      <title>Find Windows Product Key</title>
+      <link>https://nbari.com/post/find-windows-product-key/</link>
+      <pubDate>Thu, 26 Apr 2018 15:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/find-windows-product-key/</guid>
+      <description>To retrive the windows product key you can run this within a windows power shell:
+PS C:\Users\Monkey&amp;gt; (Get-WmiObject -query &#39;select * from SoftwareLicensingService&#39;).OA3xOriginalProductKey xxxxx-xxxxx-xxxxx-xxxxx-xxxxx  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sqlite on IT notes</title>
+    <link>https://nbari.com/tags/sqlite/</link>
+    <description>Recent content in sqlite on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Mar 2017 14:43:09 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sqlite/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sqlite2file</title>
+      <link>https://nbari.com/post/sqlite2file/</link>
+      <pubDate>Thu, 23 Mar 2017 14:43:09 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sqlite2file/</guid>
+      <description>Sqlite query to a file:
+sqlite&amp;gt; .mode ascii sqlite&amp;gt; .output data.txt sqlite&amp;gt; .select * from table;  Or dump to a file:
+sqlite3 db.sqlite .dump &amp;gt; dump  </description>
+    </item>
+    
+  </channel>
+</rss>

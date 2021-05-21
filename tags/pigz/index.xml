@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pigz on IT notes</title>
+    <link>https://nbari.com/tags/pigz/</link>
+    <description>Recent content in pigz on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Apr 2019 20:06:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pigz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pigz</title>
+      <link>https://nbari.com/post/pigz/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pigz/</guid>
+      <description>To compress using gzip format but using all your available cores:
+tar --use-compress-program=pigz -cf archive.tgz /path/to/source  Or if you want to pipe it:
+tar -cf - source | pigz &amp;gt; archive.tgz  To decompress use tar -xvf archive.tgz as usual.
+The output of pigz is compatible with gzip</description>
+    </item>
+    
+  </channel>
+</rss>

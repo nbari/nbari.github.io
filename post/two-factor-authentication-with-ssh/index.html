@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> two factor authentication with ssh &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/two-factor-authentication-with-ssh/">two factor authentication with ssh</a></h2>
+          <span class="post-date">Jun 3, 2017 </span>
+          <div class="post-content">
+            <h1 id="two-factor-authentication-2fa-with-ssh">Two-Factor-Authentication &ldquo;2FA&rdquo; with SSH</h1>
+<p>Install google authenticator and libqrencode:</p>
+<pre><code>pkg install pam_google_authenticator
+pkg install libqrencode
+</code></pre>
+<p>Edit <code>/etc/pam.d/sshd</code> an add the following line to the <code>auth</code> section:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># auth</span>
+auth            sufficient      pam_opie.so             no_warn no_fake_prompts
+auth            requisite       pam_opieaccess.so       no_warn allow_local
+<span style="color:#75715e">#auth           sufficient      pam_krb5.so             no_warn try_first_pass</span>
+<span style="color:#75715e">#auth           sufficient      pam_ssh.so              no_warn try_first_pass</span>
+<span style="color:#75715e">#auth           required        pam_unix.so             no_warn try_first_pass</span>
+auth            required        /usr/local/lib/pam_google_authenticator.so
+</code></pre></div><p>Add this to<code>/etc/ssh/sshd_config</code>:</p>
+<pre><code>CallengeResponseAuthentication yes
+UsePAM yes
+AuthenticationMethods publickey,keyboard-interactive
+</code></pre>
+<p>This setup will do a &ldquo;publickey + verification code&rdquo;, without password, in
+case you require password edit the <code>/etc/pam.d/sshd</code> and ensure the line
+<code>pam_unix.so</code> is uncommented</p>
+<pre><code>auth           required        pam_unix.so             no_warn try_first_pass
+auth           required        /usr/local/lib/pam_google_authenticator.so
+</code></pre>
+<h1 id="enable-2fa-per-user">Enable 2FA per user:</h1>
+<p>Execute google-authenticator as the user you want to protect with MFA:</p>
+<pre><code>su - alice -c google-authenticator
+</code></pre>
+<p>You can answer all questions to <strong>Y</strong>, the configuration will be saved in this
+file <code>~/.google-authenticator</code></p>
+<p>The content of the file looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&gt; cat .google_authenticator
+VLS3WGLC4YTVFSSK
+<span style="color:#e6db74">&#34; TIME_SKEW 0
+</span><span style="color:#e6db74">&#34;</span> RESETTING_TIME_SKEW
+<span style="color:#e6db74">&#34; RATE_LIMIT 3 30 1496497256
+</span><span style="color:#e6db74">&#34;</span> WINDOW_SIZE <span style="color:#ae81ff">17</span>
+<span style="color:#e6db74">&#34; DISALLOW_REUSE 49883227
+</span><span style="color:#e6db74">&#34;</span> TOTP_AUTH
+<span style="color:#ae81ff">12268625</span>
+<span style="color:#ae81ff">67512245</span>
+<span style="color:#ae81ff">75096563</span>
+<span style="color:#ae81ff">52505947</span>
+<span style="color:#ae81ff">42447122</span>
+</code></pre></div><p>If for some reason the user can&rsquo;t scan the qrcode due the font issues, use the
+code instead, in this example:</p>
+<pre><code>VLS3WGLC4YTVFSSK
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/pdsh/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/grpc/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

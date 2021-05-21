@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>date on IT notes</title>
+    <link>https://nbari.com/tags/date/</link>
+    <description>Recent content in date on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Jun 2019 21:47:58 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/date/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>timestamp</title>
+      <link>https://nbari.com/post/timestamp/</link>
+      <pubDate>Mon, 03 Jun 2019 21:47:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/timestamp/</guid>
+      <description>To get the current unix timestamp:
+date +%s  To get the date from a timestamp:
+date -r 1559591041  In Linux:
+date -d &amp;quot;@1559591041&amp;quot;  </description>
+    </item>
+    
+  </channel>
+</rss>

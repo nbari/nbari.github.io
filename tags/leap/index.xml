@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leap on IT notes</title>
+    <link>https://nbari.com/tags/leap/</link>
+    <description>Recent content in leap on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Jan 2017 15:08:31 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/leap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>leap second</title>
+      <link>https://nbari.com/post/leap-seconds/</link>
+      <pubDate>Wed, 11 Jan 2017 15:08:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/leap-seconds/</guid>
+      <description>A leap second is an ad-hoc one-second correction to synchronize atomic timescales with Earth rotation.
+It is possible to test whether a leap second will be used. Due to the nature of NTP, the test might work up to 24 hours before the leap second. Some major reference clock sources only announce leap seconds one hour ahead of the event. Query the NTP daemon:
+ntpq -c &#39;rv 0 leap&#39;  To update/sync:</description>
+    </item>
+    
+  </channel>
+</rss>

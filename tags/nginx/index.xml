@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on IT notes</title>
+    <link>https://nbari.com/tags/nginx/</link>
+    <description>Recent content in nginx on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Sep 2018 11:50:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>htpasswd</title>
+      <link>https://nbari.com/post/htpasswd/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/htpasswd/</guid>
+      <description>To create an htpasswd file (for htaccess &amp;ldquo;authentication&amp;rdquo;) using openssl:
+$ printf &amp;quot;foo:$(openssl passwd -apr1 PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  If need to use crypt:
+$ printf &amp;quot;foo:$(openssl passwd -crypt PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  </description>
+    </item>
+    
+    <item>
+      <title>nginx &#43; lua &#43; redis</title>
+      <link>https://nbari.com/post/nginx-lua-redis/</link>
+      <pubDate>Wed, 06 Dec 2017 17:15:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-lua-redis/</guid>
+      <description>Basic WAF example using lua + redis within nginx.
+-- -- lua_package_path &amp;quot;/usr/share/lua/5.1/nginx/?.lua;;&amp;quot;; -- lua_shared_dict ip_blacklist 4m; -- local redis_host = &amp;quot;your.redis.tld&amp;quot; local redis_port = 6379 local redis_connection_timeout = 300 local redis_pattern = &amp;quot;block-&amp;quot; local cache_ttl = 3 -- seconds local ip = ngx.var.remote_addr local ip_blacklist = ngx.shared.ip_blacklist local last_update_time = ip_blacklist:get(&amp;quot;last_update_time&amp;quot;); -- block if ip found in the local nginx dict if ip_blacklist:get(ip) then ngx.log(ngx.DEBUG, &amp;quot;Banned IP detected and refused access: &amp;quot; .</description>
+    </item>
+    
+    <item>
+      <title>Nginx Reverse Proxy Cache</title>
+      <link>https://nbari.com/post/nginx-reverse-proxy-cache/</link>
+      <pubDate>Thu, 10 Aug 2017 17:51:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-reverse-proxy-cache/</guid>
+      <description>This is the full configuration for nginx.conf:
+user www www; worker_processes auto; events { use kqueue; worker_connections 1024; } http { include mime.types; default_type application/octet-stream; sendfile on; tcp_nopush on; tcp_nodelay on; client_max_body_size 30M; keepalive_timeout 10 10; gzip on; gzip_static on; gzip_vary on; gzip_min_length 0; gzip_comp_level 9; gzip_buffers 16 8k; gzip_proxied any; gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml; charset utf-8; server_tokens off; server_name_in_redirect off; proxy_buffering on; proxy_cache_path /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off; proxy_buffer_size 8k; proxy_buffers 8 24k; server { listen 80; server_name _; location / { proxy_cache rubygems; proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504; proxy_cache_revalidate on; proxy_cache_min_uses 1; proxy_cache_lock on; proxy_cache_valid 200 301 304 2d; proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header Host rubygems.</description>
+    </item>
+    
+    <item>
+      <title>forward proxy</title>
+      <link>https://nbari.com/post/forward-proxy/</link>
+      <pubDate>Sat, 21 Jan 2017 17:42:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forward-proxy/</guid>
+      <description>nginx forward proxy Server configuration:
+server { listen 8080; location / { resolver 8.8.8.8; proxy_pass http://$http_host$uri$is_args$args; } error_page 500 502 503 504 /50x.html; location = /50x.html { root /usr/local/www/nginx-dist; } }  Client side On the browser configure the HTTP Proxy and port.
+Test by checking the the IP: https://trackip.net</description>
+    </item>
+    
+  </channel>
+</rss>

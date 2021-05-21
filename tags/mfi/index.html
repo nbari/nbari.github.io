@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> mfi &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/mfi/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/raidz2/">raidz2</a></h2>
+          <span class="post-date">Dec 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/raid">raid</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mfi">mfi</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:
+&gt; mfiutil show config mfi0 Configuration: 8 arrays, 8 volumes, 1 spares array 0 of 2 drives: drive 1 ( 1863G) ONLINE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&gt; SATA drive 6 ( 1863G) ONLINE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY35&gt; SATA array 1 of 1 drives: drive 0 ( 466G) ONLINE &lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ0&gt; SCSI-6 array 2 of 1 drives: drive 2 ( 466G) ONLINE &lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&gt; SCSI-6 array 3 of 1 drives: drive 3 ( 932G) ONLINE &lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&gt; SCSI-6 array 4 of 1 drives: drive 4 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&gt; SAS array 5 of 1 drives: drive 5 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C4&gt; SAS array 6 of 1 drives: drive 8 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&gt; SAS array 7 of 1 drives: drive 9 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L824&gt; SAS volume mfid0 (1863G) RAID-1 64K OPTIMAL &lt;raid1&gt; spans: array 0 volume mfid1 (465G) RAID-0 64K OPTIMAL &lt;r0&gt; spans: array 1 volume mfid2 (465G) RAID-0 64K OPTIMAL &lt;r2&gt; spans: array 2 volume mfid3 (931G) RAID-0 64K OPTIMAL &lt;r3&gt; spans: array 3 volume mfid4 (465G) RAID-0 64K OPTIMAL &lt;r4&gt; spans: array 4 volume mfid5 (465G) RAID-0 64K OPTIMAL &lt;r5&gt; spans: array 5 volume mfid6 (465G) RAID-0 64K OPTIMAL &lt;r8&gt; spans: array 6 volume mfid7 (465G) RAID-0 64K OPTIMAL &lt;r9&gt; spans: array 7 dedicated spare 7 ( 1863G) HOT SPARE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&gt; SATA backs: array 0 Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume
+				<a class="read-more" href="/post/raidz2/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

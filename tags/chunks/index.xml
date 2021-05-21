@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chunks on IT notes</title>
+    <link>https://nbari.com/tags/chunks/</link>
+    <description>Recent content in chunks on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2020 14:12:56 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/chunks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Delete in chunks</title>
+      <link>https://nbari.com/post/delete-in-chunks/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/delete-in-chunks/</guid>
+      <description>To delete a big/huge table in chunks, you could create this store procedure, but the performance at the end depends of how good/normalized is your database (indexes):
+ A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again. Such procedures are stored in the database data dictionary.
+ Connect to the database and select the database:
+mysql&amp;gt; \u my_database Database changed  To list stored procedures</description>
+    </item>
+    
+  </channel>
+</rss>

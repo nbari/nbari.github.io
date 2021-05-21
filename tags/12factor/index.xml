@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>12factor on IT notes</title>
+    <link>https://nbari.com/tags/12factor/</link>
+    <description>Recent content in 12factor on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Oct 2016 20:56:30 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/12factor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>12 factor</title>
+      <link>https://nbari.com/post/12factor/</link>
+      <pubDate>Tue, 25 Oct 2016 20:56:30 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/12factor/</guid>
+      <description>The Twelve Factors 1. Codebase Everything in revision control including environment configuration
+git flow master - production develop - staging
+2. Dependencies Explicitly declare and isolate dependencies
+3. Config Store config in the environment
+In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on IT notes</title>
+    <link>https://nbari.com/tags/tools/</link>
+    <description>Recent content in tools on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Nov 2016 18:45:50 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>observability tools</title>
+      <link>https://nbari.com/post/observability-tools/</link>
+      <pubDate>Mon, 14 Nov 2016 18:45:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/observability-tools/</guid>
+      <description>FreeBSD Linux src: http://www.brendangregg.com/blog/2015-03-06/performance-analysis-bsd.html</description>
+    </item>
+    
+  </channel>
+</rss>

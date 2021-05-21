@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>policy on IT notes</title>
+    <link>https://nbari.com/tags/policy/</link>
+    <description>Recent content in policy on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Sep 2017 22:50:11 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/policy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Policy Access by IP</title>
+      <link>https://nbari.com/post/aws-policy-access-by-ip/</link>
+      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-policy-access-by-ip/</guid>
+      <description>Policy to restrict IAM AWS API requests to a specific set of IP addresses.
+{ &amp;#34;Version&amp;#34;: &amp;#34;2012-10-17&amp;#34;, &amp;#34;Statement&amp;#34;: { &amp;#34;Effect&amp;#34;: &amp;#34;Deny&amp;#34;, &amp;#34;Action&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Resource&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Condition&amp;#34;: { &amp;#34;NotIpAddress&amp;#34;: { &amp;#34;aws:SourceIp&amp;#34;: [ &amp;#34;10.13.0.0/16&amp;#34;, &amp;#34;72.55.175.70/32&amp;#34;, &amp;#34;10.100.0.0/16&amp;#34; ] } } } } After applying this policy others may need to be applied or in case all in one required, something like this can be used:
+{ &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;, &amp;quot;Statement&amp;quot;: [{ &amp;quot;Effect&amp;quot;: &amp;quot;Deny&amp;quot;, &amp;quot;Action&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Condition&amp;quot;: { &amp;quot;NotIpAddress&amp;quot;: { &amp;quot;aws:SourceIp&amp;quot;: [ &amp;quot;10.</description>
+    </item>
+    
+  </channel>
+</rss>

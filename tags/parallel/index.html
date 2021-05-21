@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> parallel &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/parallel/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pigz/">pigz</a></h2>
+          <span class="post-date">Apr 4, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/pigz">pigz</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/gzip">gzip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To compress using gzip format but using all your available cores:
+tar --use-compress-program=pigz -cf archive.tgz /path/to/source  Or if you want to pipe it:
+tar -cf - source | pigz &gt; archive.tgz  To decompress use tar -xvf archive.tgz as usual.
+The output of pigz is compatible with gzip
+				<a class="read-more" href="/post/pigz/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/parallel-xargs/">parallel xargs</a></h2>
+          <span class="post-date">Apr 26, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/xargs">xargs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To run a script in parallel using xargs:
+printf %d\\n {0..9} | xargs -n 1 -P8 sleep  In this case sleep is going to be call 8 times (-P8) using has the input an int from 0 to 9.
+From the man:
+-P maxprocs Parallel mode: run at most maxprocs invocations of utility at once.  
+				<a class="read-more" href="/post/parallel-xargs/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pdsh/">pdsh</a></h2>
+          <span class="post-date">Jun 3, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				pdsh - issue commands to groups of hosts in parallel
+Install:
+brew install pdsh  Usage:
+pdsh -R ssh -w ^servers.txt &quot;&lt;command&gt;&quot;  In where servers.txt is something like:
+10.8.4.2 10.8.4.3 10.8.4.4  one-liner:
+pdsh -b -w &quot;10.8.4.2, 10.8.4.3, 10.8.4.4&quot; &quot;&lt;command&gt;&quot;   -b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)
+ 
+				<a class="read-more" href="/post/pdsh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

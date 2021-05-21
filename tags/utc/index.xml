@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UTC on IT notes</title>
+    <link>https://nbari.com/tags/utc/</link>
+    <description>Recent content in UTC on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2016 16:58:24 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/utc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql_tzinfo_to_sql</title>
+      <link>https://nbari.com/post/mysql_tzinfo_to_sql/</link>
+      <pubDate>Mon, 07 Nov 2016 16:58:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql_tzinfo_to_sql/</guid>
+      <description>FreeBSD &amp;amp; MySQL UTC After doing a fresh install, load the UTC zone:
+$ cd /usr/share/zoneinfo $ mysql_tzinfo_to_sql UTC UTC | mysql -u root mysql  Edit the /etc/my.cnf:
+[mysqld] default-time-zone=&#39;UTC&#39;  This will set the default timezone on the server to be UTC
+To get current timezone of the mysql you can do following things:
+mysql&amp;gt; SELECT @@global.time_zone, @@session.time_zone;  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http on IT notes</title>
+    <link>https://nbari.com/tags/http/</link>
+    <description>Recent content in http on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Feb 2019 15:26:10 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DoH Firefox</title>
+      <link>https://nbari.com/post/doh-firefox/</link>
+      <pubDate>Fri, 15 Feb 2019 15:26:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/doh-firefox/</guid>
+      <description>Open firefox and type:
+about:config  Search for:
+network.trr.uri  Probably you already have:
+https://mozilla.cloudflare-dns.com/dns-query  If not add it or use something like:
+https://cloudflare-dns.com/dns-query https://dns.quad9.net/dns-query  Then enable network.trr.mode by setting it to 2
+Set network.trr.mode to 2 make DNS Over HTTPS the browser&amp;rsquo;s first choice but use regular DNS as a fallback (0 is &amp;ldquo;off by default&amp;rdquo;, 1 lets Firefox pick whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).</description>
+    </item>
+    
+  </channel>
+</rss>

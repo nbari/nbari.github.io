@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>htpasswd on IT notes</title>
+    <link>https://nbari.com/tags/htpasswd/</link>
+    <description>Recent content in htpasswd on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Sep 2018 11:50:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/htpasswd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>htpasswd</title>
+      <link>https://nbari.com/post/htpasswd/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/htpasswd/</guid>
+      <description>To create an htpasswd file (for htaccess &amp;ldquo;authentication&amp;rdquo;) using openssl:
+$ printf &amp;quot;foo:$(openssl passwd -apr1 PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  If need to use crypt:
+$ printf &amp;quot;foo:$(openssl passwd -crypt PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  </description>
+    </item>
+    
+  </channel>
+</rss>

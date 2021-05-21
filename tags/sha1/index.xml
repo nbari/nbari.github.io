@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sha1 on IT notes</title>
+    <link>https://nbari.com/tags/sha1/</link>
+    <description>Recent content in sha1 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Mar 2019 12:34:33 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sha1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>openssl SHA1 HMAC</title>
+      <link>https://nbari.com/post/openssl-sha1-hmac/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/openssl-sha1-hmac/</guid>
+      <description>To create an HMAC-SHA1:
+$ echo -n &amp;quot;string&amp;quot; | openssl sha1 -hmac &amp;quot;shared_secret&amp;quot;  or
+$ echo -n &amp;quot;string&amp;quot; | openssl dgst -sha1 -hmac &amp;quot;shared_secret&amp;quot;  </description>
+    </item>
+    
+  </channel>
+</rss>

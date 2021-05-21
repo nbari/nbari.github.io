@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> online.net &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/online.net/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/online-net-ipv6/">online.net IPv6</a></h2>
+          <span class="post-date">Sep 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ipv6">ipv6</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dhcp6c">dhcp6c</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/online.net">online.net</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Configure IPv6 using dhcp6c for servers from online.net:
+pkg install dhcp6  Transform the DUID into a binary file (needed for dhcp6c):
+echo &lt;DUID&gt; | awk '{ gsub(&quot;:&quot;,&quot; &quot;); printf &quot;0: 0a 00 %s\n&quot;, $0 }' | xxd -r &gt; /var/db/dhcp6c_duid  Add this in /usr/local/etc/dhcp6c.conf:
+id-assoc pd { prefix-interface igb0 { }; }; id-assoc na { }; interface igb0 { send ia-pd 0; send ia-na 0; };  Add this to /etc/rc.
+				<a class="read-more" href="/post/online-net-ipv6/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/start-2-xs-sata/">Start 2 XS SATA</a></h2>
+          <span class="post-date">Sep 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/online.net">online.net</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/rescue">rescue</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install FreeBSD using the rescue system on a Start-2-XS-SATA from online.net:
+#!/bin/sh -x USER=monkey PASSWORD=secret gpart destroy -F ada0 gpart create -s gpt ada0 gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 ada0 gpart add -t freebsd-boot -l boot -s 128K ada0 gpart add -t freebsd-swap -l swap -s 4g ada0 gpart add -t freebsd-ufs -l root ada0 gpart set -a active ada0 newfs /dev/gpt/root mount /dev/gpt/root /mnt cd /tmp fetch http://ftp.
+				<a class="read-more" href="/post/start-2-xs-sata/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

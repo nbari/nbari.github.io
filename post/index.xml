@@ -1,0 +1,2926 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on IT notes</title>
+    <link>https://nbari.com/post/</link>
+    <description>Recent content in Posts on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 May 2021 20:17:41 +0200</lastBuildDate><atom:link href="https://nbari.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vultr shutdown -o -n -r now</title>
+      <link>https://nbari.com/post/vultr-shutdown-o-n/</link>
+      <pubDate>Fri, 21 May 2021 20:17:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vultr-shutdown-o-n/</guid>
+      <description>To prevent the system to hang on &amp;ldquo;detaching uhub0&amp;rdquo; reboot using the flag -n:
+shutdown -o -n -r now  </description>
+    </item>
+    
+    <item>
+      <title>pip upgrade</title>
+      <link>https://nbari.com/post/pip-upgrade/</link>
+      <pubDate>Wed, 05 May 2021 07:55:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pip-upgrade/</guid>
+      <description>Upgrade using:
+pip list --outdated --format=freeze | grep -v &#39;^\-e&#39; | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --user  </description>
+    </item>
+    
+    <item>
+      <title>gpg: selecting card failed: Operation not supported by device</title>
+      <link>https://nbari.com/post/gpg_selecting_card_failed_operation_not_supported_by_device/</link>
+      <pubDate>Tue, 27 Apr 2021 20:24:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/gpg_selecting_card_failed_operation_not_supported_by_device/</guid>
+      <description>If using a yubikey and getting this:
+gpg: selecting card failed: Operation not supported by device gpg: OpenPGP card not available: Operation not supported by device  Add to ~/.gnupg/scdaemon.conf
+disable-ccid  To debug you could use:
+reader-port Yubico Yubi debug-all debug-level guru disable-ccid log-file /tmp/scd.log  </description>
+    </item>
+    
+    <item>
+      <title>Pipenv Pyinstaller</title>
+      <link>https://nbari.com/post/pipenv-pyinstaller/</link>
+      <pubDate>Sat, 24 Apr 2021 16:25:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pipenv-pyinstaller/</guid>
+      <description>Create a basic hello world using flask:
+mkdir /tmp/project cd /tmp/project  Create app.py:
+from flask import Flask app = Flask(__name__) @app.route(&amp;quot;/&amp;quot;) def hello(): return &#39;Hello World!&#39; if __name__ == &#39;__main__&#39;: app.run(host=&#39;0.0.0.0&#39;)  Instal flask:
+ pipenv install flask  test the app:
+pipenv shell python app.py  Install pyinstaller:
+pipenv install pyinstaller  Create the requirements.txt:
+pipenv run pip freeze &amp;gt; requirements.txt  Create the binary:
+ pyinstaller --onefile app.</description>
+    </item>
+    
+    <item>
+      <title>ZFS encryption</title>
+      <link>https://nbari.com/post/zfs-encryption/</link>
+      <pubDate>Thu, 22 Apr 2021 10:52:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-encryption/</guid>
+      <description>Create an encrypted file system:
+zfs create -o encryption=on -o keyformat=passphrase -o keylocation=prompt tank/test-enc  Check encryption:
+$ zfs get encryption tank/test-enc NAME PROPERTY VALUE SOURCE tank/test-enc encryption aes-256-gcm -  Check status:
+zfs get -p encryption,keystatus,keyformat,keylocation,encryptionroot  </description>
+    </item>
+    
+    <item>
+      <title>ssh comment</title>
+      <link>https://nbari.com/post/ssh-comment/</link>
+      <pubDate>Sat, 17 Apr 2021 17:32:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-comment/</guid>
+      <description>Create a new pair of ssh keys RSA with a custom comment:
+ssh-keygen -C &amp;quot;monkey&amp;quot; -t rsa -b 4096 -o -a 100 -f /tmp/monkey  </description>
+    </item>
+    
+    <item>
+      <title>fdesetup</title>
+      <link>https://nbari.com/post/fdesetup/</link>
+      <pubDate>Thu, 15 Apr 2021 17:09:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/fdesetup/</guid>
+      <description>To remove a user from the login screen when booting and login from the first time:
+sudo fdesetup remove -user monkey  The user will not be listed any more in the login screen, but you will need first logging with a user that can decrypt the disk and then switch to your user.
+ Note this will not delete or remove the user account
+ </description>
+    </item>
+    
+    <item>
+      <title>ssh only password</title>
+      <link>https://nbari.com/post/ssh-only-password/</link>
+      <pubDate>Wed, 14 Apr 2021 17:03:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-only-password/</guid>
+      <description>When using ssh if you only need to use password (no keys):
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no &amp;lt;host&amp;gt;  </description>
+    </item>
+    
+    <item>
+      <title>yumdownloader</title>
+      <link>https://nbari.com/post/yumdownloader/</link>
+      <pubDate>Wed, 07 Apr 2021 16:30:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/yumdownloader/</guid>
+      <description>To download rpms for using them in an offline environment, install first yumdownloader:
+yum install yum-utils  Create a directory to store the rpm&#39;s:
+mkdir /tmp/rpms  Download the rpms:
+yumdownloader --destdir=/tmp/rpms --resolve MariaDB-server galera-4 MariaDB-client MariaDB-shared MariaDB-backup MariaDB-common  </description>
+    </item>
+    
+    <item>
+      <title>psql</title>
+      <link>https://nbari.com/post/psql/</link>
+      <pubDate>Sat, 06 Mar 2021 17:04:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/psql/</guid>
+      <description>To install PostgreSQL client on macOS:
+brew doctor brew update brew install libpq  Test:
+$ psql -V psql (PostgreSQL) 13.2  </description>
+    </item>
+    
+    <item>
+      <title>Flush DNS</title>
+      <link>https://nbari.com/post/flush-dns/</link>
+      <pubDate>Fri, 29 Jan 2021 20:34:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/flush-dns/</guid>
+      <description>To flush DNS on macOS:
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache  </description>
+    </item>
+    
+    <item>
+      <title>Centos Disable Ipv6</title>
+      <link>https://nbari.com/post/centos-disable-ipv6/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/centos-disable-ipv6/</guid>
+      <description>Edit file /etc/default/grub and add ipv6.disable=1, example:
+# cat /etc/default/grub GRUB_TIMEOUT=5 GRUB_DEFAULT=saved GRUB_DISABLE_SUBMENU=true GRUB_TERMINAL_OUTPUT=&amp;quot;console&amp;quot; GRUB_CMDLINE_LINUX=&amp;quot;ipv6.disable=1 crashkernel=auto rhgb quiet&amp;quot; GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;  Then regenerate and reboot:
+grub2-mkconfig -o /boot/grub2/grub.cfg  And
+reboot  Using sysctl (no need to reboot), append below lines in /etc/sysctl.conf:
+net.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1  Then run:
+sysctl -p  </description>
+    </item>
+    
+    <item>
+      <title>storj</title>
+      <link>https://nbari.com/post/storj/</link>
+      <pubDate>Sun, 18 Oct 2020 18:59:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/storj/</guid>
+      <description>Setup up and configure your jail, then create user storj:
+pw useradd -n storj -m  Clone and get and install latest version:
+git clone -b v1.14.7 https://github.com/storj/storj.git storj cd storj go install -race -v storj.io/storj/cmd/...  Create a dir to contanin the identity and storage:
+mkdir /mnt/storj chown -R storj:storj /mnt/storj  In the main host create the file system to be used in the jail:
+zfs create tank/storj  Create fstat.</description>
+    </item>
+    
+    <item>
+      <title>libx265</title>
+      <link>https://nbari.com/post/libx265/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/libx265/</guid>
+      <description>To reduce/compress a video size you could use:
+ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4  Be aware that libx265 is not supported in many players so you can always fallback to H.264:
+ffmpeg -i input.mov output.mp4   https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+ </description>
+    </item>
+    
+    <item>
+      <title>favicon</title>
+      <link>https://nbari.com/post/favicon/</link>
+      <pubDate>Tue, 28 Jul 2020 19:19:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/favicon/</guid>
+      <description>Create a favicon from a .png using imagemagick convert:
+convert favicon.png -define icon:auto-resize=64,48,32,16 favicon.ico  </description>
+    </item>
+    
+    <item>
+      <title>Import large dump</title>
+      <link>https://nbari.com/post/import-large-dump/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/import-large-dump/</guid>
+      <description>To import a large dump (~300GB) you could do:
+Split your file first:
+csplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {999}  You could also use the pattern {*} but you need the gcsplit:
+pkg install coreutils   BSD csplit don&amp;rsquo;t support {*}
+ Then try:
+gcsplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {*}  Create small INSERT chunks:
+gsplit -a 3 -d -n l/200 table05 x_   l/N split into N files without splitting lines/records</description>
+    </item>
+    
+    <item>
+      <title>Delete in chunks</title>
+      <link>https://nbari.com/post/delete-in-chunks/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/delete-in-chunks/</guid>
+      <description>To delete a big/huge table in chunks, you could create this store procedure, but the performance at the end depends of how good/normalized is your database (indexes):
+ A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again. Such procedures are stored in the database data dictionary.
+ Connect to the database and select the database:
+mysql&amp;gt; \u my_database Database changed  To list stored procedures</description>
+    </item>
+    
+    <item>
+      <title>Bypass AllowTcpForwarding</title>
+      <link>https://nbari.com/post/bypass-allowtcpforwarding/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bypass-allowtcpforwarding/</guid>
+      <description>To bypass AllowTcpForwarding no try using socat and nc:
+socat TCP-LISTEN:&amp;lt;local port&amp;gt;,reuseaddr,fork &amp;quot;EXEC:ssh &amp;lt;server&amp;gt; nc localhost &amp;lt;remote port&amp;gt;&amp;quot;  For example from your desktop run:
+socat TCP-LISTEN:8080,reuseaddr,fork &amp;quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&amp;quot;  This will listen on local port 8080 connect via ssh to 1.2.3.4 and use nc to connect 10.0.1.1:3000</description>
+    </item>
+    
+    <item>
+      <title>rust strip</title>
+      <link>https://nbari.com/post/rust-strip/</link>
+      <pubDate>Fri, 08 May 2020 21:46:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/rust-strip/</guid>
+      <description>To build &amp;amp;&amp;amp; strip a binary use:
+RUSTFLAGS=&#39;-C link-arg=-s&#39; cargo build --release   strip removes or modifies the symbol table attached to the output of the assembler and link editor. This is useful to save space after a program has been debugged and to limit dynamically bound symbols.
+ </description>
+    </item>
+    
+    <item>
+      <title>sed append</title>
+      <link>https://nbari.com/post/sed-append/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sed-append/</guid>
+      <description>To append a line using sed that works on macOS:
+sed -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39;  If need to do it in multiple files, you could use find:
+ find . -name &amp;quot;rc.conf&amp;quot; -exec sed -i &#39;&#39; -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39; {} \;  https://stackoverflow.com/a/48406504/1135424</description>
+    </item>
+    
+    <item>
+      <title>Fat16</title>
+      <link>https://nbari.com/post/fat16/</link>
+      <pubDate>Mon, 23 Mar 2020 16:26:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/fat16/</guid>
+      <description>When trying to update a bios from an USB pen, probably you will need FAT16 or FAT32, to do this from macOS try:
+diskutil partitiondisk /dev/disk3 1 MBR &amp;quot;MS-DOS FAT16&amp;quot; &amp;quot;NONAME&amp;quot; 0B   /dev/disk3 - disk device to be partitioned, found with &amp;lsquo;diskutil list&amp;rsquo; 1 - number of partitions, optional, but if given must match MBR - partition Scheme (eg, DOS=MBR, Mac=GPT) MS-DOS FAT16 - partition type (or fat32) * NONAME - partition name 0B - partition size (0B=maximum)  Then:</description>
+    </item>
+    
+    <item>
+      <title>VLC keep resized window size</title>
+      <link>https://nbari.com/post/vlc-keep-resized-window-size/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vlc-keep-resized-window-size/</guid>
+      <description>To prevent VLC from resizing the window every time you open a new video:
+VLC -&amp;gt; Preferences -&amp;gt; Show All -&amp;gt; Interface/Main interface/macosx  Uncheck the option Resize interface to the native video size</description>
+    </item>
+    
+    <item>
+      <title>get the Primary IP</title>
+      <link>https://nbari.com/post/get-primary-ip/</link>
+      <pubDate>Wed, 26 Feb 2020 14:33:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/get-primary-ip/</guid>
+      <description>To get the primary IP in Linux:
+ip route get 1 | awk &#39;{print $NF;exit}&#39;   In awk NF return the number of fields and by suffixing it with $ is like doing print $7
+ In macOS, to list all your interfaces:
+networksetup -listallhardwareports  If want to get the IP assigned to the Wi-FI:
+ipconfig getifaddr $(networksetup -listallhardwareports | awk &#39;/Hardware Port: Wi-Fi/{getline; print $2}&#39;)  </description>
+    </item>
+    
+    <item>
+      <title>redis over TLS</title>
+      <link>https://nbari.com/post/redis-over-tls/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/redis-over-tls/</guid>
+      <description>Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual</description>
+    </item>
+    
+    <item>
+      <title>removing the ^M character</title>
+      <link>https://nbari.com/post/m-character-windows/</link>
+      <pubDate>Fri, 07 Feb 2020 19:47:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/m-character-windows/</guid>
+      <description>In vim, to remove the ^M character you could do:
+:e ++ff=dos  The :e ++ff=dos command tells Vim to read the file again, forcing dos file format. Vim will remove CRLF and LF-only line endings, leaving only the text of each line in the buffer.
+Then set filetype to unix:
+:set ff=unix  And save the file:
+:x  </description>
+    </item>
+    
+    <item>
+      <title>Python quit unexpectedly macOS Catalina</title>
+      <link>https://nbari.com/post/python-quit-unexpectedly-macos/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/python-quit-unexpectedly-macos/</guid>
+      <description>When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  </description>
+    </item>
+    
+    <item>
+      <title>postfix version</title>
+      <link>https://nbari.com/post/postfix-version/</link>
+      <pubDate>Sat, 23 Nov 2019 17:19:02 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/postfix-version/</guid>
+      <description>In Postfix there is no -v or --vesion, to find the version run:
+$ postconf mail_version  </description>
+    </item>
+    
+    <item>
+      <title>macOs catalina &amp; python</title>
+      <link>https://nbari.com/post/catalina-python/</link>
+      <pubDate>Tue, 12 Nov 2019 16:20:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/catalina-python/</guid>
+      <description>Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F&#39;[=]&#39; &#39;{print $1}&#39;)  </description>
+    </item>
+    
+    <item>
+      <title>Resume Tar</title>
+      <link>https://nbari.com/post/resume-tar/</link>
+      <pubDate>Thu, 26 Sep 2019 18:26:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/resume-tar/</guid>
+      <description>To resume a terminated pr If while extracting a file, the process gets terminated you may be available to resume it with:
+ tar -xvkf file.tgz   -k (x mode only) Do not overwrite existing files. In particular, if a file appears more than once in an archive, later copies will not overwrite earlier copies.
+ </description>
+    </item>
+    
+    <item>
+      <title>convert svg</title>
+      <link>https://nbari.com/post/convert-svg/</link>
+      <pubDate>Sun, 15 Sep 2019 17:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/convert-svg/</guid>
+      <description>Convert svg to png having transparent background:
+$ convert -background none -density 1200 in.svg out.png   brew install imagemagick librsvg
+ </description>
+    </item>
+    
+    <item>
+      <title>extent</title>
+      <link>https://nbari.com/post/extent/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/extent/</guid>
+      <description>To resize an image and adjust it to fit a fixed canvas with transparent background:
+$ convert in.png \ -resize 128x128 \ -background none \ -gravity center \ -extent 128x128 \ out.png  </description>
+    </item>
+    
+    <item>
+      <title>mysql CRC32</title>
+      <link>https://nbari.com/post/mysql-crc32/</link>
+      <pubDate>Sun, 08 Sep 2019 11:04:38 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-crc32/</guid>
+      <description>If need to calculate the CRC32 of a string, using mysql:
+$ mysql -e &amp;quot;SELECT CRC32(&#39;127.0.0.1&#39;)&amp;quot; +--------------------+ | CRC32(&#39;127.0.0.1&#39;) | +--------------------+ | 3619153832 | +--------------------+  </description>
+    </item>
+    
+    <item>
+      <title>grep -H</title>
+      <link>https://nbari.com/post/grep-h/</link>
+      <pubDate>Sat, 07 Sep 2019 18:41:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/grep-h/</guid>
+      <description>To find path of a file containing a pattern:
+$ cd jails $ grep -H 34 */etc/ssh/sshd_config  In this example the path of the files containing the number 34 will be printed.</description>
+    </item>
+    
+    <item>
+      <title>online.net IPv6</title>
+      <link>https://nbari.com/post/online-net-ipv6/</link>
+      <pubDate>Tue, 03 Sep 2019 20:18:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/online-net-ipv6/</guid>
+      <description>Configure IPv6 using dhcp6c for servers from online.net:
+pkg install dhcp6  Transform the DUID into a binary file (needed for dhcp6c):
+echo &amp;lt;DUID&amp;gt; | awk &#39;{ gsub(&amp;quot;:&amp;quot;,&amp;quot; &amp;quot;); printf &amp;quot;0: 0a 00 %s\n&amp;quot;, $0 }&#39; | xxd -r &amp;gt; /var/db/dhcp6c_duid  Add this in /usr/local/etc/dhcp6c.conf:
+id-assoc pd { prefix-interface igb0 { }; }; id-assoc na { }; interface igb0 { send ia-pd 0; send ia-na 0; };  Add this to /etc/rc.</description>
+    </item>
+    
+    <item>
+      <title>Start 2 XS SATA</title>
+      <link>https://nbari.com/post/start-2-xs-sata/</link>
+      <pubDate>Tue, 03 Sep 2019 09:04:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/start-2-xs-sata/</guid>
+      <description>To install FreeBSD using the rescue system on a Start-2-XS-SATA from online.net:
+#!/bin/sh -x USER=monkey PASSWORD=secret gpart destroy -F ada0 gpart create -s gpt ada0 gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 ada0 gpart add -t freebsd-boot -l boot -s 128K ada0 gpart add -t freebsd-swap -l swap -s 4g ada0 gpart add -t freebsd-ufs -l root ada0 gpart set -a active ada0 newfs /dev/gpt/root mount /dev/gpt/root /mnt cd /tmp fetch http://ftp.</description>
+    </item>
+    
+    <item>
+      <title>Prevent Mac to Sleep</title>
+      <link>https://nbari.com/post/prevent-mac-to-sleep/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/prevent-mac-to-sleep/</guid>
+      <description>To stop sleep entirely:
+sudo pmset -a disablesleep 1  To revert, allow sleep again:
+sudo pmset -a disablesleep 0  To display global power settings:
+pmset -g  </description>
+    </item>
+    
+    <item>
+      <title>sudo SSH_CONNECTION</title>
+      <link>https://nbari.com/post/sudo-ssh_connection/</link>
+      <pubDate>Wed, 17 Jul 2019 13:31:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sudo-ssh_connection/</guid>
+      <description>When using ssh, if then doing something like sudo -i the environment vars are gone, to preserve modify your sudoers (/usr/local/etc/sudoers or /usr/local/etc/sudoers.d/devops) and add something like:
+Defaults env_keep += &amp;quot;SSH_TTY SSH_CONNECTION SSH_CLIENT&amp;quot;  In this case, it will preserve your SSH environment vars.</description>
+    </item>
+    
+    <item>
+      <title>vbox headless</title>
+      <link>https://nbari.com/post/vbox-headless/</link>
+      <pubDate>Wed, 17 Jul 2019 10:38:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vbox-headless/</guid>
+      <description>To list your vms:
+$ VBoxManage list vms  To run one in headless mode:
+$ VBoxManage startvm freebsd-server --type headless  To shutdown:
+$ VBoxManage controlvm freebsd-server acpipowerbutton  To get the IPv4:
+$ VBoxManage guestproperty enumerate freebsd-server | awk &#39;/IP/&#39;   for this to work you will need the vboxguest tools pkg install virtualbox-ose-additions
+ </description>
+    </item>
+    
+    <item>
+      <title>ddcctl</title>
+      <link>https://nbari.com/post/ddcctl/</link>
+      <pubDate>Thu, 04 Jul 2019 18:07:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ddcctl/</guid>
+      <description>To share one monitor, keyboard and mouse between two devices, mac mini and a macbook try:
+brew cask install barrier  Then to avoid changing the input source by using the buttons in the monitor try https://github.com/kfix/ddcctl:
+cd /tmp git clone https://github.com/kfix/ddcctl.git cd ddcctl make &amp;amp;&amp;amp; make install  In my case to switch from the mac mini (HDMI) to the laptop via (DP) I use:
+ddcctl -d 1 -i 15  From the laptop (USB-C -&amp;gt; DP) to HDMI, switch back to the mac mini:</description>
+    </item>
+    
+    <item>
+      <title>timestamp</title>
+      <link>https://nbari.com/post/timestamp/</link>
+      <pubDate>Mon, 03 Jun 2019 21:47:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/timestamp/</guid>
+      <description>To get the current unix timestamp:
+date +%s  To get the date from a timestamp:
+date -r 1559591041  In Linux:
+date -d &amp;quot;@1559591041&amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>docker prune</title>
+      <link>https://nbari.com/post/docker-prune/</link>
+      <pubDate>Wed, 29 May 2019 00:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/docker-prune/</guid>
+      <description>Docker cleanup:
+ docker system prune -a  </description>
+    </item>
+    
+    <item>
+      <title>rust docker</title>
+      <link>https://nbari.com/post/rust-docker/</link>
+      <pubDate>Tue, 28 May 2019 22:16:35 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/rust-docker/</guid>
+      <description>Dockerfile to create small rust docker images:
+FROM clux/muslrust RUN mkdir /source WORKDIR /source COPY . . RUN cargo build --release RUN strip ./target/x86_64-unknown-linux-musl/release/myapp FROM scratch COPY --from=0 /source/target/x86_64-unknown-linux-musl/release/myapp / CMD [&amp;quot;./myapp&amp;quot;]  Image compatible with cloud foundry:
+FROM rust:1.35 WORKDIR /usr/src/myapp COPY . . RUN cargo build --release FROM debian:latest RUN apt-get update &amp;amp;&amp;amp; DEBIAN_FRONTEND=noninteractive apt-get install -y openssl ca-certificates COPY --from=0 /usr/src/myapp/target/release/myapp / CMD [&amp;quot;./myapp&amp;quot;]  </description>
+    </item>
+    
+    <item>
+      <title>mysql pager</title>
+      <link>https://nbari.com/post/mysql-pager/</link>
+      <pubDate>Wed, 15 May 2019 10:35:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-pager/</guid>
+      <description>To use less command to vie the output of a mysql result you could use:
+mysql&amp;gt; \P less  or
+mysql&amp;gt; pager less  Then run something like:
+mysql&amp;gt; show engine innodb status\G  In some cases you may need to search for something in specific for this grep could be used, for example:
+mysql&amp;gt; \P grep -A7 &amp;quot;ROW OPERATIONS&amp;quot; PAGER set to &#39;grep -A7 &amp;quot;ROW OPERATIONS&amp;quot;&#39;  Then when running the command it will only return 7 lines after &amp;ldquo;ROW OPERATIONS&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>//&#43;build disable</title>
+      <link>https://nbari.com/post/build-disable/</link>
+      <pubDate>Tue, 14 May 2019 19:10:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/build-disable/</guid>
+      <description>In go if need to sketch something and end having func main() in two files, you could ignore building one by adding at the top of the file:
+// +build disable  This is a build constraint.
+A build constraint, also known as a build tag, is a line comment that begins:
+// +build  </description>
+    </item>
+    
+    <item>
+      <title>delete file</title>
+      <link>https://nbari.com/post/delete-file/</link>
+      <pubDate>Mon, 06 May 2019 14:44:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/delete-file/</guid>
+      <description>Ways to delete a file starting with a dash / hyphen:
+rm -- -file  The option -- means the end of options for the command.
+Another option is to indicate where is the file:
+rm ./-file  . is current directory , path to -file is ./-file
+Using find:
+find . -type f -exec rm {} \;  Finding the inode:
+ls -li  Then using find and the inode it can be removed with:</description>
+    </item>
+    
+    <item>
+      <title>galera SOS</title>
+      <link>https://nbari.com/post/galera-sos/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/galera-sos/</guid>
+      <description>Check status of cluster: https://nbari.com/post/galera/
+Find process list not sleeping:
+SELECT user, time, state, info FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id;  Doing a heavy DDL (ALTER):
+SELECT * FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND info LIKE &#39;alter%&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id LIMIT 1;   DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row.</description>
+    </item>
+    
+    <item>
+      <title>pigz</title>
+      <link>https://nbari.com/post/pigz/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pigz/</guid>
+      <description>To compress using gzip format but using all your available cores:
+tar --use-compress-program=pigz -cf archive.tgz /path/to/source  Or if you want to pipe it:
+tar -cf - source | pigz &amp;gt; archive.tgz  To decompress use tar -xvf archive.tgz as usual.
+The output of pigz is compatible with gzip</description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>https://nbari.com/post/zsh/</link>
+      <pubDate>Sat, 23 Mar 2019 18:32:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/zsh/</guid>
+      <description>Edit environment variables:
+vared PATH  Diff command output creating temporary normal files
+vimdiff =(ls /bin) =(ls /usr/bin)  Print path
+print -l $path  Run a command detached &amp;amp;! or &amp;amp;| put it in background and disown the process, exiting the shell will leave it running:
+sleep 300 &amp;amp;!  </description>
+    </item>
+    
+    <item>
+      <title>Google Cloud Functions</title>
+      <link>https://nbari.com/post/gcf/</link>
+      <pubDate>Wed, 13 Mar 2019 20:12:57 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/gcf/</guid>
+      <description>Testing Google Cloud Functions using go with an average of 250 requests/second. Cost per day close to $10USD
+Request per day: 23,511,849 Errors: 0 memory usage: 10.4MB execution time: 55.04ms </description>
+    </item>
+    
+    <item>
+      <title>ssh wireshark</title>
+      <link>https://nbari.com/post/ssh-wireshark/</link>
+      <pubDate>Sun, 10 Mar 2019 15:42:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-wireshark/</guid>
+      <description>To analyze traffic remotely over ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w -| wireshark -k -i -  In case need an specific port:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - &#39;port 5984&#39; | wireshark -k -i -  To ignore trafic from ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - &#39;not port 22&#39; | wireshark -k -i -  Or:</description>
+    </item>
+    
+    <item>
+      <title>ELK  delete_by_query</title>
+      <link>https://nbari.com/post/elk-delte-by_query/</link>
+      <pubDate>Thu, 07 Mar 2019 23:52:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/elk-delte-by_query/</guid>
+      <description>To delete indexes older than X days:
+POST haproxy/_delete_by_query { &amp;#34;query&amp;#34;: { &amp;#34;range&amp;#34;: { &amp;#34;ISODATE&amp;#34;: { &amp;#34;lt&amp;#34;: &amp;#34;now-3d&amp;#34; } } } } </description>
+    </item>
+    
+    <item>
+      <title>openssl SHA1 HMAC</title>
+      <link>https://nbari.com/post/openssl-sha1-hmac/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/openssl-sha1-hmac/</guid>
+      <description>To create an HMAC-SHA1:
+$ echo -n &amp;quot;string&amp;quot; | openssl sha1 -hmac &amp;quot;shared_secret&amp;quot;  or
+$ echo -n &amp;quot;string&amp;quot; | openssl dgst -sha1 -hmac &amp;quot;shared_secret&amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>DoH Firefox</title>
+      <link>https://nbari.com/post/doh-firefox/</link>
+      <pubDate>Fri, 15 Feb 2019 15:26:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/doh-firefox/</guid>
+      <description>Open firefox and type:
+about:config  Search for:
+network.trr.uri  Probably you already have:
+https://mozilla.cloudflare-dns.com/dns-query  If not add it or use something like:
+https://cloudflare-dns.com/dns-query https://dns.quad9.net/dns-query  Then enable network.trr.mode by setting it to 2
+Set network.trr.mode to 2 make DNS Over HTTPS the browser&amp;rsquo;s first choice but use regular DNS as a fallback (0 is &amp;ldquo;off by default&amp;rdquo;, 1 lets Firefox pick whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).</description>
+    </item>
+    
+    <item>
+      <title>osascript</title>
+      <link>https://nbari.com/post/osascript/</link>
+      <pubDate>Fri, 08 Feb 2019 08:55:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osascript/</guid>
+      <description>In macOS, to find a path of an application, for example Chromium:
+$ osascript -e &#39;POSIX path of (path to application &amp;quot;Chromium&amp;quot;)&#39;  </description>
+    </item>
+    
+    <item>
+      <title>Galera</title>
+      <link>https://nbari.com/post/galera/</link>
+      <pubDate>Wed, 06 Feb 2019 09:55:15 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/galera/</guid>
+      <description>To periodically check status of the cluster, create a script (/tmp/xx):
+#!/bin/sh mysql -e \ &amp;quot;SHOW GLOBAL STATUS WHERE Variable_name IN ( &#39;wsrep_cert_deps_distance&#39;, &#39;wsrep_cluster_size&#39;, &#39;wsrep_cluster_status&#39;, &#39;wsrep_connected&#39;, &#39;wsrep_evs_delayed&#39;, &#39;wsrep_flow_control_paused&#39;, &#39;wsrep_flow_control_paused_ns&#39;, &#39;wsrep_flow_control_recv&#39;, &#39;wsrep_flow_control_sent&#39;, &#39;wsrep_local_index&#39;, &#39;wsrep_local_state&#39;, &#39;wsrep_local_state_comment&#39;, &#39;wsrep_ready&#39;, &#39;wsrep_replicated&#39;, &#39;wsrep_replicated_bytes&#39;);&amp;quot;   if credentials are in a custom path: mysql --defaults-file=/path/to/.my.cnf -s -e
+ And run it with:
+watch sh /tmp/xx  If single node alive (ERROR 1047 WSREP has not yet prepared node for application use):</description>
+    </item>
+    
+    <item>
+      <title>galera alter</title>
+      <link>https://nbari.com/post/galera-alter/</link>
+      <pubDate>Tue, 29 Jan 2019 22:50:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/galera-alter/</guid>
+      <description>To prevent bloking the cluster while doing ALTERS (SCHEMA UPGRADES), do this per node:
+SET wsrep_OSU_method=&#39;RSU&#39;;  Then Run the ALTER statement once done reset the Schema Upgrade method back to Total Order Isolation.
+SET wsrep_OSU_method=&#39;TOI&#39;;  http://galeracluster.com/documentation-webpages/clusterstallonalter.html http://galeracluster.com/documentation-webpages/schemaupgrades.html</description>
+    </item>
+    
+    <item>
+      <title>mojave Iso</title>
+      <link>https://nbari.com/post/mojave-iso/</link>
+      <pubDate>Thu, 13 Dec 2018 20:47:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mojave-iso/</guid>
+      <description>Create 12 GB tmp disk: hdiutil create -o /tmp/Mojave.cdr -size 12000m -layout SPUD -fs HFS+J
+Attach the disk:
+hdiutil attach /tmp/Mojave.cdr.dmg -noverify -mountpoint /Volumes/install_build  Extract the installer:
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build  Create the iso
+mv /tmp/Mojave.cdr.dmg ~/Desktop/InstallSystem.dmg hdiutil detach /Volumes/Install\ macOS\ Mojave hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Mojave.iso  Rename Mojave.iso.cdr to Mojave.iso</description>
+    </item>
+    
+    <item>
+      <title>jamf</title>
+      <link>https://nbari.com/post/jamf/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/jamf/</guid>
+      <description>softwareupdate -l to see if there are macOS updates available.
+softwareupdate -ia to install all updates.
+sudo jamf policy to run all outstanding policies and updates for the apps,
+sudo jamf recon to update the inventory on the server.</description>
+    </item>
+    
+    <item>
+      <title>stty</title>
+      <link>https://nbari.com/post/stty/</link>
+      <pubDate>Mon, 10 Dec 2018 11:02:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/stty/</guid>
+      <description>If reset can&amp;rsquo;t clean your terminal, give a try to:
+stty sane  </description>
+    </item>
+    
+    <item>
+      <title>tmux</title>
+      <link>https://nbari.com/post/tmux/</link>
+      <pubDate>Fri, 07 Dec 2018 13:57:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/tmux/</guid>
+      <description>Set window title:
+&amp;lt;c-b&amp;gt;,  Get pannel number:
+&amp;lt;c-b&amp;gt;q  Show clock:
+&amp;lt;c-b&amp;gt;t  Move pane to a new window:
+&amp;lt;c-b&amp;gt;!  Join panes:
+&amp;lt;c-b&amp;gt;: join-pane -s 0 -t 3 move pane 1 to window 3 &amp;lt;c-b&amp;gt;: join-pane -t :1 move current pane to window 1  Create a new session:
+&amp;lt;c-b&amp;gt;: new -s &amp;lt;name&amp;gt;  List sessions:
+&amp;lt;c-b&amp;gt;s &amp;lt;c-b&amp;gt;w expanded  Move pane to a another session:
+&amp;lt;c-b&amp;gt;m mark the pane &amp;lt;c-b&amp;gt;w go to the destination window/session &amp;lt;c-b&amp;gt;: join-pane  or go to the pane you want to move, check the session name and windows you would like to move and try:</description>
+    </item>
+    
+    <item>
+      <title>Block SSH on MacOS</title>
+      <link>https://nbari.com/post/block-ssh-mac/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/block-ssh-mac/</guid>
+      <description>To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &amp;quot;echo &#39;block in log quick proto tcp from any to any port 22&#39; &amp;gt;&amp;gt; /etc/pf.conf&amp;quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.</description>
+    </item>
+    
+    <item>
+      <title>Processlist</title>
+      <link>https://nbari.com/post/processlist/</link>
+      <pubDate>Mon, 12 Nov 2018 20:10:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/processlist/</guid>
+      <description>Run show processlist every second:
+mysqladmin -uroot -p -i 1 processlist  -i 1 stands for interval one second</description>
+    </item>
+    
+    <item>
+      <title>OSI TLS</title>
+      <link>https://nbari.com/post/osi-tls/</link>
+      <pubDate>Wed, 07 Nov 2018 18:49:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osi-tls/</guid>
+      <description>Beside the OSI/model, there is also the TCP/IP Model:
+  Link Layer
+  Internet (IP) Layer
+  Transport Layer
+  Application
+  OSI Model The OSI model has a bit more granularity.
+ Physical Layer Data Link Layer Network Layer (IP) Transport Layer (TCP) Session Layer (TLS) Presentation Layer Application Layer (HTTP)  TLS establishes an encrypted session. In the OSI model this is where TLS operates.</description>
+    </item>
+    
+    <item>
+      <title>IRC</title>
+      <link>https://nbari.com/post/irc/</link>
+      <pubDate>Fri, 02 Nov 2018 11:18:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/irc/</guid>
+      <description>Change password password in irc:
+/msg nickserv set password &amp;lt;password&amp;gt;  </description>
+    </item>
+    
+    <item>
+      <title>combine two images</title>
+      <link>https://nbari.com/post/combine-two-images/</link>
+      <pubDate>Wed, 17 Oct 2018 12:39:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/combine-two-images/</guid>
+      <description>Combine in a single file 2 images:
+convert +append a.png b.png out.png  -append will append vertically instead of horizontally (+)</description>
+    </item>
+    
+    <item>
+      <title>LS_COLORS</title>
+      <link>https://nbari.com/post/ls_colors/</link>
+      <pubDate>Thu, 06 Sep 2018 13:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ls_colors/</guid>
+      <description>To remove the blinking of symbolic links when doing ls in Linux:
+LS_COLORS=&amp;quot;ln=35&amp;quot; export LS_COLORS  That will set the ln=35 symbolic links to color purple.
+Params for LS_COLORS:
+di Directory fi File ln Symbolic Link pi Fifo file so Socket file bd Block (buffered) special file cd Character (unbuffered) special file or Symbolic Link pointing to a non-existent file (orphan) mi Non-existent file pointed to by a symbolic link (visible when you type ls -l) ex File which is executable (ie.</description>
+    </item>
+    
+    <item>
+      <title>htpasswd</title>
+      <link>https://nbari.com/post/htpasswd/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/htpasswd/</guid>
+      <description>To create an htpasswd file (for htaccess &amp;ldquo;authentication&amp;rdquo;) using openssl:
+$ printf &amp;quot;foo:$(openssl passwd -apr1 PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  If need to use crypt:
+$ printf &amp;quot;foo:$(openssl passwd -crypt PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  </description>
+    </item>
+    
+    <item>
+      <title>Git SSH</title>
+      <link>https://nbari.com/post/git-ssh/</link>
+      <pubDate>Wed, 29 Aug 2018 16:26:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git-ssh/</guid>
+      <description>To create a git repository and access to it via ssh:
+$ ssh your.host $ mkdir my-new-repo $ cd my-new-repo $ git --bare init  To access your repo (clone it):
+$ git clone ssh://user@your.host:2222/~user/my-new-repo  </description>
+    </item>
+    
+    <item>
+      <title>self CA</title>
+      <link>https://nbari.com/post/self-ca/</link>
+      <pubDate>Mon, 27 Aug 2018 12:33:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/self-ca/</guid>
+      <description>Create a self signed CA (Certificate Authority)
+Generate private key:
+$ openssl genrsa -des3 -out CA.key 4096  To create a private key without password:
+$ openssl genrsa -out CA.key 4096  Create a root certificate:
+$ openssl req -x509 -new -nodes -key CA.key -sha256 -out CA.pem -subj &amp;quot;/CN=example.com&amp;quot; -days 365  In one single command create the private key and the certificate:
+$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout CA.</description>
+    </item>
+    
+    <item>
+      <title>Bosh cheatsheet</title>
+      <link>https://nbari.com/post/bosh-cheatsheet/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bosh-cheatsheet/</guid>
+      <description>BOSH is a project that unifies release engineering, deployment, and lifecycle management of small and large-scale cloud software.
+Check your environment:
+$ bosh env  Set your deployment environment:
+$ export BOSH_DEPLOYMENT=foo   if have multiple deployments in same dir better to use -d &amp;lt;deployment-name&amp;gt; since many commands are bound to this variable.
+ To recreate your environment (virtualbox), remove the line that start with current_manifest from the file state.</description>
+    </item>
+    
+    <item>
+      <title>ZFS swap</title>
+      <link>https://nbari.com/post/zfs-swap/</link>
+      <pubDate>Mon, 20 Aug 2018 20:51:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-swap/</guid>
+      <description>To add more swap on a ZFS system:
+# zfs create -V 64G -o org.freebsd:swap=on -o checksum=off -o compression=off -o dedup=off -o sync=disabled -o primarycache=none tank/swap2  To add it:
+# swapon /dev/zvol/tank/swap2  To resize you could first remove it:
+# swapoff /dev/zvol/tank/swap  Then destroy it:
+# zfs destroy tank/swap  </description>
+    </item>
+    
+    <item>
+      <title>No history</title>
+      <link>https://nbari.com/post/no-history/</link>
+      <pubDate>Sat, 11 Aug 2018 15:59:53 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/no-history/</guid>
+      <description>To avoid having command in history just prefix them with an empty space:
+$⎵ uname  If using zsh:
+$ echo &amp;quot;&amp;quot; &amp;gt; ~/.zsh_history &amp;amp; exec $SHELL -l  </description>
+    </item>
+    
+    <item>
+      <title>macOs sparseimage</title>
+      <link>https://nbari.com/post/macos-sparseimage/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/macos-sparseimage/</guid>
+      <description>To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &amp;quot;macOS_installmedia&amp;quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  </description>
+    </item>
+    
+    <item>
+      <title>NATO phonetic alphabet</title>
+      <link>https://nbari.com/post/nato-phonetic-alphabet/</link>
+      <pubDate>Sat, 28 Jul 2018 07:19:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/nato-phonetic-alphabet/</guid>
+      <description>   Symbol Code word Pronunciation     A Alfa Al fah   B Bravo Brah Voh   C Charlie Char Lee   D Delta Dell Tah   E Echo Eck Oh   F Fox Foks Trot   G Golf Golf   H Hotel Hoh Tell   I India In Dee Ah   J Juliett Jew Lee Ett   K Kilo Key Loh   L Lima Lee Mah   M Mike Mike   N November No Vem Ber   O Oscar Oss Car   P Papa Pah Pah   Q Quebec Keh Beck   R Romeo Row Me Oh   S Sierra See Air Ah   T Tango Tang Go   U Uniform You Nee Form   V Victor Vik Tah   W Whiskey Wiss Key   X X-ray Ecks Ray   Y Yankee Yang Key   Z Zulu Zoo Loo   0 Zero Zee Row   1 One Wun   2 Two Too   3 Three Tree   4 Four Fow Er   5 Five Fife   6 Six Six   7 Seven Sev En   8 Eight Ait   9 Nine Nine Er    </description>
+    </item>
+    
+    <item>
+      <title>ZFS send receive</title>
+      <link>https://nbari.com/post/zfs-send-receive/</link>
+      <pubDate>Thu, 21 Jun 2018 12:00:34 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zfs-send-receive/</guid>
+      <description>To send a zfs dataset being no root, on the origin server:
+# zfs allow -g wheel send,snapshot,hold tank/foo  On the receiver, create the dataset and allow users in group wheel:
+# zfs create -o mountpoint=/foo tank/foo # zfs allow -g wheel compression,mountpoint,create,mount,receive tank/foo # umount /foo  On the origin server create the snapshot to send:
+# zfs snapshot -r tank/foo  On the origin server send the dataset by using:</description>
+    </item>
+    
+    <item>
+      <title>Enable Paste</title>
+      <link>https://nbari.com/post/enable-paste/</link>
+      <pubDate>Tue, 19 Jun 2018 19:55:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/enable-paste/</guid>
+      <description>To enable paste in chrome, open the console and enter:
+var allowPaste = function(e){ e.stopImmediatePropagation(); return true; }; document.addEventListener(&#39;paste&#39;, allowPaste, true);  </description>
+    </item>
+    
+    <item>
+      <title>kld_list</title>
+      <link>https://nbari.com/post/kld_list/</link>
+      <pubDate>Fri, 15 Jun 2018 09:46:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/kld_list/</guid>
+      <description>To load kernel modules after local disks are mounted add this to /etc/rc.conf:
+kld_list=&amp;quot;fuse&amp;quot;   in this case module fuse will be loaded
+ </description>
+    </item>
+    
+    <item>
+      <title>hw.(machine|model|ncpu)</title>
+      <link>https://nbari.com/post/hw-machine-model-ncpu/</link>
+      <pubDate>Wed, 13 Jun 2018 15:27:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/hw-machine-model-ncpu/</guid>
+      <description>To get an overview of the system:
+# sysctl -a | egrep -i &#39;hw.machine|hw.model|hw.ncpu&#39; hw.machine: amd64 hw.model: Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz hw.ncpu: 16 hw.machine_arch: amd64  </description>
+    </item>
+    
+    <item>
+      <title>moosefs</title>
+      <link>https://nbari.com/post/moosefs/</link>
+      <pubDate>Tue, 12 Jun 2018 21:29:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/moosefs/</guid>
+      <description>Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
+Install the required packages:
+pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
+pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
+X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
+MFSM NEW  Create a pool to share:</description>
+    </item>
+    
+    <item>
+      <title>MANIFEST No Such File or Directory</title>
+      <link>https://nbari.com/post/manifest-no-such-file-or-directory/</link>
+      <pubDate>Tue, 12 Jun 2018 12:28:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/manifest-no-such-file-or-directory/</guid>
+      <description>If when trying to install FreeBSD using bsdinstall you get:
+&amp;quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&amp;quot; - no such file or directory  Try to:
+root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again</description>
+    </item>
+    
+    <item>
+      <title>ctrl-backslash</title>
+      <link>https://nbari.com/post/ctrl-backslash/</link>
+      <pubDate>Mon, 11 Jun 2018 17:49:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ctrl-backslash/</guid>
+      <description>To send a quit signal to the process:
+ctrl-\ # (backslash)  This will send a SIGQUIT</description>
+    </item>
+    
+    <item>
+      <title>python site packages</title>
+      <link>https://nbari.com/post/site-packages/</link>
+      <pubDate>Thu, 07 Jun 2018 14:22:46 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/site-packages/</guid>
+      <description>To find the python site-packages paths:
+$ python -m site  </description>
+    </item>
+    
+    <item>
+      <title>DNS TCP</title>
+      <link>https://nbari.com/post/dns-tcp/</link>
+      <pubDate>Fri, 01 Jun 2018 07:25:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dns-tcp/</guid>
+      <description>Unbound using DNS over TCP:
+server: private-domain: &amp;quot;plex.direct&amp;quot; forward-zone: name: &amp;quot;.&amp;quot; forward-ssl-upstream: yes forward-addr: 1.1.1.1@853 forward-addr: 9.9.9.9@853 forward-addr: 1.0.0.1@853 forward-addr: 149.112.112.112@853 forward-addr: 2606:4700:4700::1111@853 forward-addr: 2606:4700:4700::1001@853 forward-addr: 2620:fe::fe@853; forward-addr: 2620:fe::9@853;  To test do:
+# unbound-control -c /var/unbound/unbound.conf lookup .  It should return something like:
+The following name servers are used for lookup of . forwarding request: Delegation with 0 names, of which 0 can be examined to query further addresses.</description>
+    </item>
+    
+    <item>
+      <title>ssh CanonicalDomains</title>
+      <link>https://nbari.com/post/ssh-canonicaldomains/</link>
+      <pubDate>Wed, 30 May 2018 12:22:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-canonicaldomains/</guid>
+      <description>SSH Canonicalization
+CanonicalDomains example.com example.net example.org # CanonicalizeFallbackLocal no CanonicalizeHostname yes Host *.example.com IdentityFile ~/.ssh/exampleCOM User foo Host *.example.net IdentityFile ~/.ssh/exampleNET User foo Host *.example.org User foo IdentityFile ~/.ssh/exampleORG  more info: https://dotfiles.tnetconsulting.net/articles/2016/0109/ssh-canonicalization.html</description>
+    </item>
+    
+    <item>
+      <title>pfsense</title>
+      <link>https://nbari.com/post/pfsense/</link>
+      <pubDate>Tue, 29 May 2018 21:40:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pfsense/</guid>
+      <description>How to connect using serial (usb/com RJ45) port on macOS:
+$ sudo cu -s 115200 -l /dev/tty.usbserial-DN04FSAL  To bail out when you&amp;rsquo;re done, type ~. as you would with SSH.
+Boot example:
+After installing (zfs on root):
+The toy:</description>
+    </item>
+    
+    <item>
+      <title>packagecloud</title>
+      <link>https://nbari.com/post/packagecloud/</link>
+      <pubDate>Mon, 28 May 2018 11:22:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/packagecloud/</guid>
+      <description>To upload all packages to packagecloud:
+package_cloud push immortal/immortal/el/7 immortal_0.19.0_*.rpm --skip-errors   for .deb 386 needs to be i386
+ </description>
+    </item>
+    
+    <item>
+      <title>gzip</title>
+      <link>https://nbari.com/post/gzip/</link>
+      <pubDate>Fri, 25 May 2018 20:48:09 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/gzip/</guid>
+      <description>Gzip all files within a directory:
+gzip -r ./  or
+find . -type f ! -name &#39;*.gz&#39; -exec gzip &amp;quot;{}&amp;quot; \;  </description>
+    </item>
+    
+    <item>
+      <title>odroid C2</title>
+      <link>https://nbari.com/post/odroid-c2/</link>
+      <pubDate>Tue, 15 May 2018 01:06:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/odroid-c2/</guid>
+      <description>Disabling blinking blue led:
+echo none &amp;gt; /sys/class/leds/blue:heartbeat/trigger  To make the change permanent add the line to /etc/rc.local</description>
+    </item>
+    
+    <item>
+      <title>exec</title>
+      <link>https://nbari.com/post/exec/</link>
+      <pubDate>Mon, 14 May 2018 11:46:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/exec/</guid>
+      <description>exec is a functionality of an operating system that runs an executable file in the context of an already existing process, replacing the previous executable. https://en.wikipedia.org/wiki/Exec_(system_call)
+exec replaces the current program in the current process, without forking a new process.
+Examples to use:
+exec csh   This will just replace the existing shell with csh and only need to type exit once
+ Within a script to startup python scripts, for example:</description>
+    </item>
+    
+    <item>
+      <title>sockstat</title>
+      <link>https://nbari.com/post/sockstat/</link>
+      <pubDate>Sun, 13 May 2018 17:32:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sockstat/</guid>
+      <description>The sockstat command list open Internet or UNIX domain sockets.
+List open tcp in ipv4:
+# sockstat -4l  Show connectd sockets in port 443 and tcp:
+# sockstat -P tcp -p 443 -c  List unix sockets:
+# sockstat -u  </description>
+    </item>
+    
+    <item>
+      <title>Ansible ad-hoc</title>
+      <link>https://nbari.com/post/ansible-adhoc/</link>
+      <pubDate>Wed, 09 May 2018 10:24:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-adhoc/</guid>
+      <description>To send a command to all the servers within a playbook:
+$ ansible all -a &amp;quot;service chronyd restart&amp;quot; -u devops --become  What’s an ad-hoc command? An ad-hoc command is something that you might type in to do something really quick, but don’t want to save for later.
+http://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html</description>
+    </item>
+    
+    <item>
+      <title>freebsd-update</title>
+      <link>https://nbari.com/post/freebsd-update/</link>
+      <pubDate>Sat, 05 May 2018 15:58:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/freebsd-update/</guid>
+      <description>Update Freebsd using freebsd-update:
+Set in /etc/rc.conf:
+kern_securelevel_enable=&amp;quot;NO&amp;quot; kern_securelevel=&amp;quot;0&amp;quot;  reboot and then:
+# freebsd-update upgrade -r 10.4-RELEASE # freebsd-update install # reboot # freebsd-update install   Repeate then to upgrade to 11.1 freebsd-update upgrade -r 11.1-RELEASE
+ Only security patches:
+# freebsd-update fetch # freebsd-update install  To update the packages:
+# pkg-static upgrade -f # freebsd-update install   A forced upgrade of all installed packages will replace the packages with fresh versions from the repository even if the version number has not increased.</description>
+    </item>
+    
+    <item>
+      <title>Influxdb</title>
+      <link>https://nbari.com/post/influxdb/</link>
+      <pubDate>Sat, 05 May 2018 10:55:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/influxdb/</guid>
+      <description>Basic influxdb queries, setup.
+You can use influx (the influxdb shell) or use the http API on port :8086
+Create and apply retention policy to a database: warning this may remove/purge existing data
+CREATE RETENTION POLICY &amp;quot;30_days&amp;quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
+ Show retention policies:
+&amp;gt; show retention policies name duration shardGroupDuration replicaN default ---- -------- ------------------ -------- ------- autogen 0s 168h0m0s 1 false 30_days 720h0m0s 24h0m0s 1 true  Show databases contents (measurements):</description>
+    </item>
+    
+    <item>
+      <title>womp</title>
+      <link>https://nbari.com/post/womp/</link>
+      <pubDate>Fri, 04 May 2018 17:34:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/womp/</guid>
+      <description>To enable WoL (Wake-on-LAN) on macOS:
+$ sudo pmset womp 1  Then check the settings:
+$ pmset -g System-wide power settings: Currently in use: standbydelay 10800 standby 1 womp 1 halfdim 1 hibernatefile /var/vm/sleepimage powernap 1 gpuswitch 2 networkoversleep 0 disksleep 10 sleep 1 (sleep prevented by coreaudiod, coreaudiod, iTunes) autopoweroffdelay 28800 hibernatemode 3 autopoweroff 1 ttyskeepawake 1 displaysleep 10 tcpkeepalive 1 acwake 0 lidwake 1  </description>
+    </item>
+    
+    <item>
+      <title>Domain Fronting</title>
+      <link>https://nbari.com/post/domain-fronting/</link>
+      <pubDate>Wed, 02 May 2018 12:42:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/domain-fronting/</guid>
+      <description>If your domain becomes blocked you &amp;ldquo;could use&amp;rdquo; another one to bypass the block:
+curl -s -H &amp;quot;Host: your-blocked-domain&amp;quot; -H &amp;quot;Connection: close&amp;quot; &amp;quot;https://new-tld/your/path&amp;quot;  Both domains must be hosted within the same CDN, example:
+curl -s -H &amp;quot;Host: images-na.ssl-images-amazon.com&amp;quot; -H &amp;quot;Connection: close&amp;quot; &amp;quot;https://cdn.atlassian.com/images/I/01rgQ3jqo7L.css&amp;quot;  More info:
+ https://www.optiv.com/blog/escape-and-evasion-egressing-restricted-networks https://www.peew.pw/blog/2018/2/22/how-i-identified-93k-domain-frontable-cloudfront-domains  </description>
+    </item>
+    
+    <item>
+      <title>IDNA</title>
+      <link>https://nbari.com/post/idna/</link>
+      <pubDate>Sun, 29 Apr 2018 13:35:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/idna/</guid>
+      <description>To encode/decode a domain using &amp;ldquo;Internationalized Domain Names&amp;rdquo;
+$ python &amp;gt;&amp;gt;&amp;gt; x = u&#39;qép.com&#39; &amp;gt;&amp;gt;&amp;gt; x.encode(&#39;idna&#39;) b&#39;xn--qp-bja.com&#39; &amp;gt;&amp;gt;&amp;gt; x.encode(&#39;idna&#39;).decode(&#39;idna&#39;) &#39;qép.com&#39; &amp;gt;&amp;gt;&amp;gt; x == x.encode(&#39;idna&#39;).decode(&#39;idna&#39;) True   To prevent non-international domain names containing hyphens from being accidentally interpreted as Punycode, international domain name Punycode sequences have a so-called ASCII Compatible Encoding (ACE) prefix, &amp;ldquo;xn&amp;ndash;&amp;rdquo;, prepended.[2] Thus the domain name &amp;ldquo;bücher.tld&amp;rdquo; would be represented in ASCII as &amp;ldquo;xn&amp;ndash;bcher-kva.tld&amp;rdquo;.
+ </description>
+    </item>
+    
+    <item>
+      <title>Find Windows Product Key</title>
+      <link>https://nbari.com/post/find-windows-product-key/</link>
+      <pubDate>Thu, 26 Apr 2018 15:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/find-windows-product-key/</guid>
+      <description>To retrive the windows product key you can run this within a windows power shell:
+PS C:\Users\Monkey&amp;gt; (Get-WmiObject -query &#39;select * from SoftwareLicensingService&#39;).OA3xOriginalProductKey xxxxx-xxxxx-xxxxx-xxxxx-xxxxx  </description>
+    </item>
+    
+    <item>
+      <title>parallel xargs</title>
+      <link>https://nbari.com/post/parallel-xargs/</link>
+      <pubDate>Thu, 26 Apr 2018 15:18:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/parallel-xargs/</guid>
+      <description>To run a script in parallel using xargs:
+printf %d\\n {0..9} | xargs -n 1 -P8 sleep  In this case sleep is going to be call 8 times (-P8) using has the input an int from 0 to 9.
+From the man:
+-P maxprocs Parallel mode: run at most maxprocs invocations of utility at once.  </description>
+    </item>
+    
+    <item>
+      <title>tmp</title>
+      <link>https://nbari.com/post/tmp/</link>
+      <pubDate>Tue, 24 Apr 2018 18:20:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/tmp/</guid>
+      <description>Ways to create a temp file:
+Using mktemp:
+$ mktemp /tmp/file.XXX   The trailing Xs will be replaced with the process number and/or a unique letter combination
+ Creating a temp dir:
+$ mktemp -d /tmp/dir.XXX  Output could be saved into a variable:
+TMPDIR=$(mktemp -d /tmp/dir.XXXX)  $$ Using $$:
+OUT=/tmp/file.out.$$  Here $$ will be replaced with the current process PID.
+$RANDOM OUT=/tmp/file.out.${RANDOM}   $RANDOM is an internal bash/zsh function (not a constant) that returns a pseudorandom [1] integer in the range 0 - 32767</description>
+    </item>
+    
+    <item>
+      <title>pkg -o OSVERSION</title>
+      <link>https://nbari.com/post/pkg-osversion/</link>
+      <pubDate>Sat, 21 Apr 2018 20:38:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pkg-osversion/</guid>
+      <description>When updating if get something like this:
+pkg: Newer FreeBSD version for package jsoncpp: - package: 1101503 - running kernel: 1100506  Try uname -KU to get the version, and then:
+pkg -o OSVERSION=1100506 update -f pkg -o OSVERSION=1100506 upgrade  </description>
+    </item>
+    
+    <item>
+      <title>Ansible Patterns</title>
+      <link>https://nbari.com/post/ansible-patterns/</link>
+      <pubDate>Thu, 19 Apr 2018 21:56:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-patterns/</guid>
+      <description>To match hosts only starting with certain string a regex could be used for example to match hosts starting with the word fabrik:
+--- - hosts: ~fabrik.* become: True tasks: - name: uname shell: uname -a register: uname - debug: var: uname.stdout   notice the ~
+ </description>
+    </item>
+    
+    <item>
+      <title>MTU 1453</title>
+      <link>https://nbari.com/post/mtu-1453/</link>
+      <pubDate>Tue, 10 Apr 2018 21:16:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mtu-1453/</guid>
+      <description>If after upgrading macOS to 10.13.4 wifi stop working give a try to change the MTU:</description>
+    </item>
+    
+    <item>
+      <title>radtest</title>
+      <link>https://nbari.com/post/radtest/</link>
+      <pubDate>Mon, 26 Mar 2018 14:23:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/radtest/</guid>
+      <description>To test a radius server:
+$ brew install freeradius-server  Then:
+$ radtest {username} {password} {hostname} 10 {radius_secret}  The 10 is the nas-port-number. Is an integer between 0 and 2^31, and it really doesn&amp;rsquo;t matter what you put here.</description>
+    </item>
+    
+    <item>
+      <title>git basics</title>
+      <link>https://nbari.com/post/git/</link>
+      <pubDate>Sun, 25 Mar 2018 19:45:41 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git/</guid>
+      <description>git branch -a This will print all branches, local or remote, to see only local branches:
+$ git branch  To only see remote branches:
+$ git branch -r  When you clone a repo after typing git branch -a the output will look something like this:
+$ git branch -a * master remotes/origin/HEAD -&amp;gt; origin/master remotes/origin/master  master is a branch in the local repository, remotes/origin/master is a branch named master on the remote named origin:</description>
+    </item>
+    
+    <item>
+      <title>Git Web Deployment Workflow</title>
+      <link>https://nbari.com/post/git-web-deployment-workflow/</link>
+      <pubDate>Sun, 25 Mar 2018 12:28:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/git-web-deployment-workflow/</guid>
+      <description>The idea behind is to push to a remote repository on the same web/service server and a post-receive hook will checkout the files to the public directory.
+Configuring the server Create the repository:
+$ cd $HOME $ mkdir my-site.git $ cd my-site.git $ git init --bare  The idea of using .git as a suffix is just to distinguish between other directories.
+Crate the directory where you would like to deploy, for example:</description>
+    </item>
+    
+    <item>
+      <title>OBJC_DISABLE_INITIALIZE_FORK_SAFETY</title>
+      <link>https://nbari.com/post/objc_disable_initialize_fork_safety/</link>
+      <pubDate>Thu, 22 Mar 2018 15:28:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/objc_disable_initialize_fork_safety/</guid>
+      <description>In macOS High Sierra if getting this:
+objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.  Define:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES  This will fix temporally fix the problem and allow program to continue executing, more about this issue here: http://sealiesoftware.</description>
+    </item>
+    
+    <item>
+      <title>bash git prompt</title>
+      <link>https://nbari.com/post/bash-git-prompt/</link>
+      <pubDate>Tue, 20 Mar 2018 22:28:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/bash-git-prompt/</guid>
+      <description>To display the current branch in the terminal prompt using bash, add the following lines to ~/.bash_profile:
+parse_git_branch() { git branch 2&amp;gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/ (\1)/&#39; } export PS1=&amp;quot;\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ &amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>terms</title>
+      <link>https://nbari.com/post/terms/</link>
+      <pubDate>Sun, 18 Mar 2018 22:10:55 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/terms/</guid>
+      <description>Some common terms and definition
+ IT is full of buzzwords &amp;hellip;
+ SRE &amp;ndash; Site Reliability Engineering Site Reliability Engineering (SRE) is a discipline that incorporates aspects of software engineering and applies that to IT operations problems. The main goals are to create ultra-scalable and highly reliable software systems.
+A site reliability engineer (SRE) will spend up to 50% of their time doing &amp;ldquo;ops&amp;rdquo; related work and spend the other 50% of their time on development</description>
+    </item>
+    
+    <item>
+      <title>Linux Mac Address</title>
+      <link>https://nbari.com/post/linux-mac-address/</link>
+      <pubDate>Wed, 14 Mar 2018 14:51:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/linux-mac-address/</guid>
+      <description>To get the MAC address from an interface in linux:
+cat /sys/class/net/eth1/address  </description>
+    </item>
+    
+    <item>
+      <title>ssh permissions are too open</title>
+      <link>https://nbari.com/post/ssh-permissions-are-too-open/</link>
+      <pubDate>Mon, 12 Mar 2018 20:41:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-permissions-are-too-open/</guid>
+      <description>To set mode 0400 to all your ssh keys:
+$ find ~/.ssh/* -type f -name &amp;quot;id*&amp;quot; -not -iname &amp;quot;*.pub&amp;quot; -exec chmod 0400 {} \+  </description>
+    </item>
+    
+    <item>
+      <title>nohup - disown</title>
+      <link>https://nbari.com/post/nohup-disown/</link>
+      <pubDate>Sat, 10 Mar 2018 16:07:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nohup-disown/</guid>
+      <description>In case you don&amp;rsquo;t have screen/tmux and need to run a process that won&amp;rsquo;t be terminated after closing the terminal:
+$ nohup your command &amp;amp; $ exit  Or
+$ your command &amp;amp; $ disown $ exit  If you have multiple commands:
+$ sleep 3600 &amp;amp; $ sleep 86400 &amp;amp;  By typing jobs something like this appears:
+[1] - running sleep 3600 [2] + running sleep 86400  To disown let&amp;rsquo;s say only job 2:</description>
+    </item>
+    
+    <item>
+      <title>wait_for_connection</title>
+      <link>https://nbari.com/post/wait_for_connection/</link>
+      <pubDate>Wed, 07 Mar 2018 20:46:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/wait_for_connection/</guid>
+      <description>Reboot and wait until server is reachable/usable:
+- name: Something that may reboot shell: echo &amp;quot;true&amp;quot; register: should_reboot - name: Rebooting ... shell: sleep 2 &amp;amp;&amp;amp; /sbin/shutdown -r now &amp;quot;Reboot required&amp;quot; async: 1 poll: 0 ignore_errors: true register: rebooting when: should_reboot.stdout == &amp;quot;true&amp;quot; - name: Wait for rebooted servers to come back wait_for_connection: connect_timeout: 20 sleep: 5 delay: 5 timeout: 60 when: rebooting|changed  For checking/testing if a remote host/service is up:</description>
+    </item>
+    
+    <item>
+      <title>Linux version</title>
+      <link>https://nbari.com/post/linux-version/</link>
+      <pubDate>Fri, 02 Mar 2018 10:20:22 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/linux-version/</guid>
+      <description>To determine what linux version you are using:
+cat /etc/*elease  </description>
+    </item>
+    
+    <item>
+      <title>Delete Guest</title>
+      <link>https://nbari.com/post/delete-guest/</link>
+      <pubDate>Wed, 28 Feb 2018 09:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/delete-guest/</guid>
+      <description>To delete macOS Guest user:
+sudo dscl . -delete /Users/Guest  This will avoid showing the Guest user on the login screen</description>
+    </item>
+    
+    <item>
+      <title>gpg</title>
+      <link>https://nbari.com/post/gpg/</link>
+      <pubDate>Tue, 27 Feb 2018 12:33:49 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/gpg/</guid>
+      <description>Install gpg on macOS:
+brew install gnupg pinentry-mac   if required restart gpg-agent with gpgconf --kill gpg-agent
+ To create a gpg key in batch mode, create a file named gpg-key-script with this value:
+Key-Type: 1 Key-Length: 2048 Subkey-Type: 1 Subkey-Length: 2048 Name-Real: your name Name-Comment: your comment Name-Email: your@email Expire-Date: 0  Next you could do something like:
+$ gpg --homedir /salt/gpgkeys --batch --gen-key gen-key-script  Backup private key To save the private key to a file:</description>
+    </item>
+    
+    <item>
+      <title>sasl_username</title>
+      <link>https://nbari.com/post/sasl_username/</link>
+      <pubDate>Sat, 24 Feb 2018 09:32:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sasl_username/</guid>
+      <description>Find users sending email:
+tail -F /var/log/all.log | grep -i sasl_username  </description>
+    </item>
+    
+    <item>
+      <title>ldap_auth_disable_tls_never_use_in_production</title>
+      <link>https://nbari.com/post/ldap_auth_disable_tls_never_use_in_production/</link>
+      <pubDate>Wed, 21 Feb 2018 15:38:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ldap_auth_disable_tls_never_use_in_production/</guid>
+      <description>To use sssd disabling TLS ( sssd doesn&amp;rsquo;t work without TLS but there is this undocumented option you can use ):
+ldap_auth_disable_tls_never_use_in_production = true  In case you get this error:
+Attribute &#39;ldap_auth_disable_tls_never_use_in_production&#39; is not allowed in section  Try running this:
+authconfig --enablemkhomedir --enablesssdauth --updateall  The enablemkhomedir is a plus
+If when running authconfig your /etc/sssd/sssd.conf gets overwritten, set to no this options:
+USELDAP=no USELDAPAUTH=no  </description>
+    </item>
+    
+    <item>
+      <title>SElinux</title>
+      <link>https://nbari.com/post/selinux/</link>
+      <pubDate>Wed, 21 Feb 2018 09:39:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/selinux/</guid>
+      <description>To disable SElinux temporaly:
+setenforce 0  To disable SELinux Permanetly, edit file /etc/sysconfig/selinux:
+# This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded. SELINUX=enforcing # SELINUXTYPE= can take one of three two values: # targeted - Targeted processes are protected, # minimum - Modification of targeted policy.</description>
+    </item>
+    
+    <item>
+      <title>UseKeychain</title>
+      <link>https://nbari.com/post/usekeychain/</link>
+      <pubDate>Tue, 13 Feb 2018 10:01:54 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/usekeychain/</guid>
+      <description>To save SSH keys in macOS Sierra keychain add this to ~/.ssh/config:
+Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
+Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.</description>
+    </item>
+    
+    <item>
+      <title>Find and replace recursive</title>
+      <link>https://nbari.com/post/find-and-replace-recursive/</link>
+      <pubDate>Wed, 17 Jan 2018 10:08:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/find-and-replace-recursive/</guid>
+      <description>Note: Do not run this command on a folder including a git repo - changes to .git could corrupt your get index.
+For example to replace an IP on multiple files:
+find /tmp/path -type f -exec sed -i &#39;&#39; &#39;s/193.111.141.1/82.14.220.137/g&#39; {} +   On BSD, MAC by passing an empty string to sed&amp;rsquo;s -i args will create no backup
+ perl -pi -e perl -pi -e &#39;s/replace_this/with_this/&amp;quot;  This is useful when you don&amp;rsquo;t want to change the file ending like in sed that adds an \n ad the end of the file</description>
+    </item>
+    
+    <item>
+      <title>ciphers supported</title>
+      <link>https://nbari.com/post/ciphers-supported/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ciphers-supported/</guid>
+      <description>List ciphers supported by an HTTP server:
+nmap --script ssl-enum-ciphers -p 443 www.nbari.com  Example of output:
+PORT STATE SERVICE 443/tcp open https | ssl-enum-ciphers: | TLSv1.1: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server | TLSv1.2: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server |_ least strength: A Nmap done: 1 IP address (1 host up) scanned in 9.</description>
+    </item>
+    
+    <item>
+      <title>attachments from console</title>
+      <link>https://nbari.com/post/attachments-from-console/</link>
+      <pubDate>Wed, 03 Jan 2018 10:50:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/attachments-from-console/</guid>
+      <description>To send attachments within the terminal/console:
+ $ uuencode file.bz2 attach-name.bz2 | mail -s &amp;quot;attachment&amp;quot; foo@bar.com  </description>
+    </item>
+    
+    <item>
+      <title>update port</title>
+      <link>https://nbari.com/post/update-port/</link>
+      <pubDate>Sat, 30 Dec 2017 11:25:34 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/update-port/</guid>
+      <description>Make a copy of the current port:
+cp -R &amp;lt;port-name&amp;gt; &amp;lt;port-name&amp;gt;.orig  Work on the port:
+make makesum make checksum make stage make check-orphans make package make install make deinstall make clean  Crete the diff, first change one level up:
+diff -u port-name.orig port-name &amp;gt; port-name.diff  Submit the patch.</description>
+    </item>
+    
+    <item>
+      <title>raidz2</title>
+      <link>https://nbari.com/post/raidz2/</link>
+      <pubDate>Thu, 28 Dec 2017 22:20:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/raidz2/</guid>
+      <description>If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:
+&amp;gt; mfiutil show config mfi0 Configuration: 8 arrays, 8 volumes, 1 spares array 0 of 2 drives: drive 1 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&amp;gt; SATA drive 6 ( 1863G) ONLINE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY35&amp;gt; SATA array 1 of 1 drives: drive 0 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ0&amp;gt; SCSI-6 array 2 of 1 drives: drive 2 ( 466G) ONLINE &amp;lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&amp;gt; SCSI-6 array 3 of 1 drives: drive 3 ( 932G) ONLINE &amp;lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&amp;gt; SCSI-6 array 4 of 1 drives: drive 4 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&amp;gt; SAS array 5 of 1 drives: drive 5 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C4&amp;gt; SAS array 6 of 1 drives: drive 8 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&amp;gt; SAS array 7 of 1 drives: drive 9 ( 466G) ONLINE &amp;lt;SEAGATE ST3500620SS MS04 serial=9QM5L824&amp;gt; SAS volume mfid0 (1863G) RAID-1 64K OPTIMAL &amp;lt;raid1&amp;gt; spans: array 0 volume mfid1 (465G) RAID-0 64K OPTIMAL &amp;lt;r0&amp;gt; spans: array 1 volume mfid2 (465G) RAID-0 64K OPTIMAL &amp;lt;r2&amp;gt; spans: array 2 volume mfid3 (931G) RAID-0 64K OPTIMAL &amp;lt;r3&amp;gt; spans: array 3 volume mfid4 (465G) RAID-0 64K OPTIMAL &amp;lt;r4&amp;gt; spans: array 4 volume mfid5 (465G) RAID-0 64K OPTIMAL &amp;lt;r5&amp;gt; spans: array 5 volume mfid6 (465G) RAID-0 64K OPTIMAL &amp;lt;r8&amp;gt; spans: array 6 volume mfid7 (465G) RAID-0 64K OPTIMAL &amp;lt;r9&amp;gt; spans: array 7 dedicated spare 7 ( 1863G) HOT SPARE &amp;lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&amp;gt; SATA backs: array 0 Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume</description>
+    </item>
+    
+    <item>
+      <title>DRAC5 Update</title>
+      <link>https://nbari.com/post/drac5-update/</link>
+      <pubDate>Thu, 28 Dec 2017 01:39:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/drac5-update/</guid>
+      <description>Download the firmware: http://www.dell.com/support/home/de/de/debsdt1/Drivers/DriversDetails?driverId=F3FXW
+In mac you can unzip the exe:
+unzip f_drac5v160_A00.exe  On the DRAC web interface go to &amp;ldquo;Remote Access&amp;rdquo; and upload the file firmimg.d5
+If getting errors like:
+ Unsigned application requesting unrestricted access to system. The following resource is signed with a weak signature algorithm MD5withRSA and is treated as unsigned.
+ In windows file is in: c:\Program Files\Java\jre7\lib\security\java.security
+On mac os, edit this file: /Library/Internet Plug-Ins/JavaAppletPlugin.</description>
+    </item>
+    
+    <item>
+      <title>ssh update Host Keys</title>
+      <link>https://nbari.com/post/ssh-update-host-keys/</link>
+      <pubDate>Tue, 26 Dec 2017 16:19:15 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-update-host-keys/</guid>
+      <description>To create new ssh keys on the server:
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N &#39;&#39; -t rsa ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N &#39;&#39; -t ecdsa -b 521  To check the fingerprint:
+ssh-keygen -lf ssh_host_ecdsa_key  On the client side:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed.</description>
+    </item>
+    
+    <item>
+      <title>mysql SHA512 CRYPT</title>
+      <link>https://nbari.com/post/mysql-sha512-crypt/</link>
+      <pubDate>Sat, 23 Dec 2017 10:41:29 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-sha512-crypt/</guid>
+      <description>To create a password using the SHA512-CRYPT schema:
+SELECT ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To create an user:
+INSERT INTO users SET password=ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To use with postfix or dovecot:
+INSERT INTO users SET password=CONCAT(&#39;{SHA512-CRYPT}&#39;, ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND()))));  </description>
+    </item>
+    
+    <item>
+      <title>syslog-ng Ubuntu</title>
+      <link>https://nbari.com/post/syslog-ng-ubuntu/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/syslog-ng-ubuntu/</guid>
+      <description>Errors you may get:
+Can&#39;t find class; class_name=&#39;org.syslog_ng.elasticsearch_v2.ElasticSearchDestination&#39;  Working configuration:
+@version:3.13 @module mod-java @include &amp;quot;scl.conf&amp;quot; options { flush_lines(0); keep_hostname(yes); normalize_hostnames(yes); threaded(yes); }; source s_local { system(); internal(); }; source s_network { syslog(transport(tcp)); }; destination d_all { file (&amp;quot;/var/log/all.log&amp;quot;); }; destination d_elastic { elasticsearch2( client-lib-dir(&amp;quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&amp;quot;) client_mode(&amp;quot;http&amp;quot;) cluster_url(&amp;quot;http://your-elasticsearch:9200&amp;quot;) index(&amp;quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&amp;quot;) type(&amp;quot;syslog&amp;quot;) cluster(&amp;quot;test&amp;quot;) flush-limit(&amp;quot;1000&amp;quot;) template(&amp;quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&amp;quot;) time-zone(&amp;quot;UTC&amp;quot;) ); }; log { source(s_network); destination(d_elastic); }; log { source(s_local); destination(d_all); };  Notice the client-lib-dir line:</description>
+    </item>
+    
+    <item>
+      <title>80</title>
+      <link>https://nbari.com/post/80/</link>
+      <pubDate>Mon, 11 Dec 2017 19:09:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/80/</guid>
+      <description>To start an application on port 80 being not root:
+sysctl net.inet.ip.portrange.reservedhigh=79  That will allow to bind an application in any port &amp;gt; 79, to allow any port:
+sysctl net.inet.ip.portrange.reservedhigh=0  Add this to /etc/sysctl.conf to keep changes persistent across reboots:
+net.inet.ip.portrange.reservedhigh=79  </description>
+    </item>
+    
+    <item>
+      <title>ntpdate</title>
+      <link>https://nbari.com/post/ntpdate/</link>
+      <pubDate>Mon, 11 Dec 2017 10:56:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ntpdate/</guid>
+      <description>If you want to execute ntpdate with the ntp daemon already up and running, use the following command:
+ntpdate -v -b -u 0.pool.ntp.org  To only test an NTP server or responding to queries:
+ntpdate -q time.google.com  </description>
+    </item>
+    
+    <item>
+      <title>nginx &#43; lua &#43; redis</title>
+      <link>https://nbari.com/post/nginx-lua-redis/</link>
+      <pubDate>Wed, 06 Dec 2017 17:15:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-lua-redis/</guid>
+      <description>Basic WAF example using lua + redis within nginx.
+-- -- lua_package_path &amp;quot;/usr/share/lua/5.1/nginx/?.lua;;&amp;quot;; -- lua_shared_dict ip_blacklist 4m; -- local redis_host = &amp;quot;your.redis.tld&amp;quot; local redis_port = 6379 local redis_connection_timeout = 300 local redis_pattern = &amp;quot;block-&amp;quot; local cache_ttl = 3 -- seconds local ip = ngx.var.remote_addr local ip_blacklist = ngx.shared.ip_blacklist local last_update_time = ip_blacklist:get(&amp;quot;last_update_time&amp;quot;); -- block if ip found in the local nginx dict if ip_blacklist:get(ip) then ngx.log(ngx.DEBUG, &amp;quot;Banned IP detected and refused access: &amp;quot; .</description>
+    </item>
+    
+    <item>
+      <title>Golang HTTP Timeouts</title>
+      <link>https://nbari.com/post/golang-http-timeouts/</link>
+      <pubDate>Fri, 01 Dec 2017 20:00:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/golang-http-timeouts/</guid>
+      <description>If this:
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms  Check that your go server is using proper timeouts, example:
+srv := &amp;amp;http.Server{ Addr: &amp;#34;:80&amp;#34;, Handler: router, ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.Fatal(srv.ListenAndServe()) https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</description>
+    </item>
+    
+    <item>
+      <title>Measuring the Listen Queue</title>
+      <link>https://nbari.com/post/measuring-the-listen-queue/</link>
+      <pubDate>Fri, 01 Dec 2017 11:46:32 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/measuring-the-listen-queue/</guid>
+      <description>Run the command:
+netstat -Lan  The command output may be the following:
+Current listen queue sizes (qlen/incqlen/maxqlen) Proto Listen Local Address tcp46 1863/0/32768 *.80 tcp4 0/0/128 *.31025 tcp6 0/0/128 *.31025 Some tcp sockets may have been deleted. unix 0/0/32768 /var/run/immortal/tuip/immortal.sock unix 0/0/255 /var/db/syslog-ng.ctl unix 0/0/4 /var/run/devd.pipe unix 0/0/4 /var/run/devd.seqpacket.pipe The command output shows that there are 1863 unaccepted connections in the listen queue on Port 80, while the connection limit is 32768 connections, and this situation is normal.</description>
+    </item>
+    
+    <item>
+      <title>appengine cost &gt; 150/s requests</title>
+      <link>https://nbari.com/post/appengine/</link>
+      <pubDate>Fri, 01 Dec 2017 10:33:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/appengine/</guid>
+      <description>Between $5 and $7 USD per day will cost to host in appengine a tiny go application, with an average of 150 request/second, incoming bandwidth &amp;gt; 7GB and outgoing bandwidth &amp;lt; 1GB.
+ close to $25 per month, including the network internet egress
+ Sumary:</description>
+    </item>
+    
+    <item>
+      <title>Upgrade Insecure Requests</title>
+      <link>https://nbari.com/post/upgrade-insecure-requests/</link>
+      <pubDate>Tue, 28 Nov 2017 15:55:03 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/upgrade-insecure-requests/</guid>
+      <description>The &amp;ldquo;Upgrade Insecure Requests&amp;rdquo; Content Security Policy can be used to automatically upgrade insecure (e.g. http:) requests to a secure alternative (e.g. https:) before a browser fetches them.
+In practice, this helps avoid mixed-content warnings when a page is accessed via https:, but it contains references to resources using absolute http: URLs.
+Like other Content Security Policies, the recommend approach is to enable it via a HTTP response header:
+Content-Security-Policy: upgrade-insecure-requests  Nginx example:</description>
+    </item>
+    
+    <item>
+      <title>osxfuse</title>
+      <link>https://nbari.com/post/osxfuse/</link>
+      <pubDate>Sun, 26 Nov 2017 09:26:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osxfuse/</guid>
+      <description>To install:
+brew cask install osxfuse  To install sshfuse:
+brew install sshfs  Mount the root volume of remote host:
+sshfs bastion:/ /tmp/host -o reconnect,follow_symlinks,volname=&amp;quot;LocalRemote&amp;quot;  To unmount:
+sudo diskutil umount force /tmp/bastion  </description>
+    </item>
+    
+    <item>
+      <title>sh loop</title>
+      <link>https://nbari.com/post/sh-loop/</link>
+      <pubDate>Thu, 23 Nov 2017 18:46:11 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sh-loop/</guid>
+      <description>Easy shell sh loop within a range:
+$ for i in $(seq 1 3); do echo $i; done 1 2 3  </description>
+    </item>
+    
+    <item>
+      <title>git format-patch</title>
+      <link>https://nbari.com/post/git-format-patch/</link>
+      <pubDate>Sun, 19 Nov 2017 20:34:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/git-format-patch/</guid>
+      <description>To create a patch of the latest commit:
+git format-patch -1 HEAD  The last 10 patches from head in a single patch file:
+git format-patch -10 HEAD --stdout &amp;gt; last-10-commits.patch  Apply the patch:
+git apply path-file-name  </description>
+    </item>
+    
+    <item>
+      <title>rsyslog 2 syslog-ng</title>
+      <link>https://nbari.com/post/rsyslog2syslog-ng/</link>
+      <pubDate>Thu, 16 Nov 2017 17:21:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rsyslog2syslog-ng/</guid>
+      <description>To forward all logs from rsyslog to syslog-ng, add at the end of file /etc/rsyslog.conf:
+*.* @@(o)log.server.tld:601;RSYSLOG_SyslogProtocol23Format    @@ is for sending logs via TCP on port 601
+  (o) configures proper framing
+  RSYSLOG_SyslogProtocol23Format adds the RFC5424 template
+  Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/</description>
+    </item>
+    
+    <item>
+      <title>ncdu</title>
+      <link>https://nbari.com/post/ncdu/</link>
+      <pubDate>Tue, 14 Nov 2017 10:19:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ncdu/</guid>
+      <description>ncdu helps displaying disk usage in an easy way, to install:
+brew install ncdu  To scan and browse the directory you&amp;rsquo;re currently in, all you need is a simple:
+ncdu  If you want to scan a full filesystem, your root filesystem, for example, then you&amp;rsquo;ll want to use &amp;ldquo;-x&amp;rdquo;:
+ncdu -x /  All files read only and in local machine:
+sudo ncdu -rx /  -r option is for read only mode, option -x is to stay in the same file system (do not traverse other filesystem mounts)</description>
+    </item>
+    
+    <item>
+      <title>openvpn 2fa</title>
+      <link>https://nbari.com/post/openvpn-2fa/</link>
+      <pubDate>Mon, 13 Nov 2017 18:36:27 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/openvpn-2fa/</guid>
+      <description>Setup OpenVPN + 2fa
+The way it works is that openvpn besides only allowing guest with a valid certificate it will prompt users for a username and password in where username is a system user and password is the OTP generated by the google authenticator.
+First you need to install google-authenticator:
+pkg install pam_google_authenticator  Next create the file /etc/pam.d/openvpn with this contents:
+auth required /usr/local/lib/pam_google_authenticator.so  The openvpn configuration should look like this:</description>
+    </item>
+    
+    <item>
+      <title>pamtester</title>
+      <link>https://nbari.com/post/pamtester/</link>
+      <pubDate>Mon, 13 Nov 2017 18:06:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/pamtester/</guid>
+      <description>pamtester can be used to test your PAM setup, to install it:
+pkg install pamtester  To test for example openvpn:
+pamtester -v openvpn test authenticate  </description>
+    </item>
+    
+    <item>
+      <title>Wait Process to Finish</title>
+      <link>https://nbari.com/post/wait-process-to-finish/</link>
+      <pubDate>Sat, 11 Nov 2017 09:27:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/wait-process-to-finish/</guid>
+      <description>Cross platform solutution:
+while kill -0 PID 2&amp;gt; /dev/null; do sleep 1; done;  Example:
+$ sleep 60 &amp;amp; $ while kill -0 $!; do echo 1 &amp;amp;&amp;amp; sleep 0.5; done  If using FreeBSD:
+pwait  Also lsoft can be used but requires that the $pid has open files:
+lsof -p $pid +r 1 &amp;amp;&amp;gt;/dev/null  </description>
+    </item>
+    
+    <item>
+      <title>netcat</title>
+      <link>https://nbari.com/post/netcat/</link>
+      <pubDate>Fri, 10 Nov 2017 20:50:51 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/netcat/</guid>
+      <description>As a replacement to telnet now that has been removed from macOS, netcat can be used.
+To test the response from a web server:
+echo -en &amp;quot;GET / HTTP/1.0\n\n\n&amp;quot; | nc google.com 80  If using HTTP/1.1 the host will be required:
+echo -en &amp;quot;GET / HTTP/1.1\nHost: google.com\n\n&amp;quot; | nc google.com 80  Test to see if port accepts connections:
+$ nc -vz google.com 80 found 0 associations found 1 connections: 1: flags=82&amp;lt;CONNECTED,PREFERRED&amp;gt; outif en1 src 192.</description>
+    </item>
+    
+    <item>
+      <title>shasum</title>
+      <link>https://nbari.com/post/shasum/</link>
+      <pubDate>Wed, 08 Nov 2017 11:40:03 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/shasum/</guid>
+      <description>Create a checksum file for all files within a directory:
+$ shasum * &amp;gt; checksum  Check the checksum:
+$ shasum -c checksum  To use sha256:
+$ shasum -a 256 * &amp;gt; checksum  </description>
+    </item>
+    
+    <item>
+      <title>RF clock setting the time manully</title>
+      <link>https://nbari.com/post/rf-clock-setting-the-time-manully/</link>
+      <pubDate>Sun, 29 Oct 2017 11:35:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rf-clock-setting-the-time-manully/</guid>
+      <description>Press and hold the M.SET button for 3 seconds to set the time:
+ Press the M.SET button for 1 second to advance 1 minute. Press the M.SET button for more than 1 second to auto advance the minute hand. If the M.SET button is not pressed for 8 seconds, or press REC button, the clock is set.  Start manual reception Press the REC button for 3 seconds. The hands will move to the 12:00 position and the clock will start searching for the DCF signal.</description>
+    </item>
+    
+    <item>
+      <title>pipenv &#43; ansible</title>
+      <link>https://nbari.com/post/pipenv-ansible/</link>
+      <pubDate>Tue, 24 Oct 2017 23:37:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pipenv-ansible/</guid>
+      <description>First install pipenv in case you don&amp;rsquo;t have it:
+pip install --user pipenv  Next, for testing create a directory /tmp/my-ansible, within that directory create a file named requirements.txt with the following content:
+ansible==2.4.0.0 boto==2.48.0 boto3==1.4.4 paramiko==2.0.6 cd in to /tmp/my-ansible or if you already have a working project cd in to it and run:
+pipenv install -r requirements.txt  Or you could just run:
+pipenv install ansible  It will create 2 new files Pipfile and Pipfile.</description>
+    </item>
+    
+    <item>
+      <title>locale UTF8</title>
+      <link>https://nbari.com/post/locale-utf8/</link>
+      <pubDate>Mon, 23 Oct 2017 11:54:35 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/locale-utf8/</guid>
+      <description>To enable UTF-8 globally by default, update the default login class by adding at the end this lines in file /etc/login.conf:
+ :charset=UTF-8:\ :lang=en_US.UTF-8:  Normally add them after :umask=022::
+- :umask=022: + :umask=022:\ + :charset=UTF-8:\ + :lang=en_US.UTF-8: After modifying /etc/login.conf run:
+cap_mkdb /etc/login.conf  This will rebuild the login class capabilities database.
+~/.login_conf Users may individually create a file called .login_conf in their home directory using the same format, consisting of a single entry with a record id of me.</description>
+    </item>
+    
+    <item>
+      <title>Plex within a FreeBSD jail</title>
+      <link>https://nbari.com/post/plex-jail/</link>
+      <pubDate>Sun, 22 Oct 2017 22:23:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/plex-jail/</guid>
+      <description>For downloading metadata plex uses 127.0.0.1 therefore the jail needs to have a loopback interface.
+Create a lo1 interface, add to rc.conf:
+cloned_interfaces=&amp;quot;lo1&amp;quot;  Add first the loopback IP in the jail.conf:
+plex { ip4.addr = lo1|127.0.2.1; ip4.addr += igb0|172.16.8.2; path = &amp;#34;/fabrik/jail/plex&amp;#34;; } This will add as the main IP 127.0.2.1.
+Inside a jail, access to the loopback address 127.0.0.1 is redirected to the first IP address assigned to the jail.</description>
+    </item>
+    
+    <item>
+      <title>Bhyve &#43; IPv6</title>
+      <link>https://nbari.com/post/bhyve-ipv6/</link>
+      <pubDate>Fri, 20 Oct 2017 11:21:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bhyve-ipv6/</guid>
+      <description>bhyve + ipv6
+This is how to set assign IPv6 addresses to guest within bhyve on a server with one single network card, the trick to make this to work is to assign the/handle the IPs within the bridge in auto_linklocal mode.
+The rc.conf file:
+ifconfig_igb0=&amp;#34;inet X.X.X.X netmask 255.255.255.XXX&amp;#34; defaultrouter=&amp;#34;X.X.X.X&amp;#34; gateway_enable=&amp;#34;YES&amp;#34; ipv6_activate_all_interfaces=&amp;#34;YES&amp;#34; ipv6_defaultrouter=&amp;#34;fe80::1%bridge0&amp;#34; ipv6_gateway_enable=&amp;#34;YES&amp;#34; cloned_interfaces=&amp;#34;bridge0 tap0&amp;#34; autobridge_interfaces=&amp;#34;bridge0&amp;#34; autobridge_bridge0=&amp;#34;tap* igb0&amp;#34; ifconfig_bridge0=&amp;#34;addm igb0 addm tap0 up description bhyve&amp;#34; ifconfig_bridge0_ipv6=&amp;#34;inet6 2a01:4f8:350:84ec::1 prefixlen 64 auto_linklocal&amp;#34; rtadvd_enable=&amp;#34;YES&amp;#34; rtadvd_interfaces=&amp;#34;bridge0&amp;#34; The rtadvd.</description>
+    </item>
+    
+    <item>
+      <title>netstat Bytes in Out</title>
+      <link>https://nbari.com/post/netstat-bytes-in-out/</link>
+      <pubDate>Fri, 20 Oct 2017 00:12:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/netstat-bytes-in-out/</guid>
+      <description>To get bytes in/out:
+# netstat -bI bridge0  For example to get bytes in/out on tap interface:
+# netstat -bI tap0 Name Mtu Network Address Ipkts Ierrs Idrop Ibytes Opkts Oerrs Obytes Coll tap0* 1500 &amp;lt;Link#7&amp;gt; 00:bd:49:f6:f6:00 1689 0 0 153380 0 0 161697 0  </description>
+    </item>
+    
+    <item>
+      <title>tcpdump IPv6</title>
+      <link>https://nbari.com/post/tcpdump-ipv6/</link>
+      <pubDate>Thu, 19 Oct 2017 15:29:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/tcpdump-ipv6/</guid>
+      <description>To capture ipv6 traffic using tcpdump:
+# tcpdump -vvv ip6 -i igb0   replace igb0 with your network card
+ </description>
+    </item>
+    
+    <item>
+      <title>ansible ImportError: No module named boto3</title>
+      <link>https://nbari.com/post/ansible-no-module-named-boto3/</link>
+      <pubDate>Mon, 16 Oct 2017 17:21:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-no-module-named-boto3/</guid>
+      <description>When using ansible 2.4.0.0 (macOS) to fix this problem update your library:
+pip install --upgrade --user boto3  notice the &amp;ndash;user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages
+ By using --upgrade it will recreate the site-packages.
+Or create PYTHONPATH system variable:
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages  paramiko In case you get this error:
+Unicode-objects must be encoded before hashing&amp;quot;, &amp;quot;unreachable&amp;quot;: true  Try:
+pip install --upgrade --user paramiko==2.0.6  To upgrade,reinstall ansible just in case:</description>
+    </item>
+    
+    <item>
+      <title>pflog</title>
+      <link>https://nbari.com/post/pflog/</link>
+      <pubDate>Sat, 14 Oct 2017 22:52:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pflog/</guid>
+      <description>To monitor all packets loged when using pflog, use:
+tcpdump -n -e -ttt -i pflog0  To find the rule by number:
+pfctl -vvsr  For nat:
+pfctl -vvsn  </description>
+    </item>
+    
+    <item>
+      <title>bsdinstall MANIFEST</title>
+      <link>https://nbari.com/post/bsdinstall-manifest/</link>
+      <pubDate>Fri, 13 Oct 2017 17:05:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bsdinstall-manifest/</guid>
+      <description>When installing FreeBSD from an ftp/http it may complain that MANIFEST file is missing, to solve the problem try this:
+export DISTRIBUTIONS=&amp;quot;kernel.txz base.txz&amp;quot; mkdir /usr/freebsd-dist export BSDINSTALL_DISTDIR=&amp;quot;/usr/freebsd-dist/&amp;quot; export BSDINSTALL_DISTSITE=&amp;quot;https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/&amp;quot; bsdinstall distfetch cd /usr/freebsd-dist fetch https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/MANIFEST  Then run bsdinstall</description>
+    </item>
+    
+    <item>
+      <title>Go Benchmarking</title>
+      <link>https://nbari.com/post/go-bench/</link>
+      <pubDate>Sun, 24 Sep 2017 22:43:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/go-bench/</guid>
+      <description>To exclude all the tests and just run the benchmarks:
+go test -run=^$ -bench=.  Profile:
+go test -cpuprofile=cpu.out -benchmem -memprofile=mem.out -run=^$ -bench=  Using pprof:
+CPU:
+go tool pprof &amp;lt;your-binary&amp;gt;.test cpu.out  MEM:
+go tool pprof -alloc_objects &amp;lt;your-binary&amp;gt;.test mem.out  Go Tooling in Action
+  </description>
+    </item>
+    
+    <item>
+      <title>Plex FFmpeg</title>
+      <link>https://nbari.com/post/plex-ffmpeg/</link>
+      <pubDate>Sun, 24 Sep 2017 16:09:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/plex-ffmpeg/</guid>
+      <description>Using ffmpeg to avoid PLEX transcoding.
+ffmpeg -i input.mp4 \ -c:v libx264 \ -profile:v high \ -level 5 \ -crf 18 \ -maxrate 10M \ -bufsize 16M \ -pix_fmt yuv420p \ -vf &amp;quot;scale=iw*sar:ih, scale=&#39;if(gt(iw,ih),min(1920,iw),-1)&#39;:&#39;if(gt(iw,ih),-1,min(1080,ih))&#39;&amp;quot; \ -x264opts bframes=3:cabac=1 \ -movflags faststart \ -c:a libfdk_aac \ -b:a 320k \ -y output.mp4   If parts of the file reside on physically bad sectors, or for whatever reason, the OS cannot serve the whole file to FFmpeg try: ffmpeg -err_detect ignore_err -i input.</description>
+    </item>
+    
+    <item>
+      <title>zip -r</title>
+      <link>https://nbari.com/post/zip-archive/</link>
+      <pubDate>Sun, 17 Sep 2017 09:47:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/zip-archive/</guid>
+      <description>Create and append &amp;ldquo;archive&amp;rdquo; things to a zip file Create a zip:
+$ zip -9 foo.zip file  Add more things to the zip:
+$ zip -r9 foo.zip bar.txt $ cd $VIRTUAL_ENV/lib/python2.7/site-packages $ zip -r9 foo.zip *  </description>
+    </item>
+    
+    <item>
+      <title>AWS Policy Access by IP</title>
+      <link>https://nbari.com/post/aws-policy-access-by-ip/</link>
+      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-policy-access-by-ip/</guid>
+      <description>Policy to restrict IAM AWS API requests to a specific set of IP addresses.
+{ &amp;#34;Version&amp;#34;: &amp;#34;2012-10-17&amp;#34;, &amp;#34;Statement&amp;#34;: { &amp;#34;Effect&amp;#34;: &amp;#34;Deny&amp;#34;, &amp;#34;Action&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Resource&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Condition&amp;#34;: { &amp;#34;NotIpAddress&amp;#34;: { &amp;#34;aws:SourceIp&amp;#34;: [ &amp;#34;10.13.0.0/16&amp;#34;, &amp;#34;72.55.175.70/32&amp;#34;, &amp;#34;10.100.0.0/16&amp;#34; ] } } } } After applying this policy others may need to be applied or in case all in one required, something like this can be used:
+{ &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;, &amp;quot;Statement&amp;quot;: [{ &amp;quot;Effect&amp;quot;: &amp;quot;Deny&amp;quot;, &amp;quot;Action&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Condition&amp;quot;: { &amp;quot;NotIpAddress&amp;quot;: { &amp;quot;aws:SourceIp&amp;quot;: [ &amp;quot;10.</description>
+    </item>
+    
+    <item>
+      <title>Time wait</title>
+      <link>https://nbari.com/post/time_wait/</link>
+      <pubDate>Tue, 05 Sep 2017 14:45:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/time_wait/</guid>
+      <description>Reduce TIME_WAIT connections
+How many TIME_WAITs you have hanging out (run this like root):
+netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n  On Linux:
+netstat -nat | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n  Output will be something like:
+# netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n 1 1 Foreign 1 LAST_ACK 1 been 3 LISTEN 25 SYN_RCVD 1455 CLOSE_WAIT 17518 ESTABLISHED  The formula to calculate the value (net.</description>
+    </item>
+    
+    <item>
+      <title>Strace</title>
+      <link>https://nbari.com/post/strace/</link>
+      <pubDate>Thu, 31 Aug 2017 11:25:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/strace/</guid>
+      <description>When using strace, to trace child processes, use option -f, example:
+strace -f ls  </description>
+    </item>
+    
+    <item>
+      <title>Webcrypto and Go</title>
+      <link>https://nbari.com/post/webcrypto-and-go/</link>
+      <pubDate>Thu, 17 Aug 2017 18:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/webcrypto-and-go/</guid>
+      <description>Encrypt on client side using javascript WebCrypto and decrypt on backend using go:
+javascript code:
+async function aesGcmEncrypt(plaintext, password) { const pwUtf8 = new TextEncoder().encode(password); // encode password as UTF-8  const pwHash = await crypto.subtle.digest(&amp;#39;SHA-256&amp;#39;, pwUtf8); // hash the password  const iv = crypto.getRandomValues(new Uint8Array(12)); // get 96-bit random iv  const alg = { name: &amp;#39;AES-GCM&amp;#39;, iv: iv }; // specify algorithm to use  const key = await crypto.</description>
+    </item>
+    
+    <item>
+      <title>Merge Terraform States</title>
+      <link>https://nbari.com/post/merge-terraform-states/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/merge-terraform-states/</guid>
+      <description>If states are being stored in S3, after importing a resource, for example:
+$ terraform import aws_customer_gateway.main cgw-b4dc3961  You will end with a terraform.tfstate that differs from the one in the S3 bucket.
+To merge the remote and local state do this:
+$ terraform state pull &amp;gt; terraform.tfstate $ terraform import aws_customer_gateway.main cgw-b4dc3961 $ terraform state push terraform.tfstate  First get the current s3 state:
+$ terraform state pull &amp;gt; terraform.</description>
+    </item>
+    
+    <item>
+      <title>Terraform Full Vpc</title>
+      <link>https://nbari.com/post/terraform-full-vpc/</link>
+      <pubDate>Sat, 12 Aug 2017 04:07:54 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/terraform-full-vpc/</guid>
+      <description>Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &amp;#34;aws_vpc&amp;#34; &amp;#34;test&amp;#34; { cidr_block = &amp;#34;10.100.0.0/16&amp;#34; enable_dns_hostnames = &amp;#34;true&amp;#34; enable_dns_support = &amp;#34;true&amp;#34; tags { Name = &amp;#34;test&amp;#34; } } output &amp;#34;vpc_id&amp;#34; { value = &amp;#34;${aws_vpc.test.id}&amp;#34; } resource &amp;#34;aws_internet_gateway&amp;#34; &amp;#34;igw&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; tags { Name = &amp;#34;internet gateway&amp;#34; } } resource &amp;#34;aws_subnet&amp;#34; &amp;#34;public-a&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; cidr_block = &amp;#34;10.100.0.0/24&amp;#34; availability_zone = &amp;#34;eu-central-1a&amp;#34; tags { Name = &amp;#34;public A&amp;#34; } } output &amp;#34;subnet-public-a&amp;#34; { value = &amp;#34;${aws_subnet.</description>
+    </item>
+    
+    <item>
+      <title>Nginx Reverse Proxy Cache</title>
+      <link>https://nbari.com/post/nginx-reverse-proxy-cache/</link>
+      <pubDate>Thu, 10 Aug 2017 17:51:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-reverse-proxy-cache/</guid>
+      <description>This is the full configuration for nginx.conf:
+user www www; worker_processes auto; events { use kqueue; worker_connections 1024; } http { include mime.types; default_type application/octet-stream; sendfile on; tcp_nopush on; tcp_nodelay on; client_max_body_size 30M; keepalive_timeout 10 10; gzip on; gzip_static on; gzip_vary on; gzip_min_length 0; gzip_comp_level 9; gzip_buffers 16 8k; gzip_proxied any; gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml; charset utf-8; server_tokens off; server_name_in_redirect off; proxy_buffering on; proxy_cache_path /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off; proxy_buffer_size 8k; proxy_buffers 8 24k; server { listen 80; server_name _; location / { proxy_cache rubygems; proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504; proxy_cache_revalidate on; proxy_cache_min_uses 1; proxy_cache_lock on; proxy_cache_valid 200 301 304 2d; proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header Host rubygems.</description>
+    </item>
+    
+    <item>
+      <title>Running Multiple Instances of The Same App In MacOS</title>
+      <link>https://nbari.com/post/running-multiple-instances-of-the-same-app-in-macos/</link>
+      <pubDate>Sun, 30 Jul 2017 16:31:35 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/running-multiple-instances-of-the-same-app-in-macos/</guid>
+      <description>Open a terminal and type:
+open -n /Applications/ApplicationName.app  Change &amp;ldquo;ApplicationName&amp;rdquo; with your application, example:
+open -n /Applications/PopcornTime.app  </description>
+    </item>
+    
+    <item>
+      <title>Syslogd 8 bit</title>
+      <link>https://nbari.com/post/syslogd-8-bit/</link>
+      <pubDate>Sun, 23 Jul 2017 10:12:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/syslogd-8-bit/</guid>
+      <description>If want to log full utf-8 strings &amp;ldquo;emoji&amp;rsquo;s&amp;rdquo; use the option -8, example on /etc/rc.conf:
+syslogd_flags=&amp;quot;-ssC8&amp;quot;  The optiosn are:
+ -s Operate in secure mode. Do not log messages from remote machines. If specified twice, no network socket will be opened at all, which also disables logging to remote machines. -C Create log files that do not exist (permission is set to 0600). -8 Tells syslogd not to interfere with 8-bit data.</description>
+    </item>
+    
+    <item>
+      <title>Slave Is Running</title>
+      <link>https://nbari.com/post/slave-is-running/</link>
+      <pubDate>Wed, 19 Jul 2017 14:54:35 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/slave-is-running/</guid>
+      <description>Script to check if mysql replica (slave) is running:
+#!/bin/sh  SLAVE_IS_RUNNING=$(/usr/local/bin/mysql -e &amp;#34;SHOW SLAVE STATUS\G&amp;#34; | grep Slave_SQL_Running: | awk &amp;#39;{print $2}&amp;#39;) if [ &amp;#34;$SLAVE_IS_RUNNING&amp;#34; != &amp;#34;Yes&amp;#34; ] then # your options here /usr/local/bin/mysql -e &amp;#34;STOP SLAVE; SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; START SLAVE;&amp;#34; fi The username and password can be stored in a .my.cnf file, for example in /root/.my.cnf:
+[client] user=dbadmin password=secret  </description>
+    </item>
+    
+    <item>
+      <title>Curl Response Time</title>
+      <link>https://nbari.com/post/curl-response-time/</link>
+      <pubDate>Wed, 28 Jun 2017 18:11:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/curl-response-time/</guid>
+      <description>Measure response time with curl Using the following command:
+curl -o /dev/null -s -w %{time_total} http://www.google.com  In your .zshrc this can be used:
+curl_time() { curl -o /dev/null -Ls -w &amp;#34; \ time_namelookup: %{time_namelookup}\n \ time_connect: %{time_connect}\n \ time_appconnect: %{time_appconnect}\n \ time_pretransfer: %{time_pretransfer}\n \ time_redirect: %{time_redirect}\n \ time_starttransfer: %{time_starttransfer}\n \ ----------\n \ time_total: %{time_total}\n&amp;#34; &amp;#34;$1&amp;#34; } Will output something like:
+$ curl_time https://google.com time_namelookup: 0.014 time_connect: 0.024 time_appconnect: 0.072 time_pretransfer: 0.</description>
+    </item>
+    
+    <item>
+      <title>grpc</title>
+      <link>https://nbari.com/post/grpc/</link>
+      <pubDate>Fri, 23 Jun 2017 20:10:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/grpc/</guid>
+      <description>What is gRPC? A remote procedure call (RPC) framework that by default uses protocol buffers as the Interface Definition Language (IDL). One of the initial benefits is the ability to be able to define and codify your service requirements via a .proto file.
+It uses HTTP/2 for transport but is not yet available for use within the browser, therefore currently mainly in use for Inter-Process Communication (IPC) within microservices.
+The workflow to create a gRPC service  Create the service definition and payload structure in the .</description>
+    </item>
+    
+    <item>
+      <title>two factor authentication with ssh</title>
+      <link>https://nbari.com/post/two-factor-authentication-with-ssh/</link>
+      <pubDate>Sat, 03 Jun 2017 15:21:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/two-factor-authentication-with-ssh/</guid>
+      <description>Two-Factor-Authentication &amp;ldquo;2FA&amp;rdquo; with SSH Install google authenticator and libqrencode:
+pkg install pam_google_authenticator pkg install libqrencode  Edit /etc/pam.d/sshd an add the following line to the auth section:
+# auth auth sufficient pam_opie.so no_warn no_fake_prompts auth requisite pam_opieaccess.so no_warn allow_local #auth sufficient pam_krb5.so no_warn try_first_pass #auth sufficient pam_ssh.so no_warn try_first_pass #auth required pam_unix.so no_warn try_first_pass auth required /usr/local/lib/pam_google_authenticator.so Add this to/etc/ssh/sshd_config:
+CallengeResponseAuthentication yes UsePAM yes AuthenticationMethods publickey,keyboard-interactive  This setup will do a &amp;ldquo;publickey + verification code&amp;rdquo;, without password, in case you require password edit the /etc/pam.</description>
+    </item>
+    
+    <item>
+      <title>pdsh</title>
+      <link>https://nbari.com/post/pdsh/</link>
+      <pubDate>Sat, 03 Jun 2017 15:05:03 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pdsh/</guid>
+      <description>pdsh - issue commands to groups of hosts in parallel
+Install:
+brew install pdsh  Usage:
+pdsh -R ssh -w ^servers.txt &amp;quot;&amp;lt;command&amp;gt;&amp;quot;  In where servers.txt is something like:
+10.8.4.2 10.8.4.3 10.8.4.4  one-liner:
+pdsh -b -w &amp;quot;10.8.4.2, 10.8.4.3, 10.8.4.4&amp;quot; &amp;quot;&amp;lt;command&amp;gt;&amp;quot;   -b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)
+ </description>
+    </item>
+    
+    <item>
+      <title>aws network acl</title>
+      <link>https://nbari.com/post/aws-network-acl/</link>
+      <pubDate>Wed, 31 May 2017 16:41:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-network-acl/</guid>
+      <description>AWS network ACL deny rule To block full access from an list of IP&amp;rsquo;s within AWS:
+$ count=0; for i in `cat ips.txt` count=$((count + 1)) &amp;amp;&amp;amp; aws ec2 create-network-acl-entry --network-acl-id acl-XXXXXXXX --ingress --rule-number $count --protocol all --port-range From=0,To=65535 --cidr-block $i/32 --rule-action deny In where ips.txt is a file containing the IP addresses, for example:
+169.254.2.2 169.254.1.2 ...  WARNING The default limit for a single network ACL rules set by AWS is 20 for ingress and 20 for egress rules including the default rules.</description>
+    </item>
+    
+    <item>
+      <title>haproxy ssh</title>
+      <link>https://nbari.com/post/haproxy-ssh/</link>
+      <pubDate>Tue, 30 May 2017 14:47:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/haproxy-ssh/</guid>
+      <description>HTTPS and SSH on the same port Using HAProxy to server SSH and SSL available on the same port:
+global maxconn 1000000 spread-checks 3 log /var/run/log local0 notice daemon tune.ssl.default-dh-param 2048 defaults mode http balance roundrobin option http-server-close option abortonclose option dontlognull option redispatch timeout check 3s timeout client 30s # Client and server timeout must match the longest timeout connect 5s timeout http-keep-alive 5s timeout http-request 10s # A complete request may never take that long.</description>
+    </item>
+    
+    <item>
+      <title>aws meta data</title>
+      <link>https://nbari.com/post/aws-meta-data/</link>
+      <pubDate>Tue, 30 May 2017 10:38:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-meta-data/</guid>
+      <description>AWS meta-data Instance metadata is data about your instance that you can use to configure or manage the running instance. Instance metadata is divided into categories. For more information, see Instance Metadata Categories.
+To view all the categories:
+curl http://169.254.169.254/latest/meta-data/  To obtain the private IP address:
+curl http://169.254.169.254/latest/meta-data/local-ipv4  To obtain the public IP address:
+curl http://169.254.169.254/latest/meta-data/public-ipv4  To obtain the ssh public key:
+curl http://169.254.169.254/1.0/meta-data/public-keys/0/openssh-key  To obtain the instance name:</description>
+    </item>
+    
+    <item>
+      <title>mount nfs</title>
+      <link>https://nbari.com/post/mount-nfs/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mount-nfs/</guid>
+      <description>To avoid hanging out the system while mounting NFS shares on boot time add the option bg to the /etc/fstab, example:
+192.168.1.2:/4T /plex/4T nfs rw,bg 0 0  This will help to boot and in background continue trying to mount in case of getting a &amp;ldquo;time out&amp;rdquo;
+From the man page: mount_nfs
+bg If an initial attempt to contact the server fails, fork off a child to keep trying the mount in the background.</description>
+    </item>
+    
+    <item>
+      <title>aax2m4b</title>
+      <link>https://nbari.com/post/aax2m4b/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aax2m4b/</guid>
+      <description>Convert an audiobook .aax to .m4b using ffmpeg
+brew install chromedriver ffmpeg sudo easy_install pip pip install selenium requests git clone https://github.com/inAudible-NG/audible-activator cd audible-activator sed -i &amp;#39;&amp;#39; &amp;#39;s,chromedriver_path = &amp;#34;./chromedriver&amp;#34;,chromedriver_path = &amp;#34;/usr/local/bin/chromedriver&amp;#34;,&amp;#39; audible-activator.py ./audible-activator.py When running audible-activator.py It will ask for the audible username/password it will open chrome, and when finish print the activation bytes:
+$ ./audible-activator.py Username: your@email Password: [*] Player ID is 1xmjyl5rSw0yVb/olWBYuU/NBxk= activation_bytes: b97f4709 One having the activation_bytes, use ffmpeg:</description>
+    </item>
+    
+    <item>
+      <title>tmux ssh</title>
+      <link>https://nbari.com/post/tmux-ssh/</link>
+      <pubDate>Fri, 19 May 2017 22:03:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/tmux-ssh/</guid>
+      <description>Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
+tmux script #!/bin/sh  TARGET=&amp;#34;tmux-ssh&amp;#34; SSH_USER=&amp;#34;devops&amp;#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &amp;#34;ssh -l ${SSH_USER}${line}&amp;#34; else tmux split-window -t &amp;#34;${TARGET}&amp;#34; &amp;#34;ssh -l ${SSH_USER}${line}&amp;#34; &amp;amp;&amp;amp; \  tmux select-layout -t &amp;#34;${TARGET}&amp;#34; tiled fi let i++ done &amp;lt; &amp;#34;${1:-/dev/stdin}&amp;#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:</description>
+    </item>
+    
+    <item>
+      <title>beanstalkd</title>
+      <link>https://nbari.com/post/beanstalkd/</link>
+      <pubDate>Thu, 18 May 2017 20:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/beanstalkd/</guid>
+      <description>Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.</description>
+    </item>
+    
+    <item>
+      <title>mysql db size</title>
+      <link>https://nbari.com/post/mysql-db-size/</link>
+      <pubDate>Sun, 07 May 2017 16:13:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-db-size/</guid>
+      <description>How big is your data:
+SELECT IFNULL(B.engine,&amp;#39;Total&amp;#39;) &amp;#34;Storage Engine&amp;#34;, CONCAT(LPAD(REPLACE(FORMAT(B.DSize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Data Size&amp;#34;, CONCAT(LPAD(REPLACE( FORMAT(B.ISize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Index Size&amp;#34;, CONCAT(LPAD(REPLACE( FORMAT(B.TSize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Table Size&amp;#34; FROM (SELECT engine,SUM(data_length) DSize,SUM(index_length) ISize, SUM(data_length+index_length) TSize FROM information_schema.tables WHERE table_schema NOT IN (&amp;#39;mysql&amp;#39;,&amp;#39;information_schema&amp;#39;,&amp;#39;performance_schema&amp;#39;) AND engine IS NOT NULL GROUP BY engine WITH ROLLUP) B, (SELECT 3 pw) A ORDER BY TSize; This will print something like:
++----------------+----------------------+----------------------+----------------------+ | Storage Engine | Data Size | Index Size | Table Size | +----------------+----------------------+----------------------+----------------------+ | InnoDB | 10.</description>
+    </item>
+    
+    <item>
+      <title>raw2vmdk</title>
+      <link>https://nbari.com/post/raw2vmdk/</link>
+      <pubDate>Sun, 30 Apr 2017 21:43:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/raw2vmdk/</guid>
+      <description>Convert raw image to vmdk Install qemu:
+$ brew install qemu  Convert using:
+$ qemu-img convert -f raw -O vmdk disk.raw disk.vmdk  </description>
+    </item>
+    
+    <item>
+      <title>brew update formula</title>
+      <link>https://nbari.com/post/brew-update-formula/</link>
+      <pubDate>Sun, 30 Apr 2017 12:40:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew-update-formula/</guid>
+      <description>Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  </description>
+    </item>
+    
+    <item>
+      <title>bastion ssh</title>
+      <link>https://nbari.com/post/bastion-ssh/</link>
+      <pubDate>Fri, 28 Apr 2017 11:57:07 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bastion-ssh/</guid>
+      <description>ProxyJump This is the easiest (new) way:
+Host 10.* ProxyJump user@bastion.tld:2222  Using ProxyCommand Replace your.bastion.tld with your bastion server and set your bastion username in the ProxyCommand:
+Host bastion Hostname your.bastion.tld ForwardAgent yes Host 10.10.* ProxyCommand ssh &amp;lt;your-username&amp;gt;@bastion -W %h:%p  example To login with user devops to server 10.10.3.4:
+$ ssh -l devops 10.10.3.4  or
+$ ssh devops@10.10.3.4  SSH sockets To speed up more when using the bastion host things this can be added at the top of the ~/.</description>
+    </item>
+    
+    <item>
+      <title>smarthost</title>
+      <link>https://nbari.com/post/smarthost/</link>
+      <pubDate>Wed, 26 Apr 2017 10:38:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/smarthost/</guid>
+      <description>Smarthost with postfix  A smart host is a type of email message transfer agent that allows a Simple Mail Transfer Protocol (SMTP) server to route email to an intermediate mailserver rather than directly to the recipient&amp;rsquo;s server
+ https://en.wikipedia.org/wiki/Smart_host
+Setup postfix to forward all emails using an external SMTP server, for example sendgrid.net, main.cf:
+smtp_sasl_auth_enable = yes smtp_sasl_password_maps = static:username:password smtp_sasl_security_options = noanonymous smtp_tls_security_level = encrypt header_size_limit = 4096000 relayhost = [smtp.</description>
+    </item>
+    
+    <item>
+      <title>mtr</title>
+      <link>https://nbari.com/post/mtr/</link>
+      <pubDate>Tue, 25 Apr 2017 17:52:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mtr/</guid>
+      <description>mtr to create a text file report $ sudo mtr --report --report-cycles 10 immortal.run &amp;gt; /tmp/immortal-mtr.txt  Example of output:
+Start: Tue Apr 25 17:58:11 2017 HOST: M20160001.local Loss% Snt Last Avg Best Wrst StDev 1.|-- 10.19.15.254 0.0% 10 41.7 41.2 25.1 81.6 16.8 2.|-- 10.19.0.1 0.0% 10 0.5 0.5 0.4 0.6 0.0 3.|-- 23.189.27.97 0.0% 10 1.2 8.5 1.0 74.4 23.2 4.|-- 89.27.149.117 80.0% 10 1.3 18.4 1.3 35.4 24.</description>
+    </item>
+    
+    <item>
+      <title>mysql backup</title>
+      <link>https://nbari.com/post/mysql-backup/</link>
+      <pubDate>Tue, 11 Apr 2017 10:28:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-backup/</guid>
+      <description>mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:</description>
+    </item>
+    
+    <item>
+      <title>mysql root password</title>
+      <link>https://nbari.com/post/mysql-root-password/</link>
+      <pubDate>Mon, 10 Apr 2017 15:37:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-root-password/</guid>
+      <description>Reset root password on mysql &amp;gt;= 5.7.17 Edit /etc/rc.conf:
+mysql_args=&amp;quot;--skip-grant-tables --skip-networking&amp;quot;  Restart mysql:
+service mysql-server restart  Login like root:
+mysql&amp;gt; UPDATE mysql.user SET authentication_string = PASSWORD(&#39;aaaa&#39;) WHERE User = &#39;root&#39; AND Host = &#39;localhost&#39;; mysql&amp;gt; FLUSH PRIVILEGES; mysql&amp;gt; quit  Remove or comment:
+# mysql_args=&amp;quot;--skip-grant-tables --skip-networking&amp;quot;  Restart mysql:
+service mysql-server restart  mysqldump: Couldn&amp;rsquo;t execute &amp;lsquo;SHOW VARIABLES LIKE &amp;lsquo;gtid_mode&amp;rsquo;&#39;: To fix that try this:
+# mysql_upgrade -u root -p --force  </description>
+    </item>
+    
+    <item>
+      <title>dsymutil golang</title>
+      <link>https://nbari.com/post/dsymutil-golang/</link>
+      <pubDate>Tue, 04 Apr 2017 14:02:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dsymutil-golang/</guid>
+      <description>Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  </description>
+    </item>
+    
+    <item>
+      <title>pkgin</title>
+      <link>https://nbari.com/post/pkgin/</link>
+      <pubDate>Thu, 30 Mar 2017 01:00:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pkgin/</guid>
+      <description>To install pkgin in NetBSD:
+# export PKG_PATH=&amp;quot;http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0.1/All/&amp;quot;  then:
+# pkg_add -v pkgin-*  Finish by updating:
+# pkgin update  </description>
+    </item>
+    
+    <item>
+      <title>Diffie Hellman</title>
+      <link>https://nbari.com/post/diffie-hellman/</link>
+      <pubDate>Sat, 25 Mar 2017 19:51:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/diffie-hellman/</guid>
+      <description>   </description>
+    </item>
+    
+    <item>
+      <title>sqlite2file</title>
+      <link>https://nbari.com/post/sqlite2file/</link>
+      <pubDate>Thu, 23 Mar 2017 14:43:09 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sqlite2file/</guid>
+      <description>Sqlite query to a file:
+sqlite&amp;gt; .mode ascii sqlite&amp;gt; .output data.txt sqlite&amp;gt; .select * from table;  Or dump to a file:
+sqlite3 db.sqlite .dump &amp;gt; dump  </description>
+    </item>
+    
+    <item>
+      <title>text2json</title>
+      <link>https://nbari.com/post/text2json/</link>
+      <pubDate>Thu, 23 Mar 2017 12:22:05 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/text2json/</guid>
+      <description>Convert txt to json:
+ $ jq &#39;.&#39; -R -s file  or
+$ echo textfile | jq &#39;.&#39; -R -s  </description>
+    </item>
+    
+    <item>
+      <title>routing flags</title>
+      <link>https://nbari.com/post/routing-flags/</link>
+      <pubDate>Tue, 21 Mar 2017 15:27:09 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/routing-flags/</guid>
+      <description>From netstat(1) man page:
+   Letter Flag Meaning     1 RTF_PROTO1 Protocol specific routing flag #1   2 RTF_PROTO2 Protocol specific routing flag #2   3 RTF_PROTO3 Protocol specific routing flag #3   B RTF_BLACKHOLE Just discard packets (during updates)   b RTF_BROADCAST The route represents a broadcast address   C RTF_CLONING Generate new routes on use   c RTF_PRCLONING Protocol-specified generate new routes on use   D RTF_DYNAMIC Created dynamically (by redirect)   G RTF_GATEWAY Destination requires forwarding by intermediary   H RTF_HOST Host entry (net otherwise)   I RTF_IFSCOPE Route is associated with an interface scope   i RTF_IFREF Route is holding a reference to the interface   L RTF_LLINFO Valid protocol to link address translation   M RTF_MODIFIED Modified dynamically (by redirect)   m RTF_MULTICAST The route represents a multicast address   R RTF_REJECT Host or net unreachable   r RTF_ROUTER Host is a default router   S RTF_STATIC Manually added   U RTF_UP Route usable   W RTF_WASCLONED Route was generated as a result of cloning   X RTF_XRESOLVE External daemon translates proto to link address   Y RTF_PROXY Proxying; cloned routes will not be scoped    To find current gateway when using a VPN:</description>
+    </item>
+    
+    <item>
+      <title>nil pointer</title>
+      <link>https://nbari.com/post/nil-pointer/</link>
+      <pubDate>Fri, 17 Mar 2017 17:03:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nil-pointer/</guid>
+      <description>To check that x implements y, example:
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) var _ io.ReadCloser = (*os.File)(nil) func main() { fmt.Println(&amp;#34;Hello, playground&amp;#34;) } https://play.golang.org/p/hoi5_GQEpD
+To check that os.File is an io.ReadCloser:
+var _ io.ReadCloser = (*os.File)(nil)  package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) var _ io.ReadCloser = (*os.Process)(nil) func main() { fmt.Println(&amp;#34;Hello, playground&amp;#34;) } https://play.golang.org/p/7uHmjn3ggT
+The error in this case would be:
+main.go:9: cannot use (*os.</description>
+    </item>
+    
+    <item>
+      <title>ssh ed25519</title>
+      <link>https://nbari.com/post/ssh-ed25519/</link>
+      <pubDate>Wed, 08 Mar 2017 21:00:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-ed25519/</guid>
+      <description>Generate your new ssh ed25519 key:
+$ ssh-keygen -o -a 1000 -t ed25519  </description>
+    </item>
+    
+    <item>
+      <title>urandom</title>
+      <link>https://nbari.com/post/urandom/</link>
+      <pubDate>Wed, 08 Mar 2017 15:04:59 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/urandom/</guid>
+      <description>/dev/urandom To generate a random string/password of 32 chars using /dev/urandom:
+$ base64 /dev/urandom | head -c 32  </description>
+    </item>
+    
+    <item>
+      <title>bitwise chmod</title>
+      <link>https://nbari.com/post/bitwise-chmod/</link>
+      <pubDate>Thu, 02 Mar 2017 16:37:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/bitwise-chmod/</guid>
+      <description>111 111 111          octal 777   decimal 511   binary 111 111 111   perm rwx rwx rwx    4 = r 2 = w 1 = x rwx = 4+2+1 = 7 rw = 4+2+0 = 6 r = 4+0+0 = 4 r x = 4+0+1 = 5 7 = binary 111 = rwx 6 = binary 110 = rw- 5 = binary 101 = r-x 4 = binary 100 = r-- 3 = binary 011 = -wx 2 = binary 010 = -w- 1 = binary 001 = --x 0 = binary 000 = ---  The full set of nine permission characters can then be grouped and summarized as three octal digits:</description>
+    </item>
+    
+    <item>
+      <title>add subtitles</title>
+      <link>https://nbari.com/post/add-subtitles/</link>
+      <pubDate>Mon, 20 Feb 2017 20:49:14 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/add-subtitles/</guid>
+      <description>Add subtitles to a mkv file: ffmpeg -i input.mkv -f srt -i input.srt -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy -c:s srt output.mkv  </description>
+    </item>
+    
+    <item>
+      <title>rds slave from external master</title>
+      <link>https://nbari.com/post/rds-slave-from-external-master/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rds-slave-from-external-master/</guid>
+      <description>Setup AWS MySQL RDS instance as slave of an external master Configure external mysql to become master:
+server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
+mysql&amp;gt; create user `replica`@`%` identified by &#39;PASSWORD&#39;; mysql&amp;gt; grant replication slave on *.* to &#39;replica&#39;@&#39;%&#39;;  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:</description>
+    </item>
+    
+    <item>
+      <title>haproxy</title>
+      <link>https://nbari.com/post/haproxy/</link>
+      <pubDate>Thu, 09 Feb 2017 13:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/haproxy/</guid>
+      <description>HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
+userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
+ acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:</description>
+    </item>
+    
+    <item>
+      <title>ssh proxy</title>
+      <link>https://nbari.com/post/ssh-proxy/</link>
+      <pubDate>Tue, 07 Feb 2017 11:54:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-proxy/</guid>
+      <description>SSH SOCKS5 proxy Route web traffic securely without a VPN using a SOCKS tunnel with ssh:
+$ ssh -D 8080 -f -C -q -N user@remote.host   -D 8080 tells ssh to launch a SOCKS server on port 8080 locally. -f Forks the process to the background. -C Compresses the data before sending it. -q Uses quiet mode. -N Tells SSH that no command will be sent once the tunnel is up.</description>
+    </item>
+    
+    <item>
+      <title>HSTS</title>
+      <link>https://nbari.com/post/hsts/</link>
+      <pubDate>Mon, 06 Feb 2017 15:01:22 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/hsts/</guid>
+      <description>http://&amp;hellip; will change to https://&amp;hellip; If you own a site that you would like to see included in the preloaded HSTS list you can submit it at https://hstspreload.appspot.com.
+verify HTTP Strict Transport Security (HSTS) header with curl $ curl -Is https://google.com | grep -i stric Strict-Transport-Security: max-age=15552000; includeSubDomains  Remove domain from chrome Search for the domain in: chrome://net-internals/#hsts and delete it.
+HTTP Strict Transport Security The issue that HSTS addresses is that users tend to type http:// at best, and omit the scheme entirely most of the time.</description>
+    </item>
+    
+    <item>
+      <title>ssh escape sequences</title>
+      <link>https://nbari.com/post/ssh-escape-sequences/</link>
+      <pubDate>Sun, 05 Feb 2017 17:57:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-escape-sequences/</guid>
+      <description>While using ssh your connection may become idle or unresponsive in any case instead of waiting you can simple terminate the connection by sending a escape sequence:
+~.  SSH escape sequences    sequence description     ~. terminate connection (and any multiplexed sessions)   ~B send a BREAK to the remote system   ~C open a command line   ~R request rekey   ~V/v decrease/increase verbosity (LogLevel)   ~^Z suspend ssh   ~# list forwarded connections   ~&amp;amp; background ssh (when waiting for connections to terminate)   ~?</description>
+    </item>
+    
+    <item>
+      <title>perfomance checklist</title>
+      <link>https://nbari.com/post/perfomance-checklist/</link>
+      <pubDate>Tue, 24 Jan 2017 15:12:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/perfomance-checklist/</guid>
+      <description>Perfomance checklist for SRE&amp;rsquo;s Linux Perf Analysis in 60s  uptime load averages dmesg -T | tail kernel errors vmstat 1 overall stats by time mpstat -P ALL 1 CPU balance pidstat 1 process usage iostat -xz 1 disk I/O free -m memory usage sar -n DEV 1 network I/O sar -n TCP,ETCP 1 TCP stats top check overview  Linux Disk Checklist  iostat -xz 1 any disk I/O? if not, stop looking vmstat 1 is this swapping?</description>
+    </item>
+    
+    <item>
+      <title>forward proxy</title>
+      <link>https://nbari.com/post/forward-proxy/</link>
+      <pubDate>Sat, 21 Jan 2017 17:42:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forward-proxy/</guid>
+      <description>nginx forward proxy Server configuration:
+server { listen 8080; location / { resolver 8.8.8.8; proxy_pass http://$http_host$uri$is_args$args; } error_page 500 502 503 504 /50x.html; location = /50x.html { root /usr/local/www/nginx-dist; } }  Client side On the browser configure the HTTP Proxy and port.
+Test by checking the the IP: https://trackip.net</description>
+    </item>
+    
+    <item>
+      <title>leap second</title>
+      <link>https://nbari.com/post/leap-seconds/</link>
+      <pubDate>Wed, 11 Jan 2017 15:08:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/leap-seconds/</guid>
+      <description>A leap second is an ad-hoc one-second correction to synchronize atomic timescales with Earth rotation.
+It is possible to test whether a leap second will be used. Due to the nature of NTP, the test might work up to 24 hours before the leap second. Some major reference clock sources only announce leap seconds one hour ahead of the event. Query the NTP daemon:
+ntpq -c &#39;rv 0 leap&#39;  To update/sync:</description>
+    </item>
+    
+    <item>
+      <title>vm tools</title>
+      <link>https://nbari.com/post/vm-tools/</link>
+      <pubDate>Mon, 19 Dec 2016 14:39:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vm-tools/</guid>
+      <description>vmware tools guest FreeBSD While running FreeBSD as a guest on VMWARE the vm-tools can be installed with this:
+$ pkg install open-vm-tools-nox11  Later enable them on /etc/rc.conf:
+vmware_guest_vmblock_enable=&amp;#34;YES&amp;#34; vmware_guest_vmhgfs_enable=&amp;#34;YES&amp;#34; vmware_guest_vmmemctl_enable=&amp;#34;YES&amp;#34; vmware_guest_vmxnet_enable=&amp;#34;YES&amp;#34; vmware_guestd_enable=&amp;#34;YES&amp;#34; </description>
+    </item>
+    
+    <item>
+      <title>scale</title>
+      <link>https://nbari.com/post/scale/</link>
+      <pubDate>Sun, 18 Dec 2016 11:09:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/scale/</guid>
+      <description>scale out (horizontal scaling) Refers to adding more servers with less processors and RAM. This is usually cheaper overall and can literally scale infinitely
+Pros:
+ Much cheaper than scaling vertically Easier to run fault-tolerance Easy to upgrade  Cons:
+ Bigger footprint in the Data Center Higher utility cost (Electricity and cooling) Possible need for more networking equipment (switches/routers)  scale in (vertical scaling) Refers to adding more processors and RAM, buying a more expensive and robust server.</description>
+    </item>
+    
+    <item>
+      <title>zfs</title>
+      <link>https://nbari.com/post/zfs/</link>
+      <pubDate>Sat, 10 Dec 2016 15:53:08 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/zfs/</guid>
+      <description>FreeBSD zfs disk image Use VirtualBox to install FreeBSD using UFS.
+After having FreeBSD installed, update your sources and build a custom world and kernel based on your needs for the new image to be created:
+# cd /usr/src # make -j4 buildworld buildkernel   adjust -j4 to the number or cpu cores
+ Use this script to create the image: https://github.com/nbari/freebsd/blob/master/zfs/zfs.sh
+$ mkdir /raw &amp;amp;&amp;amp; cd /raw $ fetch --no-verify-peer https://raw.</description>
+    </item>
+    
+    <item>
+      <title>forkbomb</title>
+      <link>https://nbari.com/post/forkbomb/</link>
+      <pubDate>Thu, 08 Dec 2016 11:11:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forkbomb/</guid>
+      <description>forkbomb C example:
+#include &amp;lt;stdio.h&amp;gt;int main() { while(1) fork(); } To compile:
+$ clang bomg.c  Python example:
+import os while True: os.fork() How to prevent it, use RCTL for example in a jail:
+$ rctl -a jail:myJail:maxproc:deny=50  </description>
+    </item>
+    
+    <item>
+      <title>ssmtp</title>
+      <link>https://nbari.com/post/ssmtp/</link>
+      <pubDate>Tue, 06 Dec 2016 22:50:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssmtp/</guid>
+      <description>ssmtp - send a message using smtp When having sendmail disabled:
+sendmail_enable=&amp;quot;NONE&amp;quot;  ssmtp helps to send email using an SMTP server:
+Install ssmtp:
+pkg install ssmtp  Configure to use you provider mailgun in this example /usr/local/etc/ssmtp/ssmtp.conf:
+root=monitor@domain.tld mailhub=smtp.mailgun.org AuthUser=postmaster@your.domain AuthPass=yourpassword UseTLS=Yes UseSTARTTLS=YES FromLineOverride=YES Edit /etc/mail/mailer.conf to use ssmtp:
+sendmail /usr/local/sbin/ssmtp send-mail /usr/local/sbin/ssmtp mailq /usr/local/sbin/ssmtp newaliases /usr/local/sbin/ssmtp hoststat /usr/bin/true purgestat /usr/bin/true Now all email sent to root will be sent to monitor@domain.</description>
+    </item>
+    
+    <item>
+      <title>lshw</title>
+      <link>https://nbari.com/post/lshw/</link>
+      <pubDate>Sun, 04 Dec 2016 14:06:25 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/lshw/</guid>
+      <description>To print information about your Linux system hardware, run this command.
+ $ apt-get install lshw  lshw root@server:/# lshw -short H/W path Device Class Description ================================================== system Computer /0 bus Motherboard /0/0 memory 3020MiB System memory /0/1 processor Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz /0/2 processor Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz /0/100 bridge 440FX - 82441FX PMC [Natoma] /0/100/1 bridge 82371SB PIIX3 ISA [Natoma/Triton II] /0/100/1.1 storage 82371SB PIIX3 IDE [Natoma/Triton II] /0/100/1.</description>
+    </item>
+    
+    <item>
+      <title>vps</title>
+      <link>https://nbari.com/post/vps/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vps/</guid>
+      <description>VPS providers that allow use your own image/kernel
+Google cloud (only ipv4) Allows to upload compreses raw images:
+tar --format=gnutar -Szcf disk.tar.gz disk.raw  MTU needs to be set to 1460 and in some cases disable the checksum offload
+Amazon AWS (only ipv4) Images can&amp;rsquo;t be uploaded compressed, ans disabling TSO is required:
+ifconfig_DEFAULT=&amp;quot;SYNCDHCP -tso&amp;quot;  IPV6 support vultr https://www.vultr.com/
+Instead of uploading the raw images, they will be fetched, a URL needs to be provider from where the image can be downloaded.</description>
+    </item>
+    
+    <item>
+      <title>ipv6 off</title>
+      <link>https://nbari.com/post/ipv6-off/</link>
+      <pubDate>Fri, 02 Dec 2016 14:52:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-off/</guid>
+      <description>Turn off IPv6 on mac First list interfaces:
+$ networksetup -listallnetworkservices An asterisk (*) denotes that a network service is disabled. Thunderbolt Ethernet Wi-Fi Bluetooth PAN Thunderbolt Bridge  Next:
+$ networksetup -setv6off &amp;#34;Thunderbolt Ethernet&amp;#34; For Wi-Fi:
+$ networksetup -setv6off Wi-Fi </description>
+    </item>
+    
+    <item>
+      <title>ipv6 tunnelbroker</title>
+      <link>https://nbari.com/post/ipv6-tunnelbroker/</link>
+      <pubDate>Thu, 01 Dec 2016 16:50:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-tunnelbroker/</guid>
+      <description>6in4  6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets whose IP headers have the IP protocol number set to 41. https://en.wikipedia.org/wiki/6in4
+ &amp;ldquo;6to4&amp;rdquo; is a tunneling method that is only interesting for reaching IPv6-only services. And 6to4 makes sense only if one has a public IPv4 address. As a rule, you only need to enable &amp;ldquo;6to4&amp;rdquo; if you want to access services that are only IPv6.</description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://nbari.com/post/postgres/</link>
+      <pubDate>Wed, 30 Nov 2016 17:12:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/postgres/</guid>
+      <description>Read only user Create user first:
+CREATE USER theuser WITH PASSWORD &#39;secret&#39;; GRANT SELECT ON ALL TABLES IN SCHEMA public TO theuser; GRANT CONNECT ON DATABASE mydb TO dbuser;  Test:
+psql -h host -U theuser mydb  To see the list of tables:
+mydb=&amp;gt;\d+  </description>
+    </item>
+    
+    <item>
+      <title>checksum offload</title>
+      <link>https://nbari.com/post/checksum-offload/</link>
+      <pubDate>Tue, 29 Nov 2016 19:15:23 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/checksum-offload/</guid>
+      <description>TCP offload engine  TOE is a technology used in network interface cards (NIC) to offload processing of the entire TCP/IP stack to the network controller. It is primarily used with high-speed network interfaces, such as gigabit Ethernet and 10 Gigabit Ethernet, where processing overhead of the network stack becomes significant. https://en.wikipedia.org/wiki/TCP_offload_engine
+ On Virtual Guest disabling the cheksum may boost the newtork speed, for example on GCE when using FreeBSD add this to the /boot/loader.</description>
+    </item>
+    
+    <item>
+      <title>cdn token</title>
+      <link>https://nbari.com/post/cdn-token/</link>
+      <pubDate>Tue, 22 Nov 2016 12:43:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/cdn-token/</guid>
+      <description>Restrict access only to the CDN (cloudfront) To only allow, handle request from the CDN you could add a custom header/token and check on your backend (nginx/haproxy) if is matching otherwise return a 401
+If using AWS cloudfront you edit your origins like this:
+The token can be any UUID / has or common secret between the CDN and the backend.
+If your backends are using nginx you could verify the token like this:</description>
+    </item>
+    
+    <item>
+      <title>observability tools</title>
+      <link>https://nbari.com/post/observability-tools/</link>
+      <pubDate>Mon, 14 Nov 2016 18:45:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/observability-tools/</guid>
+      <description>FreeBSD Linux src: http://www.brendangregg.com/blog/2015-03-06/performance-analysis-bsd.html</description>
+    </item>
+    
+    <item>
+      <title>innodb_flush_log_at_trx_commit=2</title>
+      <link>https://nbari.com/post/mysql_innodb_flush_log_at_trx_commit/</link>
+      <pubDate>Mon, 14 Nov 2016 11:57:34 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql_innodb_flush_log_at_trx_commit/</guid>
+      <description>To speed mysql replica add into the [mysqld]:
+innodb_flush_log_at_trx_commit=2  </description>
+    </item>
+    
+    <item>
+      <title>mysql_tzinfo_to_sql</title>
+      <link>https://nbari.com/post/mysql_tzinfo_to_sql/</link>
+      <pubDate>Mon, 07 Nov 2016 16:58:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql_tzinfo_to_sql/</guid>
+      <description>FreeBSD &amp;amp; MySQL UTC After doing a fresh install, load the UTC zone:
+$ cd /usr/share/zoneinfo $ mysql_tzinfo_to_sql UTC UTC | mysql -u root mysql  Edit the /etc/my.cnf:
+[mysqld] default-time-zone=&#39;UTC&#39;  This will set the default timezone on the server to be UTC
+To get current timezone of the mysql you can do following things:
+mysql&amp;gt; SELECT @@global.time_zone, @@session.time_zone;  </description>
+    </item>
+    
+    <item>
+      <title>convertfromraw</title>
+      <link>https://nbari.com/post/convertfromraw/</link>
+      <pubDate>Mon, 07 Nov 2016 16:20:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/convertfromraw/</guid>
+      <description>Convert from RAW to VDI When creating custom &amp;ldquo;RAW&amp;rdquo; images using mkimg they can be use in VirtualBox by converting them to &amp;ldquo;VDI&amp;rdquo; format, example:
+$ VBoxManage convertfromraw ec2.raw ec2.vdi --format VDI Converting from raw image file=&amp;quot;ec2.raw&amp;quot; to file=&amp;quot;ec2.vdi&amp;quot;... Creating dynamic image with size 3221292544 bytes (3073MB)...  Once the image is in &amp;ldquo;VDI&amp;rdquo; format it can be resized using:
+$ VBoxManage modifyhd ec2.vdi --resize 8192 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%  The above command will resize the image to 8GB.</description>
+    </item>
+    
+    <item>
+      <title>txt 2 img</title>
+      <link>https://nbari.com/post/txt2img/</link>
+      <pubDate>Tue, 01 Nov 2016 21:00:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/txt2img/</guid>
+      <description>To create an image with a custom label from the command line:
+convert -font AndaleMono -size 200x32 -gravity center -background white -fill black label:&amp;quot;0O0ilLxt your msg &amp;quot; out.png  </description>
+    </item>
+    
+    <item>
+      <title>transparent</title>
+      <link>https://nbari.com/post/transparent/</link>
+      <pubDate>Sun, 30 Oct 2016 17:36:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/transparent/</guid>
+      <description>Create an image with transparent background Using convert from imagemagick:
+convert input.jpg -fuzz 10% -transparent white transparent.png  </description>
+    </item>
+    
+    <item>
+      <title>webscraping</title>
+      <link>https://nbari.com/post/webscraping/</link>
+      <pubDate>Thu, 27 Oct 2016 21:37:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/webscraping/</guid>
+      <description>Webscraping using python + chrome In mac OS X, install chromedriver and selenium:
+brew install chromedriver  Install selenium via pip:
+pip install -U selenium   if required to install globally sudo pip install selenium
+ To test, open a terminal, type python and try:
+Python 2.7.12 (default, Oct 11 2016, 05:20:59) [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information.</description>
+    </item>
+    
+    <item>
+      <title>12 factor</title>
+      <link>https://nbari.com/post/12factor/</link>
+      <pubDate>Tue, 25 Oct 2016 20:56:30 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/12factor/</guid>
+      <description>The Twelve Factors 1. Codebase Everything in revision control including environment configuration
+git flow master - production develop - staging
+2. Dependencies Explicitly declare and isolate dependencies
+3. Config Store config in the environment
+In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.</description>
+    </item>
+    
+    <item>
+      <title>dnsmasq</title>
+      <link>https://nbari.com/post/dnsmasq/</link>
+      <pubDate>Fri, 30 Sep 2016 12:27:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dnsmasq/</guid>
+      <description>dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&amp;rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on</description>
+    </item>
+    
+    <item>
+      <title>ssh rsa public key encryption</title>
+      <link>https://nbari.com/post/ssh-rsa-public-key-encryption/</link>
+      <pubDate>Thu, 29 Sep 2016 15:22:12 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-rsa-public-key-encryption/</guid>
+      <description>Encrypt a file using ssh public keys.
+Create ssh public key in PEM format:
+ ssh-keygen -f id_rsa.pub -e -m PKCS8 &amp;gt; id_rsa.pem.pub  Use openssl to encrypt/decrypt
+Encrypt:
+openssl rsautl -encrypt -pubin -inkey ~/.ssh/id_rsa.pem.pub -ssl -in test.txt -out test.txt.enc  Decrypt:
+openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in test.txt.enc -out test.txt.enc.txt  </description>
+    </item>
+    
+    <item>
+      <title>reset qnap virtual switch</title>
+      <link>https://nbari.com/post/reset-qnap-virtual-switch/</link>
+      <pubDate>Wed, 28 Sep 2016 22:53:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/reset-qnap-virtual-switch/</guid>
+      <description>To reset the QNAP Virtualization Station, rename the file:
+/share/CE_CACHEDEV1_DATA/.qpkg/.QKVM  to
+/share/CE_CACHEDEV1_DATA/.qpkg/.QKVM-backup  From the App center remove/install the Virtualization Station.</description>
+    </item>
+    
+    <item>
+      <title>E437 terminal capability cm required</title>
+      <link>https://nbari.com/post/e437-terminal-capability-cm-required/</link>
+      <pubDate>Wed, 28 Sep 2016 22:02:37 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/e437-terminal-capability-cm-required/</guid>
+      <description>When trying to open vi/vim the following message could appear:
+&amp;quot;E437: terminal capability &amp;quot;cm&amp;quot; required&amp;quot;  To fix it type:
+$ export TERM=xterm  </description>
+    </item>
+    
+    <item>
+      <title>aws uptime</title>
+      <link>https://nbari.com/post/aws-uptime/</link>
+      <pubDate>Tue, 27 Sep 2016 16:12:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-uptime/</guid>
+      <description>AWS &amp;gt;= 657 days  OS: FreeBSD 8.2 AWS: us-east-1 Type: t1.micro  </description>
+    </item>
+    
+    <item>
+      <title>debian parted</title>
+      <link>https://nbari.com/post/debian-parted/</link>
+      <pubDate>Mon, 26 Sep 2016 15:38:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/debian-parted/</guid>
+      <description>Resize AWS Debian Jessie Probably instance will have 8GB, to extend the disk, for example to 40GB do this:
+Install parted:
+$ apt-get install parted  Run:
+$ /sbin/parted ---pretend-input-tty /dev/xvda resizepart 1 yes 100%  Resize2fs:
+$ resize2fs /dev/xvda1  Run lsblk:
+root@ip-10-20-1-17:~# lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT xvda 202:0 0 40G 0 disk `-xvda1 202:1 0 40G 0 part /  </description>
+    </item>
+    
+    <item>
+      <title>CI &amp; CD</title>
+      <link>https://nbari.com/post/ci-cd/</link>
+      <pubDate>Mon, 26 Sep 2016 14:08:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ci-cd/</guid>
+      <description>Release pipeline CI &amp;amp; CD </description>
+    </item>
+    
+    <item>
+      <title>Raspberry Pi 1 Model B</title>
+      <link>https://nbari.com/post/rpi/</link>
+      <pubDate>Sat, 24 Sep 2016 15:25:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/rpi/</guid>
+      <description>Raspberry Pi 1 Model B, FreeBSD + wifi cat /var/run/dmesg.boot:
+KDB: debugger backends: ddb KDB: current backend: ddb Copyright (c) 1992-2016 The FreeBSD Project. Copyright (c) 1979, 1980, 1983, 1986, 1988, 1989, 1991, 1992, 1993, 1994 The Regents of the University of California. All rights reserved. FreeBSD is a registered trademark of The FreeBSD Foundation. FreeBSD 10.3-RELEASE #0 r297264: Fri Mar 25 08:01:14 UTC 2016 root@releng1.nyi.freebsd.org:/usr/obj/arm.armv6/usr/src/sys/RPI-B arm FreeBSD clang version 3.</description>
+    </item>
+    
+    <item>
+      <title>uptime 1000 days</title>
+      <link>https://nbari.com/post/1000/</link>
+      <pubDate>Wed, 21 Sep 2016 21:59:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/1000/</guid>
+      <description>uptime &amp;gt;= 1000 days  OS: FreeBSD + ZFS + Jails Server: Dell PowerEdge 2900 2xE5420 24GB RAM Colocation: https://iweb.com/  Time to reboot after 4 years:
+I need to rebuild the RAID and can&amp;rsquo;t mix SAS drives with SATA on an living array:</description>
+    </item>
+    
+    <item>
+      <title>aws ec2 associate address</title>
+      <link>https://nbari.com/post/aws-ec2-associate-address/</link>
+      <pubDate>Tue, 30 Aug 2016 12:27:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-ec2-associate-address/</guid>
+      <description>If doing more than 100 requests implying the AWS CLI associate-address sub-command, subsequent calls will cost $0.10 each, so If doing to much scale in/out or have a monitoring/automated tool that frecuenly make API calls using this sub-command, the bill is not going to be cheap:
+ Scale in (remove instances) Scale out (add instances)  Long story short, The associate-address sub-command, is an idempotent operation, if you call &amp;ldquo;aws ec2 associate-address&amp;rdquo; with the same combination of instance and EIP as the one currently in place, it won&amp;rsquo;t return an error; instead, it will return and count as successful, regardless of whether an actual allocation was done or not.</description>
+    </item>
+    
+    <item>
+      <title>letsencrypt &#43; cloudfare using DNS</title>
+      <link>https://nbari.com/post/letsencrypt-cloudfare/</link>
+      <pubDate>Mon, 22 Aug 2016 12:25:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/letsencrypt-cloudfare/</guid>
+      <description>It&amp;rsquo;s not necessary to disable CloudFlare to use Let&amp;rsquo;s Encrypt,
+Installation: On mac os X:
+$ git clone https://github.com/lukas2511/letsencrypt.sh $ cd letsencrypt.sh $ mkdir hooks $ git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare $ pip install -r hooks/cloudflare/requirements-python-2.txt  Configuration Your account&amp;rsquo;s CloudFlare email and API key are expected to be in the environment:
+$ export CF_EMAIL=&amp;quot;your@email&amp;quot; $ export CF_KEY=&amp;quot;Global API Key&amp;quot; $ export CF_DNS_SERVERS=&#39;8.8.8.8 8.8.4.4&#39;  Usage $ ./letsencrypt.sh -c -d imap.ejemplo.org -t dns-01 -k &amp;quot;hooks/cloudflare/hook.</description>
+    </item>
+    
+    <item>
+      <title>error loading certificates pkg freebsd</title>
+      <link>https://nbari.com/post/error-loading-certificates-pkg-freebsd/</link>
+      <pubDate>Sat, 20 Aug 2016 12:44:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/error-loading-certificates-pkg-freebsd/</guid>
+      <description>On an FreeBSD 9 while trying to install python or something else via pkg you may get this:
+&amp;gt; pkg search python pkg: Repository FreeBSD missing. &#39;pkg update&#39; required pkg: Error loading trusted certificates pkg: Error loading trusted certificates pkg: Repository FreeBSD cannot be opened. &#39;pkg update&#39; required  To solve it, fetch the current official repository key:
+mkdir -p /usr/share/keys/pkg/trusted /usr/share/keys/pkg/revoked svn export https://svn0.us-west.FreeBSD.org/base/head/share/keys/pkg/trusted/pkg.freebsd.org.2013102301 /usr/share/keys/pkg/trusted/  Then set the repo:</description>
+    </item>
+    
+    <item>
+      <title>/bin/sh shell set</title>
+      <link>https://nbari.com/post/shell-set/</link>
+      <pubDate>Thu, 11 Aug 2016 11:28:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/shell-set/</guid>
+      <description>The Bourne shell (sh) is a shell, or command-line interpreter, for computer operating systems.
+ The Bourne shell was the default shell for Unix Version 7. Most Unix-like systems continue to have /bin/sh—which will be the Bourne shell, or a symbolic link or hard link to a compatible shell even when other shells are used by most users. https://en.wikipedia.org/wiki/Bourne_shell
+ set options In sh, the set built-in command has the following options:</description>
+    </item>
+    
+    <item>
+      <title>mosh</title>
+      <link>https://nbari.com/post/mosh/</link>
+      <pubDate>Wed, 10 Aug 2016 22:25:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mosh/</guid>
+      <description>mosh (mobile shell)  Remote terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and line editing of user keystrokes. Mosh is a replacement for SSH. It&amp;rsquo;s more robust and responsive, especially over Wi-Fi, cellular, and long-distance links.
+ How to install server FreeBSD:
+$ pkg install net/mosh  Edit /etc/login.conf and add this to the default:
+ :charset=UTF-8:\ :lang=en_US.UTF-8:\ :setenv=LC_COLLATE=C:  After editing /etc/locing.conf run:</description>
+    </item>
+    
+    <item>
+      <title>Why is unit testing important?</title>
+      <link>https://nbari.com/post/unit-testing-important/</link>
+      <pubDate>Mon, 08 Aug 2016 23:50:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/unit-testing-important/</guid>
+      <description>Why is unit testing important? Short answer, to avoid something like this:
+
+The links are inverted
+Because of that error, people may not be available to download or install the proper app and therefore will lost credibility of the service.
+What is Unit Testing? In computer programming, unit testing is a software testing method by which individual units of source code, sets of one or more computer program modules together with associated control data, usage procedures, and operating procedures, are tested to determine whether they are fit for use.</description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://nbari.com/post/vim/</link>
+      <pubDate>Mon, 08 Aug 2016 11:27:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vim/</guid>
+      <description>Quote/unquote words: ciw&#39;Ctrl+r&amp;quot;&#39;  or
+ciw &#39;&#39; Esc p  p paste after the cursor, P will paste before the cursor.
+Search matches (gn with the dot command) Suppose that we have a document containing several occurrences of the word ‘Normal’ and we’d like to change each occurrence to ‘Visual’. We can run /Normal to search for the word ‘Normal’, then type cgnVisual&amp;lt;Esc&amp;gt; to change the next match to the word ‘Visual’ and by pressing .</description>
+    </item>
+    
+    <item>
+      <title>brew macos</title>
+      <link>https://nbari.com/post/brew/</link>
+      <pubDate>Sat, 30 Jul 2016 16:35:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew/</guid>
+      <description>Homebrew installs the stuff you need that Apple didn’t.
+For example to update python and avoid many SSL warnings:
+brew install python  To use an updated version of git on mac use:
+brew install git --whitout-completion  To update vim:
+brew install vim --with-override-system-vi  Updating zsh:
+# check the zsh info brew info zsh # install zsh brew install zsh # add shell path sudo vim /etc/shells # add the following line into the very end of the file(/etc/shells) /usr/local/bin/zsh # change default shell chsh -s /usr/local/bin/zsh  Install some extra packages in oneline:</description>
+    </item>
+    
+    <item>
+      <title>asciinema</title>
+      <link>https://nbari.com/post/asciinema/</link>
+      <pubDate>Wed, 20 Jul 2016 15:14:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/asciinema/</guid>
+      <description>asciinema [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+Install FreeBSD:
+pkg install asciiname  OS X:
+brew update &amp;amp;&amp;amp; brew install asciinema  Recording tmux session Setup your tmux session create windows, splits, start processes in them:
+tmux new -s name  Detach (prefix+d) and start recording with:
+asciinema rec -c &amp;quot;tmux attach -t name&amp;quot; /tmp/play.json  When you&amp;rsquo;re finished, just detach the session again and play it with:</description>
+    </item>
+    
+    <item>
+      <title>virtualbox-el-capitan</title>
+      <link>https://nbari.com/post/virtualbox-el-capitan/</link>
+      <pubDate>Tue, 12 Jul 2016 14:18:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/virtualbox-el-capitan/</guid>
+      <description>When trying to install Virtualbox in OS X El capitan you may notice it hangs at Verifying &amp;ldquo;VirtualBox.pkg&amp;rdquo;.
+You can by pass the warning trying to install via command line with:
+$ sudo installer -package /Volumes/VirtualBox/VirtualBox.pkg -target /  </description>
+    </item>
+    
+    <item>
+      <title>Simulate cron environment</title>
+      <link>https://nbari.com/post/cron/</link>
+      <pubDate>Mon, 11 Jul 2016 14:23:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/cron/</guid>
+      <description>Add this to your cron:
+* * * * * env &amp;gt; ~/cronenv  Then start a new shell using does environments:
+env - `cat ~/cronenv` /bin/sh  </description>
+    </item>
+    
+    <item>
+      <title>L2TP over IPSec</title>
+      <link>https://nbari.com/post/l2tp-ipsec/</link>
+      <pubDate>Sun, 26 Jun 2016 14:21:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/l2tp-ipsec/</guid>
+      <description>L2TP Layer 2 Tunneling Protocol (L2TP) is a tunneling protocol used to support virtual private networks (VPNs) or as part of the delivery of services by ISPs. It does not provide any encryption or confidentiality by itself. Rather, it relies on an encryption protocol that it passes within the tunnel to provide privacy.
+L2TP/IPSec Because of the lack of confidentiality inherent in the L2TP protocol, it is often implemented along with IPsec.</description>
+    </item>
+    
+    <item>
+      <title>openssl cheat sheet</title>
+      <link>https://nbari.com/post/openssl-cheat-sheet/</link>
+      <pubDate>Wed, 22 Jun 2016 13:37:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/openssl-cheat-sheet/</guid>
+      <description>To display the contents of a PEM formatted certificate:
+$ openssl x509 -in the-cert.pm -text  Connecting to the server:
+$ openssl s_client -showcerts -connect imap.ejemplo.org:993 &amp;lt; /dev/null  Test smtp 587:
+$ openssl s_client -host smtp.gmail.com -port 587 -starttls smtp -crlf  Checking the Validity Date:
+$ openssl s_client -showcerts -connect nbari.com:443 2&amp;gt;/dev/null | openssl x509 -noout -dates  Encode base64 a file:
+$ openssl enc -base64 -in file.txt -out file.</description>
+    </item>
+    
+    <item>
+      <title>FreeBSD jails</title>
+      <link>https://nbari.com/post/jails/</link>
+      <pubDate>Sun, 19 Jun 2016 17:24:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/jails/</guid>
+      <description>The FreeBSD jail mechanism is an implementation of operating system-level virtualization that allows administrators to partition a FreeBSD-based computer system into several independent mini-systems called jails.
+ Operating-system-level virtualization is a server virtualization method in which the kernel of an operating system allows the existence of multiple isolated user-space instances, instead of just one. Such instances, which are sometimes called containers, software containers, virtualization engines (VEs) or jails (FreeBSD jail or chroot jail), may look and feel like a real server from the point of view of its owners and users.</description>
+    </item>
+    
+    <item>
+      <title>OSI model</title>
+      <link>https://nbari.com/post/osi/</link>
+      <pubDate>Sun, 19 Jun 2016 01:14:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/osi/</guid>
+      <description>The Open Systems Interconnection model (OSI model) is a conceptual model that characterizes and standardizes the communication functions of a telecommunication or computing system without regard to their underlying internal structure and technology.
+ List of newtork protocols
+HAProxy can work as a Load Balancer in Layer 4 (tcp mode) and Layer 7.</description>
+    </item>
+    
+    <item>
+      <title>Port knocking</title>
+      <link>https://nbari.com/post/portknocking/</link>
+      <pubDate>Sun, 19 Jun 2016 01:02:10 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/portknocking/</guid>
+      <description>In computer networking, port knocking is a method of externally opening ports on a firewall by generating a connection attempt on a set of prespecified closed ports. Once a correct sequence of connection attempts is received, the firewall rules are dynamically modified to allow the host which sent the connection attempts to connect over specific port(s).
+ For example, Using PF on FreeBSD to only open port 22 after X number of attempts to connect on port 1234:</description>
+    </item>
+    
+    <item>
+      <title>Hugo hosting on github using 2 repositories</title>
+      <link>https://nbari.com/post/hugo-hosting/</link>
+      <pubDate>Sun, 19 Jun 2016 00:45:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/hugo-hosting/</guid>
+      <description>This setup requires two separate repos, one for Hugo&amp;rsquo;s content, and a second one that will be a git submodule with the public folder&amp;rsquo;s content in it.
+Step by step:
+  Create on Github &amp;lt;your-project&amp;gt;-hugo repository (it will host Hugo’s content)
+  Create on GitHub &amp;lt;username&amp;gt;.github.io repository (it will host the public folder: the static website)
+  git clone &amp;lt;your-project&amp;gt;-hugo-url &amp;amp;&amp;amp; cd &amp;lt;your-project&amp;gt;-hugo
+  Make your website work locally (hugo server)</description>
+    </item>
+    
+    <item>
+      <title>AWS VPC</title>
+      <link>https://nbari.com/post/aws-vpc/</link>
+      <pubDate>Sat, 18 Jun 2016 19:44:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-vpc/</guid>
+      <description>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch Amazon Web Services (AWS) resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+ Things to keep in mind. Normalize your network First of all, do not invent IP&amp;rsquo;s, please use and create a normalized range using the private ranges: https://en.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>quit on IT notes</title>
+    <link>https://nbari.com/tags/quit/</link>
+    <description>Recent content in quit on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jan 2020 17:21:40 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/quit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python quit unexpectedly macOS Catalina</title>
+      <link>https://nbari.com/post/python-quit-unexpectedly-macos/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/python-quit-unexpectedly-macos/</guid>
+      <description>When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  </description>
+    </item>
+    
+    <item>
+      <title>ctrl-backslash</title>
+      <link>https://nbari.com/post/ctrl-backslash/</link>
+      <pubDate>Mon, 11 Jun 2018 17:49:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ctrl-backslash/</guid>
+      <description>To send a quit signal to the process:
+ctrl-\ # (backslash)  This will send a SIGQUIT</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on IT notes</title>
+    <link>https://nbari.com/tags/linux/</link>
+    <description>Recent content in linux on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Nov 2020 13:38:41 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos Disable Ipv6</title>
+      <link>https://nbari.com/post/centos-disable-ipv6/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/centos-disable-ipv6/</guid>
+      <description>Edit file /etc/default/grub and add ipv6.disable=1, example:
+# cat /etc/default/grub GRUB_TIMEOUT=5 GRUB_DEFAULT=saved GRUB_DISABLE_SUBMENU=true GRUB_TERMINAL_OUTPUT=&amp;quot;console&amp;quot; GRUB_CMDLINE_LINUX=&amp;quot;ipv6.disable=1 crashkernel=auto rhgb quiet&amp;quot; GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;  Then regenerate and reboot:
+grub2-mkconfig -o /boot/grub2/grub.cfg  And
+reboot  Using sysctl (no need to reboot), append below lines in /etc/sysctl.conf:
+net.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1  Then run:
+sysctl -p  </description>
+    </item>
+    
+    <item>
+      <title>bash git prompt</title>
+      <link>https://nbari.com/post/bash-git-prompt/</link>
+      <pubDate>Tue, 20 Mar 2018 22:28:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/bash-git-prompt/</guid>
+      <description>To display the current branch in the terminal prompt using bash, add the following lines to ~/.bash_profile:
+parse_git_branch() { git branch 2&amp;gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/ (\1)/&#39; } export PS1=&amp;quot;\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ &amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>Linux Mac Address</title>
+      <link>https://nbari.com/post/linux-mac-address/</link>
+      <pubDate>Wed, 14 Mar 2018 14:51:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/linux-mac-address/</guid>
+      <description>To get the MAC address from an interface in linux:
+cat /sys/class/net/eth1/address  </description>
+    </item>
+    
+    <item>
+      <title>Linux version</title>
+      <link>https://nbari.com/post/linux-version/</link>
+      <pubDate>Fri, 02 Mar 2018 10:20:22 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/linux-version/</guid>
+      <description>To determine what linux version you are using:
+cat /etc/*elease  </description>
+    </item>
+    
+    <item>
+      <title>gpg</title>
+      <link>https://nbari.com/post/gpg/</link>
+      <pubDate>Tue, 27 Feb 2018 12:33:49 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/gpg/</guid>
+      <description>Install gpg on macOS:
+brew install gnupg pinentry-mac   if required restart gpg-agent with gpgconf --kill gpg-agent
+ To create a gpg key in batch mode, create a file named gpg-key-script with this value:
+Key-Type: 1 Key-Length: 2048 Subkey-Type: 1 Subkey-Length: 2048 Name-Real: your name Name-Comment: your comment Name-Email: your@email Expire-Date: 0  Next you could do something like:
+$ gpg --homedir /salt/gpgkeys --batch --gen-key gen-key-script  Backup private key To save the private key to a file:</description>
+    </item>
+    
+    <item>
+      <title>SElinux</title>
+      <link>https://nbari.com/post/selinux/</link>
+      <pubDate>Wed, 21 Feb 2018 09:39:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/selinux/</guid>
+      <description>To disable SElinux temporaly:
+setenforce 0  To disable SELinux Permanetly, edit file /etc/sysconfig/selinux:
+# This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded. SELINUX=enforcing # SELINUXTYPE= can take one of three two values: # targeted - Targeted processes are protected, # minimum - Modification of targeted policy.</description>
+    </item>
+    
+    <item>
+      <title>lshw</title>
+      <link>https://nbari.com/post/lshw/</link>
+      <pubDate>Sun, 04 Dec 2016 14:06:25 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/lshw/</guid>
+      <description>To print information about your Linux system hardware, run this command.
+ $ apt-get install lshw  lshw root@server:/# lshw -short H/W path Device Class Description ================================================== system Computer /0 bus Motherboard /0/0 memory 3020MiB System memory /0/1 processor Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz /0/2 processor Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz /0/100 bridge 440FX - 82441FX PMC [Natoma] /0/100/1 bridge 82371SB PIIX3 ISA [Natoma/Triton II] /0/100/1.1 storage 82371SB PIIX3 IDE [Natoma/Triton II] /0/100/1.</description>
+    </item>
+    
+    <item>
+      <title>debian parted</title>
+      <link>https://nbari.com/post/debian-parted/</link>
+      <pubDate>Mon, 26 Sep 2016 15:38:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/debian-parted/</guid>
+      <description>Resize AWS Debian Jessie Probably instance will have 8GB, to extend the disk, for example to 40GB do this:
+Install parted:
+$ apt-get install parted  Run:
+$ /sbin/parted ---pretend-input-tty /dev/xvda resizepart 1 yes 100%  Resize2fs:
+$ resize2fs /dev/xvda1  Run lsblk:
+root@ip-10-20-1-17:~# lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT xvda 202:0 0 40G 0 disk `-xvda1 202:1 0 40G 0 part /  </description>
+    </item>
+    
+  </channel>
+</rss>

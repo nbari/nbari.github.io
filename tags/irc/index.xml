@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>irc on IT notes</title>
+    <link>https://nbari.com/tags/irc/</link>
+    <description>Recent content in irc on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Nov 2018 11:18:13 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/irc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IRC</title>
+      <link>https://nbari.com/post/irc/</link>
+      <pubDate>Fri, 02 Nov 2018 11:18:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/irc/</guid>
+      <description>Change password password in irc:
+/msg nickserv set password &amp;lt;password&amp;gt;  </description>
+    </item>
+    
+  </channel>
+</rss>

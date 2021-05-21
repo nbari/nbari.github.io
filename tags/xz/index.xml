@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xz on IT notes</title>
+    <link>https://nbari.com/tags/xz/</link>
+    <description>Recent content in xz on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Apr 2017 10:28:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/xz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql backup</title>
+      <link>https://nbari.com/post/mysql-backup/</link>
+      <pubDate>Tue, 11 Apr 2017 10:28:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-backup/</guid>
+      <description>mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:</description>
+    </item>
+    
+  </channel>
+</rss>

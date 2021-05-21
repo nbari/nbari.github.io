@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tmp on IT notes</title>
+    <link>https://nbari.com/tags/tmp/</link>
+    <description>Recent content in tmp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Apr 2018 18:20:47 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/tmp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tmp</title>
+      <link>https://nbari.com/post/tmp/</link>
+      <pubDate>Tue, 24 Apr 2018 18:20:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/tmp/</guid>
+      <description>Ways to create a temp file:
+Using mktemp:
+$ mktemp /tmp/file.XXX   The trailing Xs will be replaced with the process number and/or a unique letter combination
+ Creating a temp dir:
+$ mktemp -d /tmp/dir.XXX  Output could be saved into a variable:
+TMPDIR=$(mktemp -d /tmp/dir.XXXX)  $$ Using $$:
+OUT=/tmp/file.out.$$  Here $$ will be replaced with the current process PID.
+$RANDOM OUT=/tmp/file.out.${RANDOM}   $RANDOM is an internal bash/zsh function (not a constant) that returns a pseudorandom [1] integer in the range 0 - 32767</description>
+    </item>
+    
+  </channel>
+</rss>

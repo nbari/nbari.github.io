@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> storj &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/storj/">storj</a></h2>
+          <span class="post-date">Oct 18, 2020 </span>
+          <div class="post-content">
+            <p>Setup up and configure your jail, then create user <code>storj</code>:</p>
+<pre><code>pw useradd -n storj -m
+</code></pre>
+<p>Clone and get and install latest version:</p>
+<pre><code>git clone -b v1.14.7 https://github.com/storj/storj.git storj
+cd storj
+go install -race -v storj.io/storj/cmd/...
+</code></pre>
+<p>Create a dir to contanin the identity and storage:</p>
+<pre><code>mkdir /mnt/storj
+chown -R storj:storj /mnt/storj
+</code></pre>
+<p>In the main host create the file system to be used in the jail:</p>
+<pre><code>zfs create tank/storj
+</code></pre>
+<p>Create <code>fstat.storj</code> with something like:</p>
+<pre><code>/tank/storj     /jails/storj/mnt/storj    nullfs  rw      0       0
+</code></pre>
+<blockquote>
+<p><code>mkdir /jails/storej/mnt/storj</code> before starting the jail</p>
+</blockquote>
+<p>Change to user <code>storj</code>:</p>
+<pre><code>su - storj
+</code></pre>
+<p>Setup the node:</p>
+<pre><code>/home/storj/go/bin/storagenode setup --config-dir /mnt/storj --identity-dir /mnt/storj/identity
+</code></pre>
+<p>Config lools somethinig like:</p>
+<pre><code>contact.external-address: &quot;IP or FQDN:28967&quot;
+identity.cert-path: /mnt/storj/identity/identity.cert
+identity.key-path: /mnt/storj/identity/identity.key
+log.level: info
+operator.email: &quot;your email address&quot;
+operator.wallet: &quot;your wallet address&quot;
+server.address: :28967
+server.private-address: 127.0.0.1:7778
+server.revocation-dburl: bolt:///mnt/storj/storage/revocations.db
+storage.allocated-disk-space: 2.00 TB
+storage.path: /mnt/storj/storage
+</code></pre>
+<p>Create an identity:</p>
+<pre><code>/home/storj/go/bin/identity --config-dir /mnt/storj/identity create storagenode
+</code></pre>
+<blockquote>
+<p>this will take hours</p>
+</blockquote>
+<p>Backup before you continue, it should be quick! 🙏
+This allows you to restore your Node in case of an unfortunate hardware or OS incident.</p>
+<p>Authorize the identity:</p>
+<pre><code>/home/storj/go/bin/identity authorize storagenode &lt;email:characterstring&gt;
+</code></pre>
+<p><a href="https://documentation.storj.io/dependencies/identity">https://documentation.storj.io/dependencies/identity</a></p>
+<p>Startup using immortal:</p>
+<pre><code>pkg install immortal
+</code></pre>
+<p>Create <code>/usr/local/etc/immortal/storj.yml</code> with something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">cmd</span>: <span style="color:#ae81ff">/home/storj/go/bin/storagenode run --config-dir /mnt/storj/storage --identity-dir /mnt/storj/identity</span>
+<span style="color:#f92672">user</span>: <span style="color:#ae81ff">storj</span>
+<span style="color:#f92672">log</span>:
+  <span style="color:#f92672">file</span>: <span style="color:#ae81ff">/var/log/storj.log</span>
+</code></pre></div><p>Enable <code>immortaldir_enable</code>:</p>
+<pre><code>sysrc immortaldir_enable=&quot;YES&quot;
+</code></pre>
+<p>Start it:</p>
+<pre><code>service immortaldir start
+</code></pre>
+<p>Follow up: <a href="https://github.com/storj/storj/issues/3935">https://github.com/storj/storj/issues/3935</a></p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/libx265/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/centos-disable-ipv6/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Posts &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/post/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vultr-shutdown-o-n/">vultr shutdown -o -n -r now</a></h2>
+          <span class="post-date">May 21, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/shutdown">shutdown</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vultr">vultr</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To prevent the system to hang on &ldquo;detaching uhub0&rdquo; reboot using the flag -n:
+shutdown -o -n -r now  
+				<a class="read-more" href="/post/vultr-shutdown-o-n/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pip-upgrade/">pip upgrade</a></h2>
+          <span class="post-date">May 5, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/pip">pip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Upgrade using:
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --user  
+				<a class="read-more" href="/post/pip-upgrade/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/gpg_selecting_card_failed_operation_not_supported_by_device/">gpg: selecting card failed: Operation not supported by device</a></h2>
+          <span class="post-date">Apr 27, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/gpg">gpg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/yubico">Yubico</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/yubikey">yubikey</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If using a yubikey and getting this:
+gpg: selecting card failed: Operation not supported by device gpg: OpenPGP card not available: Operation not supported by device  Add to ~/.gnupg/scdaemon.conf
+disable-ccid  To debug you could use:
+reader-port Yubico Yubi debug-all debug-level guru disable-ccid log-file /tmp/scd.log  
+				<a class="read-more" href="/post/gpg_selecting_card_failed_operation_not_supported_by_device/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pipenv-pyinstaller/">Pipenv Pyinstaller</a></h2>
+          <span class="post-date">Apr 24, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/pipenv">pipenv</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pyinstaller">pyinstaller</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/flask">flask</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a basic hello world using flask:
+mkdir /tmp/project cd /tmp/project  Create app.py:
+from flask import Flask app = Flask(__name__) @app.route(&quot;/&quot;) def hello(): return 'Hello World!' if __name__ == '__main__': app.run(host='0.0.0.0')  Instal flask:
+ pipenv install flask  test the app:
+pipenv shell python app.py  Install pyinstaller:
+pipenv install pyinstaller  Create the requirements.txt:
+pipenv run pip freeze &gt; requirements.txt  Create the binary:
+ pyinstaller --onefile app.
+				<a class="read-more" href="/post/pipenv-pyinstaller/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/zfs-encryption/">ZFS encryption</a></h2>
+          <span class="post-date">Apr 22, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/encryption">encryption</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create an encrypted file system:
+zfs create -o encryption=on -o keyformat=passphrase -o keylocation=prompt tank/test-enc  Check encryption:
+$ zfs get encryption tank/test-enc NAME PROPERTY VALUE SOURCE tank/test-enc encryption aes-256-gcm -  Check status:
+zfs get -p encryption,keystatus,keyformat,keylocation,encryptionroot  
+				<a class="read-more" href="/post/zfs-encryption/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-comment/">ssh comment</a></h2>
+          <span class="post-date">Apr 17, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/comment">comment</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a new pair of ssh keys RSA with a custom comment:
+ssh-keygen -C &quot;monkey&quot; -t rsa -b 4096 -o -a 100 -f /tmp/monkey  
+				<a class="read-more" href="/post/ssh-comment/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/fdesetup/">fdesetup</a></h2>
+          <span class="post-date">Apr 15, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/fdesetup">fdesetup</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/login">login</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To remove a user from the login screen when booting and login from the first time:
+sudo fdesetup remove -user monkey  The user will not be listed any more in the login screen, but you will need first logging with a user that can decrypt the disk and then switch to your user.
+ Note this will not delete or remove the user account
+ 
+				<a class="read-more" href="/post/fdesetup/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-only-password/">ssh only password</a></h2>
+          <span class="post-date">Apr 14, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/password">password</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using ssh if you only need to use password (no keys):
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no &lt;host&gt;  
+				<a class="read-more" href="/post/ssh-only-password/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/yumdownloader/">yumdownloader</a></h2>
+          <span class="post-date">Apr 7, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rpm">rpm</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/centos8">centos8</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To download rpms for using them in an offline environment, install first yumdownloader:
+yum install yum-utils  Create a directory to store the rpm's:
+mkdir /tmp/rpms  Download the rpms:
+yumdownloader --destdir=/tmp/rpms --resolve MariaDB-server galera-4 MariaDB-client MariaDB-shared MariaDB-backup MariaDB-common  
+				<a class="read-more" href="/post/yumdownloader/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/psql/">psql</a></h2>
+          <span class="post-date">Mar 6, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/psql">psql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/postgres">postgres</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/client">client</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install PostgreSQL client on macOS:
+brew doctor brew update brew install libpq  Test:
+$ psql -V psql (PostgreSQL) 13.2  
+				<a class="read-more" href="/post/psql/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/flush-dns/">Flush DNS</a></h2>
+          <span class="post-date">Jan 29, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To flush DNS on macOS:
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache  
+				<a class="read-more" href="/post/flush-dns/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/centos-disable-ipv6/">Centos Disable Ipv6</a></h2>
+          <span class="post-date">Nov 29, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ipv6">ipv6</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Edit file /etc/default/grub and add ipv6.disable=1, example:
+# cat /etc/default/grub GRUB_TIMEOUT=5 GRUB_DEFAULT=saved GRUB_DISABLE_SUBMENU=true GRUB_TERMINAL_OUTPUT=&quot;console&quot; GRUB_CMDLINE_LINUX=&quot;ipv6.disable=1 crashkernel=auto rhgb quiet&quot; GRUB_DISABLE_RECOVERY=&quot;true&quot;  Then regenerate and reboot:
+grub2-mkconfig -o /boot/grub2/grub.cfg  And
+reboot  Using sysctl (no need to reboot), append below lines in /etc/sysctl.conf:
+net.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1  Then run:
+sysctl -p  
+				<a class="read-more" href="/post/centos-disable-ipv6/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/storj/">storj</a></h2>
+          <span class="post-date">Oct 18, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/storj">storj</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/coin">coin</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/crytp">crytp</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Setup up and configure your jail, then create user storj:
+pw useradd -n storj -m  Clone and get and install latest version:
+git clone -b v1.14.7 https://github.com/storj/storj.git storj cd storj go install -race -v storj.io/storj/cmd/...  Create a dir to contanin the identity and storage:
+mkdir /mnt/storj chown -R storj:storj /mnt/storj  In the main host create the file system to be used in the jail:
+zfs create tank/storj  Create fstat.
+				<a class="read-more" href="/post/storj/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/libx265/">libx265</a></h2>
+          <span class="post-date">Sep 14, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ffmpeg">ffmpeg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mp4">mp4</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mov">mov</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To reduce/compress a video size you could use:
+ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4  Be aware that libx265 is not supported in many players so you can always fallback to H.264:
+ffmpeg -i input.mov output.mp4   https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+ 
+				<a class="read-more" href="/post/libx265/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/favicon/">favicon</a></h2>
+          <span class="post-date">Jul 28, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/favicon">favicon</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ico">ico</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a favicon from a .png using imagemagick convert:
+convert favicon.png -define icon:auto-resize=64,48,32,16 favicon.ico  
+				<a class="read-more" href="/post/favicon/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/import-large-dump/">Import large dump</a></h2>
+          <span class="post-date">Jun 12, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dump">dump</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/source">source</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/csplit">csplit</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To import a large dump (~300GB) you could do:
+Split your file first:
+csplit -s -ftable dump.sql &quot;/-- Table structure for table/&quot; {999}  You could also use the pattern {*} but you need the gcsplit:
+pkg install coreutils   BSD csplit don&rsquo;t support {*}
+ Then try:
+gcsplit -s -ftable dump.sql &quot;/-- Table structure for table/&quot; {*}  Create small INSERT chunks:
+gsplit -a 3 -d -n l/200 table05 x_   l/N split into N files without splitting lines/records
+				<a class="read-more" href="/post/import-large-dump/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/delete-in-chunks/">Delete in chunks</a></h2>
+          <span class="post-date">Jun 12, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/delete">delete</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/chunks">chunks</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To delete a big/huge table in chunks, you could create this store procedure, but the performance at the end depends of how good/normalized is your database (indexes):
+ A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again. Such procedures are stored in the database data dictionary.
+ Connect to the database and select the database:
+mysql&gt; \u my_database Database changed  To list stored procedures
+				<a class="read-more" href="/post/delete-in-chunks/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bypass-allowtcpforwarding/">Bypass AllowTcpForwarding</a></h2>
+          <span class="post-date">May 11, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/portforward">portforward</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/socat">socat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/nc">nc</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To bypass AllowTcpForwarding no try using socat and nc:
+socat TCP-LISTEN:&lt;local port&gt;,reuseaddr,fork &quot;EXEC:ssh &lt;server&gt; nc localhost &lt;remote port&gt;&quot;  For example from your desktop run:
+socat TCP-LISTEN:8080,reuseaddr,fork &quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&quot;  This will listen on local port 8080 connect via ssh to 1.2.3.4 and use nc to connect 10.0.1.1:3000
+				<a class="read-more" href="/post/bypass-allowtcpforwarding/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rust-strip/">rust strip</a></h2>
+          <span class="post-date">May 8, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rust">rust</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/strip">strip</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To build &amp;&amp; strip a binary use:
+RUSTFLAGS='-C link-arg=-s' cargo build --release   strip removes or modifies the symbol table attached to the output of the assembler and link editor. This is useful to save space after a program has been debugged and to limit dynamically bound symbols.
+ 
+				<a class="read-more" href="/post/rust-strip/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sed-append/">sed append</a></h2>
+          <span class="post-date">Mar 29, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/append">append</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsd">bsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To append a line using sed that works on macOS:
+sed -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;'  If need to do it in multiple files, you could use find:
+ find . -name &quot;rc.conf&quot; -exec sed -i '' -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;' {} \;  https://stackoverflow.com/a/48406504/1135424
+				<a class="read-more" href="/post/sed-append/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+  <a class="btn next" href="/post/page/2/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ffmeg on IT notes</title>
+    <link>https://nbari.com/tags/ffmeg/</link>
+    <description>Recent content in ffmeg on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Sep 2017 16:09:44 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ffmeg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Plex FFmpeg</title>
+      <link>https://nbari.com/post/plex-ffmpeg/</link>
+      <pubDate>Sun, 24 Sep 2017 16:09:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/plex-ffmpeg/</guid>
+      <description>Using ffmpeg to avoid PLEX transcoding.
+ffmpeg -i input.mp4 \ -c:v libx264 \ -profile:v high \ -level 5 \ -crf 18 \ -maxrate 10M \ -bufsize 16M \ -pix_fmt yuv420p \ -vf &amp;quot;scale=iw*sar:ih, scale=&#39;if(gt(iw,ih),min(1920,iw),-1)&#39;:&#39;if(gt(iw,ih),-1,min(1080,ih))&#39;&amp;quot; \ -x264opts bframes=3:cabac=1 \ -movflags faststart \ -c:a libfdk_aac \ -b:a 320k \ -y output.mp4   If parts of the file reside on physically bad sectors, or for whatever reason, the OS cannot serve the whole file to FFmpeg try: ffmpeg -err_detect ignore_err -i input.</description>
+    </item>
+    
+  </channel>
+</rss>

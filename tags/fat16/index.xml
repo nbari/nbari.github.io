@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fat16 on IT notes</title>
+    <link>https://nbari.com/tags/fat16/</link>
+    <description>Recent content in fat16 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2020 16:26:45 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/fat16/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fat16</title>
+      <link>https://nbari.com/post/fat16/</link>
+      <pubDate>Mon, 23 Mar 2020 16:26:45 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/fat16/</guid>
+      <description>When trying to update a bios from an USB pen, probably you will need FAT16 or FAT32, to do this from macOS try:
+diskutil partitiondisk /dev/disk3 1 MBR &amp;quot;MS-DOS FAT16&amp;quot; &amp;quot;NONAME&amp;quot; 0B   /dev/disk3 - disk device to be partitioned, found with &amp;lsquo;diskutil list&amp;rsquo; 1 - number of partitions, optional, but if given must match MBR - partition Scheme (eg, DOS=MBR, Mac=GPT) MS-DOS FAT16 - partition type (or fat32) * NONAME - partition name 0B - partition size (0B=maximum)  Then:</description>
+    </item>
+    
+  </channel>
+</rss>

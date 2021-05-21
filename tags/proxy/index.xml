@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>proxy on IT notes</title>
+    <link>https://nbari.com/tags/proxy/</link>
+    <description>Recent content in proxy on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Feb 2020 14:48:39 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>redis over TLS</title>
+      <link>https://nbari.com/post/redis-over-tls/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/redis-over-tls/</guid>
+      <description>Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual</description>
+    </item>
+    
+    <item>
+      <title>Nginx Reverse Proxy Cache</title>
+      <link>https://nbari.com/post/nginx-reverse-proxy-cache/</link>
+      <pubDate>Thu, 10 Aug 2017 17:51:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-reverse-proxy-cache/</guid>
+      <description>This is the full configuration for nginx.conf:
+user www www; worker_processes auto; events { use kqueue; worker_connections 1024; } http { include mime.types; default_type application/octet-stream; sendfile on; tcp_nopush on; tcp_nodelay on; client_max_body_size 30M; keepalive_timeout 10 10; gzip on; gzip_static on; gzip_vary on; gzip_min_length 0; gzip_comp_level 9; gzip_buffers 16 8k; gzip_proxied any; gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml; charset utf-8; server_tokens off; server_name_in_redirect off; proxy_buffering on; proxy_cache_path /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off; proxy_buffer_size 8k; proxy_buffers 8 24k; server { listen 80; server_name _; location / { proxy_cache rubygems; proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504; proxy_cache_revalidate on; proxy_cache_min_uses 1; proxy_cache_lock on; proxy_cache_valid 200 301 304 2d; proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header Host rubygems.</description>
+    </item>
+    
+    <item>
+      <title>ssh proxy</title>
+      <link>https://nbari.com/post/ssh-proxy/</link>
+      <pubDate>Tue, 07 Feb 2017 11:54:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-proxy/</guid>
+      <description>SSH SOCKS5 proxy Route web traffic securely without a VPN using a SOCKS tunnel with ssh:
+$ ssh -D 8080 -f -C -q -N user@remote.host   -D 8080 tells ssh to launch a SOCKS server on port 8080 locally. -f Forks the process to the background. -C Compresses the data before sending it. -q Uses quiet mode. -N Tells SSH that no command will be sent once the tunnel is up.</description>
+    </item>
+    
+    <item>
+      <title>forward proxy</title>
+      <link>https://nbari.com/post/forward-proxy/</link>
+      <pubDate>Sat, 21 Jan 2017 17:42:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forward-proxy/</guid>
+      <description>nginx forward proxy Server configuration:
+server { listen 8080; location / { resolver 8.8.8.8; proxy_pass http://$http_host$uri$is_args$args; } error_page 500 502 503 504 /50x.html; location = /50x.html { root /usr/local/www/nginx-dist; } }  Client side On the browser configure the HTTP Proxy and port.
+Test by checking the the IP: https://trackip.net</description>
+    </item>
+    
+  </channel>
+</rss>

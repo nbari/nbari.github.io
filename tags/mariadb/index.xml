@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mariadb on IT notes</title>
+    <link>https://nbari.com/tags/mariadb/</link>
+    <description>Recent content in mariadb on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Apr 2019 19:29:55 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mariadb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>galera SOS</title>
+      <link>https://nbari.com/post/galera-sos/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/galera-sos/</guid>
+      <description>Check status of cluster: https://nbari.com/post/galera/
+Find process list not sleeping:
+SELECT user, time, state, info FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id;  Doing a heavy DDL (ALTER):
+SELECT * FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND info LIKE &#39;alter%&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id LIMIT 1;   DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row.</description>
+    </item>
+    
+    <item>
+      <title>Galera</title>
+      <link>https://nbari.com/post/galera/</link>
+      <pubDate>Wed, 06 Feb 2019 09:55:15 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/galera/</guid>
+      <description>To periodically check status of the cluster, create a script (/tmp/xx):
+#!/bin/sh mysql -e \ &amp;quot;SHOW GLOBAL STATUS WHERE Variable_name IN ( &#39;wsrep_cert_deps_distance&#39;, &#39;wsrep_cluster_size&#39;, &#39;wsrep_cluster_status&#39;, &#39;wsrep_connected&#39;, &#39;wsrep_evs_delayed&#39;, &#39;wsrep_flow_control_paused&#39;, &#39;wsrep_flow_control_paused_ns&#39;, &#39;wsrep_flow_control_recv&#39;, &#39;wsrep_flow_control_sent&#39;, &#39;wsrep_local_index&#39;, &#39;wsrep_local_state&#39;, &#39;wsrep_local_state_comment&#39;, &#39;wsrep_ready&#39;, &#39;wsrep_replicated&#39;, &#39;wsrep_replicated_bytes&#39;);&amp;quot;   if credentials are in a custom path: mysql --defaults-file=/path/to/.my.cnf -s -e
+ And run it with:
+watch sh /tmp/xx  If single node alive (ERROR 1047 WSREP has not yet prepared node for application use):</description>
+    </item>
+    
+  </channel>
+</rss>

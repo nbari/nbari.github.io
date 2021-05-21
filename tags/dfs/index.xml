@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dfs on IT notes</title>
+    <link>https://nbari.com/tags/dfs/</link>
+    <description>Recent content in dfs on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Jun 2018 21:29:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/dfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>moosefs</title>
+      <link>https://nbari.com/post/moosefs/</link>
+      <pubDate>Tue, 12 Jun 2018 21:29:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/moosefs/</guid>
+      <description>Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
+Install the required packages:
+pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
+pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
+X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
+MFSM NEW  Create a pool to share:</description>
+    </item>
+    
+  </channel>
+</rss>

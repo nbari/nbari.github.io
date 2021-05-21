@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tunnel on IT notes</title>
+    <link>https://nbari.com/tags/tunnel/</link>
+    <description>Recent content in tunnel on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Feb 2017 11:54:20 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/tunnel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh proxy</title>
+      <link>https://nbari.com/post/ssh-proxy/</link>
+      <pubDate>Tue, 07 Feb 2017 11:54:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-proxy/</guid>
+      <description>SSH SOCKS5 proxy Route web traffic securely without a VPN using a SOCKS tunnel with ssh:
+$ ssh -D 8080 -f -C -q -N user@remote.host   -D 8080 tells ssh to launch a SOCKS server on port 8080 locally. -f Forks the process to the background. -C Compresses the data before sending it. -q Uses quiet mode. -N Tells SSH that no command will be sent once the tunnel is up.</description>
+    </item>
+    
+  </channel>
+</rss>

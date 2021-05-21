@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dnsmasq on IT notes</title>
+    <link>https://nbari.com/tags/dnsmasq/</link>
+    <description>Recent content in dnsmasq on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Sep 2016 12:27:32 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/dnsmasq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dnsmasq</title>
+      <link>https://nbari.com/post/dnsmasq/</link>
+      <pubDate>Fri, 30 Sep 2016 12:27:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dnsmasq/</guid>
+      <description>dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&amp;rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on</description>
+    </item>
+    
+  </channel>
+</rss>

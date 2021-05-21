@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>he on IT notes</title>
+    <link>https://nbari.com/tags/he/</link>
+    <description>Recent content in he on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Dec 2016 16:50:30 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/he/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ipv6 tunnelbroker</title>
+      <link>https://nbari.com/post/ipv6-tunnelbroker/</link>
+      <pubDate>Thu, 01 Dec 2016 16:50:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-tunnelbroker/</guid>
+      <description>6in4  6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets whose IP headers have the IP protocol number set to 41. https://en.wikipedia.org/wiki/6in4
+ &amp;ldquo;6to4&amp;rdquo; is a tunneling method that is only interesting for reaching IPv6-only services. And 6to4 makes sense only if one has a public IPv4 address. As a rule, you only need to enable &amp;ldquo;6to4&amp;rdquo; if you want to access services that are only IPv6.</description>
+    </item>
+    
+  </channel>
+</rss>

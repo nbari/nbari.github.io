@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wireshark on IT notes</title>
+    <link>https://nbari.com/tags/wireshark/</link>
+    <description>Recent content in wireshark on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Mar 2019 15:42:20 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/wireshark/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh wireshark</title>
+      <link>https://nbari.com/post/ssh-wireshark/</link>
+      <pubDate>Sun, 10 Mar 2019 15:42:20 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-wireshark/</guid>
+      <description>To analyze traffic remotely over ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w -| wireshark -k -i -  In case need an specific port:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - &#39;port 5984&#39; | wireshark -k -i -  To ignore trafic from ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - &#39;not port 22&#39; | wireshark -k -i -  Or:</description>
+    </item>
+    
+  </channel>
+</rss>

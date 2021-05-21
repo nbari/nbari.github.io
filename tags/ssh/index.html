@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> ssh &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/ssh/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-comment/">ssh comment</a></h2>
+          <span class="post-date">Apr 17, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/comment">comment</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a new pair of ssh keys RSA with a custom comment:
+ssh-keygen -C &quot;monkey&quot; -t rsa -b 4096 -o -a 100 -f /tmp/monkey  
+				<a class="read-more" href="/post/ssh-comment/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-only-password/">ssh only password</a></h2>
+          <span class="post-date">Apr 14, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/password">password</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using ssh if you only need to use password (no keys):
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no &lt;host&gt;  
+				<a class="read-more" href="/post/ssh-only-password/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bypass-allowtcpforwarding/">Bypass AllowTcpForwarding</a></h2>
+          <span class="post-date">May 11, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/portforward">portforward</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/socat">socat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/nc">nc</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To bypass AllowTcpForwarding no try using socat and nc:
+socat TCP-LISTEN:&lt;local port&gt;,reuseaddr,fork &quot;EXEC:ssh &lt;server&gt; nc localhost &lt;remote port&gt;&quot;  For example from your desktop run:
+socat TCP-LISTEN:8080,reuseaddr,fork &quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&quot;  This will listen on local port 8080 connect via ssh to 1.2.3.4 and use nc to connect 10.0.1.1:3000
+				<a class="read-more" href="/post/bypass-allowtcpforwarding/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sudo-ssh_connection/">sudo SSH_CONNECTION</a></h2>
+          <span class="post-date">Jul 17, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sudo">sudo</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/environment">environment</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using ssh, if then doing something like sudo -i the environment vars are gone, to preserve modify your sudoers (/usr/local/etc/sudoers or /usr/local/etc/sudoers.d/devops) and add something like:
+Defaults env_keep += &quot;SSH_TTY SSH_CONNECTION SSH_CLIENT&quot;  In this case, it will preserve your SSH environment vars.
+				<a class="read-more" href="/post/sudo-ssh_connection/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-wireshark/">ssh wireshark</a></h2>
+          <span class="post-date">Mar 10, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tcpdump">tcpdump</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/wireshark">wireshark</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To analyze traffic remotely over ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w -| wireshark -k -i -  In case need an specific port:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - 'port 5984' | wireshark -k -i -  To ignore trafic from ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - 'not port 22' | wireshark -k -i -  Or:
+				<a class="read-more" href="/post/ssh-wireshark/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/block-ssh-mac/">Block SSH on MacOS</a></h2>
+          <span class="post-date">Dec 1, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pf">pf</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/firewall">firewall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/managed">managed</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &quot;echo 'block in log quick proto tcp from any to any port 22' &gt;&gt; /etc/pf.conf&quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.
+				<a class="read-more" href="/post/block-ssh-mac/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-ssh/">Git SSH</a></h2>
+          <span class="post-date">Aug 29, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bare">bare</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a git repository and access to it via ssh:
+$ ssh your.host $ mkdir my-new-repo $ cd my-new-repo $ git --bare init  To access your repo (clone it):
+$ git clone ssh://user@your.host:2222/~user/my-new-repo  
+				<a class="read-more" href="/post/git-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-canonicaldomains/">ssh CanonicalDomains</a></h2>
+          <span class="post-date">May 30, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/canonicaldomains">CanonicalDomains</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				SSH Canonicalization
+CanonicalDomains example.com example.net example.org # CanonicalizeFallbackLocal no CanonicalizeHostname yes Host *.example.com IdentityFile ~/.ssh/exampleCOM User foo Host *.example.net IdentityFile ~/.ssh/exampleNET User foo Host *.example.org User foo IdentityFile ~/.ssh/exampleORG  more info: https://dotfiles.tnetconsulting.net/articles/2016/0109/ssh-canonicalization.html
+				<a class="read-more" href="/post/ssh-canonicaldomains/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-permissions-are-too-open/">ssh permissions are too open</a></h2>
+          <span class="post-date">Mar 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/chmod">chmod</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/find">find</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To set mode 0400 to all your ssh keys:
+$ find ~/.ssh/* -type f -name &quot;id*&quot; -not -iname &quot;*.pub&quot; -exec chmod 0400 {} \+  
+				<a class="read-more" href="/post/ssh-permissions-are-too-open/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/usekeychain/">UseKeychain</a></h2>
+          <span class="post-date">Feb 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/keychain">keychain</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To save SSH keys in macOS Sierra keychain add this to ~/.ssh/config:
+Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
+Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.
+				<a class="read-more" href="/post/usekeychain/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-update-host-keys/">ssh update Host Keys</a></h2>
+          <span class="post-date">Dec 26, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/keys">keys</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create new ssh keys on the server:
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa -b 521  To check the fingerprint:
+ssh-keygen -lf ssh_host_ecdsa_key  On the client side:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed.
+				<a class="read-more" href="/post/ssh-update-host-keys/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/two-factor-authentication-with-ssh/">two factor authentication with ssh</a></h2>
+          <span class="post-date">Jun 3, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/2fa">2FA</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Two-Factor-Authentication &ldquo;2FA&rdquo; with SSH Install google authenticator and libqrencode:
+pkg install pam_google_authenticator pkg install libqrencode  Edit /etc/pam.d/sshd an add the following line to the auth section:
+# auth auth sufficient pam_opie.so no_warn no_fake_prompts auth requisite pam_opieaccess.so no_warn allow_local #auth sufficient pam_krb5.so no_warn try_first_pass #auth sufficient pam_ssh.so no_warn try_first_pass #auth required pam_unix.so no_warn try_first_pass auth required /usr/local/lib/pam_google_authenticator.so Add this to/etc/ssh/sshd_config:
+CallengeResponseAuthentication yes UsePAM yes AuthenticationMethods publickey,keyboard-interactive  This setup will do a &ldquo;publickey + verification code&rdquo;, without password, in case you require password edit the /etc/pam.
+				<a class="read-more" href="/post/two-factor-authentication-with-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pdsh/">pdsh</a></h2>
+          <span class="post-date">Jun 3, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				pdsh - issue commands to groups of hosts in parallel
+Install:
+brew install pdsh  Usage:
+pdsh -R ssh -w ^servers.txt &quot;&lt;command&gt;&quot;  In where servers.txt is something like:
+10.8.4.2 10.8.4.3 10.8.4.4  one-liner:
+pdsh -b -w &quot;10.8.4.2, 10.8.4.3, 10.8.4.4&quot; &quot;&lt;command&gt;&quot;   -b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)
+ 
+				<a class="read-more" href="/post/pdsh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/haproxy-ssh/">haproxy ssh</a></h2>
+          <span class="post-date">May 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/haproxy">haproxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				HTTPS and SSH on the same port Using HAProxy to server SSH and SSL available on the same port:
+global maxconn 1000000 spread-checks 3 log /var/run/log local0 notice daemon tune.ssl.default-dh-param 2048 defaults mode http balance roundrobin option http-server-close option abortonclose option dontlognull option redispatch timeout check 3s timeout client 30s # Client and server timeout must match the longest timeout connect 5s timeout http-keep-alive 5s timeout http-request 10s # A complete request may never take that long.
+				<a class="read-more" href="/post/haproxy-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux-ssh/">tmux ssh</a></h2>
+          <span class="post-date">May 19, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
+tmux script #!/bin/sh  TARGET=&#34;tmux-ssh&#34; SSH_USER=&#34;devops&#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &#34;ssh -l ${SSH_USER}${line}&#34; else tmux split-window -t &#34;${TARGET}&#34; &#34;ssh -l ${SSH_USER}${line}&#34; &amp;&amp; \  tmux select-layout -t &#34;${TARGET}&#34; tiled fi let i++ done &lt; &#34;${1:-/dev/stdin}&#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:
+				<a class="read-more" href="/post/tmux-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bastion-ssh/">bastion ssh</a></h2>
+          <span class="post-date">Apr 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bastion">bastion</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/multiplex">multiplex</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				ProxyJump This is the easiest (new) way:
+Host 10.* ProxyJump user@bastion.tld:2222  Using ProxyCommand Replace your.bastion.tld with your bastion server and set your bastion username in the ProxyCommand:
+Host bastion Hostname your.bastion.tld ForwardAgent yes Host 10.10.* ProxyCommand ssh &lt;your-username&gt;@bastion -W %h:%p  example To login with user devops to server 10.10.3.4:
+$ ssh -l devops 10.10.3.4  or
+$ ssh devops@10.10.3.4  SSH sockets To speed up more when using the bastion host things this can be added at the top of the ~/.
+				<a class="read-more" href="/post/bastion-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-ed25519/">ssh ed25519</a></h2>
+          <span class="post-date">Mar 8, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ed25519">ed25519</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/eddsa">EdDSA</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Generate your new ssh ed25519 key:
+$ ssh-keygen -o -a 1000 -t ed25519  
+				<a class="read-more" href="/post/ssh-ed25519/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-proxy/">ssh proxy</a></h2>
+          <span class="post-date">Feb 7, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tunnel">tunnel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				SSH SOCKS5 proxy Route web traffic securely without a VPN using a SOCKS tunnel with ssh:
+$ ssh -D 8080 -f -C -q -N user@remote.host   -D 8080 tells ssh to launch a SOCKS server on port 8080 locally. -f Forks the process to the background. -C Compresses the data before sending it. -q Uses quiet mode. -N Tells SSH that no command will be sent once the tunnel is up.
+				<a class="read-more" href="/post/ssh-proxy/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-escape-sequences/">ssh escape sequences</a></h2>
+          <span class="post-date">Feb 5, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				While using ssh your connection may become idle or unresponsive in any case instead of waiting you can simple terminate the connection by sending a escape sequence:
+~.  SSH escape sequences    sequence description     ~. terminate connection (and any multiplexed sessions)   ~B send a BREAK to the remote system   ~C open a command line   ~R request rekey   ~V/v decrease/increase verbosity (LogLevel)   ~^Z suspend ssh   ~# list forwarded connections   ~&amp; background ssh (when waiting for connections to terminate)   ~?
+				<a class="read-more" href="/post/ssh-escape-sequences/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-rsa-public-key-encryption/">ssh rsa public key encryption</a></h2>
+          <span class="post-date">Sep 29, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Encrypt a file using ssh public keys.
+Create ssh public key in PEM format:
+ ssh-keygen -f id_rsa.pub -e -m PKCS8 &gt; id_rsa.pem.pub  Use openssl to encrypt/decrypt
+Encrypt:
+openssl rsautl -encrypt -pubin -inkey ~/.ssh/id_rsa.pem.pub -ssl -in test.txt -out test.txt.enc  Decrypt:
+openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in test.txt.enc -out test.txt.enc.txt  
+				<a class="read-more" href="/post/ssh-rsa-public-key-encryption/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+  <a class="btn next" href="/tags/ssh/page/2/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hsts on IT notes</title>
+    <link>https://nbari.com/tags/hsts/</link>
+    <description>Recent content in hsts on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 Feb 2017 15:01:22 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/hsts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HSTS</title>
+      <link>https://nbari.com/post/hsts/</link>
+      <pubDate>Mon, 06 Feb 2017 15:01:22 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/hsts/</guid>
+      <description>http://&amp;hellip; will change to https://&amp;hellip; If you own a site that you would like to see included in the preloaded HSTS list you can submit it at https://hstspreload.appspot.com.
+verify HTTP Strict Transport Security (HSTS) header with curl $ curl -Is https://google.com | grep -i stric Strict-Transport-Security: max-age=15552000; includeSubDomains  Remove domain from chrome Search for the domain in: chrome://net-internals/#hsts and delete it.
+HTTP Strict Transport Security The issue that HSTS addresses is that users tend to type http:// at best, and omit the scheme entirely most of the time.</description>
+    </item>
+    
+  </channel>
+</rss>

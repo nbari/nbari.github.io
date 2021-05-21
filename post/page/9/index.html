@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Posts &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/post/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/strace/">Strace</a></h2>
+          <span class="post-date">Aug 31, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/strace">strace</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using strace, to trace child processes, use option -f, example:
+strace -f ls  
+				<a class="read-more" href="/post/strace/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/webcrypto-and-go/">Webcrypto and Go</a></h2>
+          <span class="post-date">Aug 17, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/crypto">crypto</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aesgcm">aesgcm</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Encrypt on client side using javascript WebCrypto and decrypt on backend using go:
+javascript code:
+async function aesGcmEncrypt(plaintext, password) { const pwUtf8 = new TextEncoder().encode(password); // encode password as UTF-8  const pwHash = await crypto.subtle.digest(&#39;SHA-256&#39;, pwUtf8); // hash the password  const iv = crypto.getRandomValues(new Uint8Array(12)); // get 96-bit random iv  const alg = { name: &#39;AES-GCM&#39;, iv: iv }; // specify algorithm to use  const key = await crypto.
+				<a class="read-more" href="/post/webcrypto-and-go/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/merge-terraform-states/">Merge Terraform States</a></h2>
+          <span class="post-date">Aug 13, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/terraform">terraform</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/s3">S3</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/state">state</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If states are being stored in S3, after importing a resource, for example:
+$ terraform import aws_customer_gateway.main cgw-b4dc3961  You will end with a terraform.tfstate that differs from the one in the S3 bucket.
+To merge the remote and local state do this:
+$ terraform state pull &gt; terraform.tfstate $ terraform import aws_customer_gateway.main cgw-b4dc3961 $ terraform state push terraform.tfstate  First get the current s3 state:
+$ terraform state pull &gt; terraform.
+				<a class="read-more" href="/post/merge-terraform-states/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/terraform-full-vpc/">Terraform Full Vpc</a></h2>
+          <span class="post-date">Aug 12, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/terraform">terraform</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vpc">vpc</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &#34;aws_vpc&#34; &#34;test&#34; { cidr_block = &#34;10.100.0.0/16&#34; enable_dns_hostnames = &#34;true&#34; enable_dns_support = &#34;true&#34; tags { Name = &#34;test&#34; } } output &#34;vpc_id&#34; { value = &#34;${aws_vpc.test.id}&#34; } resource &#34;aws_internet_gateway&#34; &#34;igw&#34; { vpc_id = &#34;${aws_vpc.test.id}&#34; tags { Name = &#34;internet gateway&#34; } } resource &#34;aws_subnet&#34; &#34;public-a&#34; { vpc_id = &#34;${aws_vpc.test.id}&#34; cidr_block = &#34;10.100.0.0/24&#34; availability_zone = &#34;eu-central-1a&#34; tags { Name = &#34;public A&#34; } } output &#34;subnet-public-a&#34; { value = &#34;${aws_subnet.
+				<a class="read-more" href="/post/terraform-full-vpc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nginx-reverse-proxy-cache/">Nginx Reverse Proxy Cache</a></h2>
+          <span class="post-date">Aug 10, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				This is the full configuration for nginx.conf:
+user www www; worker_processes auto; events { use kqueue; worker_connections 1024; } http { include mime.types; default_type application/octet-stream; sendfile on; tcp_nopush on; tcp_nodelay on; client_max_body_size 30M; keepalive_timeout 10 10; gzip on; gzip_static on; gzip_vary on; gzip_min_length 0; gzip_comp_level 9; gzip_buffers 16 8k; gzip_proxied any; gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml; charset utf-8; server_tokens off; server_name_in_redirect off; proxy_buffering on; proxy_cache_path /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off; proxy_buffer_size 8k; proxy_buffers 8 24k; server { listen 80; server_name _; location / { proxy_cache rubygems; proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504; proxy_cache_revalidate on; proxy_cache_min_uses 1; proxy_cache_lock on; proxy_cache_valid 200 301 304 2d; proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header Host rubygems.
+				<a class="read-more" href="/post/nginx-reverse-proxy-cache/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/running-multiple-instances-of-the-same-app-in-macos/">Running Multiple Instances of The Same App In MacOS</a></h2>
+          <span class="post-date">Jul 30, 2017</span>
+		  
+		  
+		  	<div class="summary">
+				Open a terminal and type:
+open -n /Applications/ApplicationName.app  Change &ldquo;ApplicationName&rdquo; with your application, example:
+open -n /Applications/PopcornTime.app  
+				<a class="read-more" href="/post/running-multiple-instances-of-the-same-app-in-macos/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/syslogd-8-bit/">Syslogd 8 bit</a></h2>
+          <span class="post-date">Jul 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">FreeBSD</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslogd">syslogd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/utf8">utf8</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If want to log full utf-8 strings &ldquo;emoji&rsquo;s&rdquo; use the option -8, example on /etc/rc.conf:
+syslogd_flags=&quot;-ssC8&quot;  The optiosn are:
+ -s Operate in secure mode. Do not log messages from remote machines. If specified twice, no network socket will be opened at all, which also disables logging to remote machines. -C Create log files that do not exist (permission is set to 0600). -8 Tells syslogd not to interfere with 8-bit data.
+				<a class="read-more" href="/post/syslogd-8-bit/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/slave-is-running/">Slave Is Running</a></h2>
+          <span class="post-date">Jul 19, 2017</span>
+		  
+		  
+		  	<div class="summary">
+				Script to check if mysql replica (slave) is running:
+#!/bin/sh  SLAVE_IS_RUNNING=$(/usr/local/bin/mysql -e &#34;SHOW SLAVE STATUS\G&#34; | grep Slave_SQL_Running: | awk &#39;{print $2}&#39;) if [ &#34;$SLAVE_IS_RUNNING&#34; != &#34;Yes&#34; ] then # your options here /usr/local/bin/mysql -e &#34;STOP SLAVE; SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; START SLAVE;&#34; fi The username and password can be stored in a .my.cnf file, for example in /root/.my.cnf:
+[client] user=dbadmin password=secret  
+				<a class="read-more" href="/post/slave-is-running/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/curl-response-time/">Curl Response Time</a></h2>
+          <span class="post-date">Jun 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/curl">curl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/time">time</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Measure response time with curl Using the following command:
+curl -o /dev/null -s -w %{time_total} http://www.google.com  In your .zshrc this can be used:
+curl_time() { curl -o /dev/null -Ls -w &#34; \ time_namelookup: %{time_namelookup}\n \ time_connect: %{time_connect}\n \ time_appconnect: %{time_appconnect}\n \ time_pretransfer: %{time_pretransfer}\n \ time_redirect: %{time_redirect}\n \ time_starttransfer: %{time_starttransfer}\n \ ----------\n \ time_total: %{time_total}\n&#34; &#34;$1&#34; } Will output something like:
+$ curl_time https://google.com time_namelookup: 0.014 time_connect: 0.024 time_appconnect: 0.072 time_pretransfer: 0.
+				<a class="read-more" href="/post/curl-response-time/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/grpc/">grpc</a></h2>
+          <span class="post-date">Jun 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/grpc">grpc</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/protobuf">protobuf</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				What is gRPC? A remote procedure call (RPC) framework that by default uses protocol buffers as the Interface Definition Language (IDL). One of the initial benefits is the ability to be able to define and codify your service requirements via a .proto file.
+It uses HTTP/2 for transport but is not yet available for use within the browser, therefore currently mainly in use for Inter-Process Communication (IPC) within microservices.
+The workflow to create a gRPC service  Create the service definition and payload structure in the .
+				<a class="read-more" href="/post/grpc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/two-factor-authentication-with-ssh/">two factor authentication with ssh</a></h2>
+          <span class="post-date">Jun 3, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/2fa">2FA</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Two-Factor-Authentication &ldquo;2FA&rdquo; with SSH Install google authenticator and libqrencode:
+pkg install pam_google_authenticator pkg install libqrencode  Edit /etc/pam.d/sshd an add the following line to the auth section:
+# auth auth sufficient pam_opie.so no_warn no_fake_prompts auth requisite pam_opieaccess.so no_warn allow_local #auth sufficient pam_krb5.so no_warn try_first_pass #auth sufficient pam_ssh.so no_warn try_first_pass #auth required pam_unix.so no_warn try_first_pass auth required /usr/local/lib/pam_google_authenticator.so Add this to/etc/ssh/sshd_config:
+CallengeResponseAuthentication yes UsePAM yes AuthenticationMethods publickey,keyboard-interactive  This setup will do a &ldquo;publickey + verification code&rdquo;, without password, in case you require password edit the /etc/pam.
+				<a class="read-more" href="/post/two-factor-authentication-with-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pdsh/">pdsh</a></h2>
+          <span class="post-date">Jun 3, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				pdsh - issue commands to groups of hosts in parallel
+Install:
+brew install pdsh  Usage:
+pdsh -R ssh -w ^servers.txt &quot;&lt;command&gt;&quot;  In where servers.txt is something like:
+10.8.4.2 10.8.4.3 10.8.4.4  one-liner:
+pdsh -b -w &quot;10.8.4.2, 10.8.4.3, 10.8.4.4&quot; &quot;&lt;command&gt;&quot;   -b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)
+ 
+				<a class="read-more" href="/post/pdsh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aws-network-acl/">aws network acl</a></h2>
+          <span class="post-date">May 31, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/network-acl">network ACL</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				AWS network ACL deny rule To block full access from an list of IP&rsquo;s within AWS:
+$ count=0; for i in `cat ips.txt` count=$((count + 1)) &amp;&amp; aws ec2 create-network-acl-entry --network-acl-id acl-XXXXXXXX --ingress --rule-number $count --protocol all --port-range From=0,To=65535 --cidr-block $i/32 --rule-action deny In where ips.txt is a file containing the IP addresses, for example:
+169.254.2.2 169.254.1.2 ...  WARNING The default limit for a single network ACL rules set by AWS is 20 for ingress and 20 for egress rules including the default rules.
+				<a class="read-more" href="/post/aws-network-acl/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/haproxy-ssh/">haproxy ssh</a></h2>
+          <span class="post-date">May 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/haproxy">haproxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				HTTPS and SSH on the same port Using HAProxy to server SSH and SSL available on the same port:
+global maxconn 1000000 spread-checks 3 log /var/run/log local0 notice daemon tune.ssl.default-dh-param 2048 defaults mode http balance roundrobin option http-server-close option abortonclose option dontlognull option redispatch timeout check 3s timeout client 30s # Client and server timeout must match the longest timeout connect 5s timeout http-keep-alive 5s timeout http-request 10s # A complete request may never take that long.
+				<a class="read-more" href="/post/haproxy-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aws-meta-data/">aws meta data</a></h2>
+          <span class="post-date">May 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/meta-data">meta-data</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				AWS meta-data Instance metadata is data about your instance that you can use to configure or manage the running instance. Instance metadata is divided into categories. For more information, see Instance Metadata Categories.
+To view all the categories:
+curl http://169.254.169.254/latest/meta-data/  To obtain the private IP address:
+curl http://169.254.169.254/latest/meta-data/local-ipv4  To obtain the public IP address:
+curl http://169.254.169.254/latest/meta-data/public-ipv4  To obtain the ssh public key:
+curl http://169.254.169.254/1.0/meta-data/public-keys/0/openssh-key  To obtain the instance name:
+				<a class="read-more" href="/post/aws-meta-data/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mount-nfs/">mount nfs</a></h2>
+          <span class="post-date">May 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nfs">nfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bg">bg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/late">late</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/fstab">fstab</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To avoid hanging out the system while mounting NFS shares on boot time add the option bg to the /etc/fstab, example:
+192.168.1.2:/4T /plex/4T nfs rw,bg 0 0  This will help to boot and in background continue trying to mount in case of getting a &ldquo;time out&rdquo;
+From the man page: mount_nfs
+bg If an initial attempt to contact the server fails, fork off a child to keep trying the mount in the background.
+				<a class="read-more" href="/post/mount-nfs/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aax2m4b/">aax2m4b</a></h2>
+          <span class="post-date">May 20, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/aax">aax</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/audible">audible</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/m4a">m4a</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/m4b">m4b</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ffmpeg">ffmpeg</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Convert an audiobook .aax to .m4b using ffmpeg
+brew install chromedriver ffmpeg sudo easy_install pip pip install selenium requests git clone https://github.com/inAudible-NG/audible-activator cd audible-activator sed -i &#39;&#39; &#39;s,chromedriver_path = &#34;./chromedriver&#34;,chromedriver_path = &#34;/usr/local/bin/chromedriver&#34;,&#39; audible-activator.py ./audible-activator.py When running audible-activator.py It will ask for the audible username/password it will open chrome, and when finish print the activation bytes:
+$ ./audible-activator.py Username: your@email Password: [*] Player ID is 1xmjyl5rSw0yVb/olWBYuU/NBxk= activation_bytes: b97f4709 One having the activation_bytes, use ffmpeg:
+				<a class="read-more" href="/post/aax2m4b/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux-ssh/">tmux ssh</a></h2>
+          <span class="post-date">May 19, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
+tmux script #!/bin/sh  TARGET=&#34;tmux-ssh&#34; SSH_USER=&#34;devops&#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &#34;ssh -l ${SSH_USER}${line}&#34; else tmux split-window -t &#34;${TARGET}&#34; &#34;ssh -l ${SSH_USER}${line}&#34; &amp;&amp; \  tmux select-layout -t &#34;${TARGET}&#34; tiled fi let i++ done &lt; &#34;${1:-/dev/stdin}&#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:
+				<a class="read-more" href="/post/tmux-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/beanstalkd/">beanstalkd</a></h2>
+          <span class="post-date">May 18, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/beanstalkd">beanstalkd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/queue">queue</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/jobs">jobs</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.
+				<a class="read-more" href="/post/beanstalkd/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-db-size/">mysql db size</a></h2>
+          <span class="post-date">May 7, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				How big is your data:
+SELECT IFNULL(B.engine,&#39;Total&#39;) &#34;Storage Engine&#34;, CONCAT(LPAD(REPLACE(FORMAT(B.DSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Data Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.ISize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Index Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.TSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Table Size&#34; FROM (SELECT engine,SUM(data_length) DSize,SUM(index_length) ISize, SUM(data_length+index_length) TSize FROM information_schema.tables WHERE table_schema NOT IN (&#39;mysql&#39;,&#39;information_schema&#39;,&#39;performance_schema&#39;) AND engine IS NOT NULL GROUP BY engine WITH ROLLUP) B, (SELECT 3 pw) A ORDER BY TSize; This will print something like:
++----------------+----------------------+----------------------+----------------------+ | Storage Engine | Data Size | Index Size | Table Size | +----------------+----------------------+----------------------+----------------------+ | InnoDB | 10.
+				<a class="read-more" href="/post/mysql-db-size/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/8/">Newer</a>  
+  <a class="btn next" href="/post/page/10/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

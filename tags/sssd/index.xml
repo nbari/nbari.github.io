@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sssd on IT notes</title>
+    <link>https://nbari.com/tags/sssd/</link>
+    <description>Recent content in sssd on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Feb 2018 15:38:30 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sssd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ldap_auth_disable_tls_never_use_in_production</title>
+      <link>https://nbari.com/post/ldap_auth_disable_tls_never_use_in_production/</link>
+      <pubDate>Wed, 21 Feb 2018 15:38:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ldap_auth_disable_tls_never_use_in_production/</guid>
+      <description>To use sssd disabling TLS ( sssd doesn&amp;rsquo;t work without TLS but there is this undocumented option you can use ):
+ldap_auth_disable_tls_never_use_in_production = true  In case you get this error:
+Attribute &#39;ldap_auth_disable_tls_never_use_in_production&#39; is not allowed in section  Try running this:
+authconfig --enablemkhomedir --enablesssdauth --updateall  The enablemkhomedir is a plus
+If when running authconfig your /etc/sssd/sssd.conf gets overwritten, set to no this options:
+USELDAP=no USELDAPAUTH=no  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>centos8 on IT notes</title>
+    <link>https://nbari.com/tags/centos8/</link>
+    <description>Recent content in centos8 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Apr 2021 16:30:51 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/centos8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>yumdownloader</title>
+      <link>https://nbari.com/post/yumdownloader/</link>
+      <pubDate>Wed, 07 Apr 2021 16:30:51 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/yumdownloader/</guid>
+      <description>To download rpms for using them in an offline environment, install first yumdownloader:
+yum install yum-utils  Create a directory to store the rpm&#39;s:
+mkdir /tmp/rpms  Download the rpms:
+yumdownloader --destdir=/tmp/rpms --resolve MariaDB-server galera-4 MariaDB-client MariaDB-shared MariaDB-backup MariaDB-common  </description>
+    </item>
+    
+  </channel>
+</rss>

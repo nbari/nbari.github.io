@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>beanstalkd on IT notes</title>
+    <link>https://nbari.com/tags/beanstalkd/</link>
+    <description>Recent content in beanstalkd on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 May 2017 20:14:57 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/beanstalkd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>beanstalkd</title>
+      <link>https://nbari.com/post/beanstalkd/</link>
+      <pubDate>Thu, 18 May 2017 20:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/beanstalkd/</guid>
+      <description>Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.</description>
+    </item>
+    
+  </channel>
+</rss>

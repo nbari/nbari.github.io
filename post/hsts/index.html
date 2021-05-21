@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> HSTS &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/hsts/">HSTS</a></h2>
+          <span class="post-date">Feb 6, 2017 </span>
+          <div class="post-content">
+            <h1 id="http-will-change-to-https">http://&hellip; will change to https://&hellip;</h1>
+<p>If you own a site that you would like to see included in the preloaded HSTS list
+you can submit it at <a href="https://hstspreload.appspot.com">https://hstspreload.appspot.com</a>.</p>
+<h2 id="verify-http-strict-transport-security-hsts-header-with-curl">verify HTTP Strict Transport Security (HSTS) header with curl</h2>
+<pre><code>$ curl -Is https://google.com | grep -i stric
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+</code></pre>
+<h2 id="remove-domain-from-chrome">Remove domain from chrome</h2>
+<p>Search for the domain in: <a href="chrome://net-internals/#hsts">chrome://net-internals/#hsts</a>
+and delete it.</p>
+<h2 id="http-strict-transport-security">HTTP Strict Transport Security</h2>
+<p>The issue that HSTS addresses is that users tend to type http:// at best, and
+omit the scheme entirely most of the time. In the latter case, browsers will
+insert http:// for them.</p>
+<p>However, HTTP is insecure. An attacker can grab that connection, manipulate
+it and only the most eagle eyed users might notice that it redirected to
+<a href="https://www.bank0famerica.com">https://www.bank0famerica.com</a> or some such. From then on, the user is under the
+control of the attacker, who can intercept passwords etc at will.</p>
+<p>An HSTS enabled server can include the following header in an HTTPS reply:</p>
+<p>Strict-Transport-Security: max-age=16070400; includeSubDomains</p>
+<p>When the browser sees this, it will remember, for the given number of seconds,
+that the current domain should only be contacted over HTTPS. In the future, if
+the user types http:// or omits the scheme, HTTPS is the default. In fact, all
+requests for URLs in the current domain will be redirected to HTTPS. (So you
+have to make sure that you can serve them all!).</p>
+<p>More info: <a href="https://www.chromium.org/hsts">https://www.chromium.org/hsts</a></p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/ssh-escape-sequences/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/ssh-proxy/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

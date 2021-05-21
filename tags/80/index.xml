@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>80 on IT notes</title>
+    <link>https://nbari.com/tags/80/</link>
+    <description>Recent content in 80 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Dec 2017 19:09:58 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>80</title>
+      <link>https://nbari.com/post/80/</link>
+      <pubDate>Mon, 11 Dec 2017 19:09:58 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/80/</guid>
+      <description>To start an application on port 80 being not root:
+sysctl net.inet.ip.portrange.reservedhigh=79  That will allow to bind an application in any port &amp;gt; 79, to allow any port:
+sysctl net.inet.ip.portrange.reservedhigh=0  Add this to /etc/sysctl.conf to keep changes persistent across reboots:
+net.inet.ip.portrange.reservedhigh=79  </description>
+    </item>
+    
+  </channel>
+</rss>

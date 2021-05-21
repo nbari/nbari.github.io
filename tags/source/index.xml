@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>source on IT notes</title>
+    <link>https://nbari.com/tags/source/</link>
+    <description>Recent content in source on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2020 21:59:02 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/source/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Import large dump</title>
+      <link>https://nbari.com/post/import-large-dump/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/import-large-dump/</guid>
+      <description>To import a large dump (~300GB) you could do:
+Split your file first:
+csplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {999}  You could also use the pattern {*} but you need the gcsplit:
+pkg install coreutils   BSD csplit don&amp;rsquo;t support {*}
+ Then try:
+gcsplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {*}  Create small INSERT chunks:
+gsplit -a 3 -d -n l/200 table05 x_   l/N split into N files without splitting lines/records</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>letsencrypt on IT notes</title>
+    <link>https://nbari.com/tags/letsencrypt/</link>
+    <description>Recent content in letsencrypt on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Aug 2016 12:25:18 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/letsencrypt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>letsencrypt &#43; cloudfare using DNS</title>
+      <link>https://nbari.com/post/letsencrypt-cloudfare/</link>
+      <pubDate>Mon, 22 Aug 2016 12:25:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/letsencrypt-cloudfare/</guid>
+      <description>It&amp;rsquo;s not necessary to disable CloudFlare to use Let&amp;rsquo;s Encrypt,
+Installation: On mac os X:
+$ git clone https://github.com/lukas2511/letsencrypt.sh $ cd letsencrypt.sh $ mkdir hooks $ git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare $ pip install -r hooks/cloudflare/requirements-python-2.txt  Configuration Your account&amp;rsquo;s CloudFlare email and API key are expected to be in the environment:
+$ export CF_EMAIL=&amp;quot;your@email&amp;quot; $ export CF_KEY=&amp;quot;Global API Key&amp;quot; $ export CF_DNS_SERVERS=&#39;8.8.8.8 8.8.4.4&#39;  Usage $ ./letsencrypt.sh -c -d imap.ejemplo.org -t dns-01 -k &amp;quot;hooks/cloudflare/hook.</description>
+    </item>
+    
+  </channel>
+</rss>

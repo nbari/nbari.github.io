@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sleep on IT notes</title>
+    <link>https://nbari.com/tags/sleep/</link>
+    <description>Recent content in sleep on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Aug 2019 21:20:50 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/sleep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prevent Mac to Sleep</title>
+      <link>https://nbari.com/post/prevent-mac-to-sleep/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/prevent-mac-to-sleep/</guid>
+      <description>To stop sleep entirely:
+sudo pmset -a disablesleep 1  To revert, allow sleep again:
+sudo pmset -a disablesleep 0  To display global power settings:
+pmset -g  </description>
+    </item>
+    
+  </channel>
+</rss>

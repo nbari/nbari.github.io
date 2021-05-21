@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>password on IT notes</title>
+    <link>https://nbari.com/tags/password/</link>
+    <description>Recent content in password on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Apr 2021 17:03:59 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/password/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh only password</title>
+      <link>https://nbari.com/post/ssh-only-password/</link>
+      <pubDate>Wed, 14 Apr 2021 17:03:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-only-password/</guid>
+      <description>When using ssh if you only need to use password (no keys):
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no &amp;lt;host&amp;gt;  </description>
+    </item>
+    
+    <item>
+      <title>urandom</title>
+      <link>https://nbari.com/post/urandom/</link>
+      <pubDate>Wed, 08 Mar 2017 15:04:59 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/urandom/</guid>
+      <description>/dev/urandom To generate a random string/password of 32 chars using /dev/urandom:
+$ base64 /dev/urandom | head -c 32  </description>
+    </item>
+    
+  </channel>
+</rss>

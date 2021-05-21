@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jamf on IT notes</title>
+    <link>https://nbari.com/tags/jamf/</link>
+    <description>Recent content in jamf on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Dec 2018 08:22:37 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/jamf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jamf</title>
+      <link>https://nbari.com/post/jamf/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/jamf/</guid>
+      <description>softwareupdate -l to see if there are macOS updates available.
+softwareupdate -ia to install all updates.
+sudo jamf policy to run all outstanding policies and updates for the apps,
+sudo jamf recon to update the inventory on the server.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>video on IT notes</title>
+    <link>https://nbari.com/tags/video/</link>
+    <description>Recent content in video on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Mar 2020 13:06:31 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/video/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VLC keep resized window size</title>
+      <link>https://nbari.com/post/vlc-keep-resized-window-size/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vlc-keep-resized-window-size/</guid>
+      <description>To prevent VLC from resizing the window every time you open a new video:
+VLC -&amp;gt; Preferences -&amp;gt; Show All -&amp;gt; Interface/Main interface/macosx  Uncheck the option Resize interface to the native video size</description>
+    </item>
+    
+    <item>
+      <title>asciinema</title>
+      <link>https://nbari.com/post/asciinema/</link>
+      <pubDate>Wed, 20 Jul 2016 15:14:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/asciinema/</guid>
+      <description>asciinema [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+Install FreeBSD:
+pkg install asciiname  OS X:
+brew update &amp;amp;&amp;amp; brew install asciinema  Recording tmux session Setup your tmux session create windows, splits, start processes in them:
+tmux new -s name  Detach (prefix+d) and start recording with:
+asciinema rec -c &amp;quot;tmux attach -t name&amp;quot; /tmp/play.json  When you&amp;rsquo;re finished, just detach the session again and play it with:</description>
+    </item>
+    
+  </channel>
+</rss>

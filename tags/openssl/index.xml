@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>openssl on IT notes</title>
+    <link>https://nbari.com/tags/openssl/</link>
+    <description>Recent content in openssl on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Mar 2019 12:34:33 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>openssl SHA1 HMAC</title>
+      <link>https://nbari.com/post/openssl-sha1-hmac/</link>
+      <pubDate>Tue, 05 Mar 2019 12:34:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/openssl-sha1-hmac/</guid>
+      <description>To create an HMAC-SHA1:
+$ echo -n &amp;quot;string&amp;quot; | openssl sha1 -hmac &amp;quot;shared_secret&amp;quot;  or
+$ echo -n &amp;quot;string&amp;quot; | openssl dgst -sha1 -hmac &amp;quot;shared_secret&amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>htpasswd</title>
+      <link>https://nbari.com/post/htpasswd/</link>
+      <pubDate>Sun, 02 Sep 2018 11:50:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/htpasswd/</guid>
+      <description>To create an htpasswd file (for htaccess &amp;ldquo;authentication&amp;rdquo;) using openssl:
+$ printf &amp;quot;foo:$(openssl passwd -apr1 PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  If need to use crypt:
+$ printf &amp;quot;foo:$(openssl passwd -crypt PASSWORD)\n&amp;quot; &amp;gt;&amp;gt; .htpasswd  </description>
+    </item>
+    
+    <item>
+      <title>mysql backup</title>
+      <link>https://nbari.com/post/mysql-backup/</link>
+      <pubDate>Tue, 11 Apr 2017 10:28:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-backup/</guid>
+      <description>mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:</description>
+    </item>
+    
+    <item>
+      <title>ssh rsa public key encryption</title>
+      <link>https://nbari.com/post/ssh-rsa-public-key-encryption/</link>
+      <pubDate>Thu, 29 Sep 2016 15:22:12 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-rsa-public-key-encryption/</guid>
+      <description>Encrypt a file using ssh public keys.
+Create ssh public key in PEM format:
+ ssh-keygen -f id_rsa.pub -e -m PKCS8 &amp;gt; id_rsa.pem.pub  Use openssl to encrypt/decrypt
+Encrypt:
+openssl rsautl -encrypt -pubin -inkey ~/.ssh/id_rsa.pem.pub -ssl -in test.txt -out test.txt.enc  Decrypt:
+openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in test.txt.enc -out test.txt.enc.txt  </description>
+    </item>
+    
+    <item>
+      <title>openssl cheat sheet</title>
+      <link>https://nbari.com/post/openssl-cheat-sheet/</link>
+      <pubDate>Wed, 22 Jun 2016 13:37:44 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/openssl-cheat-sheet/</guid>
+      <description>To display the contents of a PEM formatted certificate:
+$ openssl x509 -in the-cert.pm -text  Connecting to the server:
+$ openssl s_client -showcerts -connect imap.ejemplo.org:993 &amp;lt; /dev/null  Test smtp 587:
+$ openssl s_client -host smtp.gmail.com -port 587 -starttls smtp -crlf  Checking the Validity Date:
+$ openssl s_client -showcerts -connect nbari.com:443 2&amp;gt;/dev/null | openssl x509 -noout -dates  Encode base64 a file:
+$ openssl enc -base64 -in file.txt -out file.</description>
+    </item>
+    
+  </channel>
+</rss>

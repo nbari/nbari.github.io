@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>token on IT notes</title>
+    <link>https://nbari.com/tags/token/</link>
+    <description>Recent content in token on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Nov 2016 12:43:16 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/token/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cdn token</title>
+      <link>https://nbari.com/post/cdn-token/</link>
+      <pubDate>Tue, 22 Nov 2016 12:43:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/cdn-token/</guid>
+      <description>Restrict access only to the CDN (cloudfront) To only allow, handle request from the CDN you could add a custom header/token and check on your backend (nginx/haproxy) if is matching otherwise return a 401
+If using AWS cloudfront you edit your origins like this:
+The token can be any UUID / has or common secret between the CDN and the backend.
+If your backends are using nginx you could verify the token like this:</description>
+    </item>
+    
+  </channel>
+</rss>

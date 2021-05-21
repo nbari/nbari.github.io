@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>influxdb on IT notes</title>
+    <link>https://nbari.com/tags/influxdb/</link>
+    <description>Recent content in influxdb on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 May 2018 10:55:00 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/influxdb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Influxdb</title>
+      <link>https://nbari.com/post/influxdb/</link>
+      <pubDate>Sat, 05 May 2018 10:55:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/influxdb/</guid>
+      <description>Basic influxdb queries, setup.
+You can use influx (the influxdb shell) or use the http API on port :8086
+Create and apply retention policy to a database: warning this may remove/purge existing data
+CREATE RETENTION POLICY &amp;quot;30_days&amp;quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
+ Show retention policies:
+&amp;gt; show retention policies name duration shardGroupDuration replicaN default ---- -------- ------------------ -------- ------- autogen 0s 168h0m0s 1 false 30_days 720h0m0s 24h0m0s 1 true  Show databases contents (measurements):</description>
+    </item>
+    
+  </channel>
+</rss>

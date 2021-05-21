@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on IT notes</title>
+    <link>https://nbari.com/tags/redis/</link>
+    <description>Recent content in redis on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Feb 2020 14:48:39 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>redis over TLS</title>
+      <link>https://nbari.com/post/redis-over-tls/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/redis-over-tls/</guid>
+      <description>Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual</description>
+    </item>
+    
+    <item>
+      <title>nginx &#43; lua &#43; redis</title>
+      <link>https://nbari.com/post/nginx-lua-redis/</link>
+      <pubDate>Wed, 06 Dec 2017 17:15:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nginx-lua-redis/</guid>
+      <description>Basic WAF example using lua + redis within nginx.
+-- -- lua_package_path &amp;quot;/usr/share/lua/5.1/nginx/?.lua;;&amp;quot;; -- lua_shared_dict ip_blacklist 4m; -- local redis_host = &amp;quot;your.redis.tld&amp;quot; local redis_port = 6379 local redis_connection_timeout = 300 local redis_pattern = &amp;quot;block-&amp;quot; local cache_ttl = 3 -- seconds local ip = ngx.var.remote_addr local ip_blacklist = ngx.shared.ip_blacklist local last_update_time = ip_blacklist:get(&amp;quot;last_update_time&amp;quot;); -- block if ip found in the local nginx dict if ip_blacklist:get(ip) then ngx.log(ngx.DEBUG, &amp;quot;Banned IP detected and refused access: &amp;quot; .</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> ssh proxy &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-proxy/">ssh proxy</a></h2>
+          <span class="post-date">Feb 7, 2017 </span>
+          <div class="post-content">
+            <h1 id="ssh-socks5-proxy">SSH SOCKS5 proxy</h1>
+<p>Route web traffic securely without a VPN using a SOCKS tunnel with ssh:</p>
+<pre><code>$ ssh -D 8080 -f -C -q -N user@remote.host
+</code></pre>
+<ul>
+<li>-D 8080 tells ssh to launch a SOCKS server on port 8080 locally.</li>
+<li>-f Forks the process to the background.</li>
+<li>-C Compresses the data before sending it.</li>
+<li>-q  Uses quiet mode.</li>
+<li>-N Tells SSH that no command will be sent once the tunnel is up.</li>
+</ul>
+<h2 id="configure-firefox">Configure firefox</h2>
+<p><img src="/img/ssh-proxy.png" alt="ssh-proxy"></p>
+<h2 id="curl">curl</h2>
+<p>To use socks5 in curl try:</p>
+<pre><code>curl -x socks5h://localhost:8080 http://myip.country
+</code></pre>
+<h1 id="ssh-tunnel--tcp-forwarding">SSH tunnel / TCP forwarding</h1>
+<p>If you only need to access an open port on the remote server:</p>
+<pre><code>$ ssh -L 8080:localhost:1234 -Nf user@your-remote-server.com
+</code></pre>
+<p>The option <code>-L</code> will do a local port forwarding from port <code>8080</code> (your computer)
+to port <code>1234</code> in <code>localhost</code> (the remote server), then in your browser just enter:</p>
+<pre><code>    http://localhost:8080
+</code></pre>
+<p>If this is a web server you will see hopefully the content, but you could also
+use this technique for a database, for example</p>
+<pre><code>$ ssh -L 3307:localhost:3306 user@your-remote-server.com
+</code></pre>
+<p>This will forward port 3307 (your computer) to <code>3306</code> remotely (mysql server)</p>
+<pre><code>$ mysql -h localhost -P 3307
+</code></pre>
+<p>You can read/remember this as <code>-L</code> forward my local port <code>XXXX</code> to <code>remote address (localhost/google.com/any-server.tld</code> at port <code>YYYY</code> through
+<code>user@remote-server.com</code></p>
+<h1 id="manage-your-pfsense">Manage your pfsense</h1>
+<p>If you could could ssh to a server within your infrastructure you could do then:</p>
+<pre><code>ssh -L 8443:192.168.1.1:443 -Nf &lt;user&gt;@host
+</code></pre>
+<p>Then in your browser:</p>
+<pre><code>https://localhost:8443
+</code></pre>
+<h1 id="provide-internet-to-a-server-behind-a-firewall">Provide internet to a server behind a firewall</h1>
+<p>Enable ssh on your desktop/laptop (from where you are connecting) and then:</p>
+<pre><code>ssh -t -D 1080 localhost ssh -R 1080:localhost:1080 user@10.0.0.8
+</code></pre>
+<p>Then you could use socks5 from the remote server:</p>
+<pre><code>curl --socks5-hostname 127.0.0.1:1080 http://myip.country
+</code></pre>
+<p>or</p>
+<pre><code>curl -x socks5h://127.0.0.1:1080 http://myip.country
+</code></pre>
+<p>Then to use it:</p>
+<pre><code>export http_proxy=socks5h://127.0.0.1:1080
+export https_proxy=socks5h://127.0.0.1:1080
+</code></pre>
+<p>If need to install  <code>pipenv</code> you may need <code>privoxy</code></p>
+<pre><code>yum install privoxy
+</code></pre>
+<p>Edit the configuration file <code>/etc/privoxy/config</code> and add this line:</p>
+<pre><code>forward-socks5 / 127.0.0.1:1080 .
+</code></pre>
+<p>Start the service and then you could use:</p>
+<pre><code>export http_proxy=http://127.0.0.1:8118
+export https_proxy=http://127.0.0.1:8118
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/hsts/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/haproxy/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

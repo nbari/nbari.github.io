@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> mysql db size &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-db-size/">mysql db size</a></h2>
+          <span class="post-date">May 7, 2017 </span>
+          <div class="post-content">
+            <p>How big is your data:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> IFNULL(B.engine,<span style="color:#e6db74">&#39;Total&#39;</span>) <span style="color:#e6db74">&#34;Storage Engine&#34;</span>,
+CONCAT(LPAD(<span style="color:#66d9ef">REPLACE</span>(FORMAT(B.DSize<span style="color:#f92672">/</span>POWER(<span style="color:#ae81ff">1024</span>,pw),<span style="color:#ae81ff">3</span>),<span style="color:#e6db74">&#39;,&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>),<span style="color:#ae81ff">17</span>,<span style="color:#e6db74">&#39; &#39;</span>),<span style="color:#e6db74">&#39; &#39;</span>,
+SUBSTR(<span style="color:#e6db74">&#39; KMGTP&#39;</span>,pw<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>),<span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#e6db74">&#34;Data Size&#34;</span>, CONCAT(LPAD(<span style="color:#66d9ef">REPLACE</span>(
+FORMAT(B.ISize<span style="color:#f92672">/</span>POWER(<span style="color:#ae81ff">1024</span>,pw),<span style="color:#ae81ff">3</span>),<span style="color:#e6db74">&#39;,&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>),<span style="color:#ae81ff">17</span>,<span style="color:#e6db74">&#39; &#39;</span>),<span style="color:#e6db74">&#39; &#39;</span>,
+SUBSTR(<span style="color:#e6db74">&#39; KMGTP&#39;</span>,pw<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>),<span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#e6db74">&#34;Index Size&#34;</span>, CONCAT(LPAD(<span style="color:#66d9ef">REPLACE</span>(
+FORMAT(B.TSize<span style="color:#f92672">/</span>POWER(<span style="color:#ae81ff">1024</span>,pw),<span style="color:#ae81ff">3</span>),<span style="color:#e6db74">&#39;,&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>),<span style="color:#ae81ff">17</span>,<span style="color:#e6db74">&#39; &#39;</span>),<span style="color:#e6db74">&#39; &#39;</span>,
+SUBSTR(<span style="color:#e6db74">&#39; KMGTP&#39;</span>,pw<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>),<span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#e6db74">&#34;Table Size&#34;</span> <span style="color:#66d9ef">FROM</span>
+(<span style="color:#66d9ef">SELECT</span> engine,<span style="color:#66d9ef">SUM</span>(data_length) DSize,<span style="color:#66d9ef">SUM</span>(index_length) ISize,
+<span style="color:#66d9ef">SUM</span>(data_length<span style="color:#f92672">+</span>index_length) TSize <span style="color:#66d9ef">FROM</span>
+information_schema.tables <span style="color:#66d9ef">WHERE</span> table_schema <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span>
+(<span style="color:#e6db74">&#39;mysql&#39;</span>,<span style="color:#e6db74">&#39;information_schema&#39;</span>,<span style="color:#e6db74">&#39;performance_schema&#39;</span>) <span style="color:#66d9ef">AND</span>
+engine <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> engine <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">ROLLUP</span>) B,
+(<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">3</span> pw) A <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> TSize;
+</code></pre></div><p>This will print something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">+</span><span style="color:#75715e">----------------+----------------------+----------------------+----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">Storage</span> Engine <span style="color:#f92672">|</span> <span style="color:#66d9ef">Data</span> <span style="color:#66d9ef">Size</span>            <span style="color:#f92672">|</span> <span style="color:#66d9ef">Index</span> <span style="color:#66d9ef">Size</span>           <span style="color:#f92672">|</span> <span style="color:#66d9ef">Table</span> <span style="color:#66d9ef">Size</span>           <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------------+----------------------+----------------------+----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> InnoDB         <span style="color:#f92672">|</span>            <span style="color:#ae81ff">10</span>.<span style="color:#ae81ff">412</span> GB <span style="color:#f92672">|</span>             <span style="color:#ae81ff">2</span>.<span style="color:#ae81ff">917</span> GB <span style="color:#f92672">|</span>            <span style="color:#ae81ff">13</span>.<span style="color:#ae81ff">330</span> GB <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Total          <span style="color:#f92672">|</span>            <span style="color:#ae81ff">10</span>.<span style="color:#ae81ff">412</span> GB <span style="color:#f92672">|</span>             <span style="color:#ae81ff">2</span>.<span style="color:#ae81ff">917</span> GB <span style="color:#f92672">|</span>            <span style="color:#ae81ff">13</span>.<span style="color:#ae81ff">330</span> GB <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------------+----------------------+----------------------+----------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">06</span> sec)
+</code></pre></div><p>To get size of databases:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> table_schema                                        <span style="color:#e6db74">&#34;DB Name&#34;</span>,
+   Round(<span style="color:#66d9ef">Sum</span>(data_length <span style="color:#f92672">+</span> index_length) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;DB Size in MB&#34;</span>
+   <span style="color:#66d9ef">FROM</span>   information_schema.tables
+   <span style="color:#66d9ef">GROUP</span>  <span style="color:#66d9ef">BY</span> table_schema;
+</code></pre></div><p>Get usage and free size available:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> table_schema <span style="color:#e6db74">&#34;Data Base Name&#34;</span>,
+<span style="color:#66d9ef">sum</span>( data_length <span style="color:#f92672">+</span> index_length ) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span>
+<span style="color:#ae81ff">1024</span> <span style="color:#e6db74">&#34;Data Base Size in MB&#34;</span>,
+<span style="color:#66d9ef">sum</span>( data_free )<span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#e6db74">&#34;Free Space in MB&#34;</span>
+<span style="color:#66d9ef">FROM</span> information_schema.TABLES
+<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> table_schema;
+</code></pre></div>
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/raw2vmdk/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/beanstalkd/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

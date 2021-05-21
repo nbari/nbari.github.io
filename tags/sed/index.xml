@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sed on IT notes</title>
+    <link>https://nbari.com/tags/sed/</link>
+    <description>Recent content in sed on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Mar 2020 18:29:39 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/sed/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sed append</title>
+      <link>https://nbari.com/post/sed-append/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sed-append/</guid>
+      <description>To append a line using sed that works on macOS:
+sed -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39;  If need to do it in multiple files, you could use find:
+ find . -name &amp;quot;rc.conf&amp;quot; -exec sed -i &#39;&#39; -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39; {} \;  https://stackoverflow.com/a/48406504/1135424</description>
+    </item>
+    
+    <item>
+      <title>Find and replace recursive</title>
+      <link>https://nbari.com/post/find-and-replace-recursive/</link>
+      <pubDate>Wed, 17 Jan 2018 10:08:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/find-and-replace-recursive/</guid>
+      <description>Note: Do not run this command on a folder including a git repo - changes to .git could corrupt your get index.
+For example to replace an IP on multiple files:
+find /tmp/path -type f -exec sed -i &#39;&#39; &#39;s/193.111.141.1/82.14.220.137/g&#39; {} +   On BSD, MAC by passing an empty string to sed&amp;rsquo;s -i args will create no backup
+ perl -pi -e perl -pi -e &#39;s/replace_this/with_this/&amp;quot;  This is useful when you don&amp;rsquo;t want to change the file ending like in sed that adds an \n ad the end of the file</description>
+    </item>
+    
+  </channel>
+</rss>

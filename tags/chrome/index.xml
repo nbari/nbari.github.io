@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chrome on IT notes</title>
+    <link>https://nbari.com/tags/chrome/</link>
+    <description>Recent content in chrome on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jun 2018 19:55:16 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enable Paste</title>
+      <link>https://nbari.com/post/enable-paste/</link>
+      <pubDate>Tue, 19 Jun 2018 19:55:16 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/enable-paste/</guid>
+      <description>To enable paste in chrome, open the console and enter:
+var allowPaste = function(e){ e.stopImmediatePropagation(); return true; }; document.addEventListener(&#39;paste&#39;, allowPaste, true);  </description>
+    </item>
+    
+  </channel>
+</rss>

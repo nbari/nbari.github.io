@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta name="generator" content="Hugo 0.83.1" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> IT notes &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/fat16/">Fat16</a></h2>
+          <span class="post-date">Mar 23, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/fat16">fat16</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/fat32">fat32</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When trying to update a bios from an USB pen, probably you will need FAT16 or FAT32, to do this from macOS try:
+diskutil partitiondisk /dev/disk3 1 MBR &quot;MS-DOS FAT16&quot; &quot;NONAME&quot; 0B   /dev/disk3 - disk device to be partitioned, found with &lsquo;diskutil list&rsquo; 1 - number of partitions, optional, but if given must match MBR - partition Scheme (eg, DOS=MBR, Mac=GPT) MS-DOS FAT16 - partition type (or fat32) * NONAME - partition name 0B - partition size (0B=maximum)  Then:
+				<a class="read-more" href="/post/fat16/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vlc-keep-resized-window-size/">VLC keep resized window size</a></h2>
+          <span class="post-date">Mar 8, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/vlc">vlc</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/video">video</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/size">size</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To prevent VLC from resizing the window every time you open a new video:
+VLC -&gt; Preferences -&gt; Show All -&gt; Interface/Main interface/macosx  Uncheck the option Resize interface to the native video size
+				<a class="read-more" href="/post/vlc-keep-resized-window-size/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/get-primary-ip/">get the Primary IP</a></h2>
+          <span class="post-date">Feb 26, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ip">ip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/route">route</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To get the primary IP in Linux:
+ip route get 1 | awk '{print $NF;exit}'   In awk NF return the number of fields and by suffixing it with $ is like doing print $7
+ In macOS, to list all your interfaces:
+networksetup -listallhardwareports  If want to get the IP assigned to the Wi-FI:
+ipconfig getifaddr $(networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}')  
+				<a class="read-more" href="/post/get-primary-ip/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/redis-over-tls/">redis over TLS</a></h2>
+          <span class="post-date">Feb 23, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/socat">socat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/redis">redis</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tls">tls</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual
+				<a class="read-more" href="/post/redis-over-tls/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/m-character-windows/">removing the ^M character</a></h2>
+          <span class="post-date">Feb 7, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/vim">vim</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/windows">windows</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In vim, to remove the ^M character you could do:
+:e ++ff=dos  The :e ++ff=dos command tells Vim to read the file again, forcing dos file format. Vim will remove CRLF and LF-only line endings, leaving only the text of each line in the buffer.
+Then set filetype to unix:
+:set ff=unix  And save the file:
+:x  
+				<a class="read-more" href="/post/m-character-windows/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/python-quit-unexpectedly-macos/">Python quit unexpectedly macOS Catalina</a></h2>
+          <span class="post-date">Jan 20, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/quit">quit</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ansible">ansible</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  
+				<a class="read-more" href="/post/python-quit-unexpectedly-macos/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/postfix-version/">postfix version</a></h2>
+          <span class="post-date">Nov 23, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/postfix">postfix</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/version">version</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In Postfix there is no -v or --vesion, to find the version run:
+$ postconf mail_version  
+				<a class="read-more" href="/post/postfix-version/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/catalina-python/">macOs catalina &amp; python</a></h2>
+          <span class="post-date">Nov 12, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pip">pip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/catalina">catalina</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F'[=]' '{print $1}')  
+				<a class="read-more" href="/post/catalina-python/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/resume-tar/">Resume Tar</a></h2>
+          <span class="post-date">Sep 26, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tar">tar</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/resume">resume</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To resume a terminated pr If while extracting a file, the process gets terminated you may be available to resume it with:
+ tar -xvkf file.tgz   -k (x mode only) Do not overwrite existing files. In particular, if a file appears more than once in an archive, later copies will not overwrite earlier copies.
+ 
+				<a class="read-more" href="/post/resume-tar/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/convert-svg/">convert svg</a></h2>
+          <span class="post-date">Sep 15, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/convert">convert</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/svg">svg</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Convert svg to png having transparent background:
+$ convert -background none -density 1200 in.svg out.png   brew install imagemagick librsvg
+ 
+				<a class="read-more" href="/post/convert-svg/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/extent/">extent</a></h2>
+          <span class="post-date">Sep 15, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/convert">convert</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/imagemagick">imagemagick</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/resize">resize</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/crop">crop</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/canvas">canvas</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To resize an image and adjust it to fit a fixed canvas with transparent background:
+$ convert in.png \ -resize 128x128 \ -background none \ -gravity center \ -extent 128x128 \ out.png  
+				<a class="read-more" href="/post/extent/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-crc32/">mysql CRC32</a></h2>
+          <span class="post-date">Sep 8, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/crc32">crc32</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If need to calculate the CRC32 of a string, using mysql:
+$ mysql -e &quot;SELECT CRC32('127.0.0.1')&quot; +--------------------+ | CRC32('127.0.0.1') | +--------------------+ | 3619153832 | +--------------------+  
+				<a class="read-more" href="/post/mysql-crc32/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/grep-h/">grep -H</a></h2>
+          <span class="post-date">Sep 7, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/grep">grep</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To find path of a file containing a pattern:
+$ cd jails $ grep -H 34 */etc/ssh/sshd_config  In this example the path of the files containing the number 34 will be printed.
+				<a class="read-more" href="/post/grep-h/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/online-net-ipv6/">online.net IPv6</a></h2>
+          <span class="post-date">Sep 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ipv6">ipv6</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dhcp6c">dhcp6c</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/online.net">online.net</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Configure IPv6 using dhcp6c for servers from online.net:
+pkg install dhcp6  Transform the DUID into a binary file (needed for dhcp6c):
+echo &lt;DUID&gt; | awk '{ gsub(&quot;:&quot;,&quot; &quot;); printf &quot;0: 0a 00 %s\n&quot;, $0 }' | xxd -r &gt; /var/db/dhcp6c_duid  Add this in /usr/local/etc/dhcp6c.conf:
+id-assoc pd { prefix-interface igb0 { }; }; id-assoc na { }; interface igb0 { send ia-pd 0; send ia-na 0; };  Add this to /etc/rc.
+				<a class="read-more" href="/post/online-net-ipv6/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/start-2-xs-sata/">Start 2 XS SATA</a></h2>
+          <span class="post-date">Sep 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/online.net">online.net</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/rescue">rescue</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install FreeBSD using the rescue system on a Start-2-XS-SATA from online.net:
+#!/bin/sh -x USER=monkey PASSWORD=secret gpart destroy -F ada0 gpart create -s gpt ada0 gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 ada0 gpart add -t freebsd-boot -l boot -s 128K ada0 gpart add -t freebsd-swap -l swap -s 4g ada0 gpart add -t freebsd-ufs -l root ada0 gpart set -a active ada0 newfs /dev/gpt/root mount /dev/gpt/root /mnt cd /tmp fetch http://ftp.
+				<a class="read-more" href="/post/start-2-xs-sata/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/prevent-mac-to-sleep/">Prevent Mac to Sleep</a></h2>
+          <span class="post-date">Aug 28, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sleep">sleep</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pmset">pmset</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To stop sleep entirely:
+sudo pmset -a disablesleep 1  To revert, allow sleep again:
+sudo pmset -a disablesleep 0  To display global power settings:
+pmset -g  
+				<a class="read-more" href="/post/prevent-mac-to-sleep/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sudo-ssh_connection/">sudo SSH_CONNECTION</a></h2>
+          <span class="post-date">Jul 17, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sudo">sudo</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/environment">environment</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using ssh, if then doing something like sudo -i the environment vars are gone, to preserve modify your sudoers (/usr/local/etc/sudoers or /usr/local/etc/sudoers.d/devops) and add something like:
+Defaults env_keep += &quot;SSH_TTY SSH_CONNECTION SSH_CLIENT&quot;  In this case, it will preserve your SSH environment vars.
+				<a class="read-more" href="/post/sudo-ssh_connection/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vbox-headless/">vbox headless</a></h2>
+          <span class="post-date">Jul 17, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/virtualbox">virtualbox</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/headless">headless</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To list your vms:
+$ VBoxManage list vms  To run one in headless mode:
+$ VBoxManage startvm freebsd-server --type headless  To shutdown:
+$ VBoxManage controlvm freebsd-server acpipowerbutton  To get the IPv4:
+$ VBoxManage guestproperty enumerate freebsd-server | awk '/IP/'   for this to work you will need the vboxguest tools pkg install virtualbox-ose-additions
+ 
+				<a class="read-more" href="/post/vbox-headless/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ddcctl/">ddcctl</a></h2>
+          <span class="post-date">Jul 4, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/screen">screen</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/monitor">monitor</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sharing">sharing</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hdmi">hdmi</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dpi">dpi</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To share one monitor, keyboard and mouse between two devices, mac mini and a macbook try:
+brew cask install barrier  Then to avoid changing the input source by using the buttons in the monitor try https://github.com/kfix/ddcctl:
+cd /tmp git clone https://github.com/kfix/ddcctl.git cd ddcctl make &amp;&amp; make install  In my case to switch from the mac mini (HDMI) to the laptop via (DP) I use:
+ddcctl -d 1 -i 15  From the laptop (USB-C -&gt; DP) to HDMI, switch back to the mac mini:
+				<a class="read-more" href="/post/ddcctl/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/timestamp/">timestamp</a></h2>
+          <span class="post-date">Jun 3, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/timestamp">timestamp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/unix">unix</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/date">date</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To get the current unix timestamp:
+date +%s  To get the date from a timestamp:
+date -r 1559591041  In Linux:
+date -d &quot;@1559591041&quot;  
+				<a class="read-more" href="/post/timestamp/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/">Newer</a>  
+  <a class="btn next" href="/page/3/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

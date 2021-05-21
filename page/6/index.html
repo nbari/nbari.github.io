@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta name="generator" content="Hugo 0.83.1" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> IT notes &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ansible-patterns/">Ansible Patterns</a></h2>
+          <span class="post-date">Apr 19, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ansible">ansible</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hosts">hosts</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To match hosts only starting with certain string a regex could be used for example to match hosts starting with the word fabrik:
+--- - hosts: ~fabrik.* become: True tasks: - name: uname shell: uname -a register: uname - debug: var: uname.stdout   notice the ~
+ 
+				<a class="read-more" href="/post/ansible-patterns/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mtu-1453/">MTU 1453</a></h2>
+          <span class="post-date">Apr 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/wifi">wifi</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mtu">mtu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If after upgrading macOS to 10.13.4 wifi stop working give a try to change the MTU:
+				<a class="read-more" href="/post/mtu-1453/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/radtest/">radtest</a></h2>
+          <span class="post-date">Mar 26, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/radtest">radtest</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/radius">radius</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To test a radius server:
+$ brew install freeradius-server  Then:
+$ radtest {username} {password} {hostname} 10 {radius_secret}  The 10 is the nas-port-number. Is an integer between 0 and 2^31, and it really doesn&rsquo;t matter what you put here.
+				<a class="read-more" href="/post/radtest/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git/">git basics</a></h2>
+          <span class="post-date">Mar 25, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				git branch -a This will print all branches, local or remote, to see only local branches:
+$ git branch  To only see remote branches:
+$ git branch -r  When you clone a repo after typing git branch -a the output will look something like this:
+$ git branch -a * master remotes/origin/HEAD -&gt; origin/master remotes/origin/master  master is a branch in the local repository, remotes/origin/master is a branch named master on the remote named origin:
+				<a class="read-more" href="/post/git/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-web-deployment-workflow/">Git Web Deployment Workflow</a></h2>
+          <span class="post-date">Mar 25, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/deployment">deployment</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hooks">hooks</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				The idea behind is to push to a remote repository on the same web/service server and a post-receive hook will checkout the files to the public directory.
+Configuring the server Create the repository:
+$ cd $HOME $ mkdir my-site.git $ cd my-site.git $ git init --bare  The idea of using .git as a suffix is just to distinguish between other directories.
+Crate the directory where you would like to deploy, for example:
+				<a class="read-more" href="/post/git-web-deployment-workflow/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/objc_disable_initialize_fork_safety/">OBJC_DISABLE_INITIALIZE_FORK_SAFETY</a></h2>
+          <span class="post-date">Mar 22, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/python">python</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/fork">fork</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In macOS High Sierra if getting this:
+objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.  Define:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES  This will fix temporally fix the problem and allow program to continue executing, more about this issue here: http://sealiesoftware.
+				<a class="read-more" href="/post/objc_disable_initialize_fork_safety/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bash-git-prompt/">bash git prompt</a></h2>
+          <span class="post-date">Mar 20, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bash">bash</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/prompt">prompt</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To display the current branch in the terminal prompt using bash, add the following lines to ~/.bash_profile:
+parse_git_branch() { git branch 2&gt; /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' } export PS1=&quot;\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ &quot;  
+				<a class="read-more" href="/post/bash-git-prompt/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/terms/">terms</a></h2>
+          <span class="post-date">Mar 18, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/terms">terms</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Some common terms and definition
+ IT is full of buzzwords &hellip;
+ SRE &ndash; Site Reliability Engineering Site Reliability Engineering (SRE) is a discipline that incorporates aspects of software engineering and applies that to IT operations problems. The main goals are to create ultra-scalable and highly reliable software systems.
+A site reliability engineer (SRE) will spend up to 50% of their time doing &ldquo;ops&rdquo; related work and spend the other 50% of their time on development
+				<a class="read-more" href="/post/terms/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/linux-mac-address/">Linux Mac Address</a></h2>
+          <span class="post-date">Mar 14, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hwaddr">HWADDR</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To get the MAC address from an interface in linux:
+cat /sys/class/net/eth1/address  
+				<a class="read-more" href="/post/linux-mac-address/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-permissions-are-too-open/">ssh permissions are too open</a></h2>
+          <span class="post-date">Mar 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/chmod">chmod</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/find">find</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To set mode 0400 to all your ssh keys:
+$ find ~/.ssh/* -type f -name &quot;id*&quot; -not -iname &quot;*.pub&quot; -exec chmod 0400 {} \+  
+				<a class="read-more" href="/post/ssh-permissions-are-too-open/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nohup-disown/">nohup - disown</a></h2>
+          <span class="post-date">Mar 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nohup">nohup</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/disown">disown</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/terminal">terminal</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In case you don&rsquo;t have screen/tmux and need to run a process that won&rsquo;t be terminated after closing the terminal:
+$ nohup your command &amp; $ exit  Or
+$ your command &amp; $ disown $ exit  If you have multiple commands:
+$ sleep 3600 &amp; $ sleep 86400 &amp;  By typing jobs something like this appears:
+[1] - running sleep 3600 [2] + running sleep 86400  To disown let&rsquo;s say only job 2:
+				<a class="read-more" href="/post/nohup-disown/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/wait_for_connection/">wait_for_connection</a></h2>
+          <span class="post-date">Mar 7, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ansible">ansible</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/reboot">reboot</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Reboot and wait until server is reachable/usable:
+- name: Something that may reboot shell: echo &quot;true&quot; register: should_reboot - name: Rebooting ... shell: sleep 2 &amp;&amp; /sbin/shutdown -r now &quot;Reboot required&quot; async: 1 poll: 0 ignore_errors: true register: rebooting when: should_reboot.stdout == &quot;true&quot; - name: Wait for rebooted servers to come back wait_for_connection: connect_timeout: 20 sleep: 5 delay: 5 timeout: 60 when: rebooting|changed  For checking/testing if a remote host/service is up:
+				<a class="read-more" href="/post/wait_for_connection/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/linux-version/">Linux version</a></h2>
+          <span class="post-date">Mar 2, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/version">version</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To determine what linux version you are using:
+cat /etc/*elease  
+				<a class="read-more" href="/post/linux-version/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/delete-guest/">Delete Guest</a></h2>
+          <span class="post-date">Feb 28, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/guest">guest</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macOS</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To delete macOS Guest user:
+sudo dscl . -delete /Users/Guest  This will avoid showing the Guest user on the login screen
+				<a class="read-more" href="/post/delete-guest/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/gpg/">gpg</a></h2>
+          <span class="post-date">Feb 27, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/gpg">gpg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/centos">centos</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Install gpg on macOS:
+brew install gnupg pinentry-mac   if required restart gpg-agent with gpgconf --kill gpg-agent
+ To create a gpg key in batch mode, create a file named gpg-key-script with this value:
+Key-Type: 1 Key-Length: 2048 Subkey-Type: 1 Subkey-Length: 2048 Name-Real: your name Name-Comment: your comment Name-Email: your@email Expire-Date: 0  Next you could do something like:
+$ gpg --homedir /salt/gpgkeys --batch --gen-key gen-key-script  Backup private key To save the private key to a file:
+				<a class="read-more" href="/post/gpg/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sasl_username/">sasl_username</a></h2>
+          <span class="post-date">Feb 24, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/postfix">postfix</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Find users sending email:
+tail -F /var/log/all.log | grep -i sasl_username  
+				<a class="read-more" href="/post/sasl_username/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ldap_auth_disable_tls_never_use_in_production/">ldap_auth_disable_tls_never_use_in_production</a></h2>
+          <span class="post-date">Feb 21, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sssd">sssd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To use sssd disabling TLS ( sssd doesn&rsquo;t work without TLS but there is this undocumented option you can use ):
+ldap_auth_disable_tls_never_use_in_production = true  In case you get this error:
+Attribute 'ldap_auth_disable_tls_never_use_in_production' is not allowed in section  Try running this:
+authconfig --enablemkhomedir --enablesssdauth --updateall  The enablemkhomedir is a plus
+If when running authconfig your /etc/sssd/sssd.conf gets overwritten, set to no this options:
+USELDAP=no USELDAPAUTH=no  
+				<a class="read-more" href="/post/ldap_auth_disable_tls_never_use_in_production/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/selinux/">SElinux</a></h2>
+          <span class="post-date">Feb 21, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/selinux">selinux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To disable SElinux temporaly:
+setenforce 0  To disable SELinux Permanetly, edit file /etc/sysconfig/selinux:
+# This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded. SELINUX=enforcing # SELINUXTYPE= can take one of three two values: # targeted - Targeted processes are protected, # minimum - Modification of targeted policy.
+				<a class="read-more" href="/post/selinux/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/usekeychain/">UseKeychain</a></h2>
+          <span class="post-date">Feb 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/keychain">keychain</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To save SSH keys in macOS Sierra keychain add this to ~/.ssh/config:
+Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
+Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.
+				<a class="read-more" href="/post/usekeychain/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/find-and-replace-recursive/">Find and replace recursive</a></h2>
+          <span class="post-date">Jan 17, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/find">find</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Note: Do not run this command on a folder including a git repo - changes to .git could corrupt your get index.
+For example to replace an IP on multiple files:
+find /tmp/path -type f -exec sed -i '' 's/193.111.141.1/82.14.220.137/g' {} +   On BSD, MAC by passing an empty string to sed&rsquo;s -i args will create no backup
+ perl -pi -e perl -pi -e 's/replace_this/with_this/&quot;  This is useful when you don&rsquo;t want to change the file ending like in sed that adds an \n ad the end of the file
+				<a class="read-more" href="/post/find-and-replace-recursive/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/page/5/">Newer</a>  
+  <a class="btn next" href="/page/7/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

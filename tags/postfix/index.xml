@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postfix on IT notes</title>
+    <link>https://nbari.com/tags/postfix/</link>
+    <description>Recent content in postfix on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2019 17:19:02 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/postfix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postfix version</title>
+      <link>https://nbari.com/post/postfix-version/</link>
+      <pubDate>Sat, 23 Nov 2019 17:19:02 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/postfix-version/</guid>
+      <description>In Postfix there is no -v or --vesion, to find the version run:
+$ postconf mail_version  </description>
+    </item>
+    
+    <item>
+      <title>sasl_username</title>
+      <link>https://nbari.com/post/sasl_username/</link>
+      <pubDate>Sat, 24 Feb 2018 09:32:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/sasl_username/</guid>
+      <description>Find users sending email:
+tail -F /var/log/all.log | grep -i sasl_username  </description>
+    </item>
+    
+    <item>
+      <title>smarthost</title>
+      <link>https://nbari.com/post/smarthost/</link>
+      <pubDate>Wed, 26 Apr 2017 10:38:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/smarthost/</guid>
+      <description>Smarthost with postfix  A smart host is a type of email message transfer agent that allows a Simple Mail Transfer Protocol (SMTP) server to route email to an intermediate mailserver rather than directly to the recipient&amp;rsquo;s server
+ https://en.wikipedia.org/wiki/Smart_host
+Setup postfix to forward all emails using an external SMTP server, for example sendgrid.net, main.cf:
+smtp_sasl_auth_enable = yes smtp_sasl_password_maps = static:username:password smtp_sasl_security_options = noanonymous smtp_tls_security_level = encrypt header_size_limit = 4096000 relayhost = [smtp.</description>
+    </item>
+    
+  </channel>
+</rss>

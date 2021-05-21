@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pkgin on IT notes</title>
+    <link>https://nbari.com/tags/pkgin/</link>
+    <description>Recent content in pkgin on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 01:00:29 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pkgin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pkgin</title>
+      <link>https://nbari.com/post/pkgin/</link>
+      <pubDate>Thu, 30 Mar 2017 01:00:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pkgin/</guid>
+      <description>To install pkgin in NetBSD:
+# export PKG_PATH=&amp;quot;http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0.1/All/&amp;quot;  then:
+# pkg_add -v pkgin-*  Finish by updating:
+# pkgin update  </description>
+    </item>
+    
+  </channel>
+</rss>

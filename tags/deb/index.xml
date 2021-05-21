@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deb on IT notes</title>
+    <link>https://nbari.com/tags/deb/</link>
+    <description>Recent content in deb on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 May 2018 11:22:19 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/deb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>packagecloud</title>
+      <link>https://nbari.com/post/packagecloud/</link>
+      <pubDate>Mon, 28 May 2018 11:22:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/packagecloud/</guid>
+      <description>To upload all packages to packagecloud:
+package_cloud push immortal/immortal/el/7 immortal_0.19.0_*.rpm --skip-errors   for .deb 386 needs to be i386
+ </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>state on IT notes</title>
+    <link>https://nbari.com/tags/state/</link>
+    <description>Recent content in state on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Aug 2017 09:31:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/state/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Merge Terraform States</title>
+      <link>https://nbari.com/post/merge-terraform-states/</link>
+      <pubDate>Sun, 13 Aug 2017 09:31:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/merge-terraform-states/</guid>
+      <description>If states are being stored in S3, after importing a resource, for example:
+$ terraform import aws_customer_gateway.main cgw-b4dc3961  You will end with a terraform.tfstate that differs from the one in the S3 bucket.
+To merge the remote and local state do this:
+$ terraform state pull &amp;gt; terraform.tfstate $ terraform import aws_customer_gateway.main cgw-b4dc3961 $ terraform state push terraform.tfstate  First get the current s3 state:
+$ terraform state pull &amp;gt; terraform.</description>
+    </item>
+    
+  </channel>
+</rss>

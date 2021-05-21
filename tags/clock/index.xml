@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>clock on IT notes</title>
+    <link>https://nbari.com/tags/clock/</link>
+    <description>Recent content in clock on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Oct 2017 11:35:38 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/clock/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RF clock setting the time manully</title>
+      <link>https://nbari.com/post/rf-clock-setting-the-time-manully/</link>
+      <pubDate>Sun, 29 Oct 2017 11:35:38 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rf-clock-setting-the-time-manully/</guid>
+      <description>Press and hold the M.SET button for 3 seconds to set the time:
+ Press the M.SET button for 1 second to advance 1 minute. Press the M.SET button for more than 1 second to auto advance the minute hand. If the M.SET button is not pressed for 8 seconds, or press REC button, the clock is set.  Start manual reception Press the REC button for 3 seconds. The hands will move to the 12:00 position and the clock will start searching for the DCF signal.</description>
+    </item>
+    
+  </channel>
+</rss>

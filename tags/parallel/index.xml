@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>parallel on IT notes</title>
+    <link>https://nbari.com/tags/parallel/</link>
+    <description>Recent content in parallel on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Apr 2019 20:06:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/parallel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pigz</title>
+      <link>https://nbari.com/post/pigz/</link>
+      <pubDate>Thu, 04 Apr 2019 20:06:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pigz/</guid>
+      <description>To compress using gzip format but using all your available cores:
+tar --use-compress-program=pigz -cf archive.tgz /path/to/source  Or if you want to pipe it:
+tar -cf - source | pigz &amp;gt; archive.tgz  To decompress use tar -xvf archive.tgz as usual.
+The output of pigz is compatible with gzip</description>
+    </item>
+    
+    <item>
+      <title>parallel xargs</title>
+      <link>https://nbari.com/post/parallel-xargs/</link>
+      <pubDate>Thu, 26 Apr 2018 15:18:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/parallel-xargs/</guid>
+      <description>To run a script in parallel using xargs:
+printf %d\\n {0..9} | xargs -n 1 -P8 sleep  In this case sleep is going to be call 8 times (-P8) using has the input an int from 0 to 9.
+From the man:
+-P maxprocs Parallel mode: run at most maxprocs invocations of utility at once.  </description>
+    </item>
+    
+    <item>
+      <title>pdsh</title>
+      <link>https://nbari.com/post/pdsh/</link>
+      <pubDate>Sat, 03 Jun 2017 15:05:03 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pdsh/</guid>
+      <description>pdsh - issue commands to groups of hosts in parallel
+Install:
+brew install pdsh  Usage:
+pdsh -R ssh -w ^servers.txt &amp;quot;&amp;lt;command&amp;gt;&amp;quot;  In where servers.txt is something like:
+10.8.4.2 10.8.4.3 10.8.4.4  one-liner:
+pdsh -b -w &amp;quot;10.8.4.2, 10.8.4.3, 10.8.4.4&amp;quot; &amp;quot;&amp;lt;command&amp;gt;&amp;quot;   -b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)
+ </description>
+    </item>
+    
+  </channel>
+</rss>

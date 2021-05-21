@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mtu on IT notes</title>
+    <link>https://nbari.com/tags/mtu/</link>
+    <description>Recent content in mtu on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Apr 2018 21:16:59 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mtu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MTU 1453</title>
+      <link>https://nbari.com/post/mtu-1453/</link>
+      <pubDate>Tue, 10 Apr 2018 21:16:59 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mtu-1453/</guid>
+      <description>If after upgrading macOS to 10.13.4 wifi stop working give a try to change the MTU:</description>
+    </item>
+    
+  </channel>
+</rss>

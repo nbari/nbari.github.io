@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> grpc &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/grpc/">grpc</a></h2>
+          <span class="post-date">Jun 23, 2017 </span>
+          <div class="post-content">
+            <h1 id="what-is-grpc">What is gRPC?</h1>
+<p>A remote procedure call
+(<a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>)
+framework that by default uses
+<a href="https://developers.google.com/protocol-buffers/docs/overview">protocol buffers</a>
+as the Interface Definition Language (IDL). One of the initial benefits is
+the ability to be able to define and codify your service requirements via a
+<strong>.proto</strong> file.</p>
+<p>It uses HTTP/2 for transport but <strong>is not yet available for use within the
+browser</strong>, therefore currently mainly in use for Inter-Process Communication (IPC)
+within microservices.</p>
+<h1 id="the-workflow-to-create-a-grpc-service">The workflow to create a gRPC service</h1>
+<ol>
+<li>Create the service definition and payload structure in the <code>.proto</code> file.</li>
+<li>Generate the gRPC code from the <code>.proto</code> file.</li>
+<li>Implement the server in one of the supported languages.</li>
+<li>Create the client that invokes the service thought the Stub.</li>
+<li>Run the server and client(s).</li>
+</ol>
+<h3 id="proto">.proto</h3>
+<p>The first step when working with protocol buffers is to define the structure for
+the data you want to serialize in a proto file: this is an ordinary text file
+with a <strong>.proto</strong> extension. Protocol buffer data is structured as messages,
+where each message is a small logical record of information containing a series
+of name-value pairs called fields. Here’s a simple example:</p>
+<pre><code>message Person {
+  string name = 1;
+  int32 id = 2;
+  bool has_ponycopter = 3;
+}
+</code></pre>
+<p>Once you have your service defined, you can utilise a command line compiler to
+generate stubs and code in multiple programming languages. So you can generate
+a client and server with the Go programming language, and then using the same
+<strong>.proto</strong> file generate a client/server with Ruby.</p>
+<h1 id="install-grpc">Install gRPC</h1>
+<p>To install this package, you need to install Go and setup your Go workspace on
+your computer. The simplest way to install the library is to run:</p>
+<pre><code>$ go get -u google.golang.org/grpc
+</code></pre>
+<p>Next, install the protoc plugin for Go:</p>
+<pre><code>$ go get -u github.com/golang/protobuf/protoc-gen-go
+</code></pre>
+<h1 id="hello-world-service-example">Hello World service example</h1>
+<p>Example of a service definition <code>helloworld.proto</code> using syntatx <a href="https://developers.google.com/protocol-buffers/docs/proto3#specifying-field-types">proto3</a></p>
+<pre><code>syntax = &quot;proto3&quot;;
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+</code></pre>
+<blockquote>
+<p>The package value is used (conveniently) as the name of the Go package, in this case &ldquo;helloworld&rdquo;</p>
+</blockquote>
+<p>The service <code>Greeter</code> exposes a method named <code>SayHello</code> if you would like more
+methods you could do something like this:</p>
+<pre><code>// The greeting service definition.
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+}
+</code></pre>
+<p>Now service <code>Greeter</code> exposes method <code>SayHello</code> and <code>SayHelloAgain</code>.</p>
+<h2 id="syntax-explanation">Syntax Explanation</h2>
+<p>Inside the <code>service</code> statement <code>Greeter</code> we state that we want a RPC service
+that as a <code>SayHello</code> method and that method accepts something of type
+<code>HelloRequest</code> and returns something of type <code>HelloReply</code>. The <code>message</code>
+statement defines what <code>HelloRequest</code> and <code>HelloReply</code> look like.</p>
+<p>The numbers assigned to the property (e.g. both <code>name = 1</code> and <code>message = 1</code>)
+are known as &lsquo;tags&rsquo;. Effectively, tags with a number between 1 and 15 take one
+byte to encode where as tags between 16 and 2047 take two bytes to encode.
+The idea is that you should reserve the tags 1 through 15 for very frequently
+occurring message elements.</p>
+<h1 id="create-the-code-protoc">Create the code protoc</h1>
+<p>When using go you could keep this per repository in this case the package name
+is <code>helloworld</code>:</p>
+<pre><code>$ cd $GOPATH/src/github.com/&lt;your thing&gt;/helloworld
+</code></pre>
+<p>And then:</p>
+<pre><code>protoc -I helloworld/ helloworld/helloworld.proto --go_out=plugins=grpc:helloworld
+</code></pre>
+<p>This will create go code in a file named
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/helloworld/helloworld.pb.go">helloworld.pb.go</a>
+and can be used to create the
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/server/main.go">server</a>
+and
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/client/main.go">client</a></p>
+<h3 id="when-should-you-use-rest">When should you use REST?</h3>
+<p>If interoperability is your primary concern, nothing beats REST. There are no
+special technologies needed, and you can leverage all of the widely deployed
+infrastructure and tools that support the modern Web.</p>
+<h3 id="when-should-you-use-rpc">When should you use RPC?</h3>
+<p>If performance is your primary concern, RPC can provide an edge by leveraging
+serialized data formats and alternative transport mechanisms.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/XaMr--wAuSI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/two-factor-authentication-with-ssh/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/curl-response-time/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

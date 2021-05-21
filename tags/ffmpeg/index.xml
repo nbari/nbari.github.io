@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ffmpeg on IT notes</title>
+    <link>https://nbari.com/tags/ffmpeg/</link>
+    <description>Recent content in ffmpeg on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Sep 2020 13:08:58 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>libx265</title>
+      <link>https://nbari.com/post/libx265/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/libx265/</guid>
+      <description>To reduce/compress a video size you could use:
+ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4  Be aware that libx265 is not supported in many players so you can always fallback to H.264:
+ffmpeg -i input.mov output.mp4   https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+ </description>
+    </item>
+    
+    <item>
+      <title>aax2m4b</title>
+      <link>https://nbari.com/post/aax2m4b/</link>
+      <pubDate>Sat, 20 May 2017 18:53:19 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aax2m4b/</guid>
+      <description>Convert an audiobook .aax to .m4b using ffmpeg
+brew install chromedriver ffmpeg sudo easy_install pip pip install selenium requests git clone https://github.com/inAudible-NG/audible-activator cd audible-activator sed -i &amp;#39;&amp;#39; &amp;#39;s,chromedriver_path = &amp;#34;./chromedriver&amp;#34;,chromedriver_path = &amp;#34;/usr/local/bin/chromedriver&amp;#34;,&amp;#39; audible-activator.py ./audible-activator.py When running audible-activator.py It will ask for the audible username/password it will open chrome, and when finish print the activation bytes:
+$ ./audible-activator.py Username: your@email Password: [*] Player ID is 1xmjyl5rSw0yVb/olWBYuU/NBxk= activation_bytes: b97f4709 One having the activation_bytes, use ffmpeg:</description>
+    </item>
+    
+  </channel>
+</rss>

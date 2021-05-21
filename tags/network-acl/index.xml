@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>network ACL on IT notes</title>
+    <link>https://nbari.com/tags/network-acl/</link>
+    <description>Recent content in network ACL on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 31 May 2017 16:41:58 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/network-acl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws network acl</title>
+      <link>https://nbari.com/post/aws-network-acl/</link>
+      <pubDate>Wed, 31 May 2017 16:41:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-network-acl/</guid>
+      <description>AWS network ACL deny rule To block full access from an list of IP&amp;rsquo;s within AWS:
+$ count=0; for i in `cat ips.txt` count=$((count + 1)) &amp;amp;&amp;amp; aws ec2 create-network-acl-entry --network-acl-id acl-XXXXXXXX --ingress --rule-number $count --protocol all --port-range From=0,To=65535 --cidr-block $i/32 --rule-action deny In where ips.txt is a file containing the IP addresses, for example:
+169.254.2.2 169.254.1.2 ...  WARNING The default limit for a single network ACL rules set by AWS is 20 for ingress and 20 for egress rules including the default rules.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vlc on IT notes</title>
+    <link>https://nbari.com/tags/vlc/</link>
+    <description>Recent content in vlc on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Mar 2020 13:06:31 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/vlc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VLC keep resized window size</title>
+      <link>https://nbari.com/post/vlc-keep-resized-window-size/</link>
+      <pubDate>Sun, 08 Mar 2020 13:06:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vlc-keep-resized-window-size/</guid>
+      <description>To prevent VLC from resizing the window every time you open a new video:
+VLC -&amp;gt; Preferences -&amp;gt; Show All -&amp;gt; Interface/Main interface/macosx  Uncheck the option Resize interface to the native video size</description>
+    </item>
+    
+  </channel>
+</rss>

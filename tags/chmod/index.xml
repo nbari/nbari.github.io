@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chmod on IT notes</title>
+    <link>https://nbari.com/tags/chmod/</link>
+    <description>Recent content in chmod on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Mar 2018 20:41:19 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/chmod/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh permissions are too open</title>
+      <link>https://nbari.com/post/ssh-permissions-are-too-open/</link>
+      <pubDate>Mon, 12 Mar 2018 20:41:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-permissions-are-too-open/</guid>
+      <description>To set mode 0400 to all your ssh keys:
+$ find ~/.ssh/* -type f -name &amp;quot;id*&amp;quot; -not -iname &amp;quot;*.pub&amp;quot; -exec chmod 0400 {} \+  </description>
+    </item>
+    
+  </channel>
+</rss>

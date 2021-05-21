@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>managed on IT notes</title>
+    <link>https://nbari.com/tags/managed/</link>
+    <description>Recent content in managed on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Dec 2018 08:22:37 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/managed/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jamf</title>
+      <link>https://nbari.com/post/jamf/</link>
+      <pubDate>Wed, 12 Dec 2018 08:22:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/jamf/</guid>
+      <description>softwareupdate -l to see if there are macOS updates available.
+softwareupdate -ia to install all updates.
+sudo jamf policy to run all outstanding policies and updates for the apps,
+sudo jamf recon to update the inventory on the server.</description>
+    </item>
+    
+    <item>
+      <title>Block SSH on MacOS</title>
+      <link>https://nbari.com/post/block-ssh-mac/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/block-ssh-mac/</guid>
+      <description>To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &amp;quot;echo &#39;block in log quick proto tcp from any to any port 22&#39; &amp;gt;&amp;gt; /etc/pf.conf&amp;quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ipv6 on IT notes</title>
+    <link>https://nbari.com/tags/ipv6/</link>
+    <description>Recent content in ipv6 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Nov 2020 13:38:41 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/ipv6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos Disable Ipv6</title>
+      <link>https://nbari.com/post/centos-disable-ipv6/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/centos-disable-ipv6/</guid>
+      <description>Edit file /etc/default/grub and add ipv6.disable=1, example:
+# cat /etc/default/grub GRUB_TIMEOUT=5 GRUB_DEFAULT=saved GRUB_DISABLE_SUBMENU=true GRUB_TERMINAL_OUTPUT=&amp;quot;console&amp;quot; GRUB_CMDLINE_LINUX=&amp;quot;ipv6.disable=1 crashkernel=auto rhgb quiet&amp;quot; GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;  Then regenerate and reboot:
+grub2-mkconfig -o /boot/grub2/grub.cfg  And
+reboot  Using sysctl (no need to reboot), append below lines in /etc/sysctl.conf:
+net.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1  Then run:
+sysctl -p  </description>
+    </item>
+    
+    <item>
+      <title>online.net IPv6</title>
+      <link>https://nbari.com/post/online-net-ipv6/</link>
+      <pubDate>Tue, 03 Sep 2019 20:18:00 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/online-net-ipv6/</guid>
+      <description>Configure IPv6 using dhcp6c for servers from online.net:
+pkg install dhcp6  Transform the DUID into a binary file (needed for dhcp6c):
+echo &amp;lt;DUID&amp;gt; | awk &#39;{ gsub(&amp;quot;:&amp;quot;,&amp;quot; &amp;quot;); printf &amp;quot;0: 0a 00 %s\n&amp;quot;, $0 }&#39; | xxd -r &amp;gt; /var/db/dhcp6c_duid  Add this in /usr/local/etc/dhcp6c.conf:
+id-assoc pd { prefix-interface igb0 { }; }; id-assoc na { }; interface igb0 { send ia-pd 0; send ia-na 0; };  Add this to /etc/rc.</description>
+    </item>
+    
+    <item>
+      <title>vps</title>
+      <link>https://nbari.com/post/vps/</link>
+      <pubDate>Sun, 04 Dec 2016 12:57:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/vps/</guid>
+      <description>VPS providers that allow use your own image/kernel
+Google cloud (only ipv4) Allows to upload compreses raw images:
+tar --format=gnutar -Szcf disk.tar.gz disk.raw  MTU needs to be set to 1460 and in some cases disable the checksum offload
+Amazon AWS (only ipv4) Images can&amp;rsquo;t be uploaded compressed, ans disabling TSO is required:
+ifconfig_DEFAULT=&amp;quot;SYNCDHCP -tso&amp;quot;  IPV6 support vultr https://www.vultr.com/
+Instead of uploading the raw images, they will be fetched, a URL needs to be provider from where the image can be downloaded.</description>
+    </item>
+    
+    <item>
+      <title>ipv6 off</title>
+      <link>https://nbari.com/post/ipv6-off/</link>
+      <pubDate>Fri, 02 Dec 2016 14:52:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-off/</guid>
+      <description>Turn off IPv6 on mac First list interfaces:
+$ networksetup -listallnetworkservices An asterisk (*) denotes that a network service is disabled. Thunderbolt Ethernet Wi-Fi Bluetooth PAN Thunderbolt Bridge  Next:
+$ networksetup -setv6off &amp;#34;Thunderbolt Ethernet&amp;#34; For Wi-Fi:
+$ networksetup -setv6off Wi-Fi </description>
+    </item>
+    
+    <item>
+      <title>ipv6 tunnelbroker</title>
+      <link>https://nbari.com/post/ipv6-tunnelbroker/</link>
+      <pubDate>Thu, 01 Dec 2016 16:50:30 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ipv6-tunnelbroker/</guid>
+      <description>6in4  6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets whose IP headers have the IP protocol number set to 41. https://en.wikipedia.org/wiki/6in4
+ &amp;ldquo;6to4&amp;rdquo; is a tunneling method that is only interesting for reaching IPv6-only services. And 6to4 makes sense only if one has a public IPv4 address. As a rule, you only need to enable &amp;ldquo;6to4&amp;rdquo; if you want to access services that are only IPv6.</description>
+    </item>
+    
+  </channel>
+</rss>

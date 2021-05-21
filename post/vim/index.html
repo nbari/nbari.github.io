@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> vim &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/vim/">vim</a></h2>
+          <span class="post-date">Aug 8, 2016 </span>
+          <div class="post-content">
+            <h2 id="quoteunquote-words">Quote/unquote words:</h2>
+<pre><code>ciw'Ctrl+r&quot;'
+</code></pre>
+<p>or</p>
+<pre><code>ciw '' Esc p
+</code></pre>
+<p><code>p</code> paste after the cursor, <code>P</code> will paste before the cursor.</p>
+<h2 id="search-matches-gn-with-the-dot-command">Search matches (gn with the dot command)</h2>
+<p>Suppose that we have a document containing several occurrences of the word
+‘Normal’ and we’d like to change each occurrence to ‘Visual’. We can run <code>/Normal</code>
+to search for the word ‘Normal’, then type <code>cgnVisual&lt;Esc&gt;</code> to change the next
+match to the word ‘Visual’ and by pressing <code>.</code> it will change the next match.
+No need to use <code>n.</code> (<a href="http://vimcasts.org/episodes/operating-on-search-matches-using-gn/">http://vimcasts.org/episodes/operating-on-search-matches-using-gn/</a>)</p>
+<h2 id="habit-breaking">Habit breaking</h2>
+<p>Moving your Vim cursor around using the arrow keys is a bad habit, and like many
+bad habits it’s a difficult one to break! Putting these lines into your vimrc can
+help:</p>
+<pre><code>nnoremap &lt;up&gt;    &lt;nop&gt;
+nnoremap &lt;down&gt;  &lt;nop&gt;
+nnoremap &lt;left&gt;  &lt;nop&gt;
+nnoremap &lt;right&gt; &lt;nop&gt;
+inoremap &lt;up&gt;    &lt;nop&gt;
+inoremap &lt;down&gt;  &lt;nop&gt;
+inoremap &lt;left&gt;  &lt;nop&gt;
+inoremap &lt;right&gt; &lt;nop&gt;
+</code></pre>
+<p>This snippet causes each of the arrow keys to execute no operation, or in other
+words: it disables them.</p>
+<h2 id="traversing-test-in-insert-mode">Traversing test in insert mode</h2>
+<p>While in insert mode, use <code>Ctrl-O</code> to go to normal mode for just one command</p>
+<pre><code>CTRL-o h  move cursor left
+CTRL-o l  move cursor right
+CTRL-o j  move cursor down
+CTRL-o k  move cursor up
+
+CTRL-w    delete word to the left of cursor
+CTRL-o D  delete everything to the right of cursor
+CTRL-u    delete everything to the left of cursor
+CTRL-h    backspace/delete
+CTRL-j    insert newline (easier than reaching for the return key)
+CTRL-t    indent current line
+CTRL-d    un-indent current line
+</code></pre>
+<h2 id="vim--tmux-layout">vim + tmux layout</h2>
+<p>Screen shot while playing with immortal</p>
+<p>![vim screen shot](/img/Screen Shot 2016-08-21 at 02.18.15.png)</p>
+<p>No Axis</p>
+<p><img src="/img/vim-clean-no-axis.png" alt="vim screen shot clean"></p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/brew/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/unit-testing-important/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

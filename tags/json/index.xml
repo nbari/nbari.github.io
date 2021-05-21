@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>json on IT notes</title>
+    <link>https://nbari.com/tags/json/</link>
+    <description>Recent content in json on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Mar 2017 12:22:05 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/json/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>text2json</title>
+      <link>https://nbari.com/post/text2json/</link>
+      <pubDate>Thu, 23 Mar 2017 12:22:05 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/text2json/</guid>
+      <description>Convert txt to json:
+ $ jq &#39;.&#39; -R -s file  or
+$ echo textfile | jq &#39;.&#39; -R -s  </description>
+    </item>
+    
+  </channel>
+</rss>

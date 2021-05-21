@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aesgcm on IT notes</title>
+    <link>https://nbari.com/tags/aesgcm/</link>
+    <description>Recent content in aesgcm on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Aug 2017 18:14:57 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/aesgcm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webcrypto and Go</title>
+      <link>https://nbari.com/post/webcrypto-and-go/</link>
+      <pubDate>Thu, 17 Aug 2017 18:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/webcrypto-and-go/</guid>
+      <description>Encrypt on client side using javascript WebCrypto and decrypt on backend using go:
+javascript code:
+async function aesGcmEncrypt(plaintext, password) { const pwUtf8 = new TextEncoder().encode(password); // encode password as UTF-8  const pwHash = await crypto.subtle.digest(&amp;#39;SHA-256&amp;#39;, pwUtf8); // hash the password  const iv = crypto.getRandomValues(new Uint8Array(12)); // get 96-bit random iv  const alg = { name: &amp;#39;AES-GCM&amp;#39;, iv: iv }; // specify algorithm to use  const key = await crypto.</description>
+    </item>
+    
+  </channel>
+</rss>

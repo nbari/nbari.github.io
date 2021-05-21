@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>selinux on IT notes</title>
+    <link>https://nbari.com/tags/selinux/</link>
+    <description>Recent content in selinux on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Feb 2018 09:39:12 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/selinux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SElinux</title>
+      <link>https://nbari.com/post/selinux/</link>
+      <pubDate>Wed, 21 Feb 2018 09:39:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/selinux/</guid>
+      <description>To disable SElinux temporaly:
+setenforce 0  To disable SELinux Permanetly, edit file /etc/sysconfig/selinux:
+# This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded. SELINUX=enforcing # SELINUXTYPE= can take one of three two values: # targeted - Targeted processes are protected, # minimum - Modification of targeted policy.</description>
+    </item>
+    
+  </channel>
+</rss>

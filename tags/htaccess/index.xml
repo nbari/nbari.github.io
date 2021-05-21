@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>htaccess on IT notes</title>
+    <link>https://nbari.com/tags/htaccess/</link>
+    <description>Recent content in htaccess on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Feb 2017 13:53:50 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/htaccess/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>haproxy</title>
+      <link>https://nbari.com/post/haproxy/</link>
+      <pubDate>Thu, 09 Feb 2017 13:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/haproxy/</guid>
+      <description>HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
+userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
+ acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:</description>
+    </item>
+    
+  </channel>
+</rss>

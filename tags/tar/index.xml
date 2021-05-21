@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tar on IT notes</title>
+    <link>https://nbari.com/tags/tar/</link>
+    <description>Recent content in tar on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Sep 2019 18:26:24 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/tar/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resume Tar</title>
+      <link>https://nbari.com/post/resume-tar/</link>
+      <pubDate>Thu, 26 Sep 2019 18:26:24 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/resume-tar/</guid>
+      <description>To resume a terminated pr If while extracting a file, the process gets terminated you may be available to resume it with:
+ tar -xvkf file.tgz   -k (x mode only) Do not overwrite existing files. In particular, if a file appears more than once in an archive, later copies will not overwrite earlier copies.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

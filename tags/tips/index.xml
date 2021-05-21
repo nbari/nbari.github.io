@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tips on IT notes</title>
+    <link>https://nbari.com/tags/tips/</link>
+    <description>Recent content in tips on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Aug 2016 11:27:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vim</title>
+      <link>https://nbari.com/post/vim/</link>
+      <pubDate>Mon, 08 Aug 2016 11:27:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vim/</guid>
+      <description>Quote/unquote words: ciw&#39;Ctrl+r&amp;quot;&#39;  or
+ciw &#39;&#39; Esc p  p paste after the cursor, P will paste before the cursor.
+Search matches (gn with the dot command) Suppose that we have a document containing several occurrences of the word ‘Normal’ and we’d like to change each occurrence to ‘Visual’. We can run /Normal to search for the word ‘Normal’, then type cgnVisual&amp;lt;Esc&amp;gt; to change the next match to the word ‘Visual’ and by pressing .</description>
+    </item>
+    
+  </channel>
+</rss>

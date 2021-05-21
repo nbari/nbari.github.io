@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>late on IT notes</title>
+    <link>https://nbari.com/tags/late/</link>
+    <description>Recent content in late on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 May 2017 20:26:20 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/late/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mount nfs</title>
+      <link>https://nbari.com/post/mount-nfs/</link>
+      <pubDate>Sun, 28 May 2017 20:26:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mount-nfs/</guid>
+      <description>To avoid hanging out the system while mounting NFS shares on boot time add the option bg to the /etc/fstab, example:
+192.168.1.2:/4T /plex/4T nfs rw,bg 0 0  This will help to boot and in background continue trying to mount in case of getting a &amp;ldquo;time out&amp;rdquo;
+From the man page: mount_nfs
+bg If an initial attempt to contact the server fails, fork off a child to keep trying the mount in the background.</description>
+    </item>
+    
+  </channel>
+</rss>

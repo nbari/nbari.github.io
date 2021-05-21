@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on IT notes</title>
+    <link>https://nbari.com/tags/mysql/</link>
+    <description>Recent content in mysql on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2020 21:59:02 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Import large dump</title>
+      <link>https://nbari.com/post/import-large-dump/</link>
+      <pubDate>Fri, 12 Jun 2020 21:59:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/import-large-dump/</guid>
+      <description>To import a large dump (~300GB) you could do:
+Split your file first:
+csplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {999}  You could also use the pattern {*} but you need the gcsplit:
+pkg install coreutils   BSD csplit don&amp;rsquo;t support {*}
+ Then try:
+gcsplit -s -ftable dump.sql &amp;quot;/-- Table structure for table/&amp;quot; {*}  Create small INSERT chunks:
+gsplit -a 3 -d -n l/200 table05 x_   l/N split into N files without splitting lines/records</description>
+    </item>
+    
+    <item>
+      <title>Delete in chunks</title>
+      <link>https://nbari.com/post/delete-in-chunks/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/delete-in-chunks/</guid>
+      <description>To delete a big/huge table in chunks, you could create this store procedure, but the performance at the end depends of how good/normalized is your database (indexes):
+ A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again. Such procedures are stored in the database data dictionary.
+ Connect to the database and select the database:
+mysql&amp;gt; \u my_database Database changed  To list stored procedures</description>
+    </item>
+    
+    <item>
+      <title>mysql CRC32</title>
+      <link>https://nbari.com/post/mysql-crc32/</link>
+      <pubDate>Sun, 08 Sep 2019 11:04:38 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-crc32/</guid>
+      <description>If need to calculate the CRC32 of a string, using mysql:
+$ mysql -e &amp;quot;SELECT CRC32(&#39;127.0.0.1&#39;)&amp;quot; +--------------------+ | CRC32(&#39;127.0.0.1&#39;) | +--------------------+ | 3619153832 | +--------------------+  </description>
+    </item>
+    
+    <item>
+      <title>mysql pager</title>
+      <link>https://nbari.com/post/mysql-pager/</link>
+      <pubDate>Wed, 15 May 2019 10:35:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-pager/</guid>
+      <description>To use less command to vie the output of a mysql result you could use:
+mysql&amp;gt; \P less  or
+mysql&amp;gt; pager less  Then run something like:
+mysql&amp;gt; show engine innodb status\G  In some cases you may need to search for something in specific for this grep could be used, for example:
+mysql&amp;gt; \P grep -A7 &amp;quot;ROW OPERATIONS&amp;quot; PAGER set to &#39;grep -A7 &amp;quot;ROW OPERATIONS&amp;quot;&#39;  Then when running the command it will only return 7 lines after &amp;ldquo;ROW OPERATIONS&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>galera SOS</title>
+      <link>https://nbari.com/post/galera-sos/</link>
+      <pubDate>Wed, 10 Apr 2019 19:29:55 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/galera-sos/</guid>
+      <description>Check status of cluster: https://nbari.com/post/galera/
+Find process list not sleeping:
+SELECT user, time, state, info FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id;  Doing a heavy DDL (ALTER):
+SELECT * FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND info LIKE &#39;alter%&#39; AND time &amp;gt;= 2 ORDER BY time DESC, id LIMIT 1;   DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row.</description>
+    </item>
+    
+    <item>
+      <title>galera alter</title>
+      <link>https://nbari.com/post/galera-alter/</link>
+      <pubDate>Tue, 29 Jan 2019 22:50:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/galera-alter/</guid>
+      <description>To prevent bloking the cluster while doing ALTERS (SCHEMA UPGRADES), do this per node:
+SET wsrep_OSU_method=&#39;RSU&#39;;  Then Run the ALTER statement once done reset the Schema Upgrade method back to Total Order Isolation.
+SET wsrep_OSU_method=&#39;TOI&#39;;  http://galeracluster.com/documentation-webpages/clusterstallonalter.html http://galeracluster.com/documentation-webpages/schemaupgrades.html</description>
+    </item>
+    
+    <item>
+      <title>Processlist</title>
+      <link>https://nbari.com/post/processlist/</link>
+      <pubDate>Mon, 12 Nov 2018 20:10:04 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/processlist/</guid>
+      <description>Run show processlist every second:
+mysqladmin -uroot -p -i 1 processlist  -i 1 stands for interval one second</description>
+    </item>
+    
+    <item>
+      <title>mysql SHA512 CRYPT</title>
+      <link>https://nbari.com/post/mysql-sha512-crypt/</link>
+      <pubDate>Sat, 23 Dec 2017 10:41:29 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-sha512-crypt/</guid>
+      <description>To create a password using the SHA512-CRYPT schema:
+SELECT ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To create an user:
+INSERT INTO users SET password=ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To use with postfix or dovecot:
+INSERT INTO users SET password=CONCAT(&#39;{SHA512-CRYPT}&#39;, ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND()))));  </description>
+    </item>
+    
+    <item>
+      <title>mysql db size</title>
+      <link>https://nbari.com/post/mysql-db-size/</link>
+      <pubDate>Sun, 07 May 2017 16:13:29 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-db-size/</guid>
+      <description>How big is your data:
+SELECT IFNULL(B.engine,&amp;#39;Total&amp;#39;) &amp;#34;Storage Engine&amp;#34;, CONCAT(LPAD(REPLACE(FORMAT(B.DSize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Data Size&amp;#34;, CONCAT(LPAD(REPLACE( FORMAT(B.ISize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Index Size&amp;#34;, CONCAT(LPAD(REPLACE( FORMAT(B.TSize/POWER(1024,pw),3),&amp;#39;,&amp;#39;,&amp;#39;&amp;#39;),17,&amp;#39; &amp;#39;),&amp;#39; &amp;#39;, SUBSTR(&amp;#39; KMGTP&amp;#39;,pw+1,1),&amp;#39;B&amp;#39;) &amp;#34;Table Size&amp;#34; FROM (SELECT engine,SUM(data_length) DSize,SUM(index_length) ISize, SUM(data_length+index_length) TSize FROM information_schema.tables WHERE table_schema NOT IN (&amp;#39;mysql&amp;#39;,&amp;#39;information_schema&amp;#39;,&amp;#39;performance_schema&amp;#39;) AND engine IS NOT NULL GROUP BY engine WITH ROLLUP) B, (SELECT 3 pw) A ORDER BY TSize; This will print something like:
++----------------+----------------------+----------------------+----------------------+ | Storage Engine | Data Size | Index Size | Table Size | +----------------+----------------------+----------------------+----------------------+ | InnoDB | 10.</description>
+    </item>
+    
+    <item>
+      <title>mysql backup</title>
+      <link>https://nbari.com/post/mysql-backup/</link>
+      <pubDate>Tue, 11 Apr 2017 10:28:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-backup/</guid>
+      <description>mysqldump + xz + openssl First add to .my.cnf the proper username/password to avoid getting a warning:
+[client] host = localhost user = dbadmin password = secret  To take the dump and keep it only for 31 days:
+#!/bin/sh DAY=$(date +%d) mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction dbname | \ xz -c | \ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outform DER /path/to/cert.pem  mysqldump The options used:</description>
+    </item>
+    
+    <item>
+      <title>mysql root password</title>
+      <link>https://nbari.com/post/mysql-root-password/</link>
+      <pubDate>Mon, 10 Apr 2017 15:37:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-root-password/</guid>
+      <description>Reset root password on mysql &amp;gt;= 5.7.17 Edit /etc/rc.conf:
+mysql_args=&amp;quot;--skip-grant-tables --skip-networking&amp;quot;  Restart mysql:
+service mysql-server restart  Login like root:
+mysql&amp;gt; UPDATE mysql.user SET authentication_string = PASSWORD(&#39;aaaa&#39;) WHERE User = &#39;root&#39; AND Host = &#39;localhost&#39;; mysql&amp;gt; FLUSH PRIVILEGES; mysql&amp;gt; quit  Remove or comment:
+# mysql_args=&amp;quot;--skip-grant-tables --skip-networking&amp;quot;  Restart mysql:
+service mysql-server restart  mysqldump: Couldn&amp;rsquo;t execute &amp;lsquo;SHOW VARIABLES LIKE &amp;lsquo;gtid_mode&amp;rsquo;&#39;: To fix that try this:
+# mysql_upgrade -u root -p --force  </description>
+    </item>
+    
+    <item>
+      <title>rds slave from external master</title>
+      <link>https://nbari.com/post/rds-slave-from-external-master/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rds-slave-from-external-master/</guid>
+      <description>Setup AWS MySQL RDS instance as slave of an external master Configure external mysql to become master:
+server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
+mysql&amp;gt; create user `replica`@`%` identified by &#39;PASSWORD&#39;; mysql&amp;gt; grant replication slave on *.* to &#39;replica&#39;@&#39;%&#39;;  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:</description>
+    </item>
+    
+    <item>
+      <title>innodb_flush_log_at_trx_commit=2</title>
+      <link>https://nbari.com/post/mysql_innodb_flush_log_at_trx_commit/</link>
+      <pubDate>Mon, 14 Nov 2016 11:57:34 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql_innodb_flush_log_at_trx_commit/</guid>
+      <description>To speed mysql replica add into the [mysqld]:
+innodb_flush_log_at_trx_commit=2  </description>
+    </item>
+    
+    <item>
+      <title>mysql_tzinfo_to_sql</title>
+      <link>https://nbari.com/post/mysql_tzinfo_to_sql/</link>
+      <pubDate>Mon, 07 Nov 2016 16:58:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql_tzinfo_to_sql/</guid>
+      <description>FreeBSD &amp;amp; MySQL UTC After doing a fresh install, load the UTC zone:
+$ cd /usr/share/zoneinfo $ mysql_tzinfo_to_sql UTC UTC | mysql -u root mysql  Edit the /etc/my.cnf:
+[mysqld] default-time-zone=&#39;UTC&#39;  This will set the default timezone on the server to be UTC
+To get current timezone of the mysql you can do following things:
+mysql&amp;gt; SELECT @@global.time_zone, @@session.time_zone;  </description>
+    </item>
+    
+  </channel>
+</rss>

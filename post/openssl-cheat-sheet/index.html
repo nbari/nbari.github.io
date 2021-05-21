@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> openssl cheat sheet &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/openssl-cheat-sheet/">openssl cheat sheet</a></h2>
+          <span class="post-date">Jun 22, 2016 </span>
+          <div class="post-content">
+            <p>To display the contents of a <a href="http://serverfault.com/a/9717/94862">PEM</a> formatted certificate:</p>
+<pre><code>$ openssl x509 -in the-cert.pm -text
+</code></pre>
+<p>Connecting to the server:</p>
+<pre><code>$ openssl s_client -showcerts -connect imap.ejemplo.org:993 &lt; /dev/null
+</code></pre>
+<p>Test smtp 587:</p>
+<pre><code>$ openssl s_client -host smtp.gmail.com -port 587 -starttls smtp -crlf
+</code></pre>
+<p>Checking the Validity Date:</p>
+<pre><code>$ openssl s_client -showcerts -connect nbari.com:443 2&gt;/dev/null | openssl x509 -noout -dates
+</code></pre>
+<p>Encode base64 a file:</p>
+<pre><code>$ openssl enc -base64 -in file.txt -out file.txt.enc
+</code></pre>
+<blockquote>
+<p>if no ssl: python -m base64 -d</p>
+</blockquote>
+<p>Create pair of keys (self signed certificate):</p>
+<pre><code>$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout example.key -out example.crt -subj &quot;/CN=example.com&quot; -days 3650
+</code></pre>
+<p>Test speed of signatures:</p>
+<pre><code>$ openssl speed sha256 sha512
+</code></pre>
+<p>Change pass-phrase of a key, you will need to specify the old pass-phrase and
+then spedify a new one:</p>
+<pre><code>$ openssl rsa -des3 -in example.key -out example.key.new
+</code></pre>
+<h2 id="encrypt--decrypt">encrypt / decrypt</h2>
+<p>Encrypt:</p>
+<pre><code>$ openssl aes-256-cbc -a -salt -in file.txt -out file.txt.enc
+</code></pre>
+<p>Decrypt:</p>
+<pre><code>$ openssl aes-256-cbc -d -a -in file.txt.enc -out file.txt
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/jails/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/l2tp-ipsec/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

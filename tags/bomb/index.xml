@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bomb on IT notes</title>
+    <link>https://nbari.com/tags/bomb/</link>
+    <description>Recent content in bomb on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Dec 2016 11:11:36 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/bomb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>forkbomb</title>
+      <link>https://nbari.com/post/forkbomb/</link>
+      <pubDate>Thu, 08 Dec 2016 11:11:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/forkbomb/</guid>
+      <description>forkbomb C example:
+#include &amp;lt;stdio.h&amp;gt;int main() { while(1) fork(); } To compile:
+$ clang bomg.c  Python example:
+import os while True: os.fork() How to prevent it, use RCTL for example in a jail:
+$ rctl -a jail:myJail:maxproc:deny=50  </description>
+    </item>
+    
+  </channel>
+</rss>

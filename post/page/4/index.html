@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Posts &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/post/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/block-ssh-mac/">Block SSH on MacOS</a></h2>
+          <span class="post-date">Dec 1, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pf">pf</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/firewall">firewall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/managed">managed</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &quot;echo 'block in log quick proto tcp from any to any port 22' &gt;&gt; /etc/pf.conf&quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.
+				<a class="read-more" href="/post/block-ssh-mac/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/processlist/">Processlist</a></h2>
+          <span class="post-date">Nov 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/processlist">processlist</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/watch">watch</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Run show processlist every second:
+mysqladmin -uroot -p -i 1 processlist  -i 1 stands for interval one second
+				<a class="read-more" href="/post/processlist/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/osi-tls/">OSI TLS</a></h2>
+          <span class="post-date">Nov 7, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tls">tls</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/osi">osi</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Beside the OSI/model, there is also the TCP/IP Model:
+  Link Layer
+  Internet (IP) Layer
+  Transport Layer
+  Application
+  OSI Model The OSI model has a bit more granularity.
+ Physical Layer Data Link Layer Network Layer (IP) Transport Layer (TCP) Session Layer (TLS) Presentation Layer Application Layer (HTTP)  TLS establishes an encrypted session. In the OSI model this is where TLS operates.
+				<a class="read-more" href="/post/osi-tls/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/irc/">IRC</a></h2>
+          <span class="post-date">Nov 2, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/irc">irc</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Change password password in irc:
+/msg nickserv set password &lt;password&gt;  
+				<a class="read-more" href="/post/irc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/combine-two-images/">combine two images</a></h2>
+          <span class="post-date">Oct 17, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/converg">converg</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/imagemagick">imagemagick</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/append">append</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Combine in a single file 2 images:
+convert +append a.png b.png out.png  -append will append vertically instead of horizontally (+)
+				<a class="read-more" href="/post/combine-two-images/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ls_colors/">LS_COLORS</a></h2>
+          <span class="post-date">Sep 6, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ls">ls</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/colors">colors</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/shell">shell</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To remove the blinking of symbolic links when doing ls in Linux:
+LS_COLORS=&quot;ln=35&quot; export LS_COLORS  That will set the ln=35 symbolic links to color purple.
+Params for LS_COLORS:
+di Directory fi File ln Symbolic Link pi Fifo file so Socket file bd Block (buffered) special file cd Character (unbuffered) special file or Symbolic Link pointing to a non-existent file (orphan) mi Non-existent file pointed to by a symbolic link (visible when you type ls -l) ex File which is executable (ie.
+				<a class="read-more" href="/post/ls_colors/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/htpasswd/">htpasswd</a></h2>
+          <span class="post-date">Sep 2, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/htpasswd">htpasswd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an htpasswd file (for htaccess &ldquo;authentication&rdquo;) using openssl:
+$ printf &quot;foo:$(openssl passwd -apr1 PASSWORD)\n&quot; &gt;&gt; .htpasswd  If need to use crypt:
+$ printf &quot;foo:$(openssl passwd -crypt PASSWORD)\n&quot; &gt;&gt; .htpasswd  
+				<a class="read-more" href="/post/htpasswd/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-ssh/">Git SSH</a></h2>
+          <span class="post-date">Aug 29, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bare">bare</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a git repository and access to it via ssh:
+$ ssh your.host $ mkdir my-new-repo $ cd my-new-repo $ git --bare init  To access your repo (clone it):
+$ git clone ssh://user@your.host:2222/~user/my-new-repo  
+				<a class="read-more" href="/post/git-ssh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/self-ca/">self CA</a></h2>
+          <span class="post-date">Aug 27, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ca">ca</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tls">tls</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/self-signed">self-signed</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a self signed CA (Certificate Authority)
+Generate private key:
+$ openssl genrsa -des3 -out CA.key 4096  To create a private key without password:
+$ openssl genrsa -out CA.key 4096  Create a root certificate:
+$ openssl req -x509 -new -nodes -key CA.key -sha256 -out CA.pem -subj &quot;/CN=example.com&quot; -days 365  In one single command create the private key and the certificate:
+$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout CA.
+				<a class="read-more" href="/post/self-ca/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bosh-cheatsheet/">Bosh cheatsheet</a></h2>
+          <span class="post-date">Aug 23, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/bosh">bosh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/cheat">cheat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/cheatsheet">cheatsheet</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sheet">sheet</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				BOSH is a project that unifies release engineering, deployment, and lifecycle management of small and large-scale cloud software.
+Check your environment:
+$ bosh env  Set your deployment environment:
+$ export BOSH_DEPLOYMENT=foo   if have multiple deployments in same dir better to use -d &lt;deployment-name&gt; since many commands are bound to this variable.
+ To recreate your environment (virtualbox), remove the line that start with current_manifest from the file state.
+				<a class="read-more" href="/post/bosh-cheatsheet/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/zfs-swap/">ZFS swap</a></h2>
+          <span class="post-date">Aug 20, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/swap">swap</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To add more swap on a ZFS system:
+# zfs create -V 64G -o org.freebsd:swap=on -o checksum=off -o compression=off -o dedup=off -o sync=disabled -o primarycache=none tank/swap2  To add it:
+# swapon /dev/zvol/tank/swap2  To resize you could first remove it:
+# swapoff /dev/zvol/tank/swap  Then destroy it:
+# zfs destroy tank/swap  
+				<a class="read-more" href="/post/zfs-swap/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/no-history/">No history</a></h2>
+          <span class="post-date">Aug 11, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/history">history</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/shell">shell</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To avoid having command in history just prefix them with an empty space:
+$⎵ uname  If using zsh:
+$ echo &quot;&quot; &gt; ~/.zsh_history &amp; exec $SHELL -l  
+				<a class="read-more" href="/post/no-history/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/macos-sparseimage/">macOs sparseimage</a></h2>
+          <span class="post-date">Aug 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sparse">sparse</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/install">install</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vmware">vmware</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &quot;macOS_installmedia&quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  
+				<a class="read-more" href="/post/macos-sparseimage/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nato-phonetic-alphabet/">NATO phonetic alphabet</a></h2>
+          <span class="post-date">Jul 28, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nato">nato</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/alphabet">alphabet</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				   Symbol Code word Pronunciation     A Alfa Al fah   B Bravo Brah Voh   C Charlie Char Lee   D Delta Dell Tah   E Echo Eck Oh   F Fox Foks Trot   G Golf Golf   H Hotel Hoh Tell   I India In Dee Ah   J Juliett Jew Lee Ett   K Kilo Key Loh   L Lima Lee Mah   M Mike Mike   N November No Vem Ber   O Oscar Oss Car   P Papa Pah Pah   Q Quebec Keh Beck   R Romeo Row Me Oh   S Sierra See Air Ah   T Tango Tang Go   U Uniform You Nee Form   V Victor Vik Tah   W Whiskey Wiss Key   X X-ray Ecks Ray   Y Yankee Yang Key   Z Zulu Zoo Loo   0 Zero Zee Row   1 One Wun   2 Two Too   3 Three Tree   4 Four Fow Er   5 Five Fife   6 Six Six   7 Seven Sev En   8 Eight Ait   9 Nine Nine Er    
+				<a class="read-more" href="/post/nato-phonetic-alphabet/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/zfs-send-receive/">ZFS send receive</a></h2>
+          <span class="post-date">Jun 21, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/send">send</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/receive">receive</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/root">root</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To send a zfs dataset being no root, on the origin server:
+# zfs allow -g wheel send,snapshot,hold tank/foo  On the receiver, create the dataset and allow users in group wheel:
+# zfs create -o mountpoint=/foo tank/foo # zfs allow -g wheel compression,mountpoint,create,mount,receive tank/foo # umount /foo  On the origin server create the snapshot to send:
+# zfs snapshot -r tank/foo  On the origin server send the dataset by using:
+				<a class="read-more" href="/post/zfs-send-receive/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/enable-paste/">Enable Paste</a></h2>
+          <span class="post-date">Jun 19, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/chrome">chrome</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/paste">paste</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To enable paste in chrome, open the console and enter:
+var allowPaste = function(e){ e.stopImmediatePropagation(); return true; }; document.addEventListener('paste', allowPaste, true);  
+				<a class="read-more" href="/post/enable-paste/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/kld_list/">kld_list</a></h2>
+          <span class="post-date">Jun 15, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/kernel">kernel</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/kldload">kldload</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To load kernel modules after local disks are mounted add this to /etc/rc.conf:
+kld_list=&quot;fuse&quot;   in this case module fuse will be loaded
+ 
+				<a class="read-more" href="/post/kld_list/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/hw-machine-model-ncpu/">hw.(machine|model|ncpu)</a></h2>
+          <span class="post-date">Jun 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ncpu">ncpu</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sysctl">sysctl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To get an overview of the system:
+# sysctl -a | egrep -i 'hw.machine|hw.model|hw.ncpu' hw.machine: amd64 hw.model: Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz hw.ncpu: 16 hw.machine_arch: amd64  
+				<a class="read-more" href="/post/hw-machine-model-ncpu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/moosefs/">moosefs</a></h2>
+          <span class="post-date">Jun 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/moosefs">moosefs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dfs">dfs</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
+Install the required packages:
+pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
+pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
+X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
+MFSM NEW  Create a pool to share:
+				<a class="read-more" href="/post/moosefs/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/manifest-no-such-file-or-directory/">MANIFEST No Such File or Directory</a></h2>
+          <span class="post-date">Jun 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/manifest">MANIFEST</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsdinstall">bsdinstall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hetzner">hetzner</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If when trying to install FreeBSD using bsdinstall you get:
+&quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&quot; - no such file or directory  Try to:
+root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again
+				<a class="read-more" href="/post/manifest-no-such-file-or-directory/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/3/">Newer</a>  
+  <a class="btn next" href="/post/page/5/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

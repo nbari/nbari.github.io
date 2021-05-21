@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on IT notes</title>
+    <link>https://nbari.com/tags/python/</link>
+    <description>Recent content in python on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 May 2021 07:55:26 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pip upgrade</title>
+      <link>https://nbari.com/post/pip-upgrade/</link>
+      <pubDate>Wed, 05 May 2021 07:55:26 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pip-upgrade/</guid>
+      <description>Upgrade using:
+pip list --outdated --format=freeze | grep -v &#39;^\-e&#39; | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --user  </description>
+    </item>
+    
+    <item>
+      <title>Python quit unexpectedly macOS Catalina</title>
+      <link>https://nbari.com/post/python-quit-unexpectedly-macos/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/python-quit-unexpectedly-macos/</guid>
+      <description>When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  </description>
+    </item>
+    
+    <item>
+      <title>macOs catalina &amp; python</title>
+      <link>https://nbari.com/post/catalina-python/</link>
+      <pubDate>Tue, 12 Nov 2019 16:20:28 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/catalina-python/</guid>
+      <description>Reinstall openssl:
+brew reinstall openssl  And then:
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH  Or create the link manually:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  Reinstall python:
+brew reinstall python  Upgrade pip packages:
+pip install -U --user $(pip freeze | awk -F&#39;[=]&#39; &#39;{print $1}&#39;)  </description>
+    </item>
+    
+    <item>
+      <title>python site packages</title>
+      <link>https://nbari.com/post/site-packages/</link>
+      <pubDate>Thu, 07 Jun 2018 14:22:46 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/site-packages/</guid>
+      <description>To find the python site-packages paths:
+$ python -m site  </description>
+    </item>
+    
+    <item>
+      <title>OBJC_DISABLE_INITIALIZE_FORK_SAFETY</title>
+      <link>https://nbari.com/post/objc_disable_initialize_fork_safety/</link>
+      <pubDate>Thu, 22 Mar 2018 15:28:13 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/objc_disable_initialize_fork_safety/</guid>
+      <description>In macOS High Sierra if getting this:
+objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.  Define:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES  This will fix temporally fix the problem and allow program to continue executing, more about this issue here: http://sealiesoftware.</description>
+    </item>
+    
+    <item>
+      <title>webscraping</title>
+      <link>https://nbari.com/post/webscraping/</link>
+      <pubDate>Thu, 27 Oct 2016 21:37:13 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/webscraping/</guid>
+      <description>Webscraping using python + chrome In mac OS X, install chromedriver and selenium:
+brew install chromedriver  Install selenium via pip:
+pip install -U selenium   if required to install globally sudo pip install selenium
+ To test, open a terminal, type python and try:
+Python 2.7.12 (default, Oct 11 2016, 05:20:59) [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information.</description>
+    </item>
+    
+  </channel>
+</rss>

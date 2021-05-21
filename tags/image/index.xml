@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>image on IT notes</title>
+    <link>https://nbari.com/tags/image/</link>
+    <description>Recent content in image on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Dec 2016 15:53:08 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/image/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>zfs</title>
+      <link>https://nbari.com/post/zfs/</link>
+      <pubDate>Sat, 10 Dec 2016 15:53:08 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/zfs/</guid>
+      <description>FreeBSD zfs disk image Use VirtualBox to install FreeBSD using UFS.
+After having FreeBSD installed, update your sources and build a custom world and kernel based on your needs for the new image to be created:
+# cd /usr/src # make -j4 buildworld buildkernel   adjust -j4 to the number or cpu cores
+ Use this script to create the image: https://github.com/nbari/freebsd/blob/master/zfs/zfs.sh
+$ mkdir /raw &amp;amp;&amp;amp; cd /raw $ fetch --no-verify-peer https://raw.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>resize on IT notes</title>
+    <link>https://nbari.com/tags/resize/</link>
+    <description>Recent content in resize on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Sep 2019 10:23:40 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/resize/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>extent</title>
+      <link>https://nbari.com/post/extent/</link>
+      <pubDate>Sun, 15 Sep 2019 10:23:40 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/extent/</guid>
+      <description>To resize an image and adjust it to fit a fixed canvas with transparent background:
+$ convert in.png \ -resize 128x128 \ -background none \ -gravity center \ -extent 128x128 \ out.png  </description>
+    </item>
+    
+    <item>
+      <title>debian parted</title>
+      <link>https://nbari.com/post/debian-parted/</link>
+      <pubDate>Mon, 26 Sep 2016 15:38:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/debian-parted/</guid>
+      <description>Resize AWS Debian Jessie Probably instance will have 8GB, to extend the disk, for example to 40GB do this:
+Install parted:
+$ apt-get install parted  Run:
+$ /sbin/parted ---pretend-input-tty /dev/xvda resizepart 1 yes 100%  Resize2fs:
+$ resize2fs /dev/xvda1  Run lsblk:
+root@ip-10-20-1-17:~# lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT xvda 202:0 0 40G 0 disk `-xvda1 202:1 0 40G 0 part /  </description>
+    </item>
+    
+  </channel>
+</rss>

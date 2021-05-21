@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>strace on IT notes</title>
+    <link>https://nbari.com/tags/strace/</link>
+    <description>Recent content in strace on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 31 Aug 2017 11:25:27 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/strace/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Strace</title>
+      <link>https://nbari.com/post/strace/</link>
+      <pubDate>Thu, 31 Aug 2017 11:25:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/strace/</guid>
+      <description>When using strace, to trace child processes, use option -f, example:
+strace -f ls  </description>
+    </item>
+    
+  </channel>
+</rss>

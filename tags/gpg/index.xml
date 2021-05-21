@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gpg on IT notes</title>
+    <link>https://nbari.com/tags/gpg/</link>
+    <description>Recent content in gpg on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Apr 2021 20:24:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/gpg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gpg: selecting card failed: Operation not supported by device</title>
+      <link>https://nbari.com/post/gpg_selecting_card_failed_operation_not_supported_by_device/</link>
+      <pubDate>Tue, 27 Apr 2021 20:24:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/gpg_selecting_card_failed_operation_not_supported_by_device/</guid>
+      <description>If using a yubikey and getting this:
+gpg: selecting card failed: Operation not supported by device gpg: OpenPGP card not available: Operation not supported by device  Add to ~/.gnupg/scdaemon.conf
+disable-ccid  To debug you could use:
+reader-port Yubico Yubi debug-all debug-level guru disable-ccid log-file /tmp/scd.log  </description>
+    </item>
+    
+    <item>
+      <title>gpg</title>
+      <link>https://nbari.com/post/gpg/</link>
+      <pubDate>Tue, 27 Feb 2018 12:33:49 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/gpg/</guid>
+      <description>Install gpg on macOS:
+brew install gnupg pinentry-mac   if required restart gpg-agent with gpgconf --kill gpg-agent
+ To create a gpg key in batch mode, create a file named gpg-key-script with this value:
+Key-Type: 1 Key-Length: 2048 Subkey-Type: 1 Subkey-Length: 2048 Name-Real: your name Name-Comment: your comment Name-Email: your@email Expire-Date: 0  Next you could do something like:
+$ gpg --homedir /salt/gpgkeys --batch --gen-key gen-key-script  Backup private key To save the private key to a file:</description>
+    </item>
+    
+  </channel>
+</rss>

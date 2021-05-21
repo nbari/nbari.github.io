@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mp4 on IT notes</title>
+    <link>https://nbari.com/tags/mp4/</link>
+    <description>Recent content in mp4 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Sep 2020 13:08:58 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mp4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>libx265</title>
+      <link>https://nbari.com/post/libx265/</link>
+      <pubDate>Mon, 14 Sep 2020 13:08:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/libx265/</guid>
+      <description>To reduce/compress a video size you could use:
+ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4  Be aware that libx265 is not supported in many players so you can always fallback to H.264:
+ffmpeg -i input.mov output.mp4   https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+ </description>
+    </item>
+    
+    <item>
+      <title>add subtitles</title>
+      <link>https://nbari.com/post/add-subtitles/</link>
+      <pubDate>Mon, 20 Feb 2017 20:49:14 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/add-subtitles/</guid>
+      <description>Add subtitles to a mkv file: ffmpeg -i input.mkv -f srt -i input.srt -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy -c:s srt output.mkv  </description>
+    </item>
+    
+  </channel>
+</rss>

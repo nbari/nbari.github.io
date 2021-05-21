@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dns on IT notes</title>
+    <link>https://nbari.com/tags/dns/</link>
+    <description>Recent content in dns on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 29 Jan 2021 20:34:44 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flush DNS</title>
+      <link>https://nbari.com/post/flush-dns/</link>
+      <pubDate>Fri, 29 Jan 2021 20:34:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/flush-dns/</guid>
+      <description>To flush DNS on macOS:
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache  </description>
+    </item>
+    
+    <item>
+      <title>DoH Firefox</title>
+      <link>https://nbari.com/post/doh-firefox/</link>
+      <pubDate>Fri, 15 Feb 2019 15:26:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/doh-firefox/</guid>
+      <description>Open firefox and type:
+about:config  Search for:
+network.trr.uri  Probably you already have:
+https://mozilla.cloudflare-dns.com/dns-query  If not add it or use something like:
+https://cloudflare-dns.com/dns-query https://dns.quad9.net/dns-query  Then enable network.trr.mode by setting it to 2
+Set network.trr.mode to 2 make DNS Over HTTPS the browser&amp;rsquo;s first choice but use regular DNS as a fallback (0 is &amp;ldquo;off by default&amp;rdquo;, 1 lets Firefox pick whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).</description>
+    </item>
+    
+    <item>
+      <title>DNS TCP</title>
+      <link>https://nbari.com/post/dns-tcp/</link>
+      <pubDate>Fri, 01 Jun 2018 07:25:42 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dns-tcp/</guid>
+      <description>Unbound using DNS over TCP:
+server: private-domain: &amp;quot;plex.direct&amp;quot; forward-zone: name: &amp;quot;.&amp;quot; forward-ssl-upstream: yes forward-addr: 1.1.1.1@853 forward-addr: 9.9.9.9@853 forward-addr: 1.0.0.1@853 forward-addr: 149.112.112.112@853 forward-addr: 2606:4700:4700::1111@853 forward-addr: 2606:4700:4700::1001@853 forward-addr: 2620:fe::fe@853; forward-addr: 2620:fe::9@853;  To test do:
+# unbound-control -c /var/unbound/unbound.conf lookup .  It should return something like:
+The following name servers are used for lookup of . forwarding request: Delegation with 0 names, of which 0 can be examined to query further addresses.</description>
+    </item>
+    
+    <item>
+      <title>dnsmasq</title>
+      <link>https://nbari.com/post/dnsmasq/</link>
+      <pubDate>Fri, 30 Sep 2016 12:27:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dnsmasq/</guid>
+      <description>dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&amp;rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on</description>
+    </item>
+    
+  </channel>
+</rss>

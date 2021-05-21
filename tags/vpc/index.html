@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> VPC &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/vpc/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/terraform-full-vpc/">Terraform Full Vpc</a></h2>
+          <span class="post-date">Aug 12, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/terraform">terraform</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vpc">vpc</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &#34;aws_vpc&#34; &#34;test&#34; { cidr_block = &#34;10.100.0.0/16&#34; enable_dns_hostnames = &#34;true&#34; enable_dns_support = &#34;true&#34; tags { Name = &#34;test&#34; } } output &#34;vpc_id&#34; { value = &#34;${aws_vpc.test.id}&#34; } resource &#34;aws_internet_gateway&#34; &#34;igw&#34; { vpc_id = &#34;${aws_vpc.test.id}&#34; tags { Name = &#34;internet gateway&#34; } } resource &#34;aws_subnet&#34; &#34;public-a&#34; { vpc_id = &#34;${aws_vpc.test.id}&#34; cidr_block = &#34;10.100.0.0/24&#34; availability_zone = &#34;eu-central-1a&#34; tags { Name = &#34;public A&#34; } } output &#34;subnet-public-a&#34; { value = &#34;${aws_subnet.
+				<a class="read-more" href="/post/terraform-full-vpc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aws-vpc/">AWS VPC</a></h2>
+          <span class="post-date">Jun 18, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/vpc">VPC</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Amazon Virtual Private Cloud (Amazon VPC) enables you to launch Amazon Web Services (AWS) resources into a virtual network that you&rsquo;ve defined. This virtual network closely resembles a traditional network that you&rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+ Things to keep in mind. Normalize your network First of all, do not invent IP&rsquo;s, please use and create a normalized range using the private ranges: https://en.
+				<a class="read-more" href="/post/aws-vpc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

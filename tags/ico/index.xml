@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ico on IT notes</title>
+    <link>https://nbari.com/tags/ico/</link>
+    <description>Recent content in ico on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 28 Jul 2020 19:19:05 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ico/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>favicon</title>
+      <link>https://nbari.com/post/favicon/</link>
+      <pubDate>Tue, 28 Jul 2020 19:19:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/favicon/</guid>
+      <description>Create a favicon from a .png using imagemagick convert:
+convert favicon.png -define icon:auto-resize=64,48,32,16 favicon.ico  </description>
+    </item>
+    
+  </channel>
+</rss>

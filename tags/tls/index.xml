@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tls on IT notes</title>
+    <link>https://nbari.com/tags/tls/</link>
+    <description>Recent content in tls on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Feb 2020 14:48:39 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/tls/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>redis over TLS</title>
+      <link>https://nbari.com/post/redis-over-tls/</link>
+      <pubDate>Sun, 23 Feb 2020 14:48:39 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/redis-over-tls/</guid>
+      <description>Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual</description>
+    </item>
+    
+    <item>
+      <title>OSI TLS</title>
+      <link>https://nbari.com/post/osi-tls/</link>
+      <pubDate>Wed, 07 Nov 2018 18:49:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osi-tls/</guid>
+      <description>Beside the OSI/model, there is also the TCP/IP Model:
+  Link Layer
+  Internet (IP) Layer
+  Transport Layer
+  Application
+  OSI Model The OSI model has a bit more granularity.
+ Physical Layer Data Link Layer Network Layer (IP) Transport Layer (TCP) Session Layer (TLS) Presentation Layer Application Layer (HTTP)  TLS establishes an encrypted session. In the OSI model this is where TLS operates.</description>
+    </item>
+    
+    <item>
+      <title>self CA</title>
+      <link>https://nbari.com/post/self-ca/</link>
+      <pubDate>Mon, 27 Aug 2018 12:33:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/self-ca/</guid>
+      <description>Create a self signed CA (Certificate Authority)
+Generate private key:
+$ openssl genrsa -des3 -out CA.key 4096  To create a private key without password:
+$ openssl genrsa -out CA.key 4096  Create a root certificate:
+$ openssl req -x509 -new -nodes -key CA.key -sha256 -out CA.pem -subj &amp;quot;/CN=example.com&amp;quot; -days 365  In one single command create the private key and the certificate:
+$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout CA.</description>
+    </item>
+    
+    <item>
+      <title>ciphers supported</title>
+      <link>https://nbari.com/post/ciphers-supported/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ciphers-supported/</guid>
+      <description>List ciphers supported by an HTTP server:
+nmap --script ssl-enum-ciphers -p 443 www.nbari.com  Example of output:
+PORT STATE SERVICE 443/tcp open https | ssl-enum-ciphers: | TLSv1.1: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server | TLSv1.2: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server |_ least strength: A Nmap done: 1 IP address (1 host up) scanned in 9.</description>
+    </item>
+    
+  </channel>
+</rss>

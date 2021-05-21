@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>domain on IT notes</title>
+    <link>https://nbari.com/tags/domain/</link>
+    <description>Recent content in domain on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 May 2018 12:42:22 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/domain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Domain Fronting</title>
+      <link>https://nbari.com/post/domain-fronting/</link>
+      <pubDate>Wed, 02 May 2018 12:42:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/domain-fronting/</guid>
+      <description>If your domain becomes blocked you &amp;ldquo;could use&amp;rdquo; another one to bypass the block:
+curl -s -H &amp;quot;Host: your-blocked-domain&amp;quot; -H &amp;quot;Connection: close&amp;quot; &amp;quot;https://new-tld/your/path&amp;quot;  Both domains must be hosted within the same CDN, example:
+curl -s -H &amp;quot;Host: images-na.ssl-images-amazon.com&amp;quot; -H &amp;quot;Connection: close&amp;quot; &amp;quot;https://cdn.atlassian.com/images/I/01rgQ3jqo7L.css&amp;quot;  More info:
+ https://www.optiv.com/blog/escape-and-evasion-egressing-restricted-networks https://www.peew.pw/blog/2018/2/22/how-i-identified-93k-domain-frontable-cloudfront-domains  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pmset on IT notes</title>
+    <link>https://nbari.com/tags/pmset/</link>
+    <description>Recent content in pmset on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Aug 2019 21:20:50 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pmset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prevent Mac to Sleep</title>
+      <link>https://nbari.com/post/prevent-mac-to-sleep/</link>
+      <pubDate>Wed, 28 Aug 2019 21:20:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/prevent-mac-to-sleep/</guid>
+      <description>To stop sleep entirely:
+sudo pmset -a disablesleep 1  To revert, allow sleep again:
+sudo pmset -a disablesleep 0  To display global power settings:
+pmset -g  </description>
+    </item>
+    
+    <item>
+      <title>womp</title>
+      <link>https://nbari.com/post/womp/</link>
+      <pubDate>Fri, 04 May 2018 17:34:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/womp/</guid>
+      <description>To enable WoL (Wake-on-LAN) on macOS:
+$ sudo pmset womp 1  Then check the settings:
+$ pmset -g System-wide power settings: Currently in use: standbydelay 10800 standby 1 womp 1 halfdim 1 hibernatefile /var/vm/sleepimage powernap 1 gpuswitch 2 networkoversleep 0 disksleep 10 sleep 1 (sleep prevented by coreaudiod, coreaudiod, iTunes) autopoweroffdelay 28800 hibernatemode 3 autopoweroff 1 ttyskeepawake 1 displaysleep 10 tcpkeepalive 1 acwake 0 lidwake 1  </description>
+    </item>
+    
+  </channel>
+</rss>

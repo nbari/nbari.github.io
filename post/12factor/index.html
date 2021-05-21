@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 12 factor &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/12factor/">12 factor</a></h2>
+          <span class="post-date">Oct 25, 2016 </span>
+          <div class="post-content">
+            <h1 id="the-twelve-factors">The Twelve Factors</h1>
+<h2 id="1-codebase">1. Codebase</h2>
+<p>Everything in revision control including environment configuration</p>
+<p>git flow
+master - production
+develop - staging</p>
+<h2 id="2-dependencies">2. Dependencies</h2>
+<p>Explicitly declare and isolate dependencies</p>
+<h2 id="3-config">3. Config</h2>
+<p>Store config in the environment</p>
+<p>In a twelve-factor app, env vars are granular controls, each fully orthogonal to
+other env vars. They are never grouped together as “environments”, but instead
+are independently managed for each deploy. This is a model that scales up
+smoothly as the app naturally expands into more deploys over its lifetime.</p>
+<h2 id="4-backing-services">4. Backing services</h2>
+<p>Treat backing services as attached resources.</p>
+<p>Anything your application uses as a resource (database, queueing systems, email,
+cache) should be referenced with &ldquo;bindings&rdquo; to these services.</p>
+<p>Backing services should be called via an API.</p>
+<h2 id="5-build-release-run">5. Build, release, run</h2>
+<p>Strictly separate build and run stages</p>
+<p>Don&rsquo;t compile on production environment.</p>
+<p>Blue/Green Deployments are a rule, not an exception.</p>
+<h2 id="6-processes">6. Processes</h2>
+<p>Execute the app as one or more stateless processes</p>
+<p>Some web systems rely on “sticky sessions” – that is, caching user session data
+in memory of the app’s process and expecting future requests from the same
+visitor to be routed to the same process. Sticky sessions are a violation of
+twelve-factor and should never be used or relied upon. Session state data is a
+good candidate for a datastore that offers time-expiration, such as Memcached or
+Redis.</p>
+<h2 id="7-port-binding">7. Port binding</h2>
+<p>Export services via port binding</p>
+<h2 id="8-concurrency">8. Concurrency</h2>
+<p>Scale out via the process model</p>
+<h2 id="9-disposability">9. Disposability</h2>
+<p>Maximize robustness with fast startup and graceful shutdown.</p>
+<p>Processes shut down gracefully when they receive a SIGTERM signal from the process manager.</p>
+<h2 id="10-devprod-parity">10. Dev/prod parity</h2>
+<p>Keep development, staging, and production as similar as possible.</p>
+<p>The twelve-factor app is designed for continuous deployment by keeping the gap
+between development and production small.</p>
+<p>Dev MUST == Production in config, but not performance</p>
+<h2 id="11-logs">11. Logs</h2>
+<p>Treat logs as event streams</p>
+<p>A twelve-factor app never concerns itself with routing or storage of its output
+stream. It should not attempt to write to or manage logfiles. Instead, each
+running process writes its event stream, unbuffered, to <code>stdout</code>.</p>
+<h2 id="12-admin-processes">12. Admin processes</h2>
+<p>Run admin/management tasks as one-off processes.</p>
+<p>Twelve-factor strongly favors languages which provide a
+<a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>
+shell out of the box, and which make it easy to run one-off scripts. In a local
+deploy, developers invoke one-off admin processes by a direct shell command
+inside the app’s checkout directory. In a production deploy, developers can
+use ssh or other remote command execution mechanism provided by that deploy’s
+execution environment to run such a process.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/GZ4sAEUMOnM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/dnsmasq/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/webscraping/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

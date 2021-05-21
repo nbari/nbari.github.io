@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aws on IT notes</title>
+    <link>https://nbari.com/tags/aws/</link>
+    <description>Recent content in aws on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Sep 2017 22:50:11 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Policy Access by IP</title>
+      <link>https://nbari.com/post/aws-policy-access-by-ip/</link>
+      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-policy-access-by-ip/</guid>
+      <description>Policy to restrict IAM AWS API requests to a specific set of IP addresses.
+{ &amp;#34;Version&amp;#34;: &amp;#34;2012-10-17&amp;#34;, &amp;#34;Statement&amp;#34;: { &amp;#34;Effect&amp;#34;: &amp;#34;Deny&amp;#34;, &amp;#34;Action&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Resource&amp;#34;: &amp;#34;*&amp;#34;, &amp;#34;Condition&amp;#34;: { &amp;#34;NotIpAddress&amp;#34;: { &amp;#34;aws:SourceIp&amp;#34;: [ &amp;#34;10.13.0.0/16&amp;#34;, &amp;#34;72.55.175.70/32&amp;#34;, &amp;#34;10.100.0.0/16&amp;#34; ] } } } } After applying this policy others may need to be applied or in case all in one required, something like this can be used:
+{ &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;, &amp;quot;Statement&amp;quot;: [{ &amp;quot;Effect&amp;quot;: &amp;quot;Deny&amp;quot;, &amp;quot;Action&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;, &amp;quot;Condition&amp;quot;: { &amp;quot;NotIpAddress&amp;quot;: { &amp;quot;aws:SourceIp&amp;quot;: [ &amp;quot;10.</description>
+    </item>
+    
+    <item>
+      <title>Terraform Full Vpc</title>
+      <link>https://nbari.com/post/terraform-full-vpc/</link>
+      <pubDate>Sat, 12 Aug 2017 04:07:54 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/terraform-full-vpc/</guid>
+      <description>Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &amp;#34;aws_vpc&amp;#34; &amp;#34;test&amp;#34; { cidr_block = &amp;#34;10.100.0.0/16&amp;#34; enable_dns_hostnames = &amp;#34;true&amp;#34; enable_dns_support = &amp;#34;true&amp;#34; tags { Name = &amp;#34;test&amp;#34; } } output &amp;#34;vpc_id&amp;#34; { value = &amp;#34;${aws_vpc.test.id}&amp;#34; } resource &amp;#34;aws_internet_gateway&amp;#34; &amp;#34;igw&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; tags { Name = &amp;#34;internet gateway&amp;#34; } } resource &amp;#34;aws_subnet&amp;#34; &amp;#34;public-a&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; cidr_block = &amp;#34;10.100.0.0/24&amp;#34; availability_zone = &amp;#34;eu-central-1a&amp;#34; tags { Name = &amp;#34;public A&amp;#34; } } output &amp;#34;subnet-public-a&amp;#34; { value = &amp;#34;${aws_subnet.</description>
+    </item>
+    
+    <item>
+      <title>aws network acl</title>
+      <link>https://nbari.com/post/aws-network-acl/</link>
+      <pubDate>Wed, 31 May 2017 16:41:58 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-network-acl/</guid>
+      <description>AWS network ACL deny rule To block full access from an list of IP&amp;rsquo;s within AWS:
+$ count=0; for i in `cat ips.txt` count=$((count + 1)) &amp;amp;&amp;amp; aws ec2 create-network-acl-entry --network-acl-id acl-XXXXXXXX --ingress --rule-number $count --protocol all --port-range From=0,To=65535 --cidr-block $i/32 --rule-action deny In where ips.txt is a file containing the IP addresses, for example:
+169.254.2.2 169.254.1.2 ...  WARNING The default limit for a single network ACL rules set by AWS is 20 for ingress and 20 for egress rules including the default rules.</description>
+    </item>
+    
+    <item>
+      <title>aws meta data</title>
+      <link>https://nbari.com/post/aws-meta-data/</link>
+      <pubDate>Tue, 30 May 2017 10:38:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-meta-data/</guid>
+      <description>AWS meta-data Instance metadata is data about your instance that you can use to configure or manage the running instance. Instance metadata is divided into categories. For more information, see Instance Metadata Categories.
+To view all the categories:
+curl http://169.254.169.254/latest/meta-data/  To obtain the private IP address:
+curl http://169.254.169.254/latest/meta-data/local-ipv4  To obtain the public IP address:
+curl http://169.254.169.254/latest/meta-data/public-ipv4  To obtain the ssh public key:
+curl http://169.254.169.254/1.0/meta-data/public-keys/0/openssh-key  To obtain the instance name:</description>
+    </item>
+    
+    <item>
+      <title>aws uptime</title>
+      <link>https://nbari.com/post/aws-uptime/</link>
+      <pubDate>Tue, 27 Sep 2016 16:12:36 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-uptime/</guid>
+      <description>AWS &amp;gt;= 657 days  OS: FreeBSD 8.2 AWS: us-east-1 Type: t1.micro  </description>
+    </item>
+    
+    <item>
+      <title>aws ec2 associate address</title>
+      <link>https://nbari.com/post/aws-ec2-associate-address/</link>
+      <pubDate>Tue, 30 Aug 2016 12:27:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-ec2-associate-address/</guid>
+      <description>If doing more than 100 requests implying the AWS CLI associate-address sub-command, subsequent calls will cost $0.10 each, so If doing to much scale in/out or have a monitoring/automated tool that frecuenly make API calls using this sub-command, the bill is not going to be cheap:
+ Scale in (remove instances) Scale out (add instances)  Long story short, The associate-address sub-command, is an idempotent operation, if you call &amp;ldquo;aws ec2 associate-address&amp;rdquo; with the same combination of instance and EIP as the one currently in place, it won&amp;rsquo;t return an error; instead, it will return and count as successful, regardless of whether an actual allocation was done or not.</description>
+    </item>
+    
+    <item>
+      <title>AWS VPC</title>
+      <link>https://nbari.com/post/aws-vpc/</link>
+      <pubDate>Sat, 18 Jun 2016 19:44:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-vpc/</guid>
+      <description>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch Amazon Web Services (AWS) resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+ Things to keep in mind. Normalize your network First of all, do not invent IP&amp;rsquo;s, please use and create a normalized range using the private ranges: https://en.</description>
+    </item>
+    
+  </channel>
+</rss>

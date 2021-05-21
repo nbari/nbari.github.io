@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pager on IT notes</title>
+    <link>https://nbari.com/tags/pager/</link>
+    <description>Recent content in pager on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 May 2019 10:35:50 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/pager/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql pager</title>
+      <link>https://nbari.com/post/mysql-pager/</link>
+      <pubDate>Wed, 15 May 2019 10:35:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-pager/</guid>
+      <description>To use less command to vie the output of a mysql result you could use:
+mysql&amp;gt; \P less  or
+mysql&amp;gt; pager less  Then run something like:
+mysql&amp;gt; show engine innodb status\G  In some cases you may need to search for something in specific for this grep could be used, for example:
+mysql&amp;gt; \P grep -A7 &amp;quot;ROW OPERATIONS&amp;quot; PAGER set to &#39;grep -A7 &amp;quot;ROW OPERATIONS&amp;quot;&#39;  Then when running the command it will only return 7 lines after &amp;ldquo;ROW OPERATIONS&amp;rdquo;</description>
+    </item>
+    
+  </channel>
+</rss>

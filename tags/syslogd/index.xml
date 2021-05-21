@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>syslogd on IT notes</title>
+    <link>https://nbari.com/tags/syslogd/</link>
+    <description>Recent content in syslogd on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Jul 2017 10:12:23 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/syslogd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Syslogd 8 bit</title>
+      <link>https://nbari.com/post/syslogd-8-bit/</link>
+      <pubDate>Sun, 23 Jul 2017 10:12:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/syslogd-8-bit/</guid>
+      <description>If want to log full utf-8 strings &amp;ldquo;emoji&amp;rsquo;s&amp;rdquo; use the option -8, example on /etc/rc.conf:
+syslogd_flags=&amp;quot;-ssC8&amp;quot;  The optiosn are:
+ -s Operate in secure mode. Do not log messages from remote machines. If specified twice, no network socket will be opened at all, which also disables logging to remote machines. -C Create log files that do not exist (permission is set to 0600). -8 Tells syslogd not to interfere with 8-bit data.</description>
+    </item>
+    
+  </channel>
+</rss>

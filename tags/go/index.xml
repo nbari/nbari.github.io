@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on IT notes</title>
+    <link>https://nbari.com/tags/go/</link>
+    <description>Recent content in go on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 May 2019 19:10:27 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>//&#43;build disable</title>
+      <link>https://nbari.com/post/build-disable/</link>
+      <pubDate>Tue, 14 May 2019 19:10:27 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/build-disable/</guid>
+      <description>In go if need to sketch something and end having func main() in two files, you could ignore building one by adding at the top of the file:
+// +build disable  This is a build constraint.
+A build constraint, also known as a build tag, is a line comment that begins:
+// +build  </description>
+    </item>
+    
+    <item>
+      <title>Golang HTTP Timeouts</title>
+      <link>https://nbari.com/post/golang-http-timeouts/</link>
+      <pubDate>Fri, 01 Dec 2017 20:00:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/golang-http-timeouts/</guid>
+      <description>If this:
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms  Check that your go server is using proper timeouts, example:
+srv := &amp;amp;http.Server{ Addr: &amp;#34;:80&amp;#34;, Handler: router, ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.Fatal(srv.ListenAndServe()) https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</description>
+    </item>
+    
+    <item>
+      <title>Go Benchmarking</title>
+      <link>https://nbari.com/post/go-bench/</link>
+      <pubDate>Sun, 24 Sep 2017 22:43:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/go-bench/</guid>
+      <description>To exclude all the tests and just run the benchmarks:
+go test -run=^$ -bench=.  Profile:
+go test -cpuprofile=cpu.out -benchmem -memprofile=mem.out -run=^$ -bench=  Using pprof:
+CPU:
+go tool pprof &amp;lt;your-binary&amp;gt;.test cpu.out  MEM:
+go tool pprof -alloc_objects &amp;lt;your-binary&amp;gt;.test mem.out  Go Tooling in Action
+  </description>
+    </item>
+    
+    <item>
+      <title>Webcrypto and Go</title>
+      <link>https://nbari.com/post/webcrypto-and-go/</link>
+      <pubDate>Thu, 17 Aug 2017 18:14:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/webcrypto-and-go/</guid>
+      <description>Encrypt on client side using javascript WebCrypto and decrypt on backend using go:
+javascript code:
+async function aesGcmEncrypt(plaintext, password) { const pwUtf8 = new TextEncoder().encode(password); // encode password as UTF-8  const pwHash = await crypto.subtle.digest(&amp;#39;SHA-256&amp;#39;, pwUtf8); // hash the password  const iv = crypto.getRandomValues(new Uint8Array(12)); // get 96-bit random iv  const alg = { name: &amp;#39;AES-GCM&amp;#39;, iv: iv }; // specify algorithm to use  const key = await crypto.</description>
+    </item>
+    
+    <item>
+      <title>dsymutil golang</title>
+      <link>https://nbari.com/post/dsymutil-golang/</link>
+      <pubDate>Tue, 04 Apr 2017 14:02:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dsymutil-golang/</guid>
+      <description>Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  </description>
+    </item>
+    
+    <item>
+      <title>nil pointer</title>
+      <link>https://nbari.com/post/nil-pointer/</link>
+      <pubDate>Fri, 17 Mar 2017 17:03:36 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nil-pointer/</guid>
+      <description>To check that x implements y, example:
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) var _ io.ReadCloser = (*os.File)(nil) func main() { fmt.Println(&amp;#34;Hello, playground&amp;#34;) } https://play.golang.org/p/hoi5_GQEpD
+To check that os.File is an io.ReadCloser:
+var _ io.ReadCloser = (*os.File)(nil)  package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) var _ io.ReadCloser = (*os.Process)(nil) func main() { fmt.Println(&amp;#34;Hello, playground&amp;#34;) } https://play.golang.org/p/7uHmjn3ggT
+The error in this case would be:
+main.go:9: cannot use (*os.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VPC on IT notes</title>
+    <link>https://nbari.com/tags/vpc/</link>
+    <description>Recent content in VPC on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Aug 2017 04:07:54 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/vpc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Terraform Full Vpc</title>
+      <link>https://nbari.com/post/terraform-full-vpc/</link>
+      <pubDate>Sat, 12 Aug 2017 04:07:54 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/terraform-full-vpc/</guid>
+      <description>Example of a full VPC setup using terraform, including VPN and using the default subnet:
+resource &amp;#34;aws_vpc&amp;#34; &amp;#34;test&amp;#34; { cidr_block = &amp;#34;10.100.0.0/16&amp;#34; enable_dns_hostnames = &amp;#34;true&amp;#34; enable_dns_support = &amp;#34;true&amp;#34; tags { Name = &amp;#34;test&amp;#34; } } output &amp;#34;vpc_id&amp;#34; { value = &amp;#34;${aws_vpc.test.id}&amp;#34; } resource &amp;#34;aws_internet_gateway&amp;#34; &amp;#34;igw&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; tags { Name = &amp;#34;internet gateway&amp;#34; } } resource &amp;#34;aws_subnet&amp;#34; &amp;#34;public-a&amp;#34; { vpc_id = &amp;#34;${aws_vpc.test.id}&amp;#34; cidr_block = &amp;#34;10.100.0.0/24&amp;#34; availability_zone = &amp;#34;eu-central-1a&amp;#34; tags { Name = &amp;#34;public A&amp;#34; } } output &amp;#34;subnet-public-a&amp;#34; { value = &amp;#34;${aws_subnet.</description>
+    </item>
+    
+    <item>
+      <title>AWS VPC</title>
+      <link>https://nbari.com/post/aws-vpc/</link>
+      <pubDate>Sat, 18 Jun 2016 19:44:31 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-vpc/</guid>
+      <description>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch Amazon Web Services (AWS) resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+ Things to keep in mind. Normalize your network First of all, do not invent IP&amp;rsquo;s, please use and create a normalized range using the private ranges: https://en.</description>
+    </item>
+    
+  </channel>
+</rss>

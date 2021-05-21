@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>socket on IT notes</title>
+    <link>https://nbari.com/tags/socket/</link>
+    <description>Recent content in socket on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Sep 2017 14:45:47 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/socket/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Time wait</title>
+      <link>https://nbari.com/post/time_wait/</link>
+      <pubDate>Tue, 05 Sep 2017 14:45:47 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/time_wait/</guid>
+      <description>Reduce TIME_WAIT connections
+How many TIME_WAITs you have hanging out (run this like root):
+netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n  On Linux:
+netstat -nat | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n  Output will be something like:
+# netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n 1 1 Foreign 1 LAST_ACK 1 been 3 LISTEN 25 SYN_RCVD 1455 CLOSE_WAIT 17518 ESTABLISHED  The formula to calculate the value (net.</description>
+    </item>
+    
+  </channel>
+</rss>

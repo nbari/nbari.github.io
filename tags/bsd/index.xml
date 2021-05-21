@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bsd on IT notes</title>
+    <link>https://nbari.com/tags/bsd/</link>
+    <description>Recent content in bsd on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Mar 2020 18:29:39 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/bsd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sed append</title>
+      <link>https://nbari.com/post/sed-append/</link>
+      <pubDate>Sun, 29 Mar 2020 18:29:39 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sed-append/</guid>
+      <description>To append a line using sed that works on macOS:
+sed -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39;  If need to do it in multiple files, you could use find:
+ find . -name &amp;quot;rc.conf&amp;quot; -exec sed -i &#39;&#39; -e &#39;/^telegraf_enab.*/a\&#39;$&#39;\n&#39;&#39;telegraf_user=&amp;quot;root&amp;quot;&#39; {} \;  https://stackoverflow.com/a/48406504/1135424</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> proxy &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/proxy/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/redis-over-tls/">redis over TLS</a></h2>
+          <span class="post-date">Feb 23, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/socat">socat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/redis">redis</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tls">tls</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Using socat:
+brew install socat  Create the tunnel:
+socat -v TCP-LISTEN:6379,fork,reuseaddr ssl:your.redis.example.com:6379  Use redis-cli as usual
+				<a class="read-more" href="/post/redis-over-tls/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nginx-reverse-proxy-cache/">Nginx Reverse Proxy Cache</a></h2>
+          <span class="post-date">Aug 10, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				This is the full configuration for nginx.conf:
+user www www; worker_processes auto; events { use kqueue; worker_connections 1024; } http { include mime.types; default_type application/octet-stream; sendfile on; tcp_nopush on; tcp_nodelay on; client_max_body_size 30M; keepalive_timeout 10 10; gzip on; gzip_static on; gzip_vary on; gzip_min_length 0; gzip_comp_level 9; gzip_buffers 16 8k; gzip_proxied any; gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml; charset utf-8; server_tokens off; server_name_in_redirect off; proxy_buffering on; proxy_cache_path /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off; proxy_buffer_size 8k; proxy_buffers 8 24k; server { listen 80; server_name _; location / { proxy_cache rubygems; proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504; proxy_cache_revalidate on; proxy_cache_min_uses 1; proxy_cache_lock on; proxy_cache_valid 200 301 304 2d; proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header Host rubygems.
+				<a class="read-more" href="/post/nginx-reverse-proxy-cache/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-proxy/">ssh proxy</a></h2>
+          <span class="post-date">Feb 7, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tunnel">tunnel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				SSH SOCKS5 proxy Route web traffic securely without a VPN using a SOCKS tunnel with ssh:
+$ ssh -D 8080 -f -C -q -N user@remote.host   -D 8080 tells ssh to launch a SOCKS server on port 8080 locally. -f Forks the process to the background. -C Compresses the data before sending it. -q Uses quiet mode. -N Tells SSH that no command will be sent once the tunnel is up.
+				<a class="read-more" href="/post/ssh-proxy/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/forward-proxy/">forward proxy</a></h2>
+          <span class="post-date">Jan 21, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/proxy">proxy</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				nginx forward proxy Server configuration:
+server { listen 8080; location / { resolver 8.8.8.8; proxy_pass http://$http_host$uri$is_args$args; } error_page 500 502 503 504 /50x.html; location = /50x.html { root /usr/local/www/nginx-dist; } }  Client side On the browser configure the HTTP Proxy and port.
+Test by checking the the IP: https://trackip.net
+				<a class="read-more" href="/post/forward-proxy/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hosts on IT notes</title>
+    <link>https://nbari.com/tags/hosts/</link>
+    <description>Recent content in hosts on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Apr 2018 21:56:08 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/hosts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible Patterns</title>
+      <link>https://nbari.com/post/ansible-patterns/</link>
+      <pubDate>Thu, 19 Apr 2018 21:56:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-patterns/</guid>
+      <description>To match hosts only starting with certain string a regex could be used for example to match hosts starting with the word fabrik:
+--- - hosts: ~fabrik.* become: True tasks: - name: uname shell: uname -a register: uname - debug: var: uname.stdout   notice the ~
+ </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> dns &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/dns/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/flush-dns/">Flush DNS</a></h2>
+          <span class="post-date">Jan 29, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To flush DNS on macOS:
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache  
+				<a class="read-more" href="/post/flush-dns/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/doh-firefox/">DoH Firefox</a></h2>
+          <span class="post-date">Feb 15, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/http">http</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Open firefox and type:
+about:config  Search for:
+network.trr.uri  Probably you already have:
+https://mozilla.cloudflare-dns.com/dns-query  If not add it or use something like:
+https://cloudflare-dns.com/dns-query https://dns.quad9.net/dns-query  Then enable network.trr.mode by setting it to 2
+Set network.trr.mode to 2 make DNS Over HTTPS the browser&rsquo;s first choice but use regular DNS as a fallback (0 is &ldquo;off by default&rdquo;, 1 lets Firefox pick whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).
+				<a class="read-more" href="/post/doh-firefox/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/dns-tcp/">DNS TCP</a></h2>
+          <span class="post-date">Jun 1, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tcp">tcp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/unbound">unbound</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Unbound using DNS over TCP:
+server: private-domain: &quot;plex.direct&quot; forward-zone: name: &quot;.&quot; forward-ssl-upstream: yes forward-addr: 1.1.1.1@853 forward-addr: 9.9.9.9@853 forward-addr: 1.0.0.1@853 forward-addr: 149.112.112.112@853 forward-addr: 2606:4700:4700::1111@853 forward-addr: 2606:4700:4700::1001@853 forward-addr: 2620:fe::fe@853; forward-addr: 2620:fe::9@853;  To test do:
+# unbound-control -c /var/unbound/unbound.conf lookup .  It should return something like:
+The following name servers are used for lookup of . forwarding request: Delegation with 0 names, of which 0 can be examined to query further addresses.
+				<a class="read-more" href="/post/dns-tcp/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/dnsmasq/">dnsmasq</a></h2>
+          <span class="post-date">Sep 30, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/dnsmasq">dnsmasq</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ubuntu">ubuntu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on
+				<a class="read-more" href="/post/dnsmasq/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

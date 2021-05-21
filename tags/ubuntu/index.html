@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> ubuntu &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/tags/ubuntu/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/syslog-ng-ubuntu/">syslog-ng Ubuntu</a></h2>
+          <span class="post-date">Dec 15, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/java">java</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ubuntu">ubuntu</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslog-ng">syslog-ng</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Errors you may get:
+Can't find class; class_name='org.syslog_ng.elasticsearch_v2.ElasticSearchDestination'  Working configuration:
+@version:3.13 @module mod-java @include &quot;scl.conf&quot; options { flush_lines(0); keep_hostname(yes); normalize_hostnames(yes); threaded(yes); }; source s_local { system(); internal(); }; source s_network { syslog(transport(tcp)); }; destination d_all { file (&quot;/var/log/all.log&quot;); }; destination d_elastic { elasticsearch2( client-lib-dir(&quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&quot;) client_mode(&quot;http&quot;) cluster_url(&quot;http://your-elasticsearch:9200&quot;) index(&quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&quot;) type(&quot;syslog&quot;) cluster(&quot;test&quot;) flush-limit(&quot;1000&quot;) template(&quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&quot;) time-zone(&quot;UTC&quot;) ); }; log { source(s_network); destination(d_elastic); }; log { source(s_local); destination(d_all); };  Notice the client-lib-dir line:
+				<a class="read-more" href="/post/syslog-ng-ubuntu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/dnsmasq/">dnsmasq</a></h2>
+          <span class="post-date">Sep 30, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/dnsmasq">dnsmasq</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ubuntu">ubuntu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on
+				<a class="read-more" href="/post/dnsmasq/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>netstat on IT notes</title>
+    <link>https://nbari.com/tags/netstat/</link>
+    <description>Recent content in netstat on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2017 11:46:32 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/netstat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Measuring the Listen Queue</title>
+      <link>https://nbari.com/post/measuring-the-listen-queue/</link>
+      <pubDate>Fri, 01 Dec 2017 11:46:32 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/measuring-the-listen-queue/</guid>
+      <description>Run the command:
+netstat -Lan  The command output may be the following:
+Current listen queue sizes (qlen/incqlen/maxqlen) Proto Listen Local Address tcp46 1863/0/32768 *.80 tcp4 0/0/128 *.31025 tcp6 0/0/128 *.31025 Some tcp sockets may have been deleted. unix 0/0/32768 /var/run/immortal/tuip/immortal.sock unix 0/0/255 /var/db/syslog-ng.ctl unix 0/0/4 /var/run/devd.pipe unix 0/0/4 /var/run/devd.seqpacket.pipe The command output shows that there are 1863 unaccepted connections in the listen queue on Port 80, while the connection limit is 32768 connections, and this situation is normal.</description>
+    </item>
+    
+    <item>
+      <title>routing flags</title>
+      <link>https://nbari.com/post/routing-flags/</link>
+      <pubDate>Tue, 21 Mar 2017 15:27:09 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/routing-flags/</guid>
+      <description>From netstat(1) man page:
+   Letter Flag Meaning     1 RTF_PROTO1 Protocol specific routing flag #1   2 RTF_PROTO2 Protocol specific routing flag #2   3 RTF_PROTO3 Protocol specific routing flag #3   B RTF_BLACKHOLE Just discard packets (during updates)   b RTF_BROADCAST The route represents a broadcast address   C RTF_CLONING Generate new routes on use   c RTF_PRCLONING Protocol-specified generate new routes on use   D RTF_DYNAMIC Created dynamically (by redirect)   G RTF_GATEWAY Destination requires forwarding by intermediary   H RTF_HOST Host entry (net otherwise)   I RTF_IFSCOPE Route is associated with an interface scope   i RTF_IFREF Route is holding a reference to the interface   L RTF_LLINFO Valid protocol to link address translation   M RTF_MODIFIED Modified dynamically (by redirect)   m RTF_MULTICAST The route represents a multicast address   R RTF_REJECT Host or net unreachable   r RTF_ROUTER Host is a default router   S RTF_STATIC Manually added   U RTF_UP Route usable   W RTF_WASCLONED Route was generated as a result of cloning   X RTF_XRESOLVE External daemon translates proto to link address   Y RTF_PROXY Proxying; cloned routes will not be scoped    To find current gateway when using a VPN:</description>
+    </item>
+    
+  </channel>
+</rss>

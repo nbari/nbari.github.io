@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vtnet on IT notes</title>
+    <link>https://nbari.com/tags/vtnet/</link>
+    <description>Recent content in vtnet on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Nov 2016 19:15:23 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/vtnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>checksum offload</title>
+      <link>https://nbari.com/post/checksum-offload/</link>
+      <pubDate>Tue, 29 Nov 2016 19:15:23 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/checksum-offload/</guid>
+      <description>TCP offload engine  TOE is a technology used in network interface cards (NIC) to offload processing of the entire TCP/IP stack to the network controller. It is primarily used with high-speed network interfaces, such as gigabit Ethernet and 10 Gigabit Ethernet, where processing overhead of the network stack becomes significant. https://en.wikipedia.org/wiki/TCP_offload_engine
+ On Virtual Guest disabling the cheksum may boost the newtork speed, for example on GCE when using FreeBSD add this to the /boot/loader.</description>
+    </item>
+    
+  </channel>
+</rss>

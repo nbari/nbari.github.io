@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>install on IT notes</title>
+    <link>https://nbari.com/tags/install/</link>
+    <description>Recent content in install on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Aug 2018 11:55:08 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>macOs sparseimage</title>
+      <link>https://nbari.com/post/macos-sparseimage/</link>
+      <pubDate>Fri, 10 Aug 2018 11:55:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/macos-sparseimage/</guid>
+      <description>To create an install disk using an spare disk:
+$ hdiutil create -size 6GB -fs JHFS+ -volname &amp;quot;macOS_installmedia&amp;quot; -type SPARSE ~/Desktop/macOS_installmedia  Mount it (or double-click in Finder to mount):
+$ hdiutil mount ~/Desktop/macOS_installmedia.sparseimage  Use the createinstallmedia:
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS_installmedia --applicationpath /Applications/Install\ macOS\ High\ Sierra.app  </description>
+    </item>
+    
+  </channel>
+</rss>

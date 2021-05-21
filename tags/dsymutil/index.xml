@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dsymutil on IT notes</title>
+    <link>https://nbari.com/tags/dsymutil/</link>
+    <description>Recent content in dsymutil on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Apr 2017 14:02:14 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/dsymutil/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dsymutil golang</title>
+      <link>https://nbari.com/post/dsymutil-golang/</link>
+      <pubDate>Tue, 04 Apr 2017 14:02:14 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dsymutil-golang/</guid>
+      <description>Go executables broken in macOS 10.12.X
+When compiling and executing this may happen:
+$ zsh: killed ./main  Temporary fix:
+$ ln -s /usr/bin/true /usr/local/bin/dsymutil  </description>
+    </item>
+    
+  </channel>
+</rss>

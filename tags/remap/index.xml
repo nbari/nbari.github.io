@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>remap on IT notes</title>
+    <link>https://nbari.com/tags/remap/</link>
+    <description>Recent content in remap on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Aug 2016 12:27:56 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/remap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws ec2 associate address</title>
+      <link>https://nbari.com/post/aws-ec2-associate-address/</link>
+      <pubDate>Tue, 30 Aug 2016 12:27:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/aws-ec2-associate-address/</guid>
+      <description>If doing more than 100 requests implying the AWS CLI associate-address sub-command, subsequent calls will cost $0.10 each, so If doing to much scale in/out or have a monitoring/automated tool that frecuenly make API calls using this sub-command, the bill is not going to be cheap:
+ Scale in (remove instances) Scale out (add instances)  Long story short, The associate-address sub-command, is an idempotent operation, if you call &amp;ldquo;aws ec2 associate-address&amp;rdquo; with the same combination of instance and EIP as the one currently in place, it won&amp;rsquo;t return an error; instead, it will return and count as successful, regardless of whether an actual allocation was done or not.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fuse on IT notes</title>
+    <link>https://nbari.com/tags/fuse/</link>
+    <description>Recent content in fuse on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Nov 2017 09:26:07 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/fuse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>osxfuse</title>
+      <link>https://nbari.com/post/osxfuse/</link>
+      <pubDate>Sun, 26 Nov 2017 09:26:07 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osxfuse/</guid>
+      <description>To install:
+brew cask install osxfuse  To install sshfuse:
+brew install sshfs  Mount the root volume of remote host:
+sshfs bastion:/ /tmp/host -o reconnect,follow_symlinks,volname=&amp;quot;LocalRemote&amp;quot;  To unmount:
+sudo diskutil umount force /tmp/bastion  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ad-hoc on IT notes</title>
+    <link>https://nbari.com/tags/ad-hoc/</link>
+    <description>Recent content in ad-hoc on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 May 2018 10:24:04 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/ad-hoc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible ad-hoc</title>
+      <link>https://nbari.com/post/ansible-adhoc/</link>
+      <pubDate>Wed, 09 May 2018 10:24:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-adhoc/</guid>
+      <description>To send a command to all the servers within a playbook:
+$ ansible all -a &amp;quot;service chronyd restart&amp;quot; -u devops --become  What’s an ad-hoc command? An ad-hoc command is something that you might type in to do something really quick, but don’t want to save for later.
+http://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>img on IT notes</title>
+    <link>https://nbari.com/tags/img/</link>
+    <description>Recent content in img on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Nov 2016 21:00:35 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/img/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>txt 2 img</title>
+      <link>https://nbari.com/post/txt2img/</link>
+      <pubDate>Tue, 01 Nov 2016 21:00:35 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/txt2img/</guid>
+      <description>To create an image with a custom label from the command line:
+convert -font AndaleMono -size 200x32 -gravity center -background white -fill black label:&amp;quot;0O0ilLxt your msg &amp;quot; out.png  </description>
+    </item>
+    
+  </channel>
+</rss>

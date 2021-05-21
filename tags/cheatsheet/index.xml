@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cheatsheet on IT notes</title>
+    <link>https://nbari.com/tags/cheatsheet/</link>
+    <description>Recent content in cheatsheet on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Aug 2018 11:26:21 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/cheatsheet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bosh cheatsheet</title>
+      <link>https://nbari.com/post/bosh-cheatsheet/</link>
+      <pubDate>Thu, 23 Aug 2018 11:26:21 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bosh-cheatsheet/</guid>
+      <description>BOSH is a project that unifies release engineering, deployment, and lifecycle management of small and large-scale cloud software.
+Check your environment:
+$ bosh env  Set your deployment environment:
+$ export BOSH_DEPLOYMENT=foo   if have multiple deployments in same dir better to use -d &amp;lt;deployment-name&amp;gt; since many commands are bound to this variable.
+ To recreate your environment (virtualbox), remove the line that start with current_manifest from the file state.</description>
+    </item>
+    
+  </channel>
+</rss>

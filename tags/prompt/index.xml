@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>prompt on IT notes</title>
+    <link>https://nbari.com/tags/prompt/</link>
+    <description>Recent content in prompt on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Mar 2018 22:28:21 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/prompt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bash git prompt</title>
+      <link>https://nbari.com/post/bash-git-prompt/</link>
+      <pubDate>Tue, 20 Mar 2018 22:28:21 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/bash-git-prompt/</guid>
+      <description>To display the current branch in the terminal prompt using bash, add the following lines to ~/.bash_profile:
+parse_git_branch() { git branch 2&amp;gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/ (\1)/&#39; } export PS1=&amp;quot;\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ &amp;quot;  </description>
+    </item>
+    
+  </channel>
+</rss>

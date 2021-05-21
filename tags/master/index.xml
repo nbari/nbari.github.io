@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>master on IT notes</title>
+    <link>https://nbari.com/tags/master/</link>
+    <description>Recent content in master on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Feb 2017 13:47:24 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/master/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rds slave from external master</title>
+      <link>https://nbari.com/post/rds-slave-from-external-master/</link>
+      <pubDate>Fri, 10 Feb 2017 13:47:24 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rds-slave-from-external-master/</guid>
+      <description>Setup AWS MySQL RDS instance as slave of an external master Configure external mysql to become master:
+server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
+mysql&amp;gt; create user `replica`@`%` identified by &#39;PASSWORD&#39;; mysql&amp;gt; grant replication slave on *.* to &#39;replica&#39;@&#39;%&#39;;  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:</description>
+    </item>
+    
+  </channel>
+</rss>

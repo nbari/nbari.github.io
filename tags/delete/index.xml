@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>delete on IT notes</title>
+    <link>https://nbari.com/tags/delete/</link>
+    <description>Recent content in delete on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2020 14:12:56 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/delete/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Delete in chunks</title>
+      <link>https://nbari.com/post/delete-in-chunks/</link>
+      <pubDate>Fri, 12 Jun 2020 14:12:56 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/delete-in-chunks/</guid>
+      <description>To delete a big/huge table in chunks, you could create this store procedure, but the performance at the end depends of how good/normalized is your database (indexes):
+ A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again. Such procedures are stored in the database data dictionary.
+ Connect to the database and select the database:
+mysql&amp;gt; \u my_database Database changed  To list stored procedures</description>
+    </item>
+    
+    <item>
+      <title>ELK  delete_by_query</title>
+      <link>https://nbari.com/post/elk-delte-by_query/</link>
+      <pubDate>Thu, 07 Mar 2019 23:52:19 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/elk-delte-by_query/</guid>
+      <description>To delete indexes older than X days:
+POST haproxy/_delete_by_query { &amp;#34;query&amp;#34;: { &amp;#34;range&amp;#34;: { &amp;#34;ISODATE&amp;#34;: { &amp;#34;lt&amp;#34;: &amp;#34;now-3d&amp;#34; } } } } </description>
+    </item>
+    
+  </channel>
+</rss>

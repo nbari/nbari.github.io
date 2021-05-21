@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Posts &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/post/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/docker-prune/">docker prune</a></h2>
+          <span class="post-date">May 29, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/docker">docker</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Docker cleanup:
+ docker system prune -a  
+				<a class="read-more" href="/post/docker-prune/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rust-docker/">rust docker</a></h2>
+          <span class="post-date">May 28, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rust">rust</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/docker">docker</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Dockerfile to create small rust docker images:
+FROM clux/muslrust RUN mkdir /source WORKDIR /source COPY . . RUN cargo build --release RUN strip ./target/x86_64-unknown-linux-musl/release/myapp FROM scratch COPY --from=0 /source/target/x86_64-unknown-linux-musl/release/myapp / CMD [&quot;./myapp&quot;]  Image compatible with cloud foundry:
+FROM rust:1.35 WORKDIR /usr/src/myapp COPY . . RUN cargo build --release FROM debian:latest RUN apt-get update &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get install -y openssl ca-certificates COPY --from=0 /usr/src/myapp/target/release/myapp / CMD [&quot;./myapp&quot;]  
+				<a class="read-more" href="/post/rust-docker/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-pager/">mysql pager</a></h2>
+          <span class="post-date">May 15, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pager">pager</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To use less command to vie the output of a mysql result you could use:
+mysql&gt; \P less  or
+mysql&gt; pager less  Then run something like:
+mysql&gt; show engine innodb status\G  In some cases you may need to search for something in specific for this grep could be used, for example:
+mysql&gt; \P grep -A7 &quot;ROW OPERATIONS&quot; PAGER set to 'grep -A7 &quot;ROW OPERATIONS&quot;'  Then when running the command it will only return 7 lines after &ldquo;ROW OPERATIONS&rdquo;
+				<a class="read-more" href="/post/mysql-pager/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/build-disable/">//&#43;build disable</a></h2>
+          <span class="post-date">May 14, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/build">build</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/disable">disable</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In go if need to sketch something and end having func main() in two files, you could ignore building one by adding at the top of the file:
+// +build disable  This is a build constraint.
+A build constraint, also known as a build tag, is a line comment that begins:
+// +build  
+				<a class="read-more" href="/post/build-disable/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/delete-file/">delete file</a></h2>
+          <span class="post-date">May 6, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rm">rm</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/files">files</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Ways to delete a file starting with a dash / hyphen:
+rm -- -file  The option -- means the end of options for the command.
+Another option is to indicate where is the file:
+rm ./-file  . is current directory , path to -file is ./-file
+Using find:
+find . -type f -exec rm {} \;  Finding the inode:
+ls -li  Then using find and the inode it can be removed with:
+				<a class="read-more" href="/post/delete-file/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/galera-sos/">galera SOS</a></h2>
+          <span class="post-date">Apr 10, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/galera">galera</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/cluster">cluster</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mariadb">mariadb</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Check status of cluster: https://nbari.com/post/galera/
+Find process list not sleeping:
+SELECT user, time, state, info FROM information_schema.processlist WHERE command != 'Sleep' AND time &gt;= 2 ORDER BY time DESC, id;  Doing a heavy DDL (ALTER):
+SELECT * FROM information_schema.processlist WHERE command != 'Sleep' AND info LIKE 'alter%' AND time &gt;= 2 ORDER BY time DESC, id LIMIT 1;   DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row.
+				<a class="read-more" href="/post/galera-sos/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pigz/">pigz</a></h2>
+          <span class="post-date">Apr 4, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/pigz">pigz</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/gzip">gzip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/parallel">parallel</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To compress using gzip format but using all your available cores:
+tar --use-compress-program=pigz -cf archive.tgz /path/to/source  Or if you want to pipe it:
+tar -cf - source | pigz &gt; archive.tgz  To decompress use tar -xvf archive.tgz as usual.
+The output of pigz is compatible with gzip
+				<a class="read-more" href="/post/pigz/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/zsh/">zsh</a></h2>
+          <span class="post-date">Mar 23, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zsh">zsh</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Edit environment variables:
+vared PATH  Diff command output creating temporary normal files
+vimdiff =(ls /bin) =(ls /usr/bin)  Print path
+print -l $path  Run a command detached &amp;! or &amp;| put it in background and disown the process, exiting the shell will leave it running:
+sleep 300 &amp;!  
+				<a class="read-more" href="/post/zsh/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/gcf/">Google Cloud Functions</a></h2>
+          <span class="post-date">Mar 13, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/gcf">gcf</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/google-cloud">google cloud</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/functions">functions</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Testing Google Cloud Functions using go with an average of 250 requests/second. Cost per day close to $10USD
+Request per day: 23,511,849 Errors: 0 memory usage: 10.4MB execution time: 55.04ms 
+				<a class="read-more" href="/post/gcf/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-wireshark/">ssh wireshark</a></h2>
+          <span class="post-date">Mar 10, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tcpdump">tcpdump</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/wireshark">wireshark</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To analyze traffic remotely over ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w -| wireshark -k -i -  In case need an specific port:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - 'port 5984' | wireshark -k -i -  To ignore trafic from ssh:
+ssh use@server sudo tcpdump -U -s0 -i pflog0 -w - 'not port 22' | wireshark -k -i -  Or:
+				<a class="read-more" href="/post/ssh-wireshark/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/elk-delte-by_query/">ELK  delete_by_query</a></h2>
+          <span class="post-date">Mar 7, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/elasticsearch">elasticsearch</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/isodate">ISODATE</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/delete">delete</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To delete indexes older than X days:
+POST haproxy/_delete_by_query { &#34;query&#34;: { &#34;range&#34;: { &#34;ISODATE&#34;: { &#34;lt&#34;: &#34;now-3d&#34; } } } } 
+				<a class="read-more" href="/post/elk-delte-by_query/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/openssl-sha1-hmac/">openssl SHA1 HMAC</a></h2>
+          <span class="post-date">Mar 5, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/openssl">openssl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sha1">sha1</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hmac">hmac</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create an HMAC-SHA1:
+$ echo -n &quot;string&quot; | openssl sha1 -hmac &quot;shared_secret&quot;  or
+$ echo -n &quot;string&quot; | openssl dgst -sha1 -hmac &quot;shared_secret&quot;  
+				<a class="read-more" href="/post/openssl-sha1-hmac/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/doh-firefox/">DoH Firefox</a></h2>
+          <span class="post-date">Feb 15, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/dns">dns</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/http">http</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Open firefox and type:
+about:config  Search for:
+network.trr.uri  Probably you already have:
+https://mozilla.cloudflare-dns.com/dns-query  If not add it or use something like:
+https://cloudflare-dns.com/dns-query https://dns.quad9.net/dns-query  Then enable network.trr.mode by setting it to 2
+Set network.trr.mode to 2 make DNS Over HTTPS the browser&rsquo;s first choice but use regular DNS as a fallback (0 is &ldquo;off by default&rdquo;, 1 lets Firefox pick whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).
+				<a class="read-more" href="/post/doh-firefox/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/osascript/">osascript</a></h2>
+          <span class="post-date">Feb 8, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/script">script</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/path">path</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In macOS, to find a path of an application, for example Chromium:
+$ osascript -e 'POSIX path of (path to application &quot;Chromium&quot;)'  
+				<a class="read-more" href="/post/osascript/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/galera/">Galera</a></h2>
+          <span class="post-date">Feb 6, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/galera">galera</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mariadb">mariadb</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/cluster">cluster</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To periodically check status of the cluster, create a script (/tmp/xx):
+#!/bin/sh mysql -e \ &quot;SHOW GLOBAL STATUS WHERE Variable_name IN ( 'wsrep_cert_deps_distance', 'wsrep_cluster_size', 'wsrep_cluster_status', 'wsrep_connected', 'wsrep_evs_delayed', 'wsrep_flow_control_paused', 'wsrep_flow_control_paused_ns', 'wsrep_flow_control_recv', 'wsrep_flow_control_sent', 'wsrep_local_index', 'wsrep_local_state', 'wsrep_local_state_comment', 'wsrep_ready', 'wsrep_replicated', 'wsrep_replicated_bytes');&quot;   if credentials are in a custom path: mysql --defaults-file=/path/to/.my.cnf -s -e
+ And run it with:
+watch sh /tmp/xx  If single node alive (ERROR 1047 WSREP has not yet prepared node for application use):
+				<a class="read-more" href="/post/galera/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/galera-alter/">galera alter</a></h2>
+          <span class="post-date">Jan 29, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/galera">galera</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/rsu">RSU</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/toi">TOI</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To prevent bloking the cluster while doing ALTERS (SCHEMA UPGRADES), do this per node:
+SET wsrep_OSU_method='RSU';  Then Run the ALTER statement once done reset the Schema Upgrade method back to Total Order Isolation.
+SET wsrep_OSU_method='TOI';  http://galeracluster.com/documentation-webpages/clusterstallonalter.html http://galeracluster.com/documentation-webpages/schemaupgrades.html
+				<a class="read-more" href="/post/galera-alter/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mojave-iso/">mojave Iso</a></h2>
+          <span class="post-date">Dec 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/iso">iso</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mojave">mojave</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create 12 GB tmp disk: hdiutil create -o /tmp/Mojave.cdr -size 12000m -layout SPUD -fs HFS+J
+Attach the disk:
+hdiutil attach /tmp/Mojave.cdr.dmg -noverify -mountpoint /Volumes/install_build  Extract the installer:
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build  Create the iso
+mv /tmp/Mojave.cdr.dmg ~/Desktop/InstallSystem.dmg hdiutil detach /Volumes/Install\ macOS\ Mojave hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Mojave.iso  Rename Mojave.iso.cdr to Mojave.iso
+				<a class="read-more" href="/post/mojave-iso/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/jamf/">jamf</a></h2>
+          <span class="post-date">Dec 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/managed">managed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/jamf">jamf</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mac">mac</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				softwareupdate -l to see if there are macOS updates available.
+softwareupdate -ia to install all updates.
+sudo jamf policy to run all outstanding policies and updates for the apps,
+sudo jamf recon to update the inventory on the server.
+				<a class="read-more" href="/post/jamf/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/stty/">stty</a></h2>
+          <span class="post-date">Dec 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/stty">stty</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/reset">reset</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/terminal">terminal</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If reset can&rsquo;t clean your terminal, give a try to:
+stty sane  
+				<a class="read-more" href="/post/stty/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux/">tmux</a></h2>
+          <span class="post-date">Dec 7, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Set window title:
+&lt;c-b&gt;,  Get pannel number:
+&lt;c-b&gt;q  Show clock:
+&lt;c-b&gt;t  Move pane to a new window:
+&lt;c-b&gt;!  Join panes:
+&lt;c-b&gt;: join-pane -s 0 -t 3 move pane 1 to window 3 &lt;c-b&gt;: join-pane -t :1 move current pane to window 1  Create a new session:
+&lt;c-b&gt;: new -s &lt;name&gt;  List sessions:
+&lt;c-b&gt;s &lt;c-b&gt;w expanded  Move pane to a another session:
+&lt;c-b&gt;m mark the pane &lt;c-b&gt;w go to the destination window/session &lt;c-b&gt;: join-pane  or go to the pane you want to move, check the session name and windows you would like to move and try:
+				<a class="read-more" href="/post/tmux/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/2/">Newer</a>  
+  <a class="btn next" href="/post/page/4/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

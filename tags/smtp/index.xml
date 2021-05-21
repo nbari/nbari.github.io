@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>smtp on IT notes</title>
+    <link>https://nbari.com/tags/smtp/</link>
+    <description>Recent content in smtp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Apr 2017 10:38:23 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/smtp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>smarthost</title>
+      <link>https://nbari.com/post/smarthost/</link>
+      <pubDate>Wed, 26 Apr 2017 10:38:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/smarthost/</guid>
+      <description>Smarthost with postfix  A smart host is a type of email message transfer agent that allows a Simple Mail Transfer Protocol (SMTP) server to route email to an intermediate mailserver rather than directly to the recipient&amp;rsquo;s server
+ https://en.wikipedia.org/wiki/Smart_host
+Setup postfix to forward all emails using an external SMTP server, for example sendgrid.net, main.cf:
+smtp_sasl_auth_enable = yes smtp_sasl_password_maps = static:username:password smtp_sasl_security_options = noanonymous smtp_tls_security_level = encrypt header_size_limit = 4096000 relayhost = [smtp.</description>
+    </item>
+    
+    <item>
+      <title>ssmtp</title>
+      <link>https://nbari.com/post/ssmtp/</link>
+      <pubDate>Tue, 06 Dec 2016 22:50:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssmtp/</guid>
+      <description>ssmtp - send a message using smtp When having sendmail disabled:
+sendmail_enable=&amp;quot;NONE&amp;quot;  ssmtp helps to send email using an SMTP server:
+Install ssmtp:
+pkg install ssmtp  Configure to use you provider mailgun in this example /usr/local/etc/ssmtp/ssmtp.conf:
+root=monitor@domain.tld mailhub=smtp.mailgun.org AuthUser=postmaster@your.domain AuthPass=yourpassword UseTLS=Yes UseSTARTTLS=YES FromLineOverride=YES Edit /etc/mail/mailer.conf to use ssmtp:
+sendmail /usr/local/sbin/ssmtp send-mail /usr/local/sbin/ssmtp mailq /usr/local/sbin/ssmtp newaliases /usr/local/sbin/ssmtp hoststat /usr/bin/true purgestat /usr/bin/true Now all email sent to root will be sent to monitor@domain.</description>
+    </item>
+    
+  </channel>
+</rss>

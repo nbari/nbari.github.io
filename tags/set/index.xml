@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>set on IT notes</title>
+    <link>https://nbari.com/tags/set/</link>
+    <description>Recent content in set on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Aug 2016 11:28:20 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/set/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>/bin/sh shell set</title>
+      <link>https://nbari.com/post/shell-set/</link>
+      <pubDate>Thu, 11 Aug 2016 11:28:20 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/shell-set/</guid>
+      <description>The Bourne shell (sh) is a shell, or command-line interpreter, for computer operating systems.
+ The Bourne shell was the default shell for Unix Version 7. Most Unix-like systems continue to have /bin/sh—which will be the Bourne shell, or a symbolic link or hard link to a compatible shell even when other shells are used by most users. https://en.wikipedia.org/wiki/Bourne_shell
+ set options In sh, the set built-in command has the following options:</description>
+    </item>
+    
+  </channel>
+</rss>

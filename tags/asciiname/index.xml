@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>asciiname on IT notes</title>
+    <link>https://nbari.com/tags/asciiname/</link>
+    <description>Recent content in asciiname on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Jul 2016 15:14:28 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/asciiname/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>asciinema</title>
+      <link>https://nbari.com/post/asciinema/</link>
+      <pubDate>Wed, 20 Jul 2016 15:14:28 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/asciinema/</guid>
+      <description>asciinema [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+Install FreeBSD:
+pkg install asciiname  OS X:
+brew update &amp;amp;&amp;amp; brew install asciinema  Recording tmux session Setup your tmux session create windows, splits, start processes in them:
+tmux new -s name  Detach (prefix+d) and start recording with:
+asciinema rec -c &amp;quot;tmux attach -t name&amp;quot; /tmp/play.json  When you&amp;rsquo;re finished, just detach the session again and play it with:</description>
+    </item>
+    
+  </channel>
+</rss>

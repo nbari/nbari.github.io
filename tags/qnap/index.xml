@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>qnap on IT notes</title>
+    <link>https://nbari.com/tags/qnap/</link>
+    <description>Recent content in qnap on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Sep 2016 22:53:22 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/qnap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>reset qnap virtual switch</title>
+      <link>https://nbari.com/post/reset-qnap-virtual-switch/</link>
+      <pubDate>Wed, 28 Sep 2016 22:53:22 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/reset-qnap-virtual-switch/</guid>
+      <description>To reset the QNAP Virtualization Station, rename the file:
+/share/CE_CACHEDEV1_DATA/.qpkg/.QKVM  to
+/share/CE_CACHEDEV1_DATA/.qpkg/.QKVM-backup  From the App center remove/install the Virtualization Station.</description>
+    </item>
+    
+  </channel>
+</rss>

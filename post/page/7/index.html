@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Posts &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="https://nbari.com/post/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ciphers-supported/">ciphers supported</a></h2>
+          <span class="post-date">Jan 8, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nmap">nmap</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ssl">ssl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/tls">tls</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/scanssl">scanssl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				List ciphers supported by an HTTP server:
+nmap --script ssl-enum-ciphers -p 443 www.nbari.com  Example of output:
+PORT STATE SERVICE 443/tcp open https | ssl-enum-ciphers: | TLSv1.1: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server | TLSv1.2: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server |_ least strength: A Nmap done: 1 IP address (1 host up) scanned in 9.
+				<a class="read-more" href="/post/ciphers-supported/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/attachments-from-console/">attachments from console</a></h2>
+          <span class="post-date">Jan 3, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mail">mail</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/console">console</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To send attachments within the terminal/console:
+ $ uuencode file.bz2 attach-name.bz2 | mail -s &quot;attachment&quot; foo@bar.com  
+				<a class="read-more" href="/post/attachments-from-console/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/update-port/">update port</a></h2>
+          <span class="post-date">Dec 30, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/port">port</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Make a copy of the current port:
+cp -R &lt;port-name&gt; &lt;port-name&gt;.orig  Work on the port:
+make makesum make checksum make stage make check-orphans make package make install make deinstall make clean  Crete the diff, first change one level up:
+diff -u port-name.orig port-name &gt; port-name.diff  Submit the patch.
+				<a class="read-more" href="/post/update-port/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/raidz2/">raidz2</a></h2>
+          <span class="post-date">Dec 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/raid">raid</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mfi">mfi</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:
+&gt; mfiutil show config mfi0 Configuration: 8 arrays, 8 volumes, 1 spares array 0 of 2 drives: drive 1 ( 1863G) ONLINE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&gt; SATA drive 6 ( 1863G) ONLINE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY35&gt; SATA array 1 of 1 drives: drive 0 ( 466G) ONLINE &lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ0&gt; SCSI-6 array 2 of 1 drives: drive 2 ( 466G) ONLINE &lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&gt; SCSI-6 array 3 of 1 drives: drive 3 ( 932G) ONLINE &lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&gt; SCSI-6 array 4 of 1 drives: drive 4 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&gt; SAS array 5 of 1 drives: drive 5 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C4&gt; SAS array 6 of 1 drives: drive 8 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&gt; SAS array 7 of 1 drives: drive 9 ( 466G) ONLINE &lt;SEAGATE ST3500620SS MS04 serial=9QM5L824&gt; SAS volume mfid0 (1863G) RAID-1 64K OPTIMAL &lt;raid1&gt; spans: array 0 volume mfid1 (465G) RAID-0 64K OPTIMAL &lt;r0&gt; spans: array 1 volume mfid2 (465G) RAID-0 64K OPTIMAL &lt;r2&gt; spans: array 2 volume mfid3 (931G) RAID-0 64K OPTIMAL &lt;r3&gt; spans: array 3 volume mfid4 (465G) RAID-0 64K OPTIMAL &lt;r4&gt; spans: array 4 volume mfid5 (465G) RAID-0 64K OPTIMAL &lt;r5&gt; spans: array 5 volume mfid6 (465G) RAID-0 64K OPTIMAL &lt;r8&gt; spans: array 6 volume mfid7 (465G) RAID-0 64K OPTIMAL &lt;r9&gt; spans: array 7 dedicated spare 7 ( 1863G) HOT SPARE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&gt; SATA backs: array 0 Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume
+				<a class="read-more" href="/post/raidz2/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/drac5-update/">DRAC5 Update</a></h2>
+          <span class="post-date">Dec 28, 2017</span>
+		  
+		  
+		  	<div class="summary">
+				Download the firmware: http://www.dell.com/support/home/de/de/debsdt1/Drivers/DriversDetails?driverId=F3FXW
+In mac you can unzip the exe:
+unzip f_drac5v160_A00.exe  On the DRAC web interface go to &ldquo;Remote Access&rdquo; and upload the file firmimg.d5
+If getting errors like:
+ Unsigned application requesting unrestricted access to system. The following resource is signed with a weak signature algorithm MD5withRSA and is treated as unsigned.
+ In windows file is in: c:\Program Files\Java\jre7\lib\security\java.security
+On mac os, edit this file: /Library/Internet Plug-Ins/JavaAppletPlugin.
+				<a class="read-more" href="/post/drac5-update/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ssh-update-host-keys/">ssh update Host Keys</a></h2>
+          <span class="post-date">Dec 26, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/keys">keys</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create new ssh keys on the server:
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa -b 521  To check the fingerprint:
+ssh-keygen -lf ssh_host_ecdsa_key  On the client side:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed.
+				<a class="read-more" href="/post/ssh-update-host-keys/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-sha512-crypt/">mysql SHA512 CRYPT</a></h2>
+          <span class="post-date">Dec 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sha512">sha512</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/crypt">crypt</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a password using the SHA512-CRYPT schema:
+SELECT ENCRYPT(&quot;password&quot;, CONCAT('$6$',sha(RAND())));  To create an user:
+INSERT INTO users SET password=ENCRYPT(&quot;password&quot;, CONCAT('$6$',sha(RAND())));  To use with postfix or dovecot:
+INSERT INTO users SET password=CONCAT('{SHA512-CRYPT}', ENCRYPT(&quot;password&quot;, CONCAT('$6$',sha(RAND()))));  
+				<a class="read-more" href="/post/mysql-sha512-crypt/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/syslog-ng-ubuntu/">syslog-ng Ubuntu</a></h2>
+          <span class="post-date">Dec 15, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/java">java</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ubuntu">ubuntu</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslog-ng">syslog-ng</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Errors you may get:
+Can't find class; class_name='org.syslog_ng.elasticsearch_v2.ElasticSearchDestination'  Working configuration:
+@version:3.13 @module mod-java @include &quot;scl.conf&quot; options { flush_lines(0); keep_hostname(yes); normalize_hostnames(yes); threaded(yes); }; source s_local { system(); internal(); }; source s_network { syslog(transport(tcp)); }; destination d_all { file (&quot;/var/log/all.log&quot;); }; destination d_elastic { elasticsearch2( client-lib-dir(&quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&quot;) client_mode(&quot;http&quot;) cluster_url(&quot;http://your-elasticsearch:9200&quot;) index(&quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&quot;) type(&quot;syslog&quot;) cluster(&quot;test&quot;) flush-limit(&quot;1000&quot;) template(&quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&quot;) time-zone(&quot;UTC&quot;) ); }; log { source(s_network); destination(d_elastic); }; log { source(s_local); destination(d_all); };  Notice the client-lib-dir line:
+				<a class="read-more" href="/post/syslog-ng-ubuntu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/80/">80</a></h2>
+          <span class="post-date">Dec 11, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/80">80</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/port">port</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To start an application on port 80 being not root:
+sysctl net.inet.ip.portrange.reservedhigh=79  That will allow to bind an application in any port &gt; 79, to allow any port:
+sysctl net.inet.ip.portrange.reservedhigh=0  Add this to /etc/sysctl.conf to keep changes persistent across reboots:
+net.inet.ip.portrange.reservedhigh=79  
+				<a class="read-more" href="/post/80/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ntpdate/">ntpdate</a></h2>
+          <span class="post-date">Dec 11, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ntp">ntp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/time">time</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If you want to execute ntpdate with the ntp daemon already up and running, use the following command:
+ntpdate -v -b -u 0.pool.ntp.org  To only test an NTP server or responding to queries:
+ntpdate -q time.google.com  
+				<a class="read-more" href="/post/ntpdate/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/nginx-lua-redis/">nginx &#43; lua &#43; redis</a></h2>
+          <span class="post-date">Dec 6, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/nginx">nginx</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/lua">lua</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/redis">redis</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Basic WAF example using lua + redis within nginx.
+-- -- lua_package_path &quot;/usr/share/lua/5.1/nginx/?.lua;;&quot;; -- lua_shared_dict ip_blacklist 4m; -- local redis_host = &quot;your.redis.tld&quot; local redis_port = 6379 local redis_connection_timeout = 300 local redis_pattern = &quot;block-&quot; local cache_ttl = 3 -- seconds local ip = ngx.var.remote_addr local ip_blacklist = ngx.shared.ip_blacklist local last_update_time = ip_blacklist:get(&quot;last_update_time&quot;); -- block if ip found in the local nginx dict if ip_blacklist:get(ip) then ngx.log(ngx.DEBUG, &quot;Banned IP detected and refused access: &quot; .
+				<a class="read-more" href="/post/nginx-lua-redis/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/golang-http-timeouts/">Golang HTTP Timeouts</a></h2>
+          <span class="post-date">Dec 1, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/go">go</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/timeout">timeout</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If this:
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms  Check that your go server is using proper timeouts, example:
+srv := &amp;http.Server{ Addr: &#34;:80&#34;, Handler: router, ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.Fatal(srv.ListenAndServe()) https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+				<a class="read-more" href="/post/golang-http-timeouts/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/measuring-the-listen-queue/">Measuring the Listen Queue</a></h2>
+          <span class="post-date">Dec 1, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/netstat">netstat</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sysctl">sysctl</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Run the command:
+netstat -Lan  The command output may be the following:
+Current listen queue sizes (qlen/incqlen/maxqlen) Proto Listen Local Address tcp46 1863/0/32768 *.80 tcp4 0/0/128 *.31025 tcp6 0/0/128 *.31025 Some tcp sockets may have been deleted. unix 0/0/32768 /var/run/immortal/tuip/immortal.sock unix 0/0/255 /var/db/syslog-ng.ctl unix 0/0/4 /var/run/devd.pipe unix 0/0/4 /var/run/devd.seqpacket.pipe The command output shows that there are 1863 unaccepted connections in the listen queue on Port 80, while the connection limit is 32768 connections, and this situation is normal.
+				<a class="read-more" href="/post/measuring-the-listen-queue/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/appengine/">appengine cost &gt; 150/s requests</a></h2>
+          <span class="post-date">Dec 1, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/appengine">appengine</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/cost">cost</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Between $5 and $7 USD per day will cost to host in appengine a tiny go application, with an average of 150 request/second, incoming bandwidth &gt; 7GB and outgoing bandwidth &lt; 1GB.
+ close to $25 per month, including the network internet egress
+ Sumary:
+				<a class="read-more" href="/post/appengine/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/upgrade-insecure-requests/">Upgrade Insecure Requests</a></h2>
+          <span class="post-date">Nov 28, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssl">ssl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/https">https</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/meta">meta</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				The &ldquo;Upgrade Insecure Requests&rdquo; Content Security Policy can be used to automatically upgrade insecure (e.g. http:) requests to a secure alternative (e.g. https:) before a browser fetches them.
+In practice, this helps avoid mixed-content warnings when a page is accessed via https:, but it contains references to resources using absolute http: URLs.
+Like other Content Security Policies, the recommend approach is to enable it via a HTTP response header:
+Content-Security-Policy: upgrade-insecure-requests  Nginx example:
+				<a class="read-more" href="/post/upgrade-insecure-requests/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/osxfuse/">osxfuse</a></h2>
+          <span class="post-date">Nov 26, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/fuse">fuse</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sshfs">sshfs</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To install:
+brew cask install osxfuse  To install sshfuse:
+brew install sshfs  Mount the root volume of remote host:
+sshfs bastion:/ /tmp/host -o reconnect,follow_symlinks,volname=&quot;LocalRemote&quot;  To unmount:
+sudo diskutil umount force /tmp/bastion  
+				<a class="read-more" href="/post/osxfuse/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sh-loop/">sh loop</a></h2>
+          <span class="post-date">Nov 23, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sh">sh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/loop">loop</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Easy shell sh loop within a range:
+$ for i in $(seq 1 3); do echo $i; done 1 2 3  
+				<a class="read-more" href="/post/sh-loop/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/git-format-patch/">git format-patch</a></h2>
+          <span class="post-date">Nov 19, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/git">git</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/patch">patch</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To create a patch of the latest commit:
+git format-patch -1 HEAD  The last 10 patches from head in a single patch file:
+git format-patch -10 HEAD --stdout &gt; last-10-commits.patch  Apply the patch:
+git apply path-file-name  
+				<a class="read-more" href="/post/git-format-patch/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rsyslog2syslog-ng/">rsyslog 2 syslog-ng</a></h2>
+          <span class="post-date">Nov 16, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rsyslog">rsyslog</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslog">syslog</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/syslog-ng">syslog-ng</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/5242">5242</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To forward all logs from rsyslog to syslog-ng, add at the end of file /etc/rsyslog.conf:
+*.* @@(o)log.server.tld:601;RSYSLOG_SyslogProtocol23Format    @@ is for sending logs via TCP on port 601
+  (o) configures proper framing
+  RSYSLOG_SyslogProtocol23Format adds the RFC5424 template
+  Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/
+				<a class="read-more" href="/post/rsyslog2syslog-ng/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ncdu/">ncdu</a></h2>
+          <span class="post-date">Nov 14, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/du">du</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/space">space</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				ncdu helps displaying disk usage in an easy way, to install:
+brew install ncdu  To scan and browse the directory you&rsquo;re currently in, all you need is a simple:
+ncdu  If you want to scan a full filesystem, your root filesystem, for example, then you&rsquo;ll want to use &ldquo;-x&rdquo;:
+ncdu -x /  All files read only and in local machine:
+sudo ncdu -rx /  -r option is for read only mode, option -x is to stay in the same file system (do not traverse other filesystem mounts)
+				<a class="read-more" href="/post/ncdu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/6/">Newer</a>  
+  <a class="btn next" href="/post/page/8/">Older</a> 
+</div>
+    </div>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+</html>

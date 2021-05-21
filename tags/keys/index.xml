@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keys on IT notes</title>
+    <link>https://nbari.com/tags/keys/</link>
+    <description>Recent content in keys on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 26 Dec 2017 16:19:15 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/keys/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh update Host Keys</title>
+      <link>https://nbari.com/post/ssh-update-host-keys/</link>
+      <pubDate>Tue, 26 Dec 2017 16:19:15 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssh-update-host-keys/</guid>
+      <description>To create new ssh keys on the server:
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N &#39;&#39; -t rsa ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N &#39;&#39; -t ecdsa -b 521  To check the fingerprint:
+ssh-keygen -lf ssh_host_ecdsa_key  On the client side:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed.</description>
+    </item>
+    
+  </channel>
+</rss>

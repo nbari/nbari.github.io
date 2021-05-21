@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>osi on IT notes</title>
+    <link>https://nbari.com/tags/osi/</link>
+    <description>Recent content in osi on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Nov 2018 18:49:10 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/osi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSI TLS</title>
+      <link>https://nbari.com/post/osi-tls/</link>
+      <pubDate>Wed, 07 Nov 2018 18:49:10 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/osi-tls/</guid>
+      <description>Beside the OSI/model, there is also the TCP/IP Model:
+  Link Layer
+  Internet (IP) Layer
+  Transport Layer
+  Application
+  OSI Model The OSI model has a bit more granularity.
+ Physical Layer Data Link Layer Network Layer (IP) Transport Layer (TCP) Session Layer (TLS) Presentation Layer Application Layer (HTTP)  TLS establishes an encrypted session. In the OSI model this is where TLS operates.</description>
+    </item>
+    
+    <item>
+      <title>OSI model</title>
+      <link>https://nbari.com/post/osi/</link>
+      <pubDate>Sun, 19 Jun 2016 01:14:50 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/osi/</guid>
+      <description>The Open Systems Interconnection model (OSI model) is a conceptual model that characterizes and standardizes the communication functions of a telecommunication or computing system without regard to their underlying internal structure and technology.
+ List of newtork protocols
+HAProxy can work as a Load Balancer in Layer 4 (tcp mode) and Layer 7.</description>
+    </item>
+    
+  </channel>
+</rss>

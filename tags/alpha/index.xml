@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>alpha on IT notes</title>
+    <link>https://nbari.com/tags/alpha/</link>
+    <description>Recent content in alpha on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Oct 2016 17:36:50 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/alpha/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>transparent</title>
+      <link>https://nbari.com/post/transparent/</link>
+      <pubDate>Sun, 30 Oct 2016 17:36:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/transparent/</guid>
+      <description>Create an image with transparent background Using convert from imagemagick:
+convert input.jpg -fuzz 10% -transparent white transparent.png  </description>
+    </item>
+    
+  </channel>
+</rss>

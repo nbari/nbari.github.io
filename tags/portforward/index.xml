@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>portforward on IT notes</title>
+    <link>https://nbari.com/tags/portforward/</link>
+    <description>Recent content in portforward on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 May 2020 13:43:01 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/portforward/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bypass AllowTcpForwarding</title>
+      <link>https://nbari.com/post/bypass-allowtcpforwarding/</link>
+      <pubDate>Mon, 11 May 2020 13:43:01 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bypass-allowtcpforwarding/</guid>
+      <description>To bypass AllowTcpForwarding no try using socat and nc:
+socat TCP-LISTEN:&amp;lt;local port&amp;gt;,reuseaddr,fork &amp;quot;EXEC:ssh &amp;lt;server&amp;gt; nc localhost &amp;lt;remote port&amp;gt;&amp;quot;  For example from your desktop run:
+socat TCP-LISTEN:8080,reuseaddr,fork &amp;quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&amp;quot;  This will listen on local port 8080 connect via ssh to 1.2.3.4 and use nc to connect 10.0.1.1:3000</description>
+    </item>
+    
+  </channel>
+</rss>

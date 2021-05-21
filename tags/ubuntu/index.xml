@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ubuntu on IT notes</title>
+    <link>https://nbari.com/tags/ubuntu/</link>
+    <description>Recent content in ubuntu on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Dec 2017 11:25:12 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>syslog-ng Ubuntu</title>
+      <link>https://nbari.com/post/syslog-ng-ubuntu/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/syslog-ng-ubuntu/</guid>
+      <description>Errors you may get:
+Can&#39;t find class; class_name=&#39;org.syslog_ng.elasticsearch_v2.ElasticSearchDestination&#39;  Working configuration:
+@version:3.13 @module mod-java @include &amp;quot;scl.conf&amp;quot; options { flush_lines(0); keep_hostname(yes); normalize_hostnames(yes); threaded(yes); }; source s_local { system(); internal(); }; source s_network { syslog(transport(tcp)); }; destination d_all { file (&amp;quot;/var/log/all.log&amp;quot;); }; destination d_elastic { elasticsearch2( client-lib-dir(&amp;quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&amp;quot;) client_mode(&amp;quot;http&amp;quot;) cluster_url(&amp;quot;http://your-elasticsearch:9200&amp;quot;) index(&amp;quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&amp;quot;) type(&amp;quot;syslog&amp;quot;) cluster(&amp;quot;test&amp;quot;) flush-limit(&amp;quot;1000&amp;quot;) template(&amp;quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&amp;quot;) time-zone(&amp;quot;UTC&amp;quot;) ); }; log { source(s_network); destination(d_elastic); }; log { source(s_local); destination(d_all); };  Notice the client-lib-dir line:</description>
+    </item>
+    
+    <item>
+      <title>dnsmasq</title>
+      <link>https://nbari.com/post/dnsmasq/</link>
+      <pubDate>Fri, 30 Sep 2016 12:27:32 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/dnsmasq/</guid>
+      <description>dnsmasq forwarding zones If you are using dnsmasq and need to forward a DNS zone to a specific DNS server, add this to your /etc/dnsmasq.conf
+server=/test/10.10.0.4 server=/sopas/10.20.0.4  If you don&amp;rsquo;t have the file /etc/dnsmasq.conf check for directory /etc/dnsmasq.d and there create a file named /etc/dnsmasq.d/my-zones with the content of your zones
+That means that requests made do *.test will be forwarded to 10.10.0.4 for *.sopas to 10.20.0.4 and so on</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VirtualBox on IT notes</title>
+    <link>https://nbari.com/tags/virtualbox/</link>
+    <description>Recent content in VirtualBox on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jul 2019 10:38:52 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/virtualbox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vbox headless</title>
+      <link>https://nbari.com/post/vbox-headless/</link>
+      <pubDate>Wed, 17 Jul 2019 10:38:52 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/vbox-headless/</guid>
+      <description>To list your vms:
+$ VBoxManage list vms  To run one in headless mode:
+$ VBoxManage startvm freebsd-server --type headless  To shutdown:
+$ VBoxManage controlvm freebsd-server acpipowerbutton  To get the IPv4:
+$ VBoxManage guestproperty enumerate freebsd-server | awk &#39;/IP/&#39;   for this to work you will need the vboxguest tools pkg install virtualbox-ose-additions
+ </description>
+    </item>
+    
+    <item>
+      <title>convertfromraw</title>
+      <link>https://nbari.com/post/convertfromraw/</link>
+      <pubDate>Mon, 07 Nov 2016 16:20:26 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/convertfromraw/</guid>
+      <description>Convert from RAW to VDI When creating custom &amp;ldquo;RAW&amp;rdquo; images using mkimg they can be use in VirtualBox by converting them to &amp;ldquo;VDI&amp;rdquo; format, example:
+$ VBoxManage convertfromraw ec2.raw ec2.vdi --format VDI Converting from raw image file=&amp;quot;ec2.raw&amp;quot; to file=&amp;quot;ec2.vdi&amp;quot;... Creating dynamic image with size 3221292544 bytes (3073MB)...  Once the image is in &amp;ldquo;VDI&amp;rdquo; format it can be resized using:
+$ VBoxManage modifyhd ec2.vdi --resize 8192 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%  The above command will resize the image to 8GB.</description>
+    </item>
+    
+    <item>
+      <title>virtualbox-el-capitan</title>
+      <link>https://nbari.com/post/virtualbox-el-capitan/</link>
+      <pubDate>Tue, 12 Jul 2016 14:18:43 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/virtualbox-el-capitan/</guid>
+      <description>When trying to install Virtualbox in OS X El capitan you may notice it hangs at Verifying &amp;ldquo;VirtualBox.pkg&amp;rdquo;.
+You can by pass the warning trying to install via command line with:
+$ sudo installer -package /Volumes/VirtualBox/VirtualBox.pkg -target /  </description>
+    </item>
+    
+  </channel>
+</rss>

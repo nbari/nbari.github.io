@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pam on IT notes</title>
+    <link>https://nbari.com/tags/pam/</link>
+    <description>Recent content in pam on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Nov 2017 18:06:41 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/pam/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pamtester</title>
+      <link>https://nbari.com/post/pamtester/</link>
+      <pubDate>Mon, 13 Nov 2017 18:06:41 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/pamtester/</guid>
+      <description>pamtester can be used to test your PAM setup, to install it:
+pkg install pamtester  To test for example openvpn:
+pamtester -v openvpn test authenticate  </description>
+    </item>
+    
+  </channel>
+</rss>

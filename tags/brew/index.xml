@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>brew on IT notes</title>
+    <link>https://nbari.com/tags/brew/</link>
+    <description>Recent content in brew on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Apr 2017 12:40:49 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/brew/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>brew update formula</title>
+      <link>https://nbari.com/post/brew-update-formula/</link>
+      <pubDate>Sun, 30 Apr 2017 12:40:49 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/brew-update-formula/</guid>
+      <description>Example:
+ brew bump-formula-pr --strict --url https://github.com/immortal/immortal/archive/0.24.2.tar.gz immortal   it will need an API GIT token: export HOMEBREW_GITHUB_API_TOKEN=XXXXX
+ To keep in sync forked repo:
+git fetch upstream git co upstream/master git push -f origin master  </description>
+    </item>
+    
+  </channel>
+</rss>

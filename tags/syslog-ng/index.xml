@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>syslog-ng on IT notes</title>
+    <link>https://nbari.com/tags/syslog-ng/</link>
+    <description>Recent content in syslog-ng on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Dec 2017 11:25:12 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/syslog-ng/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>syslog-ng Ubuntu</title>
+      <link>https://nbari.com/post/syslog-ng-ubuntu/</link>
+      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/syslog-ng-ubuntu/</guid>
+      <description>Errors you may get:
+Can&#39;t find class; class_name=&#39;org.syslog_ng.elasticsearch_v2.ElasticSearchDestination&#39;  Working configuration:
+@version:3.13 @module mod-java @include &amp;quot;scl.conf&amp;quot; options { flush_lines(0); keep_hostname(yes); normalize_hostnames(yes); threaded(yes); }; source s_local { system(); internal(); }; source s_network { syslog(transport(tcp)); }; destination d_all { file (&amp;quot;/var/log/all.log&amp;quot;); }; destination d_elastic { elasticsearch2( client-lib-dir(&amp;quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&amp;quot;) client_mode(&amp;quot;http&amp;quot;) cluster_url(&amp;quot;http://your-elasticsearch:9200&amp;quot;) index(&amp;quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&amp;quot;) type(&amp;quot;syslog&amp;quot;) cluster(&amp;quot;test&amp;quot;) flush-limit(&amp;quot;1000&amp;quot;) template(&amp;quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&amp;quot;) time-zone(&amp;quot;UTC&amp;quot;) ); }; log { source(s_network); destination(d_elastic); }; log { source(s_local); destination(d_all); };  Notice the client-lib-dir line:</description>
+    </item>
+    
+    <item>
+      <title>rsyslog 2 syslog-ng</title>
+      <link>https://nbari.com/post/rsyslog2syslog-ng/</link>
+      <pubDate>Thu, 16 Nov 2017 17:21:16 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/rsyslog2syslog-ng/</guid>
+      <description>To forward all logs from rsyslog to syslog-ng, add at the end of file /etc/rsyslog.conf:
+*.* @@(o)log.server.tld:601;RSYSLOG_SyslogProtocol23Format    @@ is for sending logs via TCP on port 601
+  (o) configures proper framing
+  RSYSLOG_SyslogProtocol23Format adds the RFC5424 template
+  Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/</description>
+    </item>
+    
+  </channel>
+</rss>

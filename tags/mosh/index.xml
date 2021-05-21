@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mosh on IT notes</title>
+    <link>https://nbari.com/tags/mosh/</link>
+    <description>Recent content in mosh on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Aug 2016 22:25:25 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/mosh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mosh</title>
+      <link>https://nbari.com/post/mosh/</link>
+      <pubDate>Wed, 10 Aug 2016 22:25:25 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/mosh/</guid>
+      <description>mosh (mobile shell)  Remote terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and line editing of user keystrokes. Mosh is a replacement for SSH. It&amp;rsquo;s more robust and responsive, especially over Wi-Fi, cellular, and long-distance links.
+ How to install server FreeBSD:
+$ pkg install net/mosh  Edit /etc/login.conf and add this to the default:
+ :charset=UTF-8:\ :lang=en_US.UTF-8:\ :setenv=LC_COLLATE=C:  After editing /etc/locing.conf run:</description>
+    </item>
+    
+  </channel>
+</rss>

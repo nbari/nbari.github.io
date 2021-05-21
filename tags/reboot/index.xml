@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reboot on IT notes</title>
+    <link>https://nbari.com/tags/reboot/</link>
+    <description>Recent content in reboot on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Mar 2018 20:46:56 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/reboot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>wait_for_connection</title>
+      <link>https://nbari.com/post/wait_for_connection/</link>
+      <pubDate>Wed, 07 Mar 2018 20:46:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/wait_for_connection/</guid>
+      <description>Reboot and wait until server is reachable/usable:
+- name: Something that may reboot shell: echo &amp;quot;true&amp;quot; register: should_reboot - name: Rebooting ... shell: sleep 2 &amp;amp;&amp;amp; /sbin/shutdown -r now &amp;quot;Reboot required&amp;quot; async: 1 poll: 0 ignore_errors: true register: rebooting when: should_reboot.stdout == &amp;quot;true&amp;quot; - name: Wait for rebooted servers to come back wait_for_connection: connect_timeout: 20 sleep: 5 delay: 5 timeout: 60 when: rebooting|changed  For checking/testing if a remote host/service is up:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> bitwise chmod &middot; IT notes </title>
+
+
+<link rel="stylesheet" href="https://nbari.com/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4351903432385321",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="https://nbari.com/">IT notes</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/nbari">Github</a></li>
+      <li><a href="http://www.dalmp.com">DALMP</a></li>
+      <li><a href="http://www.zunzun.io">zunzun</a></li>
+      <li><a href="https://epazote.io">epazote</a></li>
+      <li><a href="https://fabrik.red">fabrik</a></li>
+      <li><a href="https://immortal.run">immortal</a></li>
+      <li><a href="https://ssh-vault.com">ssh-vault</a></li>
+      <li><a href="https://www.slashquery.com">SlashQuery</a></li>
+      <li><a href="https://www.violetear.org">violetear</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bitwise-chmod/">bitwise chmod</a></h2>
+          <span class="post-date">Mar 2, 2017 </span>
+          <div class="post-content">
+            <h1 id="111-111-111">111 111 111</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>octal</td>
+<td>777</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>511</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>111 111 111</td>
+</tr>
+<tr>
+<td>perm</td>
+<td>rwx rwx rwx</td>
+</tr>
+</tbody>
+</table>
+<pre><code>4 = r
+2 = w
+1 = x
+
+rwx = 4+2+1 = 7
+rw  = 4+2+0 = 6
+r   = 4+0+0 = 4
+r x = 4+0+1 = 5
+
+7 = binary 111 = rwx
+6 = binary 110 = rw-
+5 = binary 101 = r-x
+4 = binary 100 = r--
+3 = binary 011 = -wx
+2 = binary 010 = -w-
+1 = binary 001 = --x
+0 = binary 000 = ---
+</code></pre>
+<p>The full set of nine permission characters can then be grouped and summarized as three octal digits:</p>
+<pre><code>rwxr-x-wx  is  rwx|r-x|-wx  is 111|101|011 ==&gt; the three digits 753
+---r----x  is  ---|r--|--x  is 000|100|001 ==&gt; the three digits 041
+---------  is  ---|---|---  is 000|000|000 ==&gt; the three digits 000
+rwxrwxrwx  is  rwx|rwx|rwx  is 111|111|111 ==&gt; the three digits 777
+</code></pre>
+<p>Convert octal to decimal using python:</p>
+<pre><code>&gt;&gt;&gt; int('777', 8)
+</code></pre>
+<p>Decimal to binary:</p>
+<pre><code>&gt;&gt;&gt; &quot;{0:b}&quot;.format(511)
+'111111111'
+</code></pre>
+<p>Bitwise AND with 07777 gives the last twelve bits of a number’s binary
+representation. With a Unix mode, this operation gives the permission or mode
+bits and discards any type information.</p>
+<pre><code>$ perl -e 'printf &quot;%d\n&quot;, (stat &quot;foo&quot;)[2] &amp; 07777'  # decimal, not useful
+420
+$ perl -e 'printf &quot;%o\n&quot;, (stat &quot;foo&quot;)[2] &amp; 07777'  # octal
+644
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="https://nbari.com/post/add-subtitles/"> Prev</a>  
+          <a class="btn next " href="https://nbari.com/post/urandom/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+    <p><a href="/about">about</a></p>
+</div>
+
+  </div>
+  <script src="https://nbari.com/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

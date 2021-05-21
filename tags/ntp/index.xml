@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ntp on IT notes</title>
+    <link>https://nbari.com/tags/ntp/</link>
+    <description>Recent content in ntp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Dec 2017 10:56:33 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/ntp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ntpdate</title>
+      <link>https://nbari.com/post/ntpdate/</link>
+      <pubDate>Mon, 11 Dec 2017 10:56:33 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ntpdate/</guid>
+      <description>If you want to execute ntpdate with the ntp daemon already up and running, use the following command:
+ntpdate -v -b -u 0.pool.ntp.org  To only test an NTP server or responding to queries:
+ntpdate -q time.google.com  </description>
+    </item>
+    
+    <item>
+      <title>leap second</title>
+      <link>https://nbari.com/post/leap-seconds/</link>
+      <pubDate>Wed, 11 Jan 2017 15:08:31 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/leap-seconds/</guid>
+      <description>A leap second is an ad-hoc one-second correction to synchronize atomic timescales with Earth rotation.
+It is possible to test whether a leap second will be used. Due to the nature of NTP, the test might work up to 24 hours before the leap second. Some major reference clock sources only announce leap seconds one hour ahead of the event. Query the NTP daemon:
+ntpq -c &#39;rv 0 leap&#39;  To update/sync:</description>
+    </item>
+    
+  </channel>
+</rss>

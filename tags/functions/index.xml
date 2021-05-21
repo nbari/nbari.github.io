@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functions on IT notes</title>
+    <link>https://nbari.com/tags/functions/</link>
+    <description>Recent content in functions on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Mar 2019 20:12:57 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/functions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google Cloud Functions</title>
+      <link>https://nbari.com/post/gcf/</link>
+      <pubDate>Wed, 13 Mar 2019 20:12:57 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/gcf/</guid>
+      <description>Testing Google Cloud Functions using go with an average of 250 requests/second. Cost per day close to $10USD
+Request per day: 23,511,849 Errors: 0 memory usage: 10.4MB execution time: 55.04ms </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iso on IT notes</title>
+    <link>https://nbari.com/tags/iso/</link>
+    <description>Recent content in iso on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Dec 2018 20:47:37 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/iso/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mojave Iso</title>
+      <link>https://nbari.com/post/mojave-iso/</link>
+      <pubDate>Thu, 13 Dec 2018 20:47:37 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mojave-iso/</guid>
+      <description>Create 12 GB tmp disk: hdiutil create -o /tmp/Mojave.cdr -size 12000m -layout SPUD -fs HFS+J
+Attach the disk:
+hdiutil attach /tmp/Mojave.cdr.dmg -noverify -mountpoint /Volumes/install_build  Extract the installer:
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build  Create the iso
+mv /tmp/Mojave.cdr.dmg ~/Desktop/InstallSystem.dmg hdiutil detach /Volumes/Install\ macOS\ Mojave hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Mojave.iso  Rename Mojave.iso.cdr to Mojave.iso</description>
+    </item>
+    
+  </channel>
+</rss>

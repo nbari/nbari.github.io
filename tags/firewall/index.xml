@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>firewall on IT notes</title>
+    <link>https://nbari.com/tags/firewall/</link>
+    <description>Recent content in firewall on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Dec 2018 09:44:00 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/firewall/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Block SSH on MacOS</title>
+      <link>https://nbari.com/post/block-ssh-mac/</link>
+      <pubDate>Sat, 01 Dec 2018 09:44:00 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/block-ssh-mac/</guid>
+      <description>To block incoming ssh connections, edit the /etc/pf.conf and add the following line at the bottom:
+block in log quick proto tcp from any to any port 22  You can use vim or use something like this:
+sudo sh -c &amp;quot;echo &#39;block in log quick proto tcp from any to any port 22&#39; &amp;gt;&amp;gt; /etc/pf.conf&amp;quot;  Then reload the pfrules:
+sudo pfctl -Fa -f /etc/pf.conf  For this to work the firewall must be enabled.</description>
+    </item>
+    
+    <item>
+      <title>pfsense</title>
+      <link>https://nbari.com/post/pfsense/</link>
+      <pubDate>Tue, 29 May 2018 21:40:18 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/pfsense/</guid>
+      <description>How to connect using serial (usb/com RJ45) port on macOS:
+$ sudo cu -s 115200 -l /dev/tty.usbserial-DN04FSAL  To bail out when you&amp;rsquo;re done, type ~. as you would with SSH.
+Boot example:
+After installing (zfs on root):
+The toy:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keychain on IT notes</title>
+    <link>https://nbari.com/tags/keychain/</link>
+    <description>Recent content in keychain on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Feb 2018 10:01:54 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/keychain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UseKeychain</title>
+      <link>https://nbari.com/post/usekeychain/</link>
+      <pubDate>Tue, 13 Feb 2018 10:01:54 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/usekeychain/</guid>
+      <description>To save SSH keys in macOS Sierra keychain add this to ~/.ssh/config:
+Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
+Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.</description>
+    </item>
+    
+  </channel>
+</rss>

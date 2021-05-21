@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scanssl on IT notes</title>
+    <link>https://nbari.com/tags/scanssl/</link>
+    <description>Recent content in scanssl on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jan 2018 11:38:18 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/scanssl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ciphers supported</title>
+      <link>https://nbari.com/post/ciphers-supported/</link>
+      <pubDate>Mon, 08 Jan 2018 11:38:18 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ciphers-supported/</guid>
+      <description>List ciphers supported by an HTTP server:
+nmap --script ssl-enum-ciphers -p 443 www.nbari.com  Example of output:
+PORT STATE SERVICE 443/tcp open https | ssl-enum-ciphers: | TLSv1.1: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server | TLSv1.2: | ciphers: | TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A | TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A | TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A | TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A | TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A | compressors: | NULL | cipher preference: server |_ least strength: A Nmap done: 1 IP address (1 host up) scanned in 9.</description>
+    </item>
+    
+  </channel>
+</rss>

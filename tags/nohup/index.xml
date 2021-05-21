@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nohup on IT notes</title>
+    <link>https://nbari.com/tags/nohup/</link>
+    <description>Recent content in nohup on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Mar 2018 16:07:46 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/nohup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nohup - disown</title>
+      <link>https://nbari.com/post/nohup-disown/</link>
+      <pubDate>Sat, 10 Mar 2018 16:07:46 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/nohup-disown/</guid>
+      <description>In case you don&amp;rsquo;t have screen/tmux and need to run a process that won&amp;rsquo;t be terminated after closing the terminal:
+$ nohup your command &amp;amp; $ exit  Or
+$ your command &amp;amp; $ disown $ exit  If you have multiple commands:
+$ sleep 3600 &amp;amp; $ sleep 86400 &amp;amp;  By typing jobs something like this appears:
+[1] - running sleep 3600 [2] + running sleep 86400  To disown let&amp;rsquo;s say only job 2:</description>
+    </item>
+    
+  </channel>
+</rss>

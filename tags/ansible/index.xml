@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ansible on IT notes</title>
+    <link>https://nbari.com/tags/ansible/</link>
+    <description>Recent content in ansible on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jan 2020 17:21:40 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python quit unexpectedly macOS Catalina</title>
+      <link>https://nbari.com/post/python-quit-unexpectedly-macos/</link>
+      <pubDate>Mon, 20 Jan 2020 17:21:40 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/python-quit-unexpectedly-macos/</guid>
+      <description>When running something depending on OpenSSL you may get something like this on macOS 10.15.2:
+The output of the report:
+To fix:
+brew reinstall openssl  Then:
+cd /usr/local/lib sudo ln -s /usr/local/opt/openssl/lib/libssl.dylib libssl.dylib sudo ln -s /usr/local/opt/openssl/lib/libcrypto.dylib libcrypto.dylib  </description>
+    </item>
+    
+    <item>
+      <title>Ansible ad-hoc</title>
+      <link>https://nbari.com/post/ansible-adhoc/</link>
+      <pubDate>Wed, 09 May 2018 10:24:04 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-adhoc/</guid>
+      <description>To send a command to all the servers within a playbook:
+$ ansible all -a &amp;quot;service chronyd restart&amp;quot; -u devops --become  What’s an ad-hoc command? An ad-hoc command is something that you might type in to do something really quick, but don’t want to save for later.
+http://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html</description>
+    </item>
+    
+    <item>
+      <title>Ansible Patterns</title>
+      <link>https://nbari.com/post/ansible-patterns/</link>
+      <pubDate>Thu, 19 Apr 2018 21:56:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-patterns/</guid>
+      <description>To match hosts only starting with certain string a regex could be used for example to match hosts starting with the word fabrik:
+--- - hosts: ~fabrik.* become: True tasks: - name: uname shell: uname -a register: uname - debug: var: uname.stdout   notice the ~
+ </description>
+    </item>
+    
+    <item>
+      <title>wait_for_connection</title>
+      <link>https://nbari.com/post/wait_for_connection/</link>
+      <pubDate>Wed, 07 Mar 2018 20:46:56 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/wait_for_connection/</guid>
+      <description>Reboot and wait until server is reachable/usable:
+- name: Something that may reboot shell: echo &amp;quot;true&amp;quot; register: should_reboot - name: Rebooting ... shell: sleep 2 &amp;amp;&amp;amp; /sbin/shutdown -r now &amp;quot;Reboot required&amp;quot; async: 1 poll: 0 ignore_errors: true register: rebooting when: should_reboot.stdout == &amp;quot;true&amp;quot; - name: Wait for rebooted servers to come back wait_for_connection: connect_timeout: 20 sleep: 5 delay: 5 timeout: 60 when: rebooting|changed  For checking/testing if a remote host/service is up:</description>
+    </item>
+    
+    <item>
+      <title>ansible ImportError: No module named boto3</title>
+      <link>https://nbari.com/post/ansible-no-module-named-boto3/</link>
+      <pubDate>Mon, 16 Oct 2017 17:21:57 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/ansible-no-module-named-boto3/</guid>
+      <description>When using ansible 2.4.0.0 (macOS) to fix this problem update your library:
+pip install --upgrade --user boto3  notice the &amp;ndash;user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages
+ By using --upgrade it will recreate the site-packages.
+Or create PYTHONPATH system variable:
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages  paramiko In case you get this error:
+Unicode-objects must be encoded before hashing&amp;quot;, &amp;quot;unreachable&amp;quot;: true  Try:
+pip install --upgrade --user paramiko==2.0.6  To upgrade,reinstall ansible just in case:</description>
+    </item>
+    
+  </channel>
+</rss>

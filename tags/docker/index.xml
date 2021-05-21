@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on IT notes</title>
+    <link>https://nbari.com/tags/docker/</link>
+    <description>Recent content in docker on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 May 2019 00:41:33 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker prune</title>
+      <link>https://nbari.com/post/docker-prune/</link>
+      <pubDate>Wed, 29 May 2019 00:41:33 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/docker-prune/</guid>
+      <description>Docker cleanup:
+ docker system prune -a  </description>
+    </item>
+    
+    <item>
+      <title>rust docker</title>
+      <link>https://nbari.com/post/rust-docker/</link>
+      <pubDate>Tue, 28 May 2019 22:16:35 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/rust-docker/</guid>
+      <description>Dockerfile to create small rust docker images:
+FROM clux/muslrust RUN mkdir /source WORKDIR /source COPY . . RUN cargo build --release RUN strip ./target/x86_64-unknown-linux-musl/release/myapp FROM scratch COPY --from=0 /source/target/x86_64-unknown-linux-musl/release/myapp / CMD [&amp;quot;./myapp&amp;quot;]  Image compatible with cloud foundry:
+FROM rust:1.35 WORKDIR /usr/src/myapp COPY . . RUN cargo build --release FROM debian:latest RUN apt-get update &amp;amp;&amp;amp; DEBIAN_FRONTEND=noninteractive apt-get install -y openssl ca-certificates COPY --from=0 /usr/src/myapp/target/release/myapp / CMD [&amp;quot;./myapp&amp;quot;]  </description>
+    </item>
+    
+    <item>
+      <title>FreeBSD jails</title>
+      <link>https://nbari.com/post/jails/</link>
+      <pubDate>Sun, 19 Jun 2016 17:24:05 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/jails/</guid>
+      <description>The FreeBSD jail mechanism is an implementation of operating system-level virtualization that allows administrators to partition a FreeBSD-based computer system into several independent mini-systems called jails.
+ Operating-system-level virtualization is a server virtualization method in which the kernel of an operating system allows the existence of multiple isolated user-space instances, instead of just one. Such instances, which are sometimes called containers, software containers, virtualization engines (VEs) or jails (FreeBSD jail or chroot jail), may look and feel like a real server from the point of view of its owners and users.</description>
+    </item>
+    
+  </channel>
+</rss>

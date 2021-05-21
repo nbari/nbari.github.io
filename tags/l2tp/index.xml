@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>l2tp on IT notes</title>
+    <link>https://nbari.com/tags/l2tp/</link>
+    <description>Recent content in l2tp on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Jun 2016 14:21:08 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/l2tp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>L2TP over IPSec</title>
+      <link>https://nbari.com/post/l2tp-ipsec/</link>
+      <pubDate>Sun, 26 Jun 2016 14:21:08 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/l2tp-ipsec/</guid>
+      <description>L2TP Layer 2 Tunneling Protocol (L2TP) is a tunneling protocol used to support virtual private networks (VPNs) or as part of the delivery of services by ISPs. It does not provide any encryption or confidentiality by itself. Rather, it relies on an encryption protocol that it passes within the tunnel to provide privacy.
+L2TP/IPSec Because of the lack of confidentiality inherent in the L2TP protocol, it is often implemented along with IPsec.</description>
+    </item>
+    
+  </channel>
+</rss>

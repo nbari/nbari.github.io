@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>email on IT notes</title>
+    <link>https://nbari.com/tags/email/</link>
+    <description>Recent content in email on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Dec 2016 22:50:47 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/email/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssmtp</title>
+      <link>https://nbari.com/post/ssmtp/</link>
+      <pubDate>Tue, 06 Dec 2016 22:50:47 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/ssmtp/</guid>
+      <description>ssmtp - send a message using smtp When having sendmail disabled:
+sendmail_enable=&amp;quot;NONE&amp;quot;  ssmtp helps to send email using an SMTP server:
+Install ssmtp:
+pkg install ssmtp  Configure to use you provider mailgun in this example /usr/local/etc/ssmtp/ssmtp.conf:
+root=monitor@domain.tld mailhub=smtp.mailgun.org AuthUser=postmaster@your.domain AuthPass=yourpassword UseTLS=Yes UseSTARTTLS=YES FromLineOverride=YES Edit /etc/mail/mailer.conf to use ssmtp:
+sendmail /usr/local/sbin/ssmtp send-mail /usr/local/sbin/ssmtp mailq /usr/local/sbin/ssmtp newaliases /usr/local/sbin/ssmtp hoststat /usr/bin/true purgestat /usr/bin/true Now all email sent to root will be sent to monitor@domain.</description>
+    </item>
+    
+  </channel>
+</rss>

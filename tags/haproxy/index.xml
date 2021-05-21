@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>haproxy on IT notes</title>
+    <link>https://nbari.com/tags/haproxy/</link>
+    <description>Recent content in haproxy on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 May 2017 14:47:06 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/haproxy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>haproxy ssh</title>
+      <link>https://nbari.com/post/haproxy-ssh/</link>
+      <pubDate>Tue, 30 May 2017 14:47:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/haproxy-ssh/</guid>
+      <description>HTTPS and SSH on the same port Using HAProxy to server SSH and SSL available on the same port:
+global maxconn 1000000 spread-checks 3 log /var/run/log local0 notice daemon tune.ssl.default-dh-param 2048 defaults mode http balance roundrobin option http-server-close option abortonclose option dontlognull option redispatch timeout check 3s timeout client 30s # Client and server timeout must match the longest timeout connect 5s timeout http-keep-alive 5s timeout http-request 10s # A complete request may never take that long.</description>
+    </item>
+    
+    <item>
+      <title>haproxy</title>
+      <link>https://nbari.com/post/haproxy/</link>
+      <pubDate>Thu, 09 Feb 2017 13:53:50 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/haproxy/</guid>
+      <description>HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
+userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
+ acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:</description>
+    </item>
+    
+  </channel>
+</rss>

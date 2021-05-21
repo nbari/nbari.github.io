@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sockstat on IT notes</title>
+    <link>https://nbari.com/tags/sockstat/</link>
+    <description>Recent content in sockstat on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 May 2018 17:32:02 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/sockstat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sockstat</title>
+      <link>https://nbari.com/post/sockstat/</link>
+      <pubDate>Sun, 13 May 2018 17:32:02 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/sockstat/</guid>
+      <description>The sockstat command list open Internet or UNIX domain sockets.
+List open tcp in ipv4:
+# sockstat -4l  Show connectd sockets in port 443 and tcp:
+# sockstat -P tcp -p 443 -c  List unix sockets:
+# sockstat -u  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>permissions on IT notes</title>
+    <link>https://nbari.com/tags/permissions/</link>
+    <description>Recent content in permissions on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Mar 2017 16:37:44 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/permissions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bitwise chmod</title>
+      <link>https://nbari.com/post/bitwise-chmod/</link>
+      <pubDate>Thu, 02 Mar 2017 16:37:44 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/bitwise-chmod/</guid>
+      <description>111 111 111          octal 777   decimal 511   binary 111 111 111   perm rwx rwx rwx    4 = r 2 = w 1 = x rwx = 4+2+1 = 7 rw = 4+2+0 = 6 r = 4+0+0 = 4 r x = 4+0+1 = 5 7 = binary 111 = rwx 6 = binary 110 = rw- 5 = binary 101 = r-x 4 = binary 100 = r-- 3 = binary 011 = -wx 2 = binary 010 = -w- 1 = binary 001 = --x 0 = binary 000 = ---  The full set of nine permission characters can then be grouped and summarized as three octal digits:</description>
+    </item>
+    
+  </channel>
+</rss>

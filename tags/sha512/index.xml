@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sha512 on IT notes</title>
+    <link>https://nbari.com/tags/sha512/</link>
+    <description>Recent content in sha512 on IT notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Dec 2017 10:41:29 +0100</lastBuildDate><atom:link href="https://nbari.com/tags/sha512/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql SHA512 CRYPT</title>
+      <link>https://nbari.com/post/mysql-sha512-crypt/</link>
+      <pubDate>Sat, 23 Dec 2017 10:41:29 +0100</pubDate>
+      
+      <guid>https://nbari.com/post/mysql-sha512-crypt/</guid>
+      <description>To create a password using the SHA512-CRYPT schema:
+SELECT ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To create an user:
+INSERT INTO users SET password=ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND())));  To use with postfix or dovecot:
+INSERT INTO users SET password=CONCAT(&#39;{SHA512-CRYPT}&#39;, ENCRYPT(&amp;quot;password&amp;quot;, CONCAT(&#39;$6$&#39;,sha(RAND()))));  </description>
+    </item>
+    
+  </channel>
+</rss>
