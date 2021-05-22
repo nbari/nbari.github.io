@@ -60,6 +60,32 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/sed-append/">sed append</a></h2>
+          <span class="post-date">Mar 29, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/append">append</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsd">bsd</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To append a line using sed that works on macOS:
+sed -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;'  If need to do it in multiple files, you could use find:
+ find . -name &quot;rc.conf&quot; -exec sed -i '' -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;' {} \;  https://stackoverflow.com/a/48406504/1135424
+				<a class="read-more" href="/post/sed-append/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/fat16/">Fat16</a></h2>
           <span class="post-date">Mar 23, 2020</span>
 		  
@@ -512,31 +538,6 @@ brew cask install barrier  Then to avoid changing the input source by using the 
 cd /tmp git clone https://github.com/kfix/ddcctl.git cd ddcctl make &amp;&amp; make install  In my case to switch from the mac mini (HDMI) to the laptop via (DP) I use:
 ddcctl -d 1 -i 15  From the laptop (USB-C -&gt; DP) to HDMI, switch back to the mac mini:
 				<a class="read-more" href="/post/ddcctl/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/timestamp/">timestamp</a></h2>
-          <span class="post-date">Jun 3, 2019</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/timestamp">timestamp</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/unix">unix</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/date">date</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				To get the current unix timestamp:
-date +%s  To get the date from a timestamp:
-date -r 1559591041  In Linux:
-date -d &quot;@1559591041&quot;  
-				<a class="read-more" href="/post/timestamp/">&hellip;</a>
 			</div>
 		  
         </div>

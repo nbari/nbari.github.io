@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> vultr shutdown -o -n -r now &middot; IT notes </title>
+<title> ssmtp &middot; IT notes </title>
 
 
 <link rel="stylesheet" href="https://nbari.com/css/slim.css">
@@ -14,7 +14,7 @@
 <link rel="shortcut icon" href="/favicon.ico">
 
 
-<link href="" rel="alternate" type="application/rss+xml" title="IT notes" />
+<link href="https://nbari.com/tags/ssmtp/index.xml" rel="alternate" type="application/rss+xml" title="IT notes" />
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
@@ -57,43 +57,36 @@
 </div>
     <div class="content">
       <div class="posts">
+         
         <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/vultr-shutdown-o-n/">vultr shutdown -o -n -r now</a></h2>
-          <span class="post-date">May 21, 2021 </span>
-          <div class="post-content">
-            <p>To prevent the system to hang on &ldquo;detaching uhub0&rdquo; reboot using the flag <code>-n</code>:</p>
-<pre><code>shutdown -o -n -r now
-</code></pre>
-
-          </div>
+          <h2 class="post-title"><a href="https://nbari.com/post/mail-rc/">mail.rc</a></h2>
+          <span class="post-date">May 22, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssmtp">ssmtp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ses">ses</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using AWS SES if trying to send mail to root you could get something like:
+554 Transaction failed: Missiong final '@domain'  AWS requires that the FROM and TO have a @domain so need to modify /etc/mail.rc and add the alias like:
+alias root root&lt;root@your.tld&gt;  
+				<a class="read-more" href="/post/mail-rc/">&hellip;</a>
+			</div>
+		  
         </div>
-        <div class="pagination">
-          <a class="btn previous " href="https://nbari.com/post/pip-upgrade/"> Prev</a>  
-          <a class="btn next " href="https://nbari.com/post/mail-rc/"> Next</a> 
-        </div>
+        
       </div>
+      <div class="pagination">
+   
+</div>
     </div>
-    <div id="disqus_thread"></div>
-    <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "nbari-com" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     <div class="footer">
     <p><a href="/about">about</a></p>
 </div>
@@ -110,6 +103,7 @@ ga('create', 'UA-79517076-1', 'auto');
 ga('send', 'pageview');
 
 </script>
+
 
 </body>
 

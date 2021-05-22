@@ -59,6 +59,30 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mail-rc/">mail.rc</a></h2>
+          <span class="post-date">May 22, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssmtp">ssmtp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ses">ses</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using AWS SES if trying to send mail to root you could get something like:
+554 Transaction failed: Missiong final '@domain'  AWS requires that the FROM and TO have a @domain so need to modify /etc/mail.rc and add the alias like:
+alias root root&lt;root@your.tld&gt;  
+				<a class="read-more" href="/post/mail-rc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/aws-policy-access-by-ip/">AWS Policy Access by IP</a></h2>
           <span class="post-date">Sep 15, 2017</span>
 		  

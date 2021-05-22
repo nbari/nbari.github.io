@@ -60,6 +60,30 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mail-rc/">mail.rc</a></h2>
+          <span class="post-date">May 22, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssmtp">ssmtp</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ses">ses</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When using AWS SES if trying to send mail to root you could get something like:
+554 Transaction failed: Missiong final '@domain'  AWS requires that the FROM and TO have a @domain so need to modify /etc/mail.rc and add the alias like:
+alias root root&lt;root@your.tld&gt;  
+				<a class="read-more" href="/post/mail-rc/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/vultr-shutdown-o-n/">vultr shutdown -o -n -r now</a></h2>
           <span class="post-date">May 21, 2021</span>
 		  
@@ -511,32 +535,6 @@ socat TCP-LISTEN:8080,reuseaddr,fork &quot;EXEC:ssh 1.2.3.4 nc 10.0.0.1 3000&quo
 RUSTFLAGS='-C link-arg=-s' cargo build --release   strip removes or modifies the symbol table attached to the output of the assembler and link editor. This is useful to save space after a program has been debugged and to limit dynamically bound symbols.
  
 				<a class="read-more" href="/post/rust-strip/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/sed-append/">sed append</a></h2>
-          <span class="post-date">Mar 29, 2020</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/append">append</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/macos">macos</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/bsd">bsd</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				To append a line using sed that works on macOS:
-sed -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;'  If need to do it in multiple files, you could use find:
- find . -name &quot;rc.conf&quot; -exec sed -i '' -e '/^telegraf_enab.*/a\'$'\n''telegraf_user=&quot;root&quot;' {} \;  https://stackoverflow.com/a/48406504/1135424
-				<a class="read-more" href="/post/sed-append/">&hellip;</a>
 			</div>
 		  
         </div>

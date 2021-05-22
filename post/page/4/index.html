@@ -59,6 +59,32 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/tmux/">tmux</a></h2>
+          <span class="post-date">Dec 7, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/tmux">tmux</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Set window title:
+&lt;c-b&gt;,  Get pannel number:
+&lt;c-b&gt;q  Show clock:
+&lt;c-b&gt;t  Move pane to a new window:
+&lt;c-b&gt;!  Join panes:
+&lt;c-b&gt;: join-pane -s 0 -t 3 move pane 1 to window 3 &lt;c-b&gt;: join-pane -t :1 move current pane to window 1  Create a new session:
+&lt;c-b&gt;: new -s &lt;name&gt;  List sessions:
+&lt;c-b&gt;s &lt;c-b&gt;w expanded  Move pane to a another session:
+&lt;c-b&gt;m mark the pane &lt;c-b&gt;w go to the destination window/session &lt;c-b&gt;: join-pane  or go to the pane you want to move, check the session name and windows you would like to move and try:
+				<a class="read-more" href="/post/tmux/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/block-ssh-mac/">Block SSH on MacOS</a></h2>
           <span class="post-date">Dec 1, 2018</span>
 		  
@@ -517,32 +543,6 @@ pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry
 X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
 MFSM NEW  Create a pool to share:
 				<a class="read-more" href="/post/moosefs/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/manifest-no-such-file-or-directory/">MANIFEST No Such File or Directory</a></h2>
-          <span class="post-date">Jun 12, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/manifest">MANIFEST</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/bsdinstall">bsdinstall</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/hetzner">hetzner</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				If when trying to install FreeBSD using bsdinstall you get:
-&quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&quot; - no such file or directory  Try to:
-root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again
-				<a class="read-more" href="/post/manifest-no-such-file-or-directory/">&hellip;</a>
 			</div>
 		  
         </div>

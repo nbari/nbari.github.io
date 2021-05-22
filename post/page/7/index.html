@@ -59,6 +59,29 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/find-and-replace-recursive/">Find and replace recursive</a></h2>
+          <span class="post-date">Jan 17, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/find">find</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Note: Do not run this command on a folder including a git repo - changes to .git could corrupt your get index.
+For example to replace an IP on multiple files:
+find /tmp/path -type f -exec sed -i '' 's/193.111.141.1/82.14.220.137/g' {} +   On BSD, MAC by passing an empty string to sed&rsquo;s -i args will create no backup
+ perl -pi -e perl -pi -e 's/replace_this/with_this/&quot;  This is useful when you don&rsquo;t want to change the file ending like in sed that adds an \n ad the end of the file
+				<a class="read-more" href="/post/find-and-replace-recursive/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/ciphers-supported/">ciphers supported</a></h2>
           <span class="post-date">Jan 8, 2018</span>
 		  
@@ -494,30 +517,6 @@ git apply path-file-name
   RSYSLOG_SyslogProtocol23Format adds the RFC5424 template
   Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/
 				<a class="read-more" href="/post/rsyslog2syslog-ng/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/ncdu/">ncdu</a></h2>
-          <span class="post-date">Nov 14, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/du">du</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/space">space</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				ncdu helps displaying disk usage in an easy way, to install:
-brew install ncdu  To scan and browse the directory you&rsquo;re currently in, all you need is a simple:
-ncdu  If you want to scan a full filesystem, your root filesystem, for example, then you&rsquo;ll want to use &ldquo;-x&rdquo;:
-ncdu -x /  All files read only and in local machine:
-sudo ncdu -rx /  -r option is for read only mode, option -x is to stay in the same file system (do not traverse other filesystem mounts)
-				<a class="read-more" href="/post/ncdu/">&hellip;</a>
 			</div>
 		  
         </div>

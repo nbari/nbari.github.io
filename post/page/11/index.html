@@ -59,6 +59,28 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/haproxy/">haproxy</a></h2>
+          <span class="post-date">Feb 9, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/haproxy">haproxy</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/htaccess">htaccess</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
+userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
+ acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:
+				<a class="read-more" href="/post/haproxy/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/ssh-proxy/">ssh proxy</a></h2>
           <span class="post-date">Feb 7, 2017</span>
 		  
@@ -487,25 +509,6 @@ If your backends are using nginx you could verify the token like this:
 		  	<div class="summary">
 				FreeBSD Linux src: http://www.brendangregg.com/blog/2015-03-06/performance-analysis-bsd.html
 				<a class="read-more" href="/post/observability-tools/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/mysql_innodb_flush_log_at_trx_commit/">innodb_flush_log_at_trx_commit=2</a></h2>
-          <span class="post-date">Nov 14, 2016</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				To speed mysql replica add into the [mysqld]:
-innodb_flush_log_at_trx_commit=2  
-				<a class="read-more" href="/post/mysql_innodb_flush_log_at_trx_commit/">&hellip;</a>
 			</div>
 		  
         </div>

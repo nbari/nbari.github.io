@@ -60,6 +60,32 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/time_wait/">Time wait</a></h2>
+          <span class="post-date">Sep 5, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/time_wait">time_wait</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/msl">msl</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/socket">socket</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Reduce TIME_WAIT connections
+How many TIME_WAITs you have hanging out (run this like root):
+netstat -na -p tcp | awk '{print $6}' | sort | uniq -c | sort -n  On Linux:
+netstat -nat | awk '{print $6}' | sort | uniq -c | sort -n  Output will be something like:
+# netstat -na -p tcp | awk '{print $6}' | sort | uniq -c | sort -n 1 1 Foreign 1 LAST_ACK 1 been 3 LISTEN 25 SYN_RCVD 1455 CLOSE_WAIT 17518 ESTABLISHED  The formula to calculate the value (net.
+				<a class="read-more" href="/post/time_wait/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/strace/">Strace</a></h2>
           <span class="post-date">Aug 31, 2017</span>
 		  
@@ -480,26 +506,6 @@ tmux script #!/bin/sh  TARGET=&#34;tmux-ssh&#34; SSH_USER=&#34;devops&#34; i=0 w
 		  	<div class="summary">
 				Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.
 				<a class="read-more" href="/post/beanstalkd/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/mysql-db-size/">mysql db size</a></h2>
-          <span class="post-date">May 7, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				How big is your data:
-SELECT IFNULL(B.engine,&#39;Total&#39;) &#34;Storage Engine&#34;, CONCAT(LPAD(REPLACE(FORMAT(B.DSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Data Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.ISize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Index Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.TSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Table Size&#34; FROM (SELECT engine,SUM(data_length) DSize,SUM(index_length) ISize, SUM(data_length+index_length) TSize FROM information_schema.tables WHERE table_schema NOT IN (&#39;mysql&#39;,&#39;information_schema&#39;,&#39;performance_schema&#39;) AND engine IS NOT NULL GROUP BY engine WITH ROLLUP) B, (SELECT 3 pw) A ORDER BY TSize; This will print something like:
-+----------------+----------------------+----------------------+----------------------+ | Storage Engine | Data Size | Index Size | Table Size | +----------------+----------------------+----------------------+----------------------+ | InnoDB | 10.
-				<a class="read-more" href="/post/mysql-db-size/">&hellip;</a>
 			</div>
 		  
         </div>

@@ -59,6 +59,28 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/pkg-osversion/">pkg -o OSVERSION</a></h2>
+          <span class="post-date">Apr 21, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/pkg">pkg</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				When updating if get something like this:
+pkg: Newer FreeBSD version for package jsoncpp: - package: 1101503 - running kernel: 1100506  Try uname -KU to get the version, and then:
+pkg -o OSVERSION=1100506 update -f pkg -o OSVERSION=1100506 upgrade  
+				<a class="read-more" href="/post/pkg-osversion/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/ansible-patterns/">Ansible Patterns</a></h2>
           <span class="post-date">Apr 19, 2018</span>
 		  
@@ -481,29 +503,6 @@ setenforce 0  To disable SELinux Permanetly, edit file /etc/sysconfig/selinux:
 Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
 Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.
 				<a class="read-more" href="/post/usekeychain/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/find-and-replace-recursive/">Find and replace recursive</a></h2>
-          <span class="post-date">Jan 17, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/sed">sed</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/find">find</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				Note: Do not run this command on a folder including a git repo - changes to .git could corrupt your get index.
-For example to replace an IP on multiple files:
-find /tmp/path -type f -exec sed -i '' 's/193.111.141.1/82.14.220.137/g' {} +   On BSD, MAC by passing an empty string to sed&rsquo;s -i args will create no backup
- perl -pi -e perl -pi -e 's/replace_this/with_this/&quot;  This is useful when you don&rsquo;t want to change the file ending like in sed that adds an \n ad the end of the file
-				<a class="read-more" href="/post/find-and-replace-recursive/">&hellip;</a>
 			</div>
 		  
         </div>

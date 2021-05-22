@@ -60,6 +60,32 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/manifest-no-such-file-or-directory/">MANIFEST No Such File or Directory</a></h2>
+          <span class="post-date">Jun 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/manifest">MANIFEST</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/bsdinstall">bsdinstall</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hetzner">hetzner</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If when trying to install FreeBSD using bsdinstall you get:
+&quot;Error while fetching file:///usr/freebsd-dist/MANIFEST&quot; - no such file or directory  Try to:
+root@rescue:~ # mkdir -p /usr/freebsd-dist/ root@rescue:~ # touch /usr/freebsd-dist/MANIFEST  And then start again
+				<a class="read-more" href="/post/manifest-no-such-file-or-directory/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/ctrl-backslash/">ctrl-backslash</a></h2>
           <span class="post-date">Jun 11, 2018</span>
 		  
@@ -505,28 +531,6 @@ TMPDIR=$(mktemp -d /tmp/dir.XXXX)  $$ Using $$:
 OUT=/tmp/file.out.$$  Here $$ will be replaced with the current process PID.
 $RANDOM OUT=/tmp/file.out.${RANDOM}   $RANDOM is an internal bash/zsh function (not a constant) that returns a pseudorandom [1] integer in the range 0 - 32767
 				<a class="read-more" href="/post/tmp/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/pkg-osversion/">pkg -o OSVERSION</a></h2>
-          <span class="post-date">Apr 21, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/pkg">pkg</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				When updating if get something like this:
-pkg: Newer FreeBSD version for package jsoncpp: - package: 1101503 - running kernel: 1100506  Try uname -KU to get the version, and then:
-pkg -o OSVERSION=1100506 update -f pkg -o OSVERSION=1100506 upgrade  
-				<a class="read-more" href="/post/pkg-osversion/">&hellip;</a>
 			</div>
 		  
         </div>

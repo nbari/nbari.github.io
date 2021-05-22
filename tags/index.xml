@@ -6,7 +6,34 @@
     <description>Recent content in Tags on IT notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 May 2021 20:17:41 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 May 2021 19:49:23 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws</title>
+      <link>https://nbari.com/tags/aws/</link>
+      <pubDate>Sat, 22 May 2021 19:49:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ses</title>
+      <link>https://nbari.com/tags/ses/</link>
+      <pubDate>Sat, 22 May 2021 19:49:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ses/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssmtp</title>
+      <link>https://nbari.com/tags/ssmtp/</link>
+      <pubDate>Sat, 22 May 2021 19:49:23 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ssmtp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>freebsd</title>
       <link>https://nbari.com/tags/freebsd/</link>
@@ -2497,15 +2524,6 @@
       <pubDate>Sun, 17 Sep 2017 09:47:31 +0200</pubDate>
       
       <guid>https://nbari.com/tags/zip/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>aws</title>
-      <link>https://nbari.com/tags/aws/</link>
-      <pubDate>Fri, 15 Sep 2017 22:50:11 +0200</pubDate>
-      
-      <guid>https://nbari.com/tags/aws/</guid>
       <description></description>
     </item>
     

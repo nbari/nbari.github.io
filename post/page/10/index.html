@@ -59,6 +59,26 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/mysql-db-size/">mysql db size</a></h2>
+          <span class="post-date">May 7, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				How big is your data:
+SELECT IFNULL(B.engine,&#39;Total&#39;) &#34;Storage Engine&#34;, CONCAT(LPAD(REPLACE(FORMAT(B.DSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Data Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.ISize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Index Size&#34;, CONCAT(LPAD(REPLACE( FORMAT(B.TSize/POWER(1024,pw),3),&#39;,&#39;,&#39;&#39;),17,&#39; &#39;),&#39; &#39;, SUBSTR(&#39; KMGTP&#39;,pw+1,1),&#39;B&#39;) &#34;Table Size&#34; FROM (SELECT engine,SUM(data_length) DSize,SUM(index_length) ISize, SUM(data_length+index_length) TSize FROM information_schema.tables WHERE table_schema NOT IN (&#39;mysql&#39;,&#39;information_schema&#39;,&#39;performance_schema&#39;) AND engine IS NOT NULL GROUP BY engine WITH ROLLUP) B, (SELECT 3 pw) A ORDER BY TSize; This will print something like:
++----------------+----------------------+----------------------+----------------------+ | Storage Engine | Data Size | Index Size | Table Size | +----------------+----------------------+----------------------+----------------------+ | InnoDB | 10.
+				<a class="read-more" href="/post/mysql-db-size/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/raw2vmdk/">raw2vmdk</a></h2>
           <span class="post-date">Apr 30, 2017</span>
 		  
@@ -481,28 +501,6 @@ $ base64 /dev/urandom | head -c 32
 server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
 mysql&gt; create user `replica`@`%` identified by 'PASSWORD'; mysql&gt; grant replication slave on *.* to 'replica'@'%';  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:
 				<a class="read-more" href="/post/rds-slave-from-external-master/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/haproxy/">haproxy</a></h2>
-          <span class="post-date">Feb 9, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/haproxy">haproxy</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/htaccess">htaccess</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				HAproxy + HTTP auth + IP SRC Use HTTP Auth when source IP is not from an allowed source:
-userlist TestUsers user guest insecure-password secret backend test-node acl network_allowed src 10.0.0.1 192.30.252.0/22 acl AuthOK http_auth(TempUsers) http-request auth realm Test if !network_allowed !AuthOK server test test.server.tld:80 maxconn 50 check To only allow specific range, for example only GitHub:
- acl network_allowed src 192.30.252.0/22 185.199.108.0/22 http-request deny if !network_allowed  HAproxy + mysql First setup mysql by creating a HAproxy to do the checks:
-				<a class="read-more" href="/post/haproxy/">&hellip;</a>
 			</div>
 		  
         </div>
