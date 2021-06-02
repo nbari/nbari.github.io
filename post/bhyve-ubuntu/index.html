@@ -83,11 +83,11 @@ nmdm_load=&quot;YES&quot;
 <p>this will create /usr/local/share/uefi-firmware/BHYVE_UEFI.fd</p>
 </blockquote>
 <p>Setup and install:</p>
-<pre><code>bhyve -A -H -P -w \
+<pre><code>bhyve -AHP -w \
 -s 1:0,lpc \
 -s 2:0,virtio-net,tap0 \
--s 3:0hci-cdtank/iso/ubuntu-20.04.2-live-server-amd64.iso \
--s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
+-s 3:0,ahci-cd,/tank/iso/ubuntu-20.04.2-live-server-amd64.iso \
+-s 4:0,virtio-blk,/dev/zvol/tank/ubuntuvm \
 -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
 -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
 -c 4 -m 8G ubuntu
@@ -98,7 +98,7 @@ nmdm_load=&quot;YES&quot;
 <pre><code>bhyve -A -H -P -w \
 -s 1:0,lpc \
 -s 2:0,virtio-net,tap0 \
--s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
+-s 4:0,virtio-blk,/dev/zvol/tank/ubuntuvm \
 -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
 -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
 -c 4 -m 8G ubuntu
