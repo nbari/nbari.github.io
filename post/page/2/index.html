@@ -59,6 +59,28 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/rust-strip/">rust strip</a></h2>
+          <span class="post-date">May 8, 2020</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/rust">rust</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/strip">strip</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To build &amp;&amp; strip a binary use:
+RUSTFLAGS='-C link-arg=-s' cargo build --release   strip removes or modifies the symbol table attached to the output of the assembler and link editor. This is useful to save space after a program has been debugged and to limit dynamically bound symbols.
+ 
+				<a class="read-more" href="/post/rust-strip/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/sed-append/">sed append</a></h2>
           <span class="post-date">Mar 29, 2020</span>
 		  
@@ -508,35 +530,6 @@ $ VBoxManage controlvm freebsd-server acpipowerbutton  To get the IPv4:
 $ VBoxManage guestproperty enumerate freebsd-server | awk '/IP/'   for this to work you will need the vboxguest tools pkg install virtualbox-ose-additions
  
 				<a class="read-more" href="/post/vbox-headless/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/ddcctl/">ddcctl</a></h2>
-          <span class="post-date">Jul 4, 2019</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/screen">screen</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/monitor">monitor</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/sharing">sharing</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/hdmi">hdmi</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/dpi">dpi</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				To share one monitor, keyboard and mouse between two devices, mac mini and a macbook try:
-brew cask install barrier  Then to avoid changing the input source by using the buttons in the monitor try https://github.com/kfix/ddcctl:
-cd /tmp git clone https://github.com/kfix/ddcctl.git cd ddcctl make &amp;&amp; make install  In my case to switch from the mac mini (HDMI) to the laptop via (DP) I use:
-ddcctl -d 1 -i 15  From the laptop (USB-C -&gt; DP) to HDMI, switch back to the mac mini:
-				<a class="read-more" href="/post/ddcctl/">&hellip;</a>
 			</div>
 		  
         </div>

@@ -59,6 +59,33 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/moosefs/">moosefs</a></h2>
+          <span class="post-date">Jun 12, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/moosefs">moosefs</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dfs">dfs</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
+Install the required packages:
+pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
+pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
+X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
+MFSM NEW  Create a pool to share:
+				<a class="read-more" href="/post/moosefs/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/manifest-no-such-file-or-directory/">MANIFEST No Such File or Directory</a></h2>
           <span class="post-date">Jun 12, 2018</span>
 		  
@@ -501,35 +528,6 @@ printf %d\\n {0..9} | xargs -n 1 -P8 sleep  In this case sleep is going to be ca
 From the man:
 -P maxprocs Parallel mode: run at most maxprocs invocations of utility at once.  
 				<a class="read-more" href="/post/parallel-xargs/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/tmp/">tmp</a></h2>
-          <span class="post-date">Apr 24, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/tmp">tmp</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/mktmp">mktmp</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/">$$</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				Ways to create a temp file:
-Using mktemp:
-$ mktemp /tmp/file.XXX   The trailing Xs will be replaced with the process number and/or a unique letter combination
- Creating a temp dir:
-$ mktemp -d /tmp/dir.XXX  Output could be saved into a variable:
-TMPDIR=$(mktemp -d /tmp/dir.XXXX)  $$ Using $$:
-OUT=/tmp/file.out.$$  Here $$ will be replaced with the current process PID.
-$RANDOM OUT=/tmp/file.out.${RANDOM}   $RANDOM is an internal bash/zsh function (not a constant) that returns a pseudorandom [1] integer in the range 0 - 32767
-				<a class="read-more" href="/post/tmp/">&hellip;</a>
 			</div>
 		  
         </div>

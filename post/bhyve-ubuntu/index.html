@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> mail.rc &middot; IT notes </title>
+<title> Bhyve Ubuntu &middot; IT notes </title>
 
 
 <link rel="stylesheet" href="https://nbari.com/css/slim.css">
@@ -58,22 +58,52 @@
     <div class="content">
       <div class="posts">
         <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/mail-rc/">mail.rc</a></h2>
-          <span class="post-date">May 22, 2021 </span>
+          <h2 class="post-title"><a href="https://nbari.com/post/bhyve-ubuntu/">Bhyve Ubuntu</a></h2>
+          <span class="post-date">Jun 2, 2021 </span>
           <div class="post-content">
-            <p>When using AWS SES if trying to send mail to root you could get something like:</p>
-<pre><code>554 Transaction failed: Missiong final '@domain'
+            <p>In <code>/etc.rc.conf</code>:</p>
+<pre><code>cloned_interfaces=&quot;lo1 bridge0 tap0&quot;
+config_lo1=&quot;inet 127.0.1.1/8&quot;
+autobridge_interfaces=&quot;bridge0&quot;
+autobridge_bridge0=&quot;tap* igb0&quot;
+ifconfig_bridge0=&quot;addm igb0 addm tap0 up description bhyve&quot;
+</code></pre><p>In <code>/boot/loader.conf</code>:</p>
+<pre><code>mm_load=&quot;YES&quot;
+nmdm_load=&quot;YES&quot;
+</code></pre><p>Check that you have:</p>
+<pre><code>sysctl net.link.tap.up_on_open=1
 </code></pre>
-<p>AWS requires that the FROM and TO have a @domain so need to modify
-<code>/etc/mail.rc</code> and add the alias like:</p>
-<pre><code>alias root root&lt;root@your.tld&gt;
+<p>Create the volume:</p>
+<pre><code>zfs create -V100G -o volmode=dev tank/ubuntuvm
+</code></pre>
+<p>Setup and install:</p>
+<pre><code>bhyve -A -H -P -w \
+-s 1:0,lpc \
+-s 2:0,virtio-net,tap0 \
+-s 3:0hci-cdtank/iso/ubuntu-20.04.2-live-server-amd64.iso \
+-s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
+-s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
+-l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+-c 4 -m 8G ubuntu
+</code></pre><p>Install when ask to reboot, destroy the vm:</p>
+<pre><code>bhyvectl --destroy --vm=ubuntu
+</code></pre>
+<p>Then to start just remove the CD <code>ahci-cd</code>:</p>
+<pre><code>bhyve -A -H -P -w \
+-s 1:0,lpc \
+-s 2:0,virtio-net,tap0 \
+-s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
+-s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
+-l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+-c 4 -m 8G ubuntu
+</code></pre><p>To connect using the VNC client you can install it using this cask:</p>
+<pre><code>brew install --cask vnc-viewer
 </code></pre>
 
           </div>
         </div>
         <div class="pagination">
-          <a class="btn previous " href="https://nbari.com/post/vultr-shutdown-o-n/"> Prev</a>  
-          <a class="btn next " href="https://nbari.com/post/bhyve-ubuntu/"> Next</a> 
+          <a class="btn previous " href="https://nbari.com/post/mail-rc/"> Prev</a>  
         </div>
       </div>
     </div>

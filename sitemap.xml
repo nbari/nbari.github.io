@@ -2,16 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://nbari.com/tags/bhyve/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/post/bhyve-ubuntu/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/tags/freebsd/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/tags/linux/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/post/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/tags/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
+    <loc>https://nbari.com/tags/ubuntu/</loc>
+    <lastmod>2021-06-02T21:41:06+02:00</lastmod>
+  </url><url>
     <loc>https://nbari.com/tags/aws/</loc>
     <lastmod>2021-05-22T19:49:23+02:00</lastmod>
   </url><url>
-    <loc>https://nbari.com/</loc>
-    <lastmod>2021-05-22T19:49:23+02:00</lastmod>
-  </url><url>
     <loc>https://nbari.com/post/mail-rc/</loc>
-    <lastmod>2021-05-22T19:49:23+02:00</lastmod>
-  </url><url>
-    <loc>https://nbari.com/post/</loc>
     <lastmod>2021-05-22T19:49:23+02:00</lastmod>
   </url><url>
     <loc>https://nbari.com/tags/ses/</loc>
@@ -19,12 +37,6 @@
   </url><url>
     <loc>https://nbari.com/tags/ssmtp/</loc>
     <lastmod>2021-05-22T19:49:23+02:00</lastmod>
-  </url><url>
-    <loc>https://nbari.com/tags/</loc>
-    <lastmod>2021-05-22T19:49:23+02:00</lastmod>
-  </url><url>
-    <loc>https://nbari.com/tags/freebsd/</loc>
-    <lastmod>2021-05-21T20:17:41+02:00</lastmod>
   </url><url>
     <loc>https://nbari.com/tags/shutdown/</loc>
     <lastmod>2021-05-21T20:17:41+02:00</lastmod>
@@ -135,9 +147,6 @@
     <lastmod>2020-11-29T13:38:41+01:00</lastmod>
   </url><url>
     <loc>https://nbari.com/tags/ipv6/</loc>
-    <lastmod>2020-11-29T13:38:41+01:00</lastmod>
-  </url><url>
-    <loc>https://nbari.com/tags/linux/</loc>
     <lastmod>2020-11-29T13:38:41+01:00</lastmod>
   </url><url>
     <loc>https://nbari.com/tags/coin/</loc>
@@ -1122,9 +1131,6 @@
     <lastmod>2017-12-15T11:25:12+01:00</lastmod>
   </url><url>
     <loc>https://nbari.com/post/syslog-ng-ubuntu/</loc>
-    <lastmod>2017-12-15T11:25:12+01:00</lastmod>
-  </url><url>
-    <loc>https://nbari.com/tags/ubuntu/</loc>
     <lastmod>2017-12-15T11:25:12+01:00</lastmod>
   </url><url>
     <loc>https://nbari.com/tags/80/</loc>

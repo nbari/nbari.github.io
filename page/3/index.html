@@ -60,6 +60,35 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/ddcctl/">ddcctl</a></h2>
+          <span class="post-date">Jul 4, 2019</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/screen">screen</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/monitor">monitor</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/sharing">sharing</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/hdmi">hdmi</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/dpi">dpi</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To share one monitor, keyboard and mouse between two devices, mac mini and a macbook try:
+brew cask install barrier  Then to avoid changing the input source by using the buttons in the monitor try https://github.com/kfix/ddcctl:
+cd /tmp git clone https://github.com/kfix/ddcctl.git cd ddcctl make &amp;&amp; make install  In my case to switch from the mac mini (HDMI) to the laptop via (DP) I use:
+ddcctl -d 1 -i 15  From the laptop (USB-C -&gt; DP) to HDMI, switch back to the mac mini:
+				<a class="read-more" href="/post/ddcctl/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/timestamp/">timestamp</a></h2>
           <span class="post-date">Jun 3, 2019</span>
 		  
@@ -515,29 +544,6 @@ softwareupdate -ia to install all updates.
 sudo jamf policy to run all outstanding policies and updates for the apps,
 sudo jamf recon to update the inventory on the server.
 				<a class="read-more" href="/post/jamf/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/stty/">stty</a></h2>
-          <span class="post-date">Dec 10, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/stty">stty</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/reset">reset</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/terminal">terminal</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				If reset can&rsquo;t clean your terminal, give a try to:
-stty sane  
-				<a class="read-more" href="/post/stty/">&hellip;</a>
 			</div>
 		  
         </div>

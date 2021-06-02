@@ -60,6 +60,30 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/aws-policy-access-by-ip/">AWS Policy Access by IP</a></h2>
+          <span class="post-date">Sep 15, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/aws">aws</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ip">ip</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/policy">policy</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Policy to restrict IAM AWS API requests to a specific set of IP addresses.
+{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: { &#34;Effect&#34;: &#34;Deny&#34;, &#34;Action&#34;: &#34;*&#34;, &#34;Resource&#34;: &#34;*&#34;, &#34;Condition&#34;: { &#34;NotIpAddress&#34;: { &#34;aws:SourceIp&#34;: [ &#34;10.13.0.0/16&#34;, &#34;72.55.175.70/32&#34;, &#34;10.100.0.0/16&#34; ] } } } } After applying this policy others may need to be applied or in case all in one required, something like this can be used:
+{ &quot;Version&quot;: &quot;2012-10-17&quot;, &quot;Statement&quot;: [{ &quot;Effect&quot;: &quot;Deny&quot;, &quot;Action&quot;: &quot;*&quot;, &quot;Resource&quot;: &quot;*&quot;, &quot;Condition&quot;: { &quot;NotIpAddress&quot;: { &quot;aws:SourceIp&quot;: [ &quot;10.
+				<a class="read-more" href="/post/aws-policy-access-by-ip/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/time_wait/">Time wait</a></h2>
           <span class="post-date">Sep 5, 2017</span>
 		  
@@ -484,28 +508,6 @@ $ ./audible-activator.py Username: your@email Password: [*] Player ID is 1xmjyl5
 				Tmux multiple ssh connections with synchronized panels If need to debug/check in real-time multiple servers via ssh, this can be used.
 tmux script #!/bin/sh  TARGET=&#34;tmux-ssh&#34; SSH_USER=&#34;devops&#34; i=0 while read line do if [ $i == 0 ] then tmux new-window -a -n ${TARGET} &#34;ssh -l ${SSH_USER}${line}&#34; else tmux split-window -t &#34;${TARGET}&#34; &#34;ssh -l ${SSH_USER}${line}&#34; &amp;&amp; \  tmux select-layout -t &#34;${TARGET}&#34; tiled fi let i++ done &lt; &#34;${1:-/dev/stdin}&#34; tmux set-window-option -t ${TARGET} synchronize-panes on hosts If the input is json, jq can be used to extract hosts, assuming your output is similar to:
 				<a class="read-more" href="/post/tmux-ssh/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/beanstalkd/">beanstalkd</a></h2>
-          <span class="post-date">May 18, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/beanstalkd">beanstalkd</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/queue">queue</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/jobs">jobs</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.
-				<a class="read-more" href="/post/beanstalkd/">&hellip;</a>
 			</div>
 		  
         </div>

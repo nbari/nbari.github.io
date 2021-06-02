@@ -59,6 +59,28 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/usekeychain/">UseKeychain</a></h2>
+          <span class="post-date">Feb 13, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/ssh">ssh</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/keychain">keychain</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				To save SSH keys in macOS Sierra keychain add this to ~/.ssh/config:
+Host * AddKeysToAgent yes UseKeychain yes  Keychain changes Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and would offer the option to store it into the keychain. This UI was deprecated some time ago and has been removed.
+Instead, a new UseKeychain option was introduced in macOS Sierra allowing users to specify whether they would like for the passphrase to be stored in the keychain.
+				<a class="read-more" href="/post/usekeychain/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/find-and-replace-recursive/">Find and replace recursive</a></h2>
           <span class="post-date">Jan 17, 2018</span>
 		  
@@ -489,34 +511,6 @@ git format-patch -1 HEAD  The last 10 patches from head in a single patch file:
 git format-patch -10 HEAD --stdout &gt; last-10-commits.patch  Apply the patch:
 git apply path-file-name  
 				<a class="read-more" href="/post/git-format-patch/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/rsyslog2syslog-ng/">rsyslog 2 syslog-ng</a></h2>
-          <span class="post-date">Nov 16, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/rsyslog">rsyslog</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/syslog">syslog</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/syslog-ng">syslog-ng</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/5242">5242</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				To forward all logs from rsyslog to syslog-ng, add at the end of file /etc/rsyslog.conf:
-*.* @@(o)log.server.tld:601;RSYSLOG_SyslogProtocol23Format    @@ is for sending logs via TCP on port 601
-  (o) configures proper framing
-  RSYSLOG_SyslogProtocol23Format adds the RFC5424 template
-  Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/
-				<a class="read-more" href="/post/rsyslog2syslog-ng/">&hellip;</a>
 			</div>
 		  
         </div>

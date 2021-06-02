@@ -6,7 +6,21 @@
     <description>Recent content on IT notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 May 2021 19:49:23 +0200</lastBuildDate><atom:link href="https://nbari.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 21:41:06 +0200</lastBuildDate><atom:link href="https://nbari.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bhyve Ubuntu</title>
+      <link>https://nbari.com/post/bhyve-ubuntu/</link>
+      <pubDate>Wed, 02 Jun 2021 21:41:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/post/bhyve-ubuntu/</guid>
+      <description>In /etc.rc.conf:
+cloned_interfaces=&amp;quot;lo1 bridge0 tap0&amp;quot; config_lo1=&amp;quot;inet 127.0.1.1/8&amp;quot; autobridge_interfaces=&amp;quot;bridge0&amp;quot; autobridge_bridge0=&amp;quot;tap* igb0&amp;quot; ifconfig_bridge0=&amp;quot;addm igb0 addm tap0 up description bhyve&amp;quot; In /boot/loader.conf:
+mm_load=&amp;quot;YES&amp;quot; nmdm_load=&amp;quot;YES&amp;quot; Check that you have:
+sysctl net.link.tap.up_on_open=1  Create the volume:
+zfs create -V100G -o volmode=dev tank/ubuntuvm  Setup and install:
+bhyve -A -H -P -w \ -s 1:0,lpc \ -s 2:0,virtio-net,tap0 \ -s 3:0hci-cdtank/iso/ubuntu-20.04.2-live-server-amd64.iso \ -s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \ -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \ -l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \ -c 4 -m 8G ubuntu Install when ask to reboot, destroy the vm:</description>
+    </item>
+    
     <item>
       <title>mail.rc</title>
       <link>https://nbari.com/post/mail-rc/</link>

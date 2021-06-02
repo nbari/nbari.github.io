@@ -59,6 +59,28 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/beanstalkd/">beanstalkd</a></h2>
+          <span class="post-date">May 18, 2017</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/beanstalkd">beanstalkd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/queue">queue</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/jobs">jobs</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				Beanstalkd Beanstalkd is a big to-do list for your distributed application. If there is a unit of work that you want to defer to later (say, sending an email, pushing some data to a slow external service, pulling data from a slow external service, generating high-quality image thumbnails) you put a description of that work, a “job”, into beanstalkd. Some processes (such as web request handlers), “producers”, put jobs into the queue.
+				<a class="read-more" href="/post/beanstalkd/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/mysql-db-size/">mysql db size</a></h2>
           <span class="post-date">May 7, 2017</span>
 		  
@@ -475,32 +497,6 @@ $ base64 /dev/urandom | head -c 32
 		  	<div class="summary">
 				Add subtitles to a mkv file: ffmpeg -i input.mkv -f srt -i input.srt -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy -c:s srt output.mkv  
 				<a class="read-more" href="/post/add-subtitles/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/rds-slave-from-external-master/">rds slave from external master</a></h2>
-          <span class="post-date">Feb 10, 2017</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/rds">rds</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/mysql">mysql</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/slave">slave</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/master">master</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				Setup AWS MySQL RDS instance as slave of an external master Configure external mysql to become master:
-server-id=1 binlog-format= mixed log-bin=mysql-bin binlog-do-db=databasename  Setup the master replica user:
-mysql&gt; create user `replica`@`%` identified by 'PASSWORD'; mysql&gt; grant replication slave on *.* to 'replica'@'%';  Use the following command to ensure that nothing can write to the master database during a database dump. Also note the filename and position of the binary log because you will need these values to complete the replication configuration:
-				<a class="read-more" href="/post/rds-slave-from-external-master/">&hellip;</a>
 			</div>
 		  
         </div>

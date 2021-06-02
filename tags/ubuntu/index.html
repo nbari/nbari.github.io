@@ -59,6 +59,35 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/bhyve-ubuntu/">Bhyve Ubuntu</a></h2>
+          <span class="post-date">Jun 2, 2021</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/bhyve">bhyve</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/freebsd">freebsd</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/linux">linux</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/ubuntu">ubuntu</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				In /etc.rc.conf:
+cloned_interfaces=&quot;lo1 bridge0 tap0&quot; config_lo1=&quot;inet 127.0.1.1/8&quot; autobridge_interfaces=&quot;bridge0&quot; autobridge_bridge0=&quot;tap* igb0&quot; ifconfig_bridge0=&quot;addm igb0 addm tap0 up description bhyve&quot; In /boot/loader.conf:
+mm_load=&quot;YES&quot; nmdm_load=&quot;YES&quot; Check that you have:
+sysctl net.link.tap.up_on_open=1  Create the volume:
+zfs create -V100G -o volmode=dev tank/ubuntuvm  Setup and install:
+bhyve -A -H -P -w \ -s 1:0,lpc \ -s 2:0,virtio-net,tap0 \ -s 3:0hci-cdtank/iso/ubuntu-20.04.2-live-server-amd64.iso \ -s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \ -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \ -l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \ -c 4 -m 8G ubuntu Install when ask to reboot, destroy the vm:
+				<a class="read-more" href="/post/bhyve-ubuntu/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/syslog-ng-ubuntu/">syslog-ng Ubuntu</a></h2>
           <span class="post-date">Dec 15, 2017</span>
 		  

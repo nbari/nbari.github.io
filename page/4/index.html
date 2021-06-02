@@ -60,6 +60,29 @@
       <div class="posts">
          
         <div class="post">
+          <h2 class="post-title"><a href="https://nbari.com/post/stty/">stty</a></h2>
+          <span class="post-date">Dec 10, 2018</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="https://nbari.com/tags/stty">stty</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/reset">reset</a>&nbsp;
+		  	
+			          #<a href="https://nbari.com/tags/terminal">terminal</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				If reset can&rsquo;t clean your terminal, give a try to:
+stty sane  
+				<a class="read-more" href="/post/stty/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+        <div class="post">
           <h2 class="post-title"><a href="https://nbari.com/post/tmux/">tmux</a></h2>
           <span class="post-date">Dec 7, 2018</span>
 		  
@@ -517,33 +540,6 @@ kld_list=&quot;fuse&quot;   in this case module fuse will be loaded
 				To get an overview of the system:
 # sysctl -a | egrep -i 'hw.machine|hw.model|hw.ncpu' hw.machine: amd64 hw.model: Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz hw.ncpu: 16 hw.machine_arch: amd64  
 				<a class="read-more" href="/post/hw-machine-model-ncpu/">&hellip;</a>
-			</div>
-		  
-        </div>
-        
-        <div class="post">
-          <h2 class="post-title"><a href="https://nbari.com/post/moosefs/">moosefs</a></h2>
-          <span class="post-date">Jun 12, 2018</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="https://nbari.com/tags/zfs">zfs</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/moosefs">moosefs</a>&nbsp;
-		  	
-			          #<a href="https://nbari.com/tags/dfs">dfs</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-		  	<div class="summary">
-				Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.
-Install the required packages:
-pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client  For the master just add:
-pkg install moosefs3-master  In all the servers add to your /etc/hosts and entry for the mfsmaster:
-X.X.X.X mfsmaster  Before starting the master, crate the file /var/mfs/metadata.mfs with:
-MFSM NEW  Create a pool to share:
-				<a class="read-more" href="/post/moosefs/">&hellip;</a>
 			</div>
 		  
         </div>

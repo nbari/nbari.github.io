@@ -6,7 +6,43 @@
     <description>Recent content in Tags on IT notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 May 2021 19:49:23 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 21:41:06 +0200</lastBuildDate><atom:link href="https://nbari.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bhyve</title>
+      <link>https://nbari.com/tags/bhyve/</link>
+      <pubDate>Wed, 02 Jun 2021 21:41:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/bhyve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>freebsd</title>
+      <link>https://nbari.com/tags/freebsd/</link>
+      <pubDate>Wed, 02 Jun 2021 21:41:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/freebsd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://nbari.com/tags/linux/</link>
+      <pubDate>Wed, 02 Jun 2021 21:41:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://nbari.com/tags/ubuntu/</link>
+      <pubDate>Wed, 02 Jun 2021 21:41:06 +0200</pubDate>
+      
+      <guid>https://nbari.com/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>aws</title>
       <link>https://nbari.com/tags/aws/</link>
@@ -31,15 +67,6 @@
       <pubDate>Sat, 22 May 2021 19:49:23 +0200</pubDate>
       
       <guid>https://nbari.com/tags/ssmtp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>freebsd</title>
-      <link>https://nbari.com/tags/freebsd/</link>
-      <pubDate>Fri, 21 May 2021 20:17:41 +0200</pubDate>
-      
-      <guid>https://nbari.com/tags/freebsd/</guid>
       <description></description>
     </item>
     
@@ -265,15 +292,6 @@
       <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
       
       <guid>https://nbari.com/tags/ipv6/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>https://nbari.com/tags/linux/</link>
-      <pubDate>Sun, 29 Nov 2020 13:38:41 +0100</pubDate>
-      
-      <guid>https://nbari.com/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -2182,15 +2200,6 @@
       <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
       
       <guid>https://nbari.com/tags/syslog-ng/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ubuntu</title>
-      <link>https://nbari.com/tags/ubuntu/</link>
-      <pubDate>Fri, 15 Dec 2017 11:25:12 +0100</pubDate>
-      
-      <guid>https://nbari.com/tags/ubuntu/</guid>
       <description></description>
     </item>
     
