@@ -95,13 +95,20 @@ nmdm_load=&quot;YES&quot;
 <pre><code>bhyvectl --destroy --vm=ubuntu
 </code></pre>
 <p>Then to start just remove the CD <code>ahci-cd</code>:</p>
-<pre><code>bhyve -A -H -P -w \
+<pre><code>while true; do
+bhyve -AHP -w \
 -s 1:0,lpc \
 -s 2:0,virtio-net,tap0 \
 -s 4:0,virtio-blk,/dev/zvol/tank/ubuntuvm \
 -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
 -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
 -c 4 -m 8G ubuntu
+bhyve_exit=$?
+if [ $bhyve_exit -ne 0 ]; then
+    break
+fi
+done
+/usr/sbin/bhyvectl --destroy --vm=ubuntu
 </code></pre><p>To connect using the VNC client you can install it using this cask:</p>
 <pre><code>brew install --cask vnc-viewer
 </code></pre>
