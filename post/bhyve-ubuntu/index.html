@@ -79,6 +79,9 @@ nmdm_load=&quot;YES&quot;
 <p>Install:</p>
 <pre><code>pkg install uefi-edk2-bhyve
 </code></pre>
+<blockquote>
+<p>this will create /usr/local/share/uefi-firmware/BHYVE_UEFI.fd</p>
+</blockquote>
 <p>Setup and install:</p>
 <pre><code>bhyve -A -H -P -w \
 -s 1:0,lpc \
@@ -86,7 +89,7 @@ nmdm_load=&quot;YES&quot;
 -s 3:0hci-cdtank/iso/ubuntu-20.04.2-live-server-amd64.iso \
 -s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
 -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
--l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+-l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
 -c 4 -m 8G ubuntu
 </code></pre><p>Install when ask to reboot, destroy the vm:</p>
 <pre><code>bhyvectl --destroy --vm=ubuntu
@@ -97,7 +100,7 @@ nmdm_load=&quot;YES&quot;
 -s 2:0,virtio-net,tap0 \
 -s 4:0,virtio-blkdev/zvol/tank/ubuntuvm \
 -s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
--l bootromusr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+-l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
 -c 4 -m 8G ubuntu
 </code></pre><p>To connect using the VNC client you can install it using this cask:</p>
 <pre><code>brew install --cask vnc-viewer
