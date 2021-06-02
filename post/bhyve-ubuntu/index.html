@@ -68,7 +68,7 @@ autobridge_interfaces=&quot;bridge0&quot;
 autobridge_bridge0=&quot;tap* igb0&quot;
 ifconfig_bridge0=&quot;addm igb0 addm tap0 up description bhyve&quot;
 </code></pre><p>In <code>/boot/loader.conf</code>:</p>
-<pre><code>mm_load=&quot;YES&quot;
+<pre><code>vmm_load=&quot;YES&quot;
 nmdm_load=&quot;YES&quot;
 </code></pre><p>Check that you have:</p>
 <pre><code>sysctl net.link.tap.up_on_open=1
