@@ -76,6 +76,9 @@ nmdm_load=&quot;YES&quot;
 <p>Create the volume:</p>
 <pre><code>zfs create -V100G -o volmode=dev tank/ubuntuvm
 </code></pre>
+<p>Install:</p>
+<pre><code>pkg install uefi-edk2-bhyve
+</code></pre>
 <p>Setup and install:</p>
 <pre><code>bhyve -A -H -P -w \
 -s 1:0,lpc \
