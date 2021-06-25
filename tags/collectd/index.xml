@@ -18,7 +18,7 @@ You can use influx (the influxdb shell) or use the http API on port :8086
 Create and apply retention policy to a database: warning this may remove/purge existing data
 CREATE RETENTION POLICY &amp;quot;30_days&amp;quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
  For 1 year, use 52w (52 weeks)
-CREATE RETENTION POLICY &amp;quot;a_year&amp;quot; ON collectd DURATION 52w REPLICATION 1 default  Show retention policies:</description>
+CREATE RETENTION POLICY &amp;quot;a_year&amp;quot; ON telegraf DURATION 52w REPLICATION 1 default  Show retention policies:</description>
     </item>
     
   </channel>
