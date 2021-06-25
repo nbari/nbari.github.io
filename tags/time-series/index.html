@@ -78,8 +78,8 @@
 You can use influx (the influxdb shell) or use the http API on port :8086
 Create and apply retention policy to a database: warning this may remove/purge existing data
 CREATE RETENTION POLICY &quot;30_days&quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
- Show retention policies:
-&gt; show retention policies name duration shardGroupDuration replicaN default ---- -------- ------------------ -------- ------- autogen 0s 168h0m0s 1 false 30_days 720h0m0s 24h0m0s 1 true  Show databases contents (measurements):
+ For 1 year, use 52w (52 weeks)
+CREATE RETENTION POLICY &quot;a_year&quot; ON collectd DURATION 52w REPLICATION 1 default  Show retention policies:
 				<a class="read-more" href="/post/influxdb/">&hellip;</a>
 			</div>
 		  

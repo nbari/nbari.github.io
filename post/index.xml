@@ -1116,8 +1116,8 @@ kern_securelevel_enable=&amp;quot;NO&amp;quot; kern_securelevel=&amp;quot;0&amp;
 You can use influx (the influxdb shell) or use the http API on port :8086
 Create and apply retention policy to a database: warning this may remove/purge existing data
 CREATE RETENTION POLICY &amp;quot;30_days&amp;quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
- Show retention policies:
-&amp;gt; show retention policies name duration shardGroupDuration replicaN default ---- -------- ------------------ -------- ------- autogen 0s 168h0m0s 1 false 30_days 720h0m0s 24h0m0s 1 true  Show databases contents (measurements):</description>
+ For 1 year, use 52w (52 weeks)
+CREATE RETENTION POLICY &amp;quot;a_year&amp;quot; ON collectd DURATION 52w REPLICATION 1 default  Show retention policies:</description>
     </item>
     
     <item>

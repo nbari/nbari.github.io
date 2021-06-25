@@ -2,7 +2,7 @@
 <html lang="en-us">
 
 <head>
-	<meta name="generator" content="Hugo 0.83.1" />
+	<meta name="generator" content="Hugo 0.84.0" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title> IT notes &middot; IT notes </title>
@@ -407,8 +407,8 @@ kern_securelevel_enable=&quot;NO&quot; kern_securelevel=&quot;0&quot;  reboot an
 You can use influx (the influxdb shell) or use the http API on port :8086
 Create and apply retention policy to a database: warning this may remove/purge existing data
 CREATE RETENTION POLICY &quot;30_days&quot; ON collectd DURATION 30d REPLICATION 1 default   notice the ending default that means to apply the created policy
- Show retention policies:
-&gt; show retention policies name duration shardGroupDuration replicaN default ---- -------- ------------------ -------- ------- autogen 0s 168h0m0s 1 false 30_days 720h0m0s 24h0m0s 1 true  Show databases contents (measurements):
+ For 1 year, use 52w (52 weeks)
+CREATE RETENTION POLICY &quot;a_year&quot; ON collectd DURATION 52w REPLICATION 1 default  Show retention policies:
 				<a class="read-more" href="/post/influxdb/">&hellip;</a>
 			</div>
 		  
