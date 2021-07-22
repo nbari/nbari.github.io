@@ -91,6 +91,12 @@ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outfor
 <p>IF getting: <code>errno: 150 &quot;Foreign key constraint is incorrectly formed&quot;</code>, try adding option:</p>
 <pre><code>--extended-insert
 </code></pre>
+<p>Try:</p>
+<pre><code>mysql --init-command=&quot;SET SESSION FOREIGN_KEY_CHECKS=0;&quot; &lt; dump.sql
+</code></pre>
+<blockquote>
+<p>cat &lt;(echo &ldquo;SET FOREIGN_KEY_CHECKS=0;&quot;) dump.sql | mysql</p>
+</blockquote>
 <h2 id="xz">xz</h2>
 <p>Compress the output:</p>
 <pre><code>xz -c
