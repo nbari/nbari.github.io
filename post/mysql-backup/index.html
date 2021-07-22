@@ -88,6 +88,9 @@ openssl smime -encrypt -aes256 -binary -out /safe/path/${DAY}.sql.xz.enc -outfor
 --opt --skip-comments --single-transaction \
 --databases dbname dbname2 dbname3
 </code></pre>
+<p>IF getting: <code>errno: 150 &quot;Foreign key constraint is incorrectly formed&quot;</code>, try adding option:</p>
+<pre><code>--extended-insert
+</code></pre>
 <h2 id="xz">xz</h2>
 <p>Compress the output:</p>
 <pre><code>xz -c
