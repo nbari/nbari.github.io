@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+&#x2F;bin&#x2F;sh shell set &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;shell-set&#x2F;">&#x2F;bin&#x2F;sh shell set</a></h2>
+<div class="post-header">
+    <span class="post-date">August 11, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/shell/">shell</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/set/">set</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>The Bourne shell (sh) is a shell, or command-line interpreter, for computer operating systems.</p>
+<blockquote>
+<p>The Bourne shell was the default shell for Unix Version 7. Most Unix-like
+systems continue to have /bin/sh—which will be the Bourne shell, or a symbolic
+link or hard link to a compatible shell even when other shells are used by most
+users. https://en.wikipedia.org/wiki/Bourne_shell</p>
+</blockquote>
+<h1 id="set-options"><a class="zola-anchor" href="#set-options" aria-label="Anchor link for: set-options">🔗</a>set options</h1>
+<p>In <strong>sh</strong>, the set built-in command has the following options:</p>
+<table><thead><tr><th>option</th><th>Description</th></tr></thead><tbody>
+<tr><td>--</td><td>An option of a double-dash (&quot;--&quot;) signifies the end of an option list. This is primarily useful when values listed after the options will start with a dash themselves.</td></tr>
+<tr><td>-a</td><td>Mark variables which are modified or created for &quot;export&quot;; environment variables set in this way will be passed on to the environments of any subsequent commands.</td></tr>
+<tr><td>-e</td><td>Exit immediately if a command exits with a non-zero exit status.</td></tr>
+<tr><td>-f</td><td>Disable file name generation (globbing).</td></tr>
+<tr><td>-h</td><td>Locate and remember function commands as functions are defined (function commands are normally located when the function is executed).</td></tr>
+<tr><td>-n</td><td>Read commands but do not execute them.</td></tr>
+<tr><td>-t</td><td>Exit after reading and executing one command.</td></tr>
+<tr><td>-u</td><td>Treat unset variables as an error when substituting.</td></tr>
+<tr><td>-v</td><td>Print shell input lines as they are read.</td></tr>
+<tr><td>-x</td><td>Print commands and their arguments as they are executed.</td></tr>
+</tbody></table>
+<p>Using <code>+</code> rather than <code>-</code> causes these flags to be turned off.</p>
+<p>Example:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span style="color:#96b5b4;">set </span><span style="color:#bf616a;">-e
+</span><span style="color:#96b5b4;">set </span><span style="color:#bf616a;">-x
+</span><span>
+</span><span style="color:#bf616a;">test</span><span> 1</span><span style="color:#bf616a;"> -eq</span><span> 0
+</span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">never printed</span><span>&quot;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

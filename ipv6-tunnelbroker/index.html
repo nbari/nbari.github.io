@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ipv6 tunnelbroker &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ipv6-tunnelbroker&#x2F;">ipv6 tunnelbroker</a></h2>
+<div class="post-header">
+    <span class="post-date">December 01, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ipv6/">ipv6</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/he/">he</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="6in4"><a class="zola-anchor" href="#6in4" aria-label="Anchor link for: 6in4">🔗</a>6in4</h1>
+<blockquote>
+<p>6in4 uses tunneling to encapsulate IPv6 traffic over explicitly-configured
+IPv4 links. The 6in4 traffic is sent over the IPv4 Internet inside IPv4 packets
+whose IP headers have the IP protocol number set to 41.
+https://en.wikipedia.org/wiki/6in4</p>
+</blockquote>
+<p><img src="/img/6in4.gif" alt="6in4" /></p>
+<p>&quot;6to4&quot; is a tunneling method that is only interesting for reaching IPv6-only
+services. And 6to4 makes sense only if one has a public IPv4 address. As a rule,
+you only need to enable &quot;6to4&quot; if you want to access services that are only
+IPv6. http://www.elektronik-kompendium.de/sites/net/1904031.htm</p>
+<p>Create an account on https://tunnelbroker.net/</p>
+<h1 id="seting-ip-on-freebsd"><a class="zola-anchor" href="#seting-ip-on-freebsd" aria-label="Anchor link for: seting-ip-on-freebsd">🔗</a>seting IP on FreeBSD</h1>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ifconfig gif0 create
+</span><span>ifconfig gif0 tunnel 1.2.3.4 Y.Y.Y.Y
+</span><span>ifconfig gif0 inet6 2001:470:1c:35e::2
+</span><span>route -n add -inet6 default 2001:470:1c:35e::1
+</span><span>ifconfig gif0 up
+</span></code></pre>
+<p>Where <code>Y.Y.Y.Y</code> is the Server IPv4 Address and <code>1.2.3.4</code> is your lan.</p>
+<h1 id="mac-os-x-setup"><a class="zola-anchor" href="#mac-os-x-setup" aria-label="Anchor link for: mac-os-x-setup">🔗</a>mac os X setup</h1>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ifconfig gif0 create
+</span><span>ifconfig gif0 tunnel 56.189.27.100 216.77.86.114
+</span><span>ifconfig gif0 inet6 2001:470:6c:387::2 2001:470:6c:387::1 prefixlen 128
+</span><span>route -n add -inet6 default 2001:470:6c:387::1
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

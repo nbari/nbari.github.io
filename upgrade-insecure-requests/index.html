@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Upgrade Insecure Requests &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;upgrade-insecure-requests&#x2F;">Upgrade Insecure Requests</a></h2>
+<div class="post-header">
+    <span class="post-date">November 28, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssl/">ssl</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/https/">https</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/meta/">meta</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>The &quot;Upgrade Insecure Requests&quot; Content Security Policy can be used to
+automatically upgrade insecure (e.g. http:) requests to a secure alternative
+(e.g. https:) before a browser fetches them.</p>
+<p>In practice, this helps avoid mixed-content warnings when a page is accessed via
+https:, but it contains references to resources using absolute http: URLs.</p>
+<p>Like other Content Security Policies, the recommend approach is to enable it
+via a HTTP response header:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Content-Security-Policy: upgrade-insecure-requests
+</span></code></pre>
+<p>Nginx example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>add_header Content-Security-Policy upgrade-insecure-requests;
+</span></code></pre>
+<p>However, if you do not have control over the underlying web server, an
+alternative is to include this meta tag in your HTML's <code>&lt;head&gt;</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot;&gt;
+</span></code></pre>
+<p>More info:</p>
+<p>https://googlechrome.github.io/samples/csp-upgrade-insecure-requests/</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

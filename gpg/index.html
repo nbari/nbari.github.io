@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+gpg &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;gpg&#x2F;">gpg</a></h2>
+<div class="post-header">
+    <span class="post-date">February 27, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/gpg/">gpg</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/centos/">centos</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Install gpg on macOS:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install gnupg pinentry-mac
+</span></code></pre>
+<blockquote>
+<p>if required restart gpg-agent with <code>gpgconf --kill gpg-agent</code></p>
+</blockquote>
+<p>To create a <code>gpg</code> key in batch mode, create a file named <code>gpg-key-script</code> with
+this value:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Key-Type: 1
+</span><span>Key-Length: 2048
+</span><span>Subkey-Type: 1
+</span><span>Subkey-Length: 2048
+</span><span>Name-Real: your name
+</span><span>Name-Comment: your comment
+</span><span>Name-Email: your@email
+</span><span>Expire-Date: 0
+</span></code></pre>
+<p>Next you could do something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ gpg --homedir /salt/gpgkeys --batch --gen-key gen-key-script
+</span></code></pre>
+<h2 id="backup-private-key"><a class="zola-anchor" href="#backup-private-key" aria-label="Anchor link for: backup-private-key">🔗</a>Backup private key</h2>
+<p>To save the private key to a file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gpg --homedir /salt/gpgkeys -a --export-secret-keys &gt; private.key
+</span></code></pre>
+<blockquote>
+<p>No need to export the public key</p>
+</blockquote>
+<p>To import the pair of keys later just do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gpg --import private.key
+</span></code></pre>
+<h1 id="rngd-linux"><a class="zola-anchor" href="#rngd-linux" aria-label="Anchor link for: rngd-linux">🔗</a>rngd (linux)</h1>
+<p>If you don't have an source of entropy it may take a while to generate the keys,
+if you are in a linux system you could install <code>rngd</code> or (<code>rng-tools</code>) and then type:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># rngd -v
+</span><span>Unable to open file: /dev/tpm0
+</span><span>can&#39;t open any entropy source
+</span><span>Maybe RNG device modules are not loaded
+</span></code></pre>
+<p>To start <code>rngd</code> usind <code>/dev/urandom</code>, do this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># cp /usr/lib/systemd/system/rngd.service /etc/systemd/system
+</span></code></pre>
+<p>Edit <code>/etc/systemd/system/rngd.service</code> and replace the line starting with <code>ExecStart</code> with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ExecStart=/sbin/rngd -f -r /dev/urandom
+</span></code></pre>
+<p>Reload systemd:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># systemctl daemon-reload
+</span></code></pre>
+<p>And restart <code>rngd</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># systemctl restart rngd
+</span></code></pre>
+<h1 id="using-gpg-as-ssh"><a class="zola-anchor" href="#using-gpg-as-ssh" aria-label="Anchor link for: using-gpg-as-ssh">🔗</a>using gpg as ssh</h1>
+<p>You need to install <code>monkeysphere</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ brew install monkeysphere
+</span></code></pre>
+<p>To remove password from a subkey &quot;authentication [A]&quot; and convert later to ssh id_rsa:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ gpg --export-secret-subkey F6C7D705867D430! | gpg --home /tmp/x --import
+</span><span>$ gpg --home /tmp/x --change-passphrase F6C7D705867D430!
+</span><span>$ gpg --home /tmp/x --export-secret-subkey F6C7D705867D430! | openpgp2ssh F6C7D705867D430  &gt; /tmp/naked-id_rsa
+</span></code></pre>
+<p>Then to add password again to the key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh-keygen -f /tmp/naked-id_rsa -p
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

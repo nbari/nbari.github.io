@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Plex within a FreeBSD jail &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;plex-jail&#x2F;">Plex within a FreeBSD jail</a></h2>
+<div class="post-header">
+    <span class="post-date">October 22, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>For downloading metadata plex uses <code>127.0.0.1</code> therefore the
+jail needs to have a loopback interface.</p>
+<p>Create a <code>lo1</code> interface, add to <code>rc.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cloned_interfaces=&quot;lo1&quot;
+</span></code></pre>
+<p>Add first the loopback IP in the <code>jail.conf</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">plex </span><span>{
+</span><span>    ip4.addr  = lo1|127.0.2.1;
+</span><span>    ip4.addr += igb0|172.16.8.2;
+</span><span>    path      = &quot;</span><span style="color:#a3be8c;">/fabrik/jail/plex</span><span>&quot;;
+</span><span>}
+</span></code></pre>
+<p>This will add as the main IP <code>127.0.2.1</code>.</p>
+<p>Inside a jail, access to the loopback address 127.0.0.1 is redirected to the
+first IP address assigned to the jail. To make the jail loopback correspond with
+the new lo1 interface, that interface must be specified first in the list of
+interfaces and IP addresses given when creating a new jail.</p>
+<p>Edit <code>/etc/hosts</code> in the jail so that localhost uses IP <code>127.0.2.1</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>127.0.2.1       localhost  localhost.your.domain
+</span></code></pre>
+<h2 id="claiming-your-server"><a class="zola-anchor" href="#claiming-your-server" aria-label="Anchor link for: claiming-your-server">🔗</a>Claiming your server</h2>
+<p>You claim/configure your new plex server, you need to run it on a private
+network, and later just redirect / forward the port so that It can be reached
+from plex.tv/web.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>rdr on $ext_if proto tcp from any to any port 32400 -&gt; 172.16.8.2 port 32400
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

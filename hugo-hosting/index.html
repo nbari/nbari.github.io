@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Hugo hosting on github using 2 repositories &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;hugo-hosting&#x2F;">Hugo hosting on github using 2 repositories</a></h2>
+<div class="post-header">
+    <span class="post-date">June 19, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hugo/">hugo</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/github/">github</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>This setup requires two separate repos, one for Hugo's content, and a second one
+that will be a git submodule with the <code>public</code> folder's content in it.</p>
+<p>Step by step:</p>
+<ol>
+<li>
+<p>Create on Github <code>&lt;your-project&gt;-hugo</code> repository (it will host Hugo’s
+content)</p>
+</li>
+<li>
+<p>Create on GitHub <code>&lt;username&gt;.github.io</code> repository (it will host the public
+folder: the static website)</p>
+</li>
+<li>
+<p><code>git clone &lt;your-project&gt;-hugo-url &amp;&amp; cd &lt;your-project&gt;-hugo</code></p>
+</li>
+<li>
+<p>Make your website work locally (hugo server)</p>
+</li>
+<li>
+<p>Once you are happy with the results, <code>Ctrl+C</code> (kill server) and <code>rm -rf public</code>
+(don’t worry, it can always be regenerated with hugo)</p>
+</li>
+<li>
+<p><code>git submodule add -b master git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public</code></p>
+</li>
+<li>
+<p>Almost done: add a <code>deploy.sh</code> script to help you (and make it executable: chmod +x deploy.sh):</p>
+</li>
+</ol>
+<p>If submodule already exist you can do this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git submodule init
+</span><span>$ git pull --recurse-submodules
+</span></code></pre>
+<p>The <code>deploy.sh</code> script:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span>
+</span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">\033[0;32mDeploying updates to GitHub...\033[0m</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Build the project.
+</span><span style="color:#bf616a;">hugo </span><span style="color:#65737e;"># if using a theme, replace by `hugo -t &lt;yourtheme&gt;`
+</span><span>
+</span><span style="color:#65737e;"># Go To Public folder
+</span><span style="color:#96b5b4;">cd</span><span> public
+</span><span style="color:#65737e;"># Add changes to git.
+</span><span style="color:#bf616a;">git</span><span> add</span><span style="color:#bf616a;"> -A
+</span><span>
+</span><span style="color:#65737e;"># Commit changes.
+</span><span style="color:#bf616a;">msg</span><span>=&quot;</span><span style="color:#a3be8c;">rebuilding site `</span><span style="color:#bf616a;">date</span><span style="color:#a3be8c;">`</span><span>&quot;
+</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>$</span><span style="color:#bf616a;"># -eq</span><span> 1 </span><span style="color:#96b5b4;">]
+</span><span>  </span><span style="color:#b48ead;">then </span><span style="color:#bf616a;">msg</span><span>=&quot;$</span><span style="color:#bf616a;">1</span><span>&quot;
+</span><span style="color:#b48ead;">fi
+</span><span style="color:#bf616a;">git</span><span> commit</span><span style="color:#bf616a;"> -m </span><span>&quot;$</span><span style="color:#bf616a;">msg</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Push source and build repos.
+</span><span style="color:#bf616a;">git</span><span> push origin master
+</span><span>
+</span><span style="color:#65737e;"># Come Back
+</span><span style="color:#96b5b4;">cd</span><span> ..
+</span></code></pre>
+<p>Run <code>./deploy.sh &quot;Your optional commit message&quot;</code> to send changes to
+<code>&lt;username&gt;.github.io</code> (careful, you may also want to commit changes on the
+<code>&lt;your-project&gt;-hugo</code> repo).</p>
+<p>Source: https://gohugo.io/tutorials/github-pages-blog/</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

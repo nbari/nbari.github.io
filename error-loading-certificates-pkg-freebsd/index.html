@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+error loading certificates pkg freebsd &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;error-loading-certificates-pkg-freebsd&#x2F;">error loading certificates pkg freebsd</a></h2>
+<div class="post-header">
+    <span class="post-date">August 20, 2016</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>On an FreeBSD 9 while trying to install python or something else via pkg you may get this:</p>
+<blockquote>
+<p>pkg search python
+pkg: Repository FreeBSD missing. 'pkg update' required
+pkg: Error loading trusted certificates
+pkg: Error loading trusted certificates
+pkg: Repository FreeBSD cannot be opened. 'pkg update' required</p>
+</blockquote>
+<p>To solve it, fetch the current official repository key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mkdir -p /usr/share/keys/pkg/trusted /usr/share/keys/pkg/revoked
+</span><span>svn export https://svn0.us-west.FreeBSD.org/base/head/share/keys/pkg/trusted/pkg.freebsd.org.2013102301 /usr/share/keys/pkg/trusted/
+</span></code></pre>
+<p>Then set the repo:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>FreeBSD: {
+</span><span>  url: &quot;pkg+http://pkg.FreeBSD.org/${ABI}/latest&quot;,
+</span><span>  mirror_type: &quot;srv&quot;,
+</span><span>  signature_type: &quot;fingerprints&quot;,
+</span><span>  fingerprints: &quot;/usr/share/keys/pkg&quot;,
+</span><span>  enabled: yes
+</span><span>}
+</span></code></pre>
+<p>Next, running <code>pkg udpate</code> should work:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pkg update
+</span><span>Updating FreeBSD repository catalogue...
+</span><span>[ca2.route.mx] Fetching meta.txz: 100%    968 B   1.0kB/s    00:01
+</span><span>[ca2.route.mx] Fetching packagesite.txz: 100%    5 MiB   5.7MB/s    00:01
+</span><span>Processing entries: 100%
+</span><span>FreeBSD repository update completed. 25174 packages processed.
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

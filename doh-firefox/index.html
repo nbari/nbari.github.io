@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+DoH Firefox &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;doh-firefox&#x2F;">DoH Firefox</a></h2>
+<div class="post-header">
+    <span class="post-date">February 15, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dns/">dns</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/http/">http</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Open firefox and type:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>about:config
+</span></code></pre>
+<p>Search for:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>network.trr.uri
+</span></code></pre>
+<p>Probably you already have:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>https://mozilla.cloudflare-dns.com/dns-query
+</span></code></pre>
+<p>If not add it or use something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>https://cloudflare-dns.com/dns-query
+</span><span>https://dns.quad9.net/dns-query
+</span></code></pre>
+<p>Then enable <code>network.trr.mode</code> by setting it to <code>2</code></p>
+<p>Set <code>network.trr.mode</code> to 2 make DNS Over HTTPS the browser's first choice
+but use regular DNS as a fallback (0 is &quot;off by default&quot;, 1 lets Firefox pick
+whichever is faster, 3 for TRR only mode, 5 to explicitly turn it off).</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

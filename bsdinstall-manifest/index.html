@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+bsdinstall MANIFEST &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bsdinstall-manifest&#x2F;">bsdinstall MANIFEST</a></h2>
+<div class="post-header">
+    <span class="post-date">October 13, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/manifest/">MANIFEST</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bsdinstall/">bsdinstall</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hetzner/">hetzner</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>When installing FreeBSD from an ftp/http it may complain that <code>MANIFEST</code> file is
+missing, to solve the problem try this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>export DISTRIBUTIONS=&quot;kernel.txz base.txz&quot;
+</span><span>mkdir /usr/freebsd-dist
+</span><span>export BSDINSTALL_DISTDIR=&quot;/usr/freebsd-dist/&quot;
+</span><span>export BSDINSTALL_DISTSITE=&quot;https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/&quot;
+</span><span>bsdinstall distfetch
+</span><span>
+</span><span>cd /usr/freebsd-dist
+</span><span>fetch https://download.freebsd.org/ftp/releases/amd64/amd64/12.1-RELEASE/MANIFEST
+</span></code></pre>
+<p>Then run <code>bsdinstall</code></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

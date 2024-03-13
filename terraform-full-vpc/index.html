@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Terraform Full Vpc &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;terraform-full-vpc&#x2F;">Terraform Full Vpc</a></h2>
+<div class="post-header">
+    <span class="post-date">August 12, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/terraform/">terraform</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vpc/">vpc</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Example of a full <a href="/post/aws-vpc/">VPC</a> setup using terraform, including VPN and using the default subnet:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>resource &quot;</span><span style="color:#a3be8c;">aws_vpc</span><span>&quot; &quot;</span><span style="color:#a3be8c;">test</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>           </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.0.0/16</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">enable_dns_hostnames</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">true</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">enable_dns_support</span><span>   </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">true</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">test</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">vpc_id</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_internet_gateway</span><span>&quot; &quot;</span><span style="color:#a3be8c;">igw</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">internet gateway</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.0.0/24</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1a</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">public A</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-public-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-a.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.1.0/24</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1b</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">public B</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-public-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-b.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.2.0/24</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1c</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">public C</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-public-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-c.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">private-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.8.0/21</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1a</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">private A</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-private-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-a.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">private-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.16.0/21</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1b</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">private B</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-private-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-b.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_subnet</span><span>&quot; &quot;</span><span style="color:#a3be8c;">private-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>            </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">cidr_block</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.100.24.0/21</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">availability_zone</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">eu-central-1c</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">private C</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>output &quot;</span><span style="color:#a3be8c;">subnet-private-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">value</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-c.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_default_route_table</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">default_route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">Public</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">destination_cidr_block</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">0.0.0.0/0</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">gateway_id</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_internet_gateway.igw.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-vpn</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_vpn_gateway.your-vpn</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">destination_cidr_block</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.13.0.0/16</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">gateway_id</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpn_gateway.your-vpn.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_eip</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat-eip</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc</span><span>        </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">true</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_internet_gateway.igw</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_nat_gateway</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">allocation_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_eip.nat-eip.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>     </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-a.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_internet_gateway.igw</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span>     </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_internet_gateway.igw</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">NAT</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_route_table.nat.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_route_table.nat</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">destination_cidr_block</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">0.0.0.0/0</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">nat_gateway_id</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_nat_gateway.nat.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat-vpn</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_route_table.nat.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">depends_on</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">aws_route_table.nat</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">,</span><span> &quot;</span><span style="color:#a3be8c;">aws_vpn_gateway.your-vpn</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">destination_cidr_block</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.13.0.0/16</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">gateway_id</span><span>             </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpn_gateway.your-vpn.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-a.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_route_table.nat.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-b.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_route_table.nat.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">nat-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.private-c.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_route_table.nat.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-a</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-a.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-b</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-b.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_route_table_association</span><span>&quot; &quot;</span><span style="color:#a3be8c;">public-c</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">subnet_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_subnet.public-c.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">route_table_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.default_route_table_id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_vpc_dhcp_options</span><span>&quot; &quot;</span><span style="color:#a3be8c;">test</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">domain_name</span><span>         </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">test</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">domain_name_servers</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">AmazonProvidedDNS</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">netbios_node_type</span><span>   </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">2</span><span>
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">test</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_vpn_gateway</span><span>&quot; &quot;</span><span style="color:#a3be8c;">your-vpn</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">your-vpn gw</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_customer_gateway</span><span>&quot; &quot;</span><span style="color:#a3be8c;">your-vpn</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">bgp_asn</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">65000</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">ip_address</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">26.19.97.10</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">type</span><span>       </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">ipsec.1</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">your-vpn gateway</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_vpn_connection</span><span>&quot; &quot;</span><span style="color:#a3be8c;">your-vpn</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpn_gateway_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpn_gateway.your-vpn.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">customer_gateway_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_customer_gateway.your-vpn.id}</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">type</span><span>                </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">ipsec.1</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">static_routes_only</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">true</span><span>
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">tags</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">your-vpn connection</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_vpn_connection_route</span><span>&quot; &quot;</span><span style="color:#a3be8c;">office</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">destination_cidr_block</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">10.13.0.0/16</span><span>&quot;
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpn_connection_id</span><span>      </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpn_connection.your-vpn.id}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;</span><span style="color:#a3be8c;">aws_default_security_group</span><span>&quot; &quot;</span><span style="color:#a3be8c;">default</span><span>&quot; {
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">vpc_id</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">${aws_vpc.test.id}</span><span>&quot;
+</span><span>
+</span><span>  </span><span style="background-color:#bf616a;color:#2b303b;">ingress</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">{</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">from_port</span><span>   </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">0</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">to_port</span><span>     </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">0</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">protocol</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">-1</span><span>&quot;
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">cidr_blocks</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">0.0.0.0/0</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  }
+</span><span>
+</span><span>  egress {
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">from_port</span><span>   </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">0</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">to_port</span><span>     </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">0</span><span>
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">protocol</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">-1</span><span>&quot;
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">cidr_blocks</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">[</span><span>&quot;</span><span style="color:#a3be8c;">0.0.0.0/0</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">]</span><span>
+</span><span>  }
+</span><span>
+</span><span>  tags {
+</span><span>    </span><span style="background-color:#bf616a;color:#2b303b;">Name</span><span> </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">default</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

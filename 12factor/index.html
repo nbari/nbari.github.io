@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+12 factor &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;12factor&#x2F;">12 factor</a></h2>
+<div class="post-header">
+    <span class="post-date">October 25, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/12factor/">12factor</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/heroku/">heroku</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="the-twelve-factors"><a class="zola-anchor" href="#the-twelve-factors" aria-label="Anchor link for: the-twelve-factors">🔗</a>The Twelve Factors</h1>
+<h2 id="1-codebase"><a class="zola-anchor" href="#1-codebase" aria-label="Anchor link for: 1-codebase">🔗</a>1. Codebase</h2>
+<p>Everything in revision control including environment configuration</p>
+<p>git flow
+master - production
+develop - staging</p>
+<h2 id="2-dependencies"><a class="zola-anchor" href="#2-dependencies" aria-label="Anchor link for: 2-dependencies">🔗</a>2. Dependencies</h2>
+<p>Explicitly declare and isolate dependencies</p>
+<h2 id="3-config"><a class="zola-anchor" href="#3-config" aria-label="Anchor link for: 3-config">🔗</a>3. Config</h2>
+<p>Store config in the environment</p>
+<p>In a twelve-factor app, env vars are granular controls, each fully orthogonal to
+other env vars. They are never grouped together as “environments”, but instead
+are independently managed for each deploy. This is a model that scales up
+smoothly as the app naturally expands into more deploys over its lifetime.</p>
+<h2 id="4-backing-services"><a class="zola-anchor" href="#4-backing-services" aria-label="Anchor link for: 4-backing-services">🔗</a>4. Backing services</h2>
+<p>Treat backing services as attached resources.</p>
+<p>Anything your application uses as a resource (database, queueing systems, email,
+cache) should be referenced with &quot;bindings&quot; to these services.</p>
+<p>Backing services should be called via an API.</p>
+<h2 id="5-build-release-run"><a class="zola-anchor" href="#5-build-release-run" aria-label="Anchor link for: 5-build-release-run">🔗</a>5. Build, release, run</h2>
+<p>Strictly separate build and run stages</p>
+<p>Don't compile on production environment.</p>
+<p>Blue/Green Deployments are a rule, not an exception.</p>
+<h2 id="6-processes"><a class="zola-anchor" href="#6-processes" aria-label="Anchor link for: 6-processes">🔗</a>6. Processes</h2>
+<p>Execute the app as one or more stateless processes</p>
+<p>Some web systems rely on “sticky sessions” – that is, caching user session data
+in memory of the app’s process and expecting future requests from the same
+visitor to be routed to the same process. Sticky sessions are a violation of
+twelve-factor and should never be used or relied upon. Session state data is a
+good candidate for a datastore that offers time-expiration, such as Memcached or
+Redis.</p>
+<h2 id="7-port-binding"><a class="zola-anchor" href="#7-port-binding" aria-label="Anchor link for: 7-port-binding">🔗</a>7. Port binding</h2>
+<p>Export services via port binding</p>
+<h2 id="8-concurrency"><a class="zola-anchor" href="#8-concurrency" aria-label="Anchor link for: 8-concurrency">🔗</a>8. Concurrency</h2>
+<p>Scale out via the process model</p>
+<h2 id="9-disposability"><a class="zola-anchor" href="#9-disposability" aria-label="Anchor link for: 9-disposability">🔗</a>9. Disposability</h2>
+<p>Maximize robustness with fast startup and graceful shutdown.</p>
+<p>Processes shut down gracefully when they receive a SIGTERM signal from the process manager.</p>
+<h2 id="10-dev-prod-parity"><a class="zola-anchor" href="#10-dev-prod-parity" aria-label="Anchor link for: 10-dev-prod-parity">🔗</a>10. Dev/prod parity</h2>
+<p>Keep development, staging, and production as similar as possible.</p>
+<p>The twelve-factor app is designed for continuous deployment by keeping the gap
+between development and production small.</p>
+<p>Dev MUST == Production in config, but not performance</p>
+<h2 id="11-logs"><a class="zola-anchor" href="#11-logs" aria-label="Anchor link for: 11-logs">🔗</a>11. Logs</h2>
+<p>Treat logs as event streams</p>
+<p>A twelve-factor app never concerns itself with routing or storage of its output
+stream. It should not attempt to write to or manage logfiles. Instead, each
+running process writes its event stream, unbuffered, to <code>stdout</code>.</p>
+<h2 id="12-admin-processes"><a class="zola-anchor" href="#12-admin-processes" aria-label="Anchor link for: 12-admin-processes">🔗</a>12. Admin processes</h2>
+<p>Run admin/management tasks as one-off processes.</p>
+<p>Twelve-factor strongly favors languages which provide a
+<a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>
+shell out of the box, and which make it easy to run one-off scripts. In a local
+deploy, developers invoke one-off admin processes by a direct shell command
+inside the app’s checkout directory. In a production deploy, developers can
+use ssh or other remote command execution mechanism provided by that deploy’s
+execution environment to run such a process.</p>
+<p>{{&lt; youtube GZ4sAEUMOnM&gt;}}</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
