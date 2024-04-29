@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+DTrace &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;dtrace&#x2F;">DTrace</a></h2>
+<div class="post-header">
+    <span class="post-date">September 05, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/debug/">debug</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/kernel/">kernel</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To enable ensure kernel is compiled with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>makeoptions     DEBUG=-g                # Build kernel with gdb(1) debug symbols
+</span><span>makeoptions     WITH_CTF=1              # Run ctfconvert(1) for DTrace support
+</span><span>options         KDTRACE_FRAME           # Ensure frames are compiled in
+</span><span>options         KDTRACE_HOOKS           # Kernel DTrace hooks
+</span><span>options         DDB_CTF                 # Kernel ELF linker loads CTF data
+</span></code></pre>
+<p>Build kernel, reboot:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>kldload dtraceall
+</span></code></pre>
+<p>To check for example <code>redis-server</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dtrace -x ustackframes=100 -n &#39;profile-197 /execname == &quot;redis-server&quot; &amp;&amp; arg1/ {@[ustack()] = count(); } tick-60s { exit(0); }&#39; -o out.stacks
+</span></code></pre>
+<p>if you do a <code>dtrace -l</code> will find:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>47296    profile    profile-197
+</span><span>47297    profile    tick-60s
+</span><span>47298    profile    tick-10s
+</span><span>47299    profile    profile-99
+</span></code></pre>
+<p><code>arg1</code> is for user land, <code>arg0</code> for the kernel.</p>
+<p>To sample the kernel:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dtrace -x stackframes=100 -n &#39;profile-197 /arg0/ { @[stack()] = count(); } tick-60s { exit(0); }&#39; -o out.stacks
+</span></code></pre>
+<p>to create a flame graph:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>git clone https://github.com/brendangregg/FlameGraph
+</span><span>cd FlameGraph
+</span><span>./stackcollapse.pl out.stacks &gt; out.folded
+</span><span>./flamegraph.pl out.folded &gt; out.svg
+</span></code></pre>
+<p>Check https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mysql backup &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mysql-backup&#x2F;">mysql backup</a></h2>
+<div class="post-header">
+    <span class="post-date">April 11, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/xz/">xz</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/openssl/">openssl</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="mysqldump-xz-openssl"><a class="zola-anchor" href="#mysqldump-xz-openssl" aria-label="Anchor link for: mysqldump-xz-openssl">🔗</a>mysqldump + xz + openssl</h1>
+<p>First add to <code>.my.cnf</code> the proper username/password to avoid getting a warning:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">[client]
+</span><span style="color:#bf616a;">host</span><span> = localhost
+</span><span style="color:#bf616a;">user</span><span> = dbadmin
+</span><span style="color:#bf616a;">password</span><span> = secret
+</span></code></pre>
+<p>To take the dump and keep it only for 31 days:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span style="color:#bf616a;">DAY</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">date</span><span style="color:#a3be8c;"> +</span><span>%</span><span style="color:#bf616a;">d</span><span style="color:#a3be8c;">)
+</span><span style="color:#bf616a;">mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction</span><span> dbname | \
+</span><span style="color:#bf616a;">xz -c </span><span>| \
+</span><span style="color:#bf616a;">openssl</span><span> smime</span><span style="color:#bf616a;"> -encrypt -aes256 -binary -out</span><span> /safe/path/${</span><span style="color:#bf616a;">DAY</span><span>}.sql.xz.enc</span><span style="color:#bf616a;"> -outform</span><span> DER /path/to/cert.pem
+</span></code></pre>
+<h2 id="mysqldump"><a class="zola-anchor" href="#mysqldump" aria-label="Anchor link for: mysqldump">🔗</a>mysqldump</h2>
+<p>The options used:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">mysqldump --events --routines --triggers --add-drop-database --compress --hex-blob --opt --skip-comments --single-transaction --databases</span><span> dbname
+</span></code></pre>
+<blockquote>
+<p>The --databases option will add the CREATE DATABASE</p>
+</blockquote>
+<p>Example multiple databases:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">mysqldump --events --routines --triggers </span><span>\
+</span><span style="color:#bf616a;">--add-drop-database --compress --hex-blob </span><span>\
+</span><span style="color:#bf616a;">--opt --skip-comments --single-transaction </span><span>\
+</span><span style="color:#bf616a;">--databases</span><span> dbname dbname2 dbname3
+</span></code></pre>
+<h2 id="xz"><a class="zola-anchor" href="#xz" aria-label="Anchor link for: xz">🔗</a>xz</h2>
+<p>Compress the output:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>xz -c
+</span></code></pre>
+<blockquote>
+<p>-c is to write to stdout</p>
+</blockquote>
+<h2 id="openssl-encrypt"><a class="zola-anchor" href="#openssl-encrypt" aria-label="Anchor link for: openssl-encrypt">🔗</a>openssl (encrypt)</h2>
+<p>Encrypt the backup using asymmetric encryption (key pairs):</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">openssl</span><span> smime</span><span style="color:#bf616a;"> -encrypt -aes256 -stream -binary -out</span><span> /safe/path/${</span><span style="color:#bf616a;">DAY</span><span>}.sql.xz.enc</span><span style="color:#bf616a;"> -outform</span><span> DER /path/to/cert.pem
+</span></code></pre>
+<blockquote>
+<p>Notice the -stream option, it helps to encrypt files bigger than 1.5 GB, and ouput is piped: xz -c |</p>
+</blockquote>
+<p>How to create a pair of keys using openssl:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> openssl req</span><span style="color:#bf616a;"> -x509 -newkey</span><span> rsa:4096</span><span style="color:#bf616a;"> -sha256 -nodes -keyout</span><span> example.key</span><span style="color:#bf616a;"> -out</span><span> example.pem</span><span style="color:#bf616a;"> -subj </span><span>&quot;</span><span style="color:#a3be8c;">/CN=example.com</span><span>&quot;</span><span style="color:#bf616a;"> -days</span><span> 3650
+</span></code></pre>
+<blockquote>
+<p>To add password to the key remove the <code>-nodes</code> (No DES encryption) options. https://security.stackexchange.com/a/106530/54143</p>
+</blockquote>
+<h2 id="decrypt"><a class="zola-anchor" href="#decrypt" aria-label="Anchor link for: decrypt">🔗</a>Decrypt</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">openssl</span><span> smime</span><span style="color:#bf616a;"> -decrypt -in</span><span> database.sql.xz.enc</span><span style="color:#bf616a;"> -binary -inform</span><span> DEM</span><span style="color:#bf616a;"> -inkey</span><span> example.key</span><span style="color:#bf616a;"> -out</span><span> database.sql.xz
+</span></code></pre>
+<h2 id="un-compress"><a class="zola-anchor" href="#un-compress" aria-label="Anchor link for: un-compress">🔗</a>Un-compress</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">xz -d</span><span> database.sql.xz
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

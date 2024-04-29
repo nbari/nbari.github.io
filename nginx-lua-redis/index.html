@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+nginx + lua + redis &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;nginx-lua-redis&#x2F;">nginx + lua + redis</a></h2>
+<div class="post-header">
+    <span class="post-date">December 06, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/nginx/">nginx</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/lua/">lua</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/redis/">redis</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Basic <a href="https://en.wikipedia.org/wiki/Web_application_firewall">WAF</a> example
+using <a href="https://www.lua.org/">lua</a> + <a href="https://redis.io/">redis</a> within nginx.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>--
+</span><span>--   lua_package_path &quot;/usr/share/lua/5.1/nginx/?.lua;;&quot;;
+</span><span>--   lua_shared_dict ip_blacklist 4m;
+</span><span>--
+</span><span>local redis_host               = &quot;your.redis.tld&quot;
+</span><span>local redis_port               = 6379
+</span><span>local redis_connection_timeout = 300
+</span><span>local redis_pattern            = &quot;block-&quot;
+</span><span>local cache_ttl                = 3 -- seconds
+</span><span>local ip                       = ngx.var.remote_addr
+</span><span>local ip_blacklist             = ngx.shared.ip_blacklist
+</span><span>local last_update_time         = ip_blacklist:get(&quot;last_update_time&quot;);
+</span><span>
+</span><span>-- block if ip found in the local nginx dict
+</span><span>if ip_blacklist:get(ip) then
+</span><span>    ngx.log(ngx.DEBUG, &quot;Banned IP detected and refused access: &quot; .. ip);
+</span><span>    return ngx.exit(429);
+</span><span>end
+</span><span>
+</span><span>-- only update ip_blacklist from Redis once every cache_ttl seconds:
+</span><span>if last_update_time == nil or last_update_time &lt; ( ngx.now() - cache_ttl ) then
+</span><span>    local redis = require &quot;redis&quot;;
+</span><span>    local red = redis:new();
+</span><span>
+</span><span>    red:set_timeout(redis_connect_timeout);
+</span><span>
+</span><span>    local ok, err = red:connect(redis_host, redis_port);
+</span><span>    if not ok then
+</span><span>        ngx.log(ngx.DEBUG, &quot;Redis connection error while retrieving ip_blacklist: &quot; .. err);
+</span><span>    else
+</span><span>        local res, err = red:get(redis_pattern .. ip);
+</span><span>        if err then
+</span><span>            ngx.log(ngx.DEBUG, &quot;Redis read error while retrieving ip_blacklist: &quot; .. err);
+</span><span>            return
+</span><span>        end
+</span><span>        if res ~= ngx.null then
+</span><span>            local ttl, err = red:ttl(redis_pattern .. ip);
+</span><span>            if not ttl then
+</span><span>                ngx.log(ngx.DEBUG, &quot;Redis connection error while retrieving ttl&quot; .. err);
+</span><span>                return
+</span><span>            end
+</span><span>            -- add IP to the ip_blacklist dict inheriting the TTL form redis
+</span><span>            ip_blacklist:set(ip, true, ttl);
+</span><span>            ip_blacklist:set(&quot;last_update_time&quot;, ngx.now());
+</span><span>        end
+</span><span>    end
+</span><span>end
+</span></code></pre>
+<p>In nginx add this lines:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">resolver</span><span> 10.10.0.2 valid=10s; </span><span style="color:#65737e;"># depends on your redis host
+</span><span style="color:#bf616a;">lua_package_path </span><span>&quot;</span><span style="color:#a3be8c;">/usr/share/lua/5.1/nginx/?.lua;/etc/nginx/lua/?.lua;;</span><span>&quot;;
+</span><span style="color:#bf616a;">lua_shared_dict</span><span> ip_blacklist 4m;
+</span></code></pre>
+<p>And call the scrip in the server section:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>
+</span><span style="color:#bf616a;">server </span><span>{
+</span><span>    listen 80;
+</span><span>    server_name _;
+</span><span>    access_by_lua_file /etc/nginx/lua/ip_blacklist.lua;
+</span><span>    ...
+</span><span>}
+</span></code></pre>
+<p>In Linux (ubuntu) this may be required:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>apt install nginx-extras lua-nginx-redis
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

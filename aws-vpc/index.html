@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+AWS VPC &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-vpc&#x2F;">AWS VPC</a></h2>
+<div class="post-header">
+    <span class="post-date">June 18, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vpc/">VPC</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <blockquote>
+<p>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch Amazon Web
+Services (AWS) resources into a virtual network that you've defined. This
+virtual network closely resembles a traditional network that you'd operate in
+your own data center, with the benefits of using the scalable infrastructure of
+AWS.</p>
+</blockquote>
+<p><img src="/img/vpc.png" alt="VPC" /></p>
+<h1 id="things-to-keep-in-mind"><a class="zola-anchor" href="#things-to-keep-in-mind" aria-label="Anchor link for: things-to-keep-in-mind">🔗</a>Things to keep in mind.</h1>
+<h2 id="normalize-your-network"><a class="zola-anchor" href="#normalize-your-network" aria-label="Anchor link for: normalize-your-network">🔗</a>Normalize your network</h2>
+<p>First of all, do not invent IP's, please use and
+create a normalized range using the private ranges:
+https://en.wikipedia.org/wiki/Classful_network#Introduction_of_address_classes</p>
+<p>If you chose something like <code>10.0.0.0/16</code> (class A),
+create your segments in ascending order, for example for the
+<strong>public</strong> segment (color yellow in the above image) in where instances can get an
+[Elastic IP Address](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses -eip.html)
+create small segments, something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>10.0.0.0/24
+</span><span>10.0.1.0/24
+</span><span>10.0.2.0/24
+</span></code></pre>
+<blockquote>
+<p>mask 24 gives you 254 available IP's</p>
+</blockquote>
+<p>For the <strong>private</strong> segment (color green) in where instances need
+<a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a> you can crate
+bigger segments (2046 hosts per segment):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>10.0.8.0/21
+</span><span>10.0.16.0/21
+</span><span>10.0.24.0/21
+</span></code></pre>
+<blockquote>
+<p>mask 21 gives you 2046 available IP's</p>
+</blockquote>
+<p><a href="http://jodies.de/ipcalc">IPCalc</a> can help you get going while setting your network:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ brew install ipcalc
+</span></code></pre>
+<h2 id="avoid-using-an-ssh-bastion-host"><a class="zola-anchor" href="#avoid-using-an-ssh-bastion-host" aria-label="Anchor link for: avoid-using-an-ssh-bastion-host">🔗</a>Avoid using an SSH Bastion Host</h2>
+<p>If possible, the order of preference instead of having an instance listening for
+ssh connection:</p>
+<ol>
+<li>Create a <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">hardware VPN</a> between your office and AWS.</li>
+<li>Use a VPN instance with <a href="https://openvpn.net/">openvpn</a> or <a href="https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol">L2TP</a>.</li>
+<li>If you still want to use a Bastion Host, at least chagne the default SSH port, or implement <a href="/post/portknocking/">portknocking</a>.</li>
+</ol>
+<p>To keep it short the whole point of this is security. If you are already setting
+up a VPC, try to stick to it, the idea at the end is to have an infrastructure
+capable of scaling and running your applications as easy as possible but keeping
+in mind security.</p>
+<h2 id="nat-gateway"><a class="zola-anchor" href="#nat-gateway" aria-label="Anchor link for: nat-gateway">🔗</a>NAT GATEWAY</h2>
+<p>You can only have NAT GATEWAY for all subnets, just be sure to attach it to the public segment.</p>
+<p><img src="/img/nat-gateway-diagram.png" alt="nat gateway" /></p>
+<h1 id="network-segments"><a class="zola-anchor" href="#network-segments" aria-label="Anchor link for: network-segments">🔗</a>Network segments</h1>
+<p>Based on the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">availability zones</a> (<strong>A-Z</strong>) the public segment is partitioned in small subnets of 255 hosts:</p>
+<ul>
+<li>public A segment <code>10.10.0.0/24</code></li>
+<li>public B segment <code>10.10.1.0/24</code></li>
+</ul>
+<p>If you were using EU(Ireland) you could add a <code>public C</code> segment:</p>
+<ul>
+<li>public C segment <code>10.10.2.0/24</code></li>
+</ul>
+<p>Within <code>10.10.0.0/21</code> you can create up to 8 subnets of 254 hosts each (a, b, c, d, e, f, g, h) so it gives plenty of space for the public segment.</p>
+<h2 id="private-segment"><a class="zola-anchor" href="#private-segment" aria-label="Anchor link for: private-segment">🔗</a>Private segment</h2>
+<p>Same as the <strong>public</strong> segment the <strong>private</strong> segment is created based on the availability zones, with the main difference that segments are bigger (mask 21 - 2046 hosts), this is because  almost all the instances reside in the private segments.</p>
+<ul>
+<li>private A segment <code>10.10.8.0/21</code></li>
+<li>private B segment <code>10.10.16.0/21</code></li>
+</ul>
+<h2 id="segments-based-on-the-availability-zones"><a class="zola-anchor" href="#segments-based-on-the-availability-zones" aria-label="Anchor link for: segments-based-on-the-availability-zones">🔗</a>Segments based on the availability zones</h2>
+<p>When you create the subnets you are available to chose a <code>zone</code> or to chose <code>No preference</code> the idea in this case of specifying a zone is that when doing <a href="https://aws.amazon.com/autoscaling/">autoscaling</a> you can have more control and prevent in advance in case of a failure happens. For example you could create an Load balancer and attach 2 instances each in one zone (A, B) in case of a failure in zone A, you still having an instance in zone B so your application still up and running.</p>
+<h2 id="why-public-and-private-segments"><a class="zola-anchor" href="#why-public-and-private-segments" aria-label="Anchor link for: why-public-and-private-segments">🔗</a>Why public and private segments</h2>
+<p><strong>Public</strong> segments are the ones don't use a <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html">NAT gateway</a> and need an <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic/public IP</a> to be available to operate, therefore this segment is used for load balancer(ELB, HAproxy), vpn/bastion hosts or instances that need to be exposed and reached directly outside the VPN.</p>
+<p><strong>Private</strong> segments require a NAT gateway and can not be reached from the outside, if you attach/allocate a public IP to an instance located within the private segment, it simple will not work.</p>
+<p>Some of the benefits with this approach:</p>
+<ul>
+<li>Inherit security from VPC (no need to create multiple security groups).</li>
+<li>Less use of elastic IP's.</li>
+<li>Common IP's for all outgoing requests.</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

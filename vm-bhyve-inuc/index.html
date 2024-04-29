@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vm-bhyve inuc &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vm-bhyve-inuc&#x2F;">vm-bhyve inuc</a></h2>
+<div class="post-header">
+    <span class="post-date">September 30, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vm/">vm</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bhyve/">bhyve</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/inuc/">inuc</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Install <code>vm-bhyve</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install vm-bhyve
+</span></code></pre>
+<span id="continue-reading"></span>
+<p>Add to <code>/etc/rc.conf</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm_enable</span><span>=&quot;</span><span style="color:#a3be8c;">YES</span><span>&quot;
+</span><span style="color:#bf616a;">vm_dir</span><span>=&quot;</span><span style="color:#a3be8c;">zfs:zroot/vms</span><span>&quot;
+</span><span style="color:#bf616a;">vm_list</span><span>=&quot;&quot;
+</span><span style="color:#bf616a;">vm_delay</span><span>=&quot;</span><span style="color:#a3be8c;">5</span><span>&quot;
+</span></code></pre>
+<p>Create <code>/vms</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zfs create -o mountpoint=/vms zroot/vms
+</span></code></pre>
+<p>Change the ZFS recordsize property from its default value of 128K to 64K:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zfs set recordsize=64K zroot/vms
+</span></code></pre>
+<blockquote>
+<p>https://klarasystems.com/articles/from-0-to-bhyve-on-freebsd-13-1/</p>
+</blockquote>
+<p>Initialize <code>vm</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> init
+</span></code></pre>
+<p>crete the switch:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> switch create</span><span style="color:#bf616a;"> -i</span><span> em0</span><span style="color:#bf616a;"> -n</span><span> 20 public
+</span></code></pre>
+<blockquote>
+<p>I am using interface em0 and vlan 20</p>
+</blockquote>
+<p>Create ubuntu template: <code>/vms/.templates/ubuntu.conf</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">loader</span><span>=&quot;</span><span style="color:#a3be8c;">uefi</span><span>&quot;
+</span><span style="color:#bf616a;">cpu</span><span>=</span><span style="color:#a3be8c;">2
+</span><span style="color:#bf616a;">memory</span><span>=</span><span style="color:#a3be8c;">2G
+</span><span style="color:#bf616a;">network0_type</span><span>=&quot;</span><span style="color:#a3be8c;">virtio-net</span><span>&quot;
+</span><span style="color:#bf616a;">network0_switch</span><span>=&quot;</span><span style="color:#a3be8c;">public</span><span>&quot;
+</span><span style="color:#bf616a;">disk0_name</span><span>=&quot;</span><span style="color:#a3be8c;">disk0</span><span>&quot;
+</span><span style="color:#bf616a;">disk0_dev</span><span>=&quot;</span><span style="color:#a3be8c;">sparse-zvol</span><span>&quot;
+</span><span style="color:#bf616a;">disk0_type</span><span>=&quot;</span><span style="color:#a3be8c;">virtio-blk</span><span>&quot;
+</span><span style="color:#bf616a;">graphics</span><span>=&quot;</span><span style="color:#a3be8c;">yes</span><span>&quot;
+</span></code></pre>
+<p>Download ubuntu:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> iso https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso
+</span></code></pre>
+<p>Create VM using template ubuntu:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> create</span><span style="color:#bf616a;"> -t</span><span> ubuntu</span><span style="color:#bf616a;"> -s</span><span> 40G m1
+</span></code></pre>
+<p>Install VM using the iso</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> install m1 ubuntu-22.04.1-live-server-amd64.iso
+</span></code></pre>
+<blockquote>
+<p>Use VNC client :5900</p>
+</blockquote>
+<p>To stop/start:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> stop m1
+</span><span style="color:#bf616a;">vm</span><span> start m1
+</span></code></pre>
+<p>or using <code>bhyvectl</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">bhyvectl --destroy --vm</span><span>=m1
+</span></code></pre>
+<p>To enable on boot the VM:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sysrc</span><span> vm_list=&quot;</span><span style="color:#a3be8c;">m1</span><span>&quot;
+</span></code></pre>
+<p>If you have multiple VM's:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sysrc</span><span> vm_list=&quot;</span><span style="color:#a3be8c;">m1 m2 m3</span><span>&quot;
+</span></code></pre>
+<p>To get a list of VM's:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> list
+</span></code></pre>
+<p>To create more VM's using an existing one, create an image with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> image create</span><span style="color:#bf616a;"> -d</span><span> debian &lt;name of existing VM&gt;
+</span></code></pre>
+<blockquote>
+<p>use <code>-u</code> for not compressing the image</p>
+</blockquote>
+<p>Create the VM:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> image provision ced71c04-a971-11ed-b840-649d99b18002 &lt;name for new VM&gt;
+</span></code></pre>
+<p>You can check the size of volume with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">zfs</span><span> get volsize tank/vms/&lt;name of vm&gt;/disk0
+</span></code></pre>
+<p>And resize if required with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">zfs</span><span> set volsize=100G tank/vms/&lt;name of vm&gt;/disk0
+</span></code></pre>
+<p>Configure values for new created VM:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> configure &lt;name of VM&gt;
+</span></code></pre>
+<h2 id="booting-debian"><a class="zola-anchor" href="#booting-debian" aria-label="Anchor link for: booting-debian">🔗</a>Booting debian</h2>
+<p>If can't boot after the first reboot exit the SHELL:</p>
+<ol>
+<li>Enter exit get out of the UEFI Shell (you will come to BHYVE panel)</li>
+<li>Choose Boot Maintenance Manager</li>
+<li>(In the Boot Maintenance Manager ) Choose Boot From File</li>
+<li>(In File Explorer) NO VOLUME LABEL, [PciRoot(0x0)/ Pci()]  press Enter</li>
+<li>(Still in the File Explorer) Choose <EFI></li>
+<li>(Still in the File Explorer) Choose debian</li>
+<li>(Still in the File Explorer) Choose grubx64.efi</li>
+<li>Then you will get into the system</li>
+</ol>
+<p>Then:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># cd /boot/efi
+</span><span style="color:#65737e;"># mkdir -p EFI/BOOT
+</span><span style="color:#65737e;"># cp EFI/debian/grubx64.efi EFI/BOOT/bootx64.efi
+</span></code></pre>
+<blockquote>
+<p>https://record99.blogspot.com/2021/12/bdsdex-failed-to-load-boot0001-uefi-bhyve-sata-disk.html</p>
+</blockquote>
+<h2 id="add-datastore"><a class="zola-anchor" href="#add-datastore" aria-label="Anchor link for: add-datastore">🔗</a>Add datastore</h2>
+<p>To add a new datastore, fore example a pool of <code>SATA</code> disks:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> datastore add sata zfs:bhyve/vms
+</span></code></pre>
+<p>Then use it like this:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> create</span><span style="color:#bf616a;"> -d</span><span> sata my-new-vm
+</span></code></pre>
+<h2 id="console"><a class="zola-anchor" href="#console" aria-label="Anchor link for: console">🔗</a>console</h2>
+<p>To access the VM, if <code>VNC</code> is not available, you can either use <code>cu</code> or
+<code>vm console</code> for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cu -l /dev/nmdm-poudriere.1B
+</span></code></pre>
+<p>or</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">vm</span><span> console poudriere
+</span></code></pre>
+<p>Type <code>~ + Ctrl-D</code> to exit back to your host</p>
+<p>To get more info about the console type do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cat</span><span> /vms/&lt;name of vm&gt;/console
+</span><span style="color:#bf616a;">com1</span><span>=</span><span style="color:#a3be8c;">/dev/nmdm-</span><span>&lt;name </span><span style="color:#bf616a;">of</span><span> vm&gt;.1B
+</span><span style="color:#bf616a;">vnc</span><span>=</span><span style="color:#a3be8c;">0.0.0.0:5902
+</span></code></pre>
+<p>I am using <code>/vms/</code> because of the `vm_dir=&quot;zfs:tank/vms&quot;</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+perfomance checklist &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;perfomance-checklist&#x2F;">perfomance checklist</a></h2>
+<div class="post-header">
+    <span class="post-date">January 24, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sre/">SRE</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="perfomance-checklist-for-sre-s"><a class="zola-anchor" href="#perfomance-checklist-for-sre-s" aria-label="Anchor link for: perfomance-checklist-for-sre-s">🔗</a>Perfomance checklist for SRE's</h1>
+<h2 id="linux-perf-analysis-in-60s"><a class="zola-anchor" href="#linux-perf-analysis-in-60s" aria-label="Anchor link for: linux-perf-analysis-in-60s">🔗</a>Linux Perf Analysis in 60s</h2>
+<ul>
+<li>uptime  <code>load averages</code></li>
+<li>dmesg -T | tail <code>kernel errors</code></li>
+<li>vmstat 1 <code>overall stats by time</code></li>
+<li>mpstat -P ALL 1 <code>CPU balance</code></li>
+<li>pidstat 1 <code>process usage</code></li>
+<li>iostat -xz 1 <code>disk I/O</code></li>
+<li>free -m <code>memory usage</code></li>
+<li>sar -n DEV 1 <code>network I/O</code></li>
+<li>sar -n TCP,ETCP 1 <code>TCP stats</code></li>
+<li>top <code>check overview</code></li>
+</ul>
+<h2 id="linux-disk-checklist"><a class="zola-anchor" href="#linux-disk-checklist" aria-label="Anchor link for: linux-disk-checklist">🔗</a>Linux Disk Checklist</h2>
+<ul>
+<li>iostat -xz 1 <code>any disk I/O? if not, stop looking</code></li>
+<li>vmstat 1 <code>is this swapping? or, high sys time?</code></li>
+<li>df -h <code>are file systems nearly full?</code></li>
+<li>ext4slower 10 <code>(zfs*, xfs*, etc.) slow file system I/O?</code></li>
+<li>bioslower 10 <code>if so, check disks</code></li>
+<li>ext4dist 1 <code>check distribution and rate</code></li>
+<li>biolatency 1 <code>if interesting, check disks</code></li>
+<li>cat /sys/devices/…/ioerr_cnt <code>(if available) errors</code></li>
+<li>smartctl -l error /dev/sda1 <code>(if available) errors</code></li>
+</ul>
+<h2 id="linux-network-checklist"><a class="zola-anchor" href="#linux-network-checklist" aria-label="Anchor link for: linux-network-checklist">🔗</a>Linux Network Checklist</h2>
+<ul>
+<li>sar -n DEV,EDEV 1 <code>at interface limits? or use nicstat</code></li>
+<li>sar -n TCP,ETCP 1 <code>active/passive load, retransmit rate</code></li>
+<li>cat /etc/resolv.conf <code>it's always DNS</code></li>
+<li>mpstat -P ALL 1 <code>high kernel time? single hot CPU?</code></li>
+<li>tcpretrans <code>what are the retransmits? state?</code></li>
+<li>tcpconnect <code>connecting to anything unexpected?</code></li>
+<li>tcpaccept <code>unexpected workload?</code></li>
+<li>netstat -rnv <code>any inefficient routes?</code></li>
+<li>check firewall config <code>anything blocking/throttling?</code></li>
+<li>netstat -s <code>play 252 metric pickup</code></li>
+</ul>
+<h2 id="linux-cpu-checklist"><a class="zola-anchor" href="#linux-cpu-checklist" aria-label="Anchor link for: linux-cpu-checklist">🔗</a>Linux CPU Checklist</h2>
+<ul>
+<li>uptime <code>load averages</code></li>
+<li>vmstat 1 <code>system-wide utilization, run q length</code></li>
+<li>mpstat -P ALL 1 <code>CPU balance</code></li>
+<li>pidstat 1 <code>per-process CPU</code></li>
+<li>CPU flame graph <code>CPU profiling</code></li>
+<li>CPU subsecond offset heat map <code>look for gaps</code></li>
+<li>perf stat -a -- sleep 10 <code>IPC, LLC hit ratio</code></li>
+</ul>
+<p>https://nbari.com/post/observability-tools/</p>
+<p>{{&lt; youtube zxCWXNigDpA&gt;}}</p>
+<blockquote>
+<p>Thanks to Brendan Gregg's for all this info http://www.brendangregg.com/
+http://www.brendangregg.com/blog/2016-05-04/srecon2016-perf-checklists-for-sres.html</p>
+</blockquote>
+<p>The Realities of the Job of Delivering Reliability</p>
+<p>{{&lt; youtube Lf4RwlOdppg&gt;}}</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

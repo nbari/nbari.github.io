@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+bitwise chmod &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bitwise-chmod&#x2F;">bitwise chmod</a></h2>
+<div class="post-header">
+    <span class="post-date">March 02, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bitwise/">bitwise</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/permissions/">permissions</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="111-111-111"><a class="zola-anchor" href="#111-111-111" aria-label="Anchor link for: 111-111-111">🔗</a>111 111 111</h1>
+<table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>octal</td><td>777</td></tr>
+<tr><td>decimal</td><td>511</td></tr>
+<tr><td>binary</td><td>111 111 111</td></tr>
+<tr><td>perm</td><td>rwx rwx rwx</td></tr>
+</tbody></table>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>4 = r
+</span><span>2 = w
+</span><span>1 = x
+</span><span>
+</span><span>rwx = 4+2+1 = 7
+</span><span>rw  = 4+2+0 = 6
+</span><span>r   = 4+0+0 = 4
+</span><span>r x = 4+0+1 = 5
+</span><span>
+</span><span>7 = binary 111 = rwx
+</span><span>6 = binary 110 = rw-
+</span><span>5 = binary 101 = r-x
+</span><span>4 = binary 100 = r--
+</span><span>3 = binary 011 = -wx
+</span><span>2 = binary 010 = -w-
+</span><span>1 = binary 001 = --x
+</span><span>0 = binary 000 = ---
+</span></code></pre>
+<p>The full set of nine permission characters can then be grouped and summarized as three octal digits:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>rwxr-x-wx  is  rwx|r-x|-wx  is 111|101|011 ==&gt; the three digits 753
+</span><span>---r----x  is  ---|r--|--x  is 000|100|001 ==&gt; the three digits 041
+</span><span>---------  is  ---|---|---  is 000|000|000 ==&gt; the three digits 000
+</span><span>rwxrwxrwx  is  rwx|rwx|rwx  is 111|111|111 ==&gt; the three digits 777
+</span></code></pre>
+<p>Convert octal to decimal using python:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt;&gt;&gt; int(&#39;777&#39;, 8)
+</span></code></pre>
+<p>Decimal to binary:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt;&gt;&gt; &quot;{0:b}&quot;.format(511)
+</span><span>&#39;111111111&#39;
+</span></code></pre>
+<p>Bitwise AND with 07777 gives the last twelve bits of a number’s binary
+representation. With a Unix mode, this operation gives the permission or mode
+bits and discards any type information.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ perl -e &#39;printf &quot;%d\n&quot;, (stat &quot;foo&quot;)[2] &amp; 07777&#39;  # decimal, not useful
+</span><span>420
+</span><span>$ perl -e &#39;printf &quot;%o\n&quot;, (stat &quot;foo&quot;)[2] &amp; 07777&#39;  # octal
+</span><span>644
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

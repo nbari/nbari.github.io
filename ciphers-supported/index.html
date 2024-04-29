@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ciphers supported &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ciphers-supported&#x2F;">ciphers supported</a></h2>
+<div class="post-header">
+    <span class="post-date">January 08, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/nmap/">nmap</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssl/">ssl</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tls/">tls</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/scanssl/">scanssl</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>List ciphers supported by an HTTP server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nmap --script ssl-enum-ciphers -p 443 www.nbari.com
+</span></code></pre>
+<p>Example of output:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">PORT</span><span>    STATE SERVICE
+</span><span style="color:#bf616a;">443/tcp</span><span> open  https
+</span><span>| </span><span style="color:#bf616a;">ssl-enum-ciphers:
+</span><span>|   </span><span style="color:#bf616a;">TLSv1.1:
+</span><span>|     </span><span style="color:#bf616a;">ciphers:
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_256_CBC_SHA</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_128_CBC_SHA</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|     </span><span style="color:#bf616a;">compressors:
+</span><span>|       </span><span style="color:#bf616a;">NULL
+</span><span>|     </span><span style="color:#bf616a;">cipher</span><span> preference: server
+</span><span>|   </span><span style="color:#bf616a;">TLSv1.2:
+</span><span>|     </span><span style="color:#bf616a;">ciphers:
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</span><span> (secp256r1) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_128_GCM_SHA256</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_256_GCM_SHA384</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_128_CBC_SHA256</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_256_CBC_SHA</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|       </span><span style="color:#bf616a;">TLS_RSA_WITH_AES_128_CBC_SHA</span><span> (rsa 2048) </span><span style="color:#bf616a;">-</span><span> A
+</span><span>|     </span><span style="color:#bf616a;">compressors:
+</span><span>|       </span><span style="color:#bf616a;">NULL
+</span><span>|     </span><span style="color:#bf616a;">cipher</span><span> preference: server
+</span><span>|</span><span style="color:#bf616a;">_</span><span>  least strength: A
+</span><span>
+</span><span style="color:#bf616a;">Nmap</span><span> done: 1 IP address (1 host up) </span><span style="color:#bf616a;">scanned</span><span> in 9.18 seconds
+</span></code></pre>
+<p>Also check <code>sslscan</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install sslscan
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

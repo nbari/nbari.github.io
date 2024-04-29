@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+two factor authentication with ssh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;two-factor-authentication-with-ssh&#x2F;">two factor authentication with ssh</a></h2>
+<div class="post-header">
+    <span class="post-date">June 03, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/2fa/">2FA</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="two-factor-authentication-2fa-with-ssh"><a class="zola-anchor" href="#two-factor-authentication-2fa-with-ssh" aria-label="Anchor link for: two-factor-authentication-2fa-with-ssh">🔗</a>Two-Factor-Authentication &quot;2FA&quot; with SSH</h1>
+<p>Install google authenticator and libqrencode:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install pam_google_authenticator
+</span><span>pkg install libqrencode
+</span></code></pre>
+<p>Edit <code>/etc/pam.d/sshd</code> an add the following line to the <code>auth</code> section:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># auth
+</span><span style="color:#bf616a;">auth</span><span>            sufficient      pam_opie.so             no_warn no_fake_prompts
+</span><span style="color:#bf616a;">auth</span><span>            requisite       pam_opieaccess.so       no_warn allow_local
+</span><span style="color:#65737e;">#auth           sufficient      pam_krb5.so             no_warn try_first_pass
+</span><span style="color:#65737e;">#auth           sufficient      pam_ssh.so              no_warn try_first_pass
+</span><span style="color:#65737e;">#auth           required        pam_unix.so             no_warn try_first_pass
+</span><span style="color:#bf616a;">auth</span><span>            required        /usr/local/lib/pam_google_authenticator.so
+</span></code></pre>
+<p>Add this to<code>/etc/ssh/sshd_config</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>CallengeResponseAuthentication yes
+</span><span>UsePAM yes
+</span><span>AuthenticationMethods publickey,keyboard-interactive
+</span></code></pre>
+<p>This setup will do a &quot;publickey + verification code&quot;, without password, in
+case you require password edit the <code>/etc/pam.d/sshd</code> and ensure the line
+<code>pam_unix.so</code> is uncommented</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>auth           required        pam_unix.so             no_warn try_first_pass
+</span><span>auth           required        /usr/local/lib/pam_google_authenticator.so
+</span></code></pre>
+<h1 id="enable-2fa-per-user"><a class="zola-anchor" href="#enable-2fa-per-user" aria-label="Anchor link for: enable-2fa-per-user">🔗</a>Enable 2FA per user:</h1>
+<p>Execute google-authenticator as the user you want to protect with MFA:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>su - alice -c google-authenticator
+</span></code></pre>
+<p>You can answer all questions to <strong>Y</strong>, the configuration will be saved in this
+file <code>~/.google-authenticator</code></p>
+<p>The content of the file looks like this:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>&gt; cat </span><span style="color:#bf616a;">.google_authenticator
+</span><span style="color:#bf616a;">VLS3WGLC4YTVFSSK
+</span><span>&quot;</span><span style="color:#a3be8c;"> TIME_SKEW 0
+</span><span>&quot; RESETTING_TIME_SKEW
+</span><span>&quot;</span><span style="color:#a3be8c;"> RATE_LIMIT 3 30 1496497256
+</span><span>&quot; WINDOW_SIZE 17
+</span><span>&quot;</span><span style="color:#a3be8c;"> DISALLOW_REUSE 49883227
+</span><span>&quot; TOTP_AUTH
+</span><span style="color:#bf616a;">12268625
+</span><span style="color:#bf616a;">67512245
+</span><span style="color:#bf616a;">75096563
+</span><span style="color:#bf616a;">52505947
+</span><span style="color:#bf616a;">42447122
+</span></code></pre>
+<p>If for some reason the user can't scan the qrcode due the font issues, use the
+code instead, in this example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>VLS3WGLC4YTVFSSK
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ldap_auth_disable_tls_never_use_in_production &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ldap-auth-disable-tls-never-use-in-production&#x2F;">ldap_auth_disable_tls_never_use_in_production</a></h2>
+<div class="post-header">
+    <span class="post-date">February 21, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sssd/">sssd</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To use <a href="https://en.wikipedia.org/wiki/System_Security_Services_Daemon">sssd</a>
+disabling TLS ( sssd doesn't work without TLS but there is this undocumented
+option you can use ):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ldap_auth_disable_tls_never_use_in_production = true
+</span></code></pre>
+<p>In case you get this error:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Attribute &#39;ldap_auth_disable_tls_never_use_in_production&#39; is not allowed in section
+</span></code></pre>
+<p>Try running this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>authconfig --enablemkhomedir --enablesssdauth --updateall
+</span></code></pre>
+<p>The <code>enablemkhomedir</code> is a plus</p>
+<p>If when running <code>authconfig</code> your <code>/etc/sssd/sssd.conf</code> gets overwritten, set to
+no this options:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>USELDAP=no
+</span><span>USELDAPAUTH=no
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

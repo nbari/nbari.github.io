@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+SElinux &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;selinux&#x2F;">SElinux</a></h2>
+<div class="post-header">
+    <span class="post-date">February 21, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/selinux/">selinux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To disable SElinux temporaly:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>setenforce 0
+</span></code></pre>
+<p>To disable SELinux Permanetly, edit file <code>/etc/sysconfig/selinux</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># This file controls the state of SELinux on the system.
+</span><span style="color:#65737e;"># SELINUX= can take one of these three values:
+</span><span style="color:#65737e;">#     enforcing - SELinux security policy is enforced.
+</span><span style="color:#65737e;">#     permissive - SELinux prints warnings instead of enforcing.
+</span><span style="color:#65737e;">#     disabled - No SELinux policy is loaded.
+</span><span style="color:#bf616a;">SELINUX</span><span>=</span><span style="color:#a3be8c;">enforcing
+</span><span style="color:#65737e;"># SELINUXTYPE= can take one of three two values:
+</span><span style="color:#65737e;">#     targeted - Targeted processes are protected,
+</span><span style="color:#65737e;">#     minimum - Modification of targeted policy. Only selected processes are protected.
+</span><span style="color:#65737e;">#     mls - Multi Level Security protection.
+</span><span style="color:#bf616a;">SELINUXTYPE</span><span>=</span><span style="color:#a3be8c;">targeted
+</span></code></pre>
+<p>Change <code>SELINUX=enforcing</code> to <code>SELINUX=disabled</code></p>
+<p>Check the status of SELinux using <code>sestatus</code> command</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

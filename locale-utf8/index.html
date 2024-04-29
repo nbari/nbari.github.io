@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+locale UTF8 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;locale-utf8&#x2F;">locale UTF8</a></h2>
+<div class="post-header">
+    <span class="post-date">October 23, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>To enable UTF-8 globally by default, update the default login class by adding at the end
+this lines in file <code>/etc/login.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>   :charset=UTF-8:\
+</span><span>   :lang=en_US.UTF-8:
+</span></code></pre>
+<p>Normally add them after <code>:umask=022:</code>:</p>
+<pre data-lang="diff" style="background-color:#2b303b;color:#c0c5ce;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#bf616a;">-       :umask=022:
+</span><span style="color:#a3be8c;">+       :umask=022:\
+</span><span style="color:#a3be8c;">+       :charset=UTF-8:\
+</span><span style="color:#a3be8c;">+       :lang=en_US.UTF-8:
+</span></code></pre>
+<p>After modifying <code>/etc/login.conf</code> run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cap_mkdb /etc/login.conf
+</span></code></pre>
+<p>This will rebuild the login class capabilities database.</p>
+<h3 id="login-conf"><a class="zola-anchor" href="#login-conf" aria-label="Anchor link for: login-conf">🔗</a>~/.login_conf</h3>
+<p>Users may individually create a file called <code>.login_conf</code> in their home
+directory using the same format, consisting of a single entry with a record id
+of <code>me</code>.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat </span><span style="color:#bf616a;">~</span><span>/.login_conf
+</span><span style="color:#bf616a;">me:\
+</span><span>        :charset=UTF-8:\
+</span><span>        :lang=en_US.UTF-8:\
+</span><span>        :setenv=LC_COLLATE=C:
+</span></code></pre>
+<h3 id="locale"><a class="zola-anchor" href="#locale" aria-label="Anchor link for: locale">🔗</a>locale</h3>
+<p>Type <code>locale</code> to verity that the new settings took effect:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># locale
+</span><span>LANG=en_US.UTF-8
+</span><span>LC_CTYPE=&quot;en_US.UTF-8&quot;
+</span><span>LC_COLLATE=&quot;en_US.UTF-8&quot;
+</span><span>LC_TIME=&quot;en_US.UTF-8&quot;
+</span><span>LC_NUMERIC=&quot;en_US.UTF-8&quot;
+</span><span>LC_MONETARY=&quot;en_US.UTF-8&quot;
+</span><span>LC_MESSAGES=&quot;en_US.UTF-8&quot;
+</span><span>LC_ALL=
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

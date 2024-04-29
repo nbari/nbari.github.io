@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+headless mac gh-runner &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;headless-mac&#x2F;">headless mac gh-runner</a></h2>
+<div class="post-header">
+    <span class="post-date">April 17, 2024</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/apple/">apple</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/m1/">m1</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/headless/">headless</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To install an apple via headless, first update:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> softwareupdate</span><span style="color:#bf616a;"> -iaR
+</span></code></pre>
+<p>Then configure ssh to only accept public-keys:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sudo vim /etc/ssh/sshd_config
+</span></code></pre>
+<p>Ensure you have this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PasswordAuthentication no
+</span><span>ChallengeResponseAuthentication no
+</span></code></pre>
+<p>Reboot, test and then install homebrew:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">/bin/bash -c </span><span>&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">curl -fsSL</span><span style="color:#a3be8c;"> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)</span><span>&quot;
+</span></code></pre>
+<p>Create a <code>Brewfile</code></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> cat $</span><span style="color:#bf616a;">HOME</span><span>/Brewfile
+</span><span style="color:#bf616a;">brew </span><span>&quot;</span><span style="color:#a3be8c;">gmp</span><span>&quot;
+</span><span style="color:#bf616a;">brew </span><span>&quot;</span><span style="color:#a3be8c;">libyaml</span><span>&quot;
+</span><span style="color:#bf616a;">brew </span><span>&quot;</span><span style="color:#a3be8c;">tmux</span><span>&quot;
+</span><span style="color:#bf616a;">brew </span><span>&quot;</span><span style="color:#a3be8c;">ssh-vault</span><span>&quot;
+</span></code></pre>
+<p>Install with <code>brew bundle</code></p>
+<p>Create a user for Github Actions (runner)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner UserShell /bin/zsh
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner RealName &quot;</span><span style="color:#a3be8c;">GitHub runner</span><span>&quot;
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner UniqueID &quot;</span><span style="color:#a3be8c;">1001</span><span>&quot;
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner PrimaryGroupID 20
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -create</span><span> /Users/gh-runner NFSHomeDirectory /Users/gh-runner
+</span><span style="color:#65737e;"># change password
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -passwd</span><span> /Users/gh-runner secret
+</span><span style="color:#bf616a;">sudo</span><span> dscl .</span><span style="color:#bf616a;"> -append</span><span> /Groups/admin GroupMembership gh-runner
+</span><span style="color:#bf616a;">sudo</span><span> createhomedir</span><span style="color:#bf616a;"> -c
+</span></code></pre>
+<p>Test:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>su - gh-runner
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

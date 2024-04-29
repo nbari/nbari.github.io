@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Domain Fronting &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;domain-fronting&#x2F;">Domain Fronting</a></h2>
+<div class="post-header">
+    <span class="post-date">May 02, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cdn/">cdn</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/domain/">domain</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/fronting/">fronting</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If your domain becomes blocked you &quot;could use&quot; another one to bypass the block:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl -s -H &quot;Host: your-blocked-domain&quot; -H &quot;Connection: close&quot; &quot;https://new-tld/your/path&quot;
+</span></code></pre>
+<p>Both domains must be hosted within the same CDN, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl -s -H &quot;Host: images-na.ssl-images-amazon.com&quot; -H &quot;Connection: close&quot; &quot;https://cdn.atlassian.com/images/I/01rgQ3jqo7L.css&quot;
+</span></code></pre>
+<p>More info:</p>
+<ul>
+<li>https://www.optiv.com/blog/escape-and-evasion-egressing-restricted-networks</li>
+<li>https://www.peew.pw/blog/2018/2/22/how-i-identified-93k-domain-frontable-cloudfront-domains</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

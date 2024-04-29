@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ansible ImportError: No module named boto3 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ansible-no-module-named-boto3&#x2F;">ansible ImportError: No module named boto3</a></h2>
+<div class="post-header">
+    <span class="post-date">October 16, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ansible/">ansible</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/boto/">boto</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/macos/">macOS</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>When using <code>ansible 2.4.0.0</code> (macOS) to fix this problem update your library:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pip</span><span> install</span><span style="color:#bf616a;"> --upgrade --user</span><span> boto3
+</span></code></pre>
+<blockquote>
+<p>notice the --user it will update, your local $HOME/Library/Python/2.7/lib/python/site-packages</p>
+</blockquote>
+<p>By using <code>--upgrade</code> it will recreate the <code>site-packages</code>.</p>
+<p>Or create <code>PYTHONPATH</code> system variable:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+</span></code></pre>
+<h3 id="paramiko"><a class="zola-anchor" href="#paramiko" aria-label="Anchor link for: paramiko">🔗</a>paramiko</h3>
+<p>In case you get this error:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Unicode-objects must be encoded before hashing&quot;, &quot;unreachable&quot;: true
+</span></code></pre>
+<p>Try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pip install --upgrade --user paramiko==2.0.6
+</span></code></pre>
+<p>To upgrade,reinstall ansible just in case:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pip install --upgrade --user ansible
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

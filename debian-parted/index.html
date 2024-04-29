@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+debian parted &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;debian-parted&#x2F;">debian parted</a></h2>
+<div class="post-header">
+    <span class="post-date">September 26, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/parted/">parted</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/debian/">debian</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/resize/">resize</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="resize-aws-debian-jessie"><a class="zola-anchor" href="#resize-aws-debian-jessie" aria-label="Anchor link for: resize-aws-debian-jessie">🔗</a>Resize AWS Debian Jessie</h1>
+<p>Probably instance will have 8GB, to extend the disk, for example to 40GB do this:</p>
+<p>Install parted:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ apt-get install parted
+</span></code></pre>
+<p>Run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ /sbin/parted ---pretend-input-tty /dev/xvda resizepart 1 yes 100%
+</span></code></pre>
+<p>Resize2fs:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ resize2fs /dev/xvda1
+</span></code></pre>
+<p>Run <code>lsblk</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>root@ip-10-20-1-17:~# lsblk
+</span><span>NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+</span><span>xvda    202:0    0  40G  0 disk
+</span><span>`-xvda1 202:1    0  40G  0 part /
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

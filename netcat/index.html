@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+netcat &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;netcat&#x2F;">netcat</a></h2>
+<div class="post-header">
+    <span class="post-date">November 10, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/nc/">nc</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/netcat/">netcat</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/telnet/">telnet</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>As a replacement to telnet now that has been removed from macOS,
+<a href="https://en.wikipedia.org/wiki/Netcat">netcat</a> can be used.</p>
+<p>To test the response from a web server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>echo -en &quot;GET / HTTP/1.0\n\n\n&quot; | nc google.com 80
+</span></code></pre>
+<p>If using HTTP/1.1 the host will be required:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>echo -en &quot;GET / HTTP/1.1\nHost: google.com\n\n&quot; | nc google.com 80
+</span></code></pre>
+<p>Test to see if port accepts connections:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> nc</span><span style="color:#bf616a;"> -vz</span><span> google.com 80
+</span><span style="color:#bf616a;">found</span><span> 0 associations
+</span><span style="color:#bf616a;">found</span><span> 1 connections:
+</span><span>     </span><span style="color:#bf616a;">1:</span><span> flags=</span><span style="color:#d08770;">82</span><span>&lt;CONNECTED,PREFERRED&gt;
+</span><span>        </span><span style="color:#bf616a;">outif</span><span> en1
+</span><span>        </span><span style="color:#bf616a;">src</span><span> 192.168.1.100 port 50532
+</span><span>        </span><span style="color:#bf616a;">dst</span><span> 216.58.211.110 port 80
+</span><span>        </span><span style="color:#bf616a;">rank</span><span> info not available
+</span><span>        </span><span style="color:#bf616a;">TCP</span><span> aux info available
+</span><span>
+</span><span style="color:#bf616a;">Connection</span><span> to google.com port 80 </span><span style="color:#b48ead;">[</span><span>tcp/http</span><span style="color:#b48ead;">]</span><span> succeeded!
+</span></code></pre>
+<p>The -z option is specifies that <code>nc</code> should just scan for listening daemons,
+without sending any data to them. If using just -v it will keep connection open
+and <code>ctrl + c</code> could be used to close the connection.</p>
+<h3 id="like-telnet"><a class="zola-anchor" href="#like-telnet" aria-label="Anchor link for: like-telnet">🔗</a>like telnet</h3>
+<p>To send data instead like where in telnet use the option <code>-t</code> which causes <code>nc</code>
+to send RFC 854 DON'T and WON'T responses to RFC 854 DO and WILL requests. This
+makes it possible to use <code>nc</code> to script telnet sessions.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> nc</span><span style="color:#bf616a;"> -vt</span><span> google.com 80
+</span><span style="color:#bf616a;">found</span><span> 0 associations
+</span><span style="color:#bf616a;">found</span><span> 1 connections:
+</span><span>     </span><span style="color:#bf616a;">1:</span><span> flags=</span><span style="color:#d08770;">82</span><span>&lt;CONNECTED,PREFERRED&gt;
+</span><span>        </span><span style="color:#bf616a;">outif</span><span> en1
+</span><span>        </span><span style="color:#bf616a;">src</span><span> 192.168.1.100 port 50532
+</span><span>        </span><span style="color:#bf616a;">dst</span><span> 216.58.211.110 port 80
+</span><span>        </span><span style="color:#bf616a;">rank</span><span> info not available
+</span><span>        </span><span style="color:#bf616a;">TCP</span><span> aux info available
+</span><span>
+</span><span style="color:#bf616a;">Connection</span><span> to google.com port 80 </span><span style="color:#b48ead;">[</span><span>tcp/http</span><span style="color:#b48ead;">]</span><span> succeeded!
+</span><span style="color:#bf616a;">GET</span><span> /   &lt;------- you write this
+</span></code></pre>
+<h3 id="scan"><a class="zola-anchor" href="#scan" aria-label="Anchor link for: scan">🔗</a>scan</h3>
+<p>To scan a range of ports:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nc -zvn your-target.tld 1-1000
+</span></code></pre>
+<blockquote>
+<p>The <code>-n</code> option is to avoid doing any DNS or service lookups</p>
+</blockquote>
+<p>To print the TPC banner of the running service this could be used:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>echo &quot;&quot; | nc -vn -w1 -G1 your-target.tld -r 1-1000
+</span></code></pre>
+<p>The <code>-w1</code> is for waiting no more than 1 second if the connection and stdin are
+idle, the <code>echo &quot;&quot;</code> send a black string to the open port and print out any
+banner received in response.</p>
+<p>The <code>-G1</code> sets the ctp connection timeout to 1 second.</p>
+<p>The <code>-r</code> specifies that the source and/or destination ports should chosen
+randomly instead of sequentially.</p>
+<p>https://docs.saltstack.com/en/latest/topics/mine/</p>
+<h3 id="listen-for-connections"><a class="zola-anchor" href="#listen-for-connections" aria-label="Anchor link for: listen-for-connections">🔗</a>listen for connections</h3>
+<p>To open a port and keep listening on it, useful for testing incoming
+connections:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nc -lk 8080
+</span></code></pre>
+<p>To test you can connect to the opened port by doing:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nc -vt 0 8080
+</span></code></pre>
+<blockquote>
+<p>0 stands for localhost but you could use the IP (192.168.X.X) for example</p>
+</blockquote>
+<h3 id="transfer-a-file"><a class="zola-anchor" href="#transfer-a-file" aria-label="Anchor link for: transfer-a-file">🔗</a>transfer a file</h3>
+<p>On the server where you want to store the file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nc -l 8080 &gt;  outfile
+</span></code></pre>
+<p>On the client where you have the file that you want to send:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nc X.X.X.X 8080 &lt; infile
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+webscraping &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;webscraping&#x2F;">webscraping</a></h2>
+<div class="post-header">
+    <span class="post-date">October 27, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/selenium/">selenium</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/scraper/">scraper</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/python/">python</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="webscraping-using-python-chrome"><a class="zola-anchor" href="#webscraping-using-python-chrome" aria-label="Anchor link for: webscraping-using-python-chrome">🔗</a>Webscraping using python + chrome</h1>
+<p>In mac OS X, install chromedriver and selenium:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install chromedriver
+</span></code></pre>
+<p>Install selenium via pip:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pip install -U selenium
+</span></code></pre>
+<blockquote>
+<p>if required to install globally <code>sudo pip install selenium</code></p>
+</blockquote>
+<p>To test, open a terminal, type python and try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Python 2.7.12 (default, Oct 11 2016, 05:20:59)
+</span><span>[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin
+</span><span>Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</span><span>&gt;&gt;&gt; from selenium import webdriver
+</span><span>&gt;&gt;&gt; driver = webdriver.Chrome()
+</span><span>&gt;&gt;&gt; driver.get(&quot;https://nbari.com&quot;)
+</span><span>&gt;&gt;&gt;
+</span></code></pre>
+<h1 id="scraping"><a class="zola-anchor" href="#scraping" aria-label="Anchor link for: scraping">🔗</a>scraping</h1>
+<p>The following example will do:</p>
+<ol>
+<li>Fill a form,</li>
+<li>Parse links of the results.</li>
+<li>Open each link.</li>
+<li>Get text data from a div.</li>
+<li>Go back to step 2 until all links are parsed.</li>
+</ol>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">from </span><span>selenium </span><span style="color:#b48ead;">import </span><span>webdriver
+</span><span style="color:#b48ead;">from </span><span>selenium.webdriver.common.keys </span><span style="color:#b48ead;">import </span><span>Keys
+</span><span>
+</span><span>driver = webdriver.</span><span style="color:#bf616a;">Chrome</span><span>()
+</span><span>driver.</span><span style="color:#bf616a;">get</span><span>(&quot;</span><span style="color:#a3be8c;">https://search.cro.ie/company/CompanySearch.aspx</span><span>&quot;)
+</span><span>inputElement = driver.</span><span style="color:#bf616a;">find_element_by_id</span><span>(&quot;</span><span style="color:#a3be8c;">ctl00_ContentPlaceHolder1_textCompanyName</span><span>&quot;)
+</span><span>inputElement.</span><span style="color:#bf616a;">send_keys</span><span>(&quot;</span><span style="color:#a3be8c;">limo</span><span>&quot;)
+</span><span>inputElement.</span><span style="color:#bf616a;">send_keys</span><span>(Keys.</span><span style="color:#bf616a;">ENTER</span><span>)
+</span><span>links = driver.</span><span style="color:#bf616a;">find_elements_by_xpath</span><span>(&quot;</span><span style="color:#a3be8c;">//*[@id=&#39;ctl00_ContentPlaceHolder1_GridView1&#39;]/tbody/tr/td/a</span><span>&quot;)
+</span><span>
+</span><span>data = {}
+</span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">xrange</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(links)):
+</span><span>    links = driver.</span><span style="color:#bf616a;">find_elements_by_xpath</span><span>(&quot;</span><span style="color:#a3be8c;">//*[@id=&#39;ctl00_ContentPlaceHolder1_GridView1&#39;]/tbody/tr/td/a</span><span>&quot;)
+</span><span>    idx_name = links[i].text
+</span><span>    links[i].</span><span style="color:#bf616a;">click</span><span>()
+</span><span>    div = driver.</span><span style="color:#bf616a;">find_element_by_id</span><span>(&quot;</span><span style="color:#a3be8c;">companyDetails</span><span>&quot;)
+</span><span>    data[idx_name] = div.text
+</span><span>    driver.</span><span style="color:#bf616a;">execute_script</span><span>(&quot;</span><span style="color:#a3be8c;">window.history.go(-1)</span><span>&quot;)
+</span><span>
+</span><span style="color:#b48ead;">for </span><span>key, value </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">sorted</span><span>(data.</span><span style="color:#bf616a;">iteritems</span><span>()):
+</span><span>    </span><span style="color:#b48ead;">print </span><span>&quot;</span><span style="color:#a3be8c;">-</span><span>&quot; * </span><span style="color:#d08770;">64
+</span><span>    </span><span style="color:#b48ead;">print </span><span>&quot;</span><span style="color:#d08770;">%s</span><span style="color:#96b5b4;">\n</span><span style="color:#d08770;">%s</span><span>&quot; % (key, value)
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vault SSH &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vault-ssh&#x2F;">vault SSH</a></h2>
+<div class="post-header">
+    <span class="post-date">April 16, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vault/">vault</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Vault <code>SSH</code> Secrets Engine</p>
+<p>Enable the ssh engine:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault secrets enable ssh
+</span></code></pre>
+<p>or chosse a path:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault secrets enable</span><span style="color:#bf616a;"> -path</span><span>=ssh-client-signer ssh
+</span></code></pre>
+<p>Configure Vault with a CA for signing client keys using the <code>/config/ca</code> endpoint:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write ssh/config/ca generate_signing_key=true
+</span></code></pre>
+<p>Get the public key:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -s </span><span>$</span><span style="color:#bf616a;">VAULT_ADDR</span><span>/v1/ssh/public_key
+</span></code></pre>
+<p>Copy the key to your servers and add this to <code>sshd_config</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>TrustedUserCAKeys /etc/ssh/truasted-ca.pem
+</span><span>AuthorizedKeysFile /dev/null
+</span><span>PasswordAuthentication no
+</span><span>ChallengeResponseAuthentication no
+</span></code></pre>
+<p>Create a role:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write ssh/roles/default -&lt;&lt;&quot;</span><span style="color:#b48ead;">EOH</span><span>&quot;
+</span><span style="color:#a3be8c;">{
+</span><span style="color:#a3be8c;">  &quot;algorithm_signer&quot;: &quot;rsa-sha2-256&quot;,
+</span><span style="color:#a3be8c;">  &quot;allow_user_certificates&quot;: true,
+</span><span style="color:#a3be8c;">  &quot;allowed_users&quot;: &quot;*&quot;,
+</span><span style="color:#a3be8c;">  &quot;allowed_extensions&quot;: &quot;permit-pty,permit-port-forwarding,permit-agent-forwarding&quot;,
+</span><span style="color:#a3be8c;">  &quot;default_extensions&quot;: [
+</span><span style="color:#a3be8c;">    {
+</span><span style="color:#a3be8c;">      &quot;permit-pty&quot;: &quot;&quot;,
+</span><span style="color:#a3be8c;">      &quot;permit-port-forwarding&quot;: &quot;&quot;,
+</span><span style="color:#a3be8c;">      &quot;permit-agent-forwarding&quot;: &quot;&quot;
+</span><span style="color:#a3be8c;">    }
+</span><span style="color:#a3be8c;">  ],
+</span><span style="color:#a3be8c;">  &quot;key_type&quot;: &quot;ca&quot;,
+</span><span style="color:#a3be8c;">  &quot;default_user&quot;: &quot;devops&quot;,
+</span><span style="color:#a3be8c;">  &quot;ttl&quot;: &quot;30m0s&quot;
+</span><span style="color:#a3be8c;">}
+</span><span style="color:#b48ead;">EOH
+</span></code></pre>
+<p>Ask Vault to sign your public key.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write</span><span style="color:#bf616a;"> -field</span><span>=signed_key ssh/sign/default public_key=@$</span><span style="color:#bf616a;">HOME</span><span>/.ssh/id_rsa.pub &gt; </span><span style="color:#bf616a;">~</span><span>/.ssh/id_rsa-cert.pub
+</span></code></pre>
+<p>For a specific user:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write</span><span style="color:#bf616a;"> -field</span><span>=signed_key ssh/sign/default public_key=@$</span><span style="color:#bf616a;">HOME</span><span>/.ssh/id_rsa.pub valid_principals=nbari &gt; </span><span style="color:#bf616a;">~</span><span>/.ssh/id_rsa-cert.pub
+</span></code></pre>
+<blockquote>
+<p>If you are saving the certificate directly beside your SSH keypair, suffix the
+name with -cert.pub (~/.ssh/id_rsa-cert.pub). With this naming scheme, OpenSSH
+will automatically use it during authentication.</p>
+</blockquote>
+<p>Examine the signed certificate:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> ssh-keygen</span><span style="color:#bf616a;"> -Lf ~</span><span>/.ssh/id_rsa-cert.pub
+</span></code></pre>
+<p>Test:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> ssh</span><span style="color:#bf616a;"> -i</span><span> id_rsa_cert.pub</span><span style="color:#bf616a;"> -i</span><span> id_rsa username@host
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

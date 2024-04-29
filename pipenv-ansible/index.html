@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+pipenv + ansible &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;pipenv-ansible&#x2F;">pipenv + ansible</a></h2>
+<div class="post-header">
+    <span class="post-date">October 24, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>First install <a href="https://docs.pipenv.org/">pipenv</a> in case you don't have it:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pip install --user pipenv
+</span></code></pre>
+<p>Next, for testing create a directory <code>/tmp/my-ansible</code>, within that directory
+create a file named <code>requirements.txt</code> with the following content:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>ansible==</span><span style="color:#d08770;">2.4.0.0
+</span><span>boto==</span><span style="color:#d08770;">2.48.0
+</span><span>boto3==</span><span style="color:#d08770;">1.4.4
+</span><span>paramiko==</span><span style="color:#d08770;">2.0.6
+</span></code></pre>
+<p><code>cd</code> in to <code>/tmp/my-ansible</code> or if you already have a working project <code>cd</code> in to
+it and run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pipenv install -r requirements.txt
+</span></code></pre>
+<p>Or you could just run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pipenv install ansible
+</span></code></pre>
+<p>It will create 2 new files <code>Pipfile</code> and <code>Pipfile.lock</code>.</p>
+<p>To active <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> in the project just run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pipenv shell
+</span></code></pre>
+<p>That will activate the environment for your working directory and launch/run
+your project based on your settings/requirements.txt.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ansible --version
+</span></code></pre>
+<p>When finish just type <code>exit</code></p>
+<p>In case you would like to remove the <code>virtualenv</code> created by <code>pipenv</code> run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pipenv --rm
+</span></code></pre>
+<p>More info here: https://github.com/kennethreitz/pipenv</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

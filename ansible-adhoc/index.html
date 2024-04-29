@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Ansible ad-hoc &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ansible-adhoc&#x2F;">Ansible ad-hoc</a></h2>
+<div class="post-header">
+    <span class="post-date">May 09, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ansible/">ansible</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ad-hoc/">ad-hoc</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To send a command to all the servers within a playbook:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ansible all -a &quot;service chronyd restart&quot; -u devops --become
+</span></code></pre>
+<h2 id="what-s-an-ad-hoc-command"><a class="zola-anchor" href="#what-s-an-ad-hoc-command" aria-label="Anchor link for: what-s-an-ad-hoc-command">🔗</a>What’s an ad-hoc command?</h2>
+<p>An ad-hoc command is something that you might type in to do something really
+quick, but don’t want to save for later.</p>
+<p>http://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

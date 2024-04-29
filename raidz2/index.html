@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+raidz2 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;raidz2&#x2F;">raidz2</a></h2>
+<div class="post-header">
+    <span class="post-date">December 28, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/zfs/">zfs</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/raid/">raid</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mfi/">mfi</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If using a DELL PERL 6/i Integrated, configure each disk as RAID-0:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>&gt; mfiutil </span><span style="color:#bf616a;">show</span><span> config
+</span><span style="color:#bf616a;">mfi0</span><span> Configuration: 8 arrays, 8 volumes, 1 spares
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 0 of 2 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  1 ( 1863G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&gt; SATA
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  6 ( 1863G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY</span><span style="color:#d08770;">35</span><span>&gt; SATA
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 1 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  0 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ</span><span style="color:#d08770;">0</span><span>&gt; SCSI-6
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 2 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  2 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&gt; SCSI-6
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 3 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  3 (  932G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&gt; SCSI-6
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 4 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  4 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&gt; SAS
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 5 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  5 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C</span><span style="color:#d08770;">4</span><span>&gt; SAS
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 6 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  8 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&gt; SAS
+</span><span>    </span><span style="color:#bf616a;">array</span><span> 7 of 1 drives:
+</span><span>        </span><span style="color:#bf616a;">drive</span><span>  9 (  466G) </span><span style="color:#bf616a;">ONLINE </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L</span><span style="color:#d08770;">824</span><span>&gt; SAS
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid0 (1863G) </span><span style="color:#bf616a;">RAID-1</span><span> 64K OPTIMAL &lt;raid1&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 0
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid1 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r0&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 1
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid2 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r2&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 2
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid3 (931G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r3&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 3
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid4 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r4&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 4
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid5 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r5&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 5
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid6 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r8&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 6
+</span><span>    </span><span style="color:#bf616a;">volume</span><span> mfid7 (465G) </span><span style="color:#bf616a;">RAID-0</span><span> 64K OPTIMAL &lt;r9&gt; spans:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 7
+</span><span>    </span><span style="color:#bf616a;">dedicated</span><span> spare  7 ( 1863G) </span><span style="color:#bf616a;">HOT</span><span> SPARE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&gt; SATA backs:
+</span><span>        </span><span style="color:#bf616a;">array</span><span> 0
+</span></code></pre>
+<p>Array has one RAID-1 using 3 disks and the others are disk are each one a RAID-0 volume</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>&gt; mfiutil </span><span style="color:#bf616a;">show</span><span> volumes
+</span><span style="color:#bf616a;">mfi0</span><span> Volumes:
+</span><span>  </span><span style="color:#bf616a;">Id</span><span>     Size    Level   Stripe  State   Cache   Name
+</span><span> </span><span style="color:#bf616a;">mfid0</span><span> ( 1863G) </span><span style="color:#bf616a;">RAID-1</span><span>      64K OPTIMAL Disabled &lt;raid1&gt;
+</span><span> </span><span style="color:#bf616a;">mfid1</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r0&gt;
+</span><span> </span><span style="color:#bf616a;">mfid2</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r2&gt;
+</span><span> </span><span style="color:#bf616a;">mfid3</span><span> (  931G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r3&gt;
+</span><span> </span><span style="color:#bf616a;">mfid4</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r4&gt;
+</span><span> </span><span style="color:#bf616a;">mfid5</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r5&gt;
+</span><span> </span><span style="color:#bf616a;">mfid6</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r8&gt;
+</span><span> </span><span style="color:#bf616a;">mfid7</span><span> (  465G) </span><span style="color:#bf616a;">RAID-0</span><span>      64K OPTIMAL Disabled &lt;r9&gt;
+</span></code></pre>
+<p>To configure the raid:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zpool create -f &lt;pool-name&gt; raidz2 mfid1 mfid2 mfid3 mfid4 mfid5 mfid6
+</span></code></pre>
+<p>Add a spare:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zpool add  &lt;pool-name&gt; spare mfid7
+</span></code></pre>
+<p>This is the output of <code>zpool status</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>&gt; zpool </span><span style="color:#bf616a;">status
+</span><span>  </span><span style="color:#bf616a;">pool:</span><span> sas
+</span><span> </span><span style="color:#bf616a;">state:</span><span> ONLINE
+</span><span>  </span><span style="color:#bf616a;">scan:</span><span> none requested
+</span><span style="color:#bf616a;">config:
+</span><span>
+</span><span>        </span><span style="color:#bf616a;">NAME</span><span>        STATE
+</span><span>        </span><span style="color:#bf616a;">sas</span><span>         ONLINE
+</span><span>          </span><span style="color:#bf616a;">raidz2-0</span><span>  ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid1</span><span>   ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid2</span><span>   ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid3</span><span>   ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid4</span><span>   ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid5</span><span>   ONLINE
+</span><span>            </span><span style="color:#bf616a;">mfid6</span><span>   ONLINE
+</span><span>        </span><span style="color:#bf616a;">spares
+</span><span>          </span><span style="color:#bf616a;">mfid7</span><span>     AVAIL
+</span><span>
+</span><span style="color:#bf616a;">errors:</span><span> No known data errors
+</span></code></pre>
+<p>In this case the pool named <code>sas</code> is a mix of SAS, SCSI of different sizes:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>&gt; mfiutil </span><span style="color:#bf616a;">show</span><span> drives
+</span><span style="color:#bf616a;">mfi0</span><span> Physical Drives:
+</span><span> </span><span style="color:#bf616a;">0</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST500NM0001 PS07 serial=Z1M17ZJ</span><span style="color:#d08770;">0</span><span>&gt; SCSI-6 E1:S0
+</span><span> </span><span style="color:#bf616a;">1</span><span> ( 1863G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BX6V&gt; SATA E1:S1
+</span><span> </span><span style="color:#bf616a;">2</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST500NM0001 0002 serial=Z1M0DAVE&gt; SCSI-6 E1:S2
+</span><span> </span><span style="color:#bf616a;">3</span><span> (  932G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST1000NM0023 0004 serial=Z1W54HJV&gt; SCSI-6 E1:S3
+</span><span> </span><span style="color:#bf616a;">4</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L94N&gt; SAS E1:S4
+</span><span> </span><span style="color:#bf616a;">5</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L9C</span><span style="color:#d08770;">4</span><span>&gt; SAS E1:S5
+</span><span> </span><span style="color:#bf616a;">6</span><span> ( 1863G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BY</span><span style="color:#d08770;">35</span><span>&gt; SATA E1:S6
+</span><span> </span><span style="color:#bf616a;">7</span><span> ( 1863G) </span><span style="color:#bf616a;">HOT</span><span> SPARE &lt;ST2000DM006-2DM1 CC26 serial=Z4Z8BPTG&gt; SATA E1:S7
+</span><span> </span><span style="color:#bf616a;">8</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L8DD&gt; SAS E1:S8
+</span><span> </span><span style="color:#bf616a;">9</span><span> (  466G) </span><span style="color:#bf616a;">ONLINE    </span><span>&lt;SEAGATE ST3500620SS MS04 serial=9QM5L</span><span style="color:#d08770;">824</span><span>&gt; SAS E1:S9
+</span></code></pre>
+<p>Enable cache on all disks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>i=0; while [ $i -le 9 ]; do mfiutil cache mfid${i} enable; i=`expr $i + 1`; done
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Golang HTTP Timeouts &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;golang-http-timeouts&#x2F;">Golang HTTP Timeouts</a></h2>
+<div class="post-header">
+    <span class="post-date">December 01, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/go/">go</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/timeout/">timeout</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms
+</span></code></pre>
+<p>Check that your go server is using proper timeouts, example:</p>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">srv </span><span>:= &amp;</span><span style="color:#bf616a;">http</span><span>.</span><span style="color:#bf616a;">Server</span><span>{
+</span><span>        </span><span style="color:#bf616a;">Addr</span><span>:         &quot;</span><span style="color:#a3be8c;">:80</span><span>&quot;,
+</span><span>        </span><span style="color:#bf616a;">Handler</span><span>:      </span><span style="color:#bf616a;">router</span><span>,
+</span><span>        </span><span style="color:#bf616a;">ReadTimeout</span><span>:  </span><span style="color:#d08770;">5 </span><span>* </span><span style="color:#bf616a;">time</span><span>.</span><span style="color:#bf616a;">Second</span><span>,
+</span><span>        </span><span style="color:#bf616a;">WriteTimeout</span><span>: </span><span style="color:#d08770;">10 </span><span>* </span><span style="color:#bf616a;">time</span><span>.</span><span style="color:#bf616a;">Second</span><span>,
+</span><span>}
+</span><span style="color:#bf616a;">log</span><span>.</span><span style="color:#bf616a;">Fatal</span><span>(</span><span style="color:#bf616a;">srv</span><span>.</span><span style="color:#bf616a;">ListenAndServe</span><span>())
+</span></code></pre>
+<p>https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

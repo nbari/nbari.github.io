@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+syslog-ng Ubuntu &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;syslog-ng-ubuntu&#x2F;">syslog-ng Ubuntu</a></h2>
+<div class="post-header">
+    <span class="post-date">December 15, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/java/">java</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ubuntu/">ubuntu</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/syslog-ng/">syslog-ng</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Errors you may get:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Can&#39;t find class; class_name=&#39;org.syslog_ng.elasticsearch_v2.ElasticSearchDestination&#39;
+</span></code></pre>
+<p>Working configuration:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>@version:3.13
+</span><span>@module mod-java
+</span><span>@include &quot;scl.conf&quot;
+</span><span>options {
+</span><span>    flush_lines(0);
+</span><span>    keep_hostname(yes);
+</span><span>    normalize_hostnames(yes);
+</span><span>    threaded(yes);
+</span><span>};
+</span><span>source      s_local   { system(); internal();   };
+</span><span>source      s_network { syslog(transport(tcp)); };
+</span><span>destination d_all { file (&quot;/var/log/all.log&quot;); };
+</span><span>destination d_elastic {
+</span><span>  elasticsearch2(
+</span><span>    client-lib-dir(&quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&quot;)
+</span><span>    client_mode(&quot;http&quot;)
+</span><span>    cluster_url(&quot;http://your-elasticsearch:9200&quot;)
+</span><span>    index(&quot;syslog-ng_${YEAR}.${MONTH}.${DAY}&quot;)
+</span><span>    type(&quot;syslog&quot;)
+</span><span>    cluster(&quot;test&quot;)
+</span><span>    flush-limit(&quot;1000&quot;)
+</span><span>    template(&quot;$(format-json --scope rfc5424 --scope nv-pairs --exclude DATE --key ISODATE)&quot;)
+</span><span>    time-zone(&quot;UTC&quot;)
+</span><span>  );
+</span><span>};
+</span><span>log { source(s_network); destination(d_elastic); };
+</span><span>log { source(s_local); destination(d_all); };
+</span></code></pre>
+<p>Notice the <code>client-lib-dir</code> line:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>client-lib-dir(&quot;/usr/lib/syslog-ng/3.13/java-modules/elastic-jest-client/*.jar:/usr/share/elasticsearch/lib/:/usr/lib/syslog-ng/3.13/java-modules/&quot;)
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Centos Disable Ipv6 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;centos-disable-ipv6&#x2F;">Centos Disable Ipv6</a></h2>
+<div class="post-header">
+    <span class="post-date">November 29, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ipv6/">ipv6</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Edit file <code>/etc/default/grub</code> and add <code>ipv6.disable=1</code>, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># cat /etc/default/grub
+</span><span>GRUB_TIMEOUT=5
+</span><span>GRUB_DEFAULT=saved
+</span><span>GRUB_DISABLE_SUBMENU=true
+</span><span>GRUB_TERMINAL_OUTPUT=&quot;console&quot;
+</span><span>GRUB_CMDLINE_LINUX=&quot;ipv6.disable=1 crashkernel=auto rhgb quiet&quot;
+</span><span>GRUB_DISABLE_RECOVERY=&quot;true&quot;
+</span></code></pre>
+<p>Then regenerate and reboot:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>grub2-mkconfig -o /boot/grub2/grub.cfg
+</span></code></pre>
+<p>And</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>reboot
+</span></code></pre>
+<p>Using sysctl (no need to reboot), append below lines in <code>/etc/sysctl.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>net.ipv6.conf.all.disable_ipv6 = 1
+</span><span>net.ipv6.conf.default.disable_ipv6 = 1
+</span></code></pre>
+<p>Then run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysctl -p
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+L2TP over IPSec &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;l2tp-ipsec&#x2F;">L2TP over IPSec</a></h2>
+<div class="post-header">
+    <span class="post-date">June 26, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/l2tp/">l2tp</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ipsec/">ipsec</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vpn/">vpn</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mpd5/">mpd5</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="l2tp"><a class="zola-anchor" href="#l2tp" aria-label="Anchor link for: l2tp">🔗</a>L2TP</h1>
+<p>Layer 2 Tunneling Protocol (L2TP) is a tunneling protocol used to support
+virtual private networks (VPNs) or as part of the delivery of services by ISPs.
+It does not provide any encryption or confidentiality by itself. Rather, it
+relies on an encryption protocol that it passes within the tunnel to provide
+privacy.</p>
+<h1 id="l2tp-ipsec"><a class="zola-anchor" href="#l2tp-ipsec" aria-label="Anchor link for: l2tp-ipsec">🔗</a>L2TP/IPSec</h1>
+<p>Because of the lack of confidentiality inherent in the L2TP protocol, it is
+often implemented along with IPsec. This is referred to as L2TP/IPsec, and is
+standardized in IETF RFC 3193.</p>
+<blockquote>
+<p>https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol</p>
+</blockquote>
+<h1 id="setting-up-an-l2tp-ipsec-freebsd-server"><a class="zola-anchor" href="#setting-up-an-l2tp-ipsec-freebsd-server" aria-label="Anchor link for: setting-up-an-l2tp-ipsec-freebsd-server">🔗</a>Setting up an L2TP/IPSec FreeBSD server</h1>
+<p>Requirements:</p>
+<ul>
+<li><a href="http://mpd.sourceforge.net/">mpd5</a></li>
+<li><a href="https://www.strongswan.org/">strongswan</a></li>
+<li><a href="https://www.freshports.org/net-mgmt/ng_ipacct/">ng_ipacct</a></li>
+<li><a href="https://www.freebsd.org/doc/handbook/firewalls-pf.html">pf</a> (for doing NAT)</li>
+</ul>
+<p>Install mpd5:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pkg install mpd5
+</span></code></pre>
+<p>Install strongswan:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pkg install strongswan
+</span></code></pre>
+<h2 id="setting-up-mpd"><a class="zola-anchor" href="#setting-up-mpd" aria-label="Anchor link for: setting-up-mpd">🔗</a>Setting up mpd</h2>
+<p>Example of an <code>mpd.conf</code>, clients obtain an IP on the <code>172.16.13.0/24</code>
+segment.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">startup:
+</span><span>        </span><span style="color:#65737e;"># set user operations secret_changeme admin
+</span><span>
+</span><span style="color:#bf616a;">default:
+</span><span>    </span><span style="color:#bf616a;">load</span><span> l2tp_server
+</span><span>
+</span><span style="color:#bf616a;">l2tp_server:
+</span><span style="color:#65737e;"># Define dynamic IP address pool.
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> ippool add pool1 172.16.13.2 172.16.13.254
+</span><span>
+</span><span style="color:#65737e;"># Create clonable bundle template named B
+</span><span>    </span><span style="color:#bf616a;">create</span><span> bundle template VPN
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> iface enable netflow-in
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> iface enable netflow-out
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> iface enable ipacct
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> iface enable proxy-arp
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> iface enable tcpmssfix
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> ipcp yes vjcomp
+</span><span>
+</span><span style="color:#65737e;"># Specify IP address pool for dynamic assigment.
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> ipcp ranges 172.16.13.1/32 ippool pool1
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> ipcp dns 8.8.8.8
+</span><span>
+</span><span style="color:#65737e;"># The five lines below enable Microsoft Point-to-Point encryption
+</span><span style="color:#65737e;"># (MPPE) using the ng_mppc(8) netgraph node type.
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> bundle enable compression
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> ccp yes mppc
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> mppc yes e40
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> mppc yes e128
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> mppc yes stateless
+</span><span>
+</span><span style="color:#65737e;"># Create clonable link template named L
+</span><span>    </span><span style="color:#bf616a;">create</span><span> link template L l2tp
+</span><span>
+</span><span style="color:#65737e;"># Set bundle template to use
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link action bundle VPN
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link enable multilink
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link yes acfcomp protocomp
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link no pap chap eap
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link enable chap-msv2
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link enable chap
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link keep-alive 10 60
+</span><span>
+</span><span style="color:#65737e;"># We reducing link mtu to avoid GRE packet fragmentation.
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link mtu 1400
+</span><span>
+</span><span style="color:#65737e;"># Configure l2tp
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> l2tp self 0.0.0.0
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> l2tp enable length
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> l2tp disable dataseq
+</span><span>
+</span><span style="color:#65737e;"># Allow to accept calls
+</span><span>    </span><span style="color:#96b5b4;">set</span><span> link enable incoming
+</span></code></pre>
+<p>An example of the <code>mpd.secret</code> file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>username1 password 172.16.13.3
+</span><span>username2 password
+</span><span>* !/external/script
+</span></code></pre>
+<h2 id="strongswan"><a class="zola-anchor" href="#strongswan" aria-label="Anchor link for: strongswan">🔗</a>strongswan</h2>
+<p>The <code>ipsec.conf</code> file:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">config</span><span> setup
+</span><span>    </span><span style="color:#bf616a;">strictcrlpolicy</span><span>=</span><span style="color:#a3be8c;">no
+</span><span>
+</span><span style="color:#bf616a;">conn </span><span>%</span><span style="color:#bf616a;">default
+</span><span>    </span><span style="color:#bf616a;">ikelifetime</span><span>=</span><span style="color:#a3be8c;">8h
+</span><span>    </span><span style="color:#bf616a;">ike</span><span>=</span><span style="color:#a3be8c;">aes256-sha1-modp1024!
+</span><span>    </span><span style="color:#bf616a;">esp</span><span>=</span><span style="color:#a3be8c;">aes256-sha1!
+</span><span>    </span><span style="color:#bf616a;">dpdaction</span><span>=</span><span style="color:#a3be8c;">clear
+</span><span>    </span><span style="color:#bf616a;">dpddelay</span><span>=</span><span style="color:#a3be8c;">300s
+</span><span>    </span><span style="color:#bf616a;">rekey</span><span>=</span><span style="color:#a3be8c;">no
+</span><span>    </span><span style="color:#bf616a;">left</span><span>=%</span><span style="color:#bf616a;">any
+</span><span>    </span><span style="color:#bf616a;">leftsubnet</span><span>=</span><span style="color:#a3be8c;">0.0.0.0/0
+</span><span>    </span><span style="color:#bf616a;">leftid</span><span>=</span><span style="color:#a3be8c;">@vpn.test
+</span><span>    </span><span style="color:#bf616a;">leftcert</span><span>=</span><span style="color:#a3be8c;">vpnHostCert.pem
+</span><span>    </span><span style="color:#bf616a;">right</span><span>=%</span><span style="color:#bf616a;">any
+</span><span>    </span><span style="color:#bf616a;">auto</span><span>=</span><span style="color:#a3be8c;">add
+</span><span>
+</span><span style="color:#bf616a;">conn</span><span> L2TP-IPSec-PSK
+</span><span>    </span><span style="color:#bf616a;">type</span><span>=</span><span style="color:#a3be8c;">transport
+</span><span>    </span><span style="color:#bf616a;">leftauth</span><span>=</span><span style="color:#a3be8c;">psk
+</span><span>    </span><span style="color:#bf616a;">rightauth</span><span>=</span><span style="color:#a3be8c;">psk
+</span></code></pre>
+<p>The <code>ipsec.secrets</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>: PSK &quot;the-shared-secret-key&quot;
+</span></code></pre>
+<h3 id="pf-nat"><a class="zola-anchor" href="#pf-nat" aria-label="Anchor link for: pf-nat">🔗</a>PF NAT</h3>
+<p>High are the changes you will require to use
+<a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>
+in that case this configuration may help:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">scrub</span><span> in all
+</span><span style="color:#bf616a;">nat</span><span> on xn0 from !xn0:0 to any -&gt; (xn0)
+</span><span style="color:#96b5b4;">set</span><span> skip on lo
+</span><span style="color:#bf616a;">pass</span><span> all
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

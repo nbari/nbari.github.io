@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Delete in chunks &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;delete-in-chunks&#x2F;">Delete in chunks</a></h2>
+<div class="post-header">
+    <span class="post-date">June 12, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/delete/">delete</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/chunks/">chunks</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To delete a big/huge table in chunks, you could create this store procedure,
+but the performance at the end depends of how good/normalized is your database
+(indexes):</p>
+<blockquote>
+<p>A stored procedure is a prepared SQL code that you can save, so the code can
+be reused over and over again. Such procedures are stored in the database data
+dictionary.</p>
+</blockquote>
+<p>Connect to the database and select the database:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; \u my_database
+</span><span>Database changed
+</span></code></pre>
+<p>To list stored procedures</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; SHOW PROCEDURE STATUS;
+</span></code></pre>
+<p>Create the delete procedure:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; DROP PROCEDURE IF EXISTS archive_table;
+</span></code></pre>
+<blockquote>
+<p>This will delete any existing procedures named <code>archive_table</code></p>
+</blockquote>
+<p>Change the delimiter:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; DELIMITER $$
+</span></code></pre>
+<blockquote>
+<p>When you write SQL statements, you use the semicolon (;) to separate two statements. A stored procedure, however, consists of multiple statements separated by a semicolon (;).If you use a MySQL client program to define a stored procedure that contains semicolon characters, the MySQL client program will not treat the whole stored procedure as a single statement, but many statements. Therefore, you must redefine the delimiter temporarily so that you can pass the whole stored procedure to the server as a single statement.</p>
+</blockquote>
+<p>Create the procedure:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#b48ead;">CREATE PROCEDURE </span><span style="color:#8fa1b3;">archive_table</span><span>()
+</span><span style="color:#b48ead;">BEGIN
+</span><span>    REPEAT
+</span><span>        </span><span style="color:#b48ead;">DELETE FROM</span><span> table_name
+</span><span>        </span><span style="color:#b48ead;">WHERE</span><span> time_stamp &lt; unix_timestamp(NOW() - INTERVAL </span><span style="color:#d08770;">2</span><span> MONTH)
+</span><span>        </span><span style="color:#b48ead;">ORDER BY</span><span> time_stamp </span><span style="color:#65737e;">-- time_stamp needs an INDEX
+</span><span>        </span><span style="color:#b48ead;">LIMIT </span><span style="color:#d08770;">1000</span><span>; </span><span style="color:#65737e;">-- can be tweaked
+</span><span>        </span><span style="color:#b48ead;">SELECT</span><span> SLEEP(</span><span style="color:#d08770;">1</span><span>);
+</span><span>    UNTIL ROW_COUNT() = </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">END</span><span> REPEAT;
+</span><span style="color:#b48ead;">END</span><span>$$
+</span></code></pre>
+<p>For <code>MyISAM</code> you could try <code>DELETE LOW_PRIORITY QUICK FROM table_name</code></p>
+<blockquote>
+<p>LIMIT leads to a warning on replication about it being non-deterministic, see more here: http://mysql.rjweb.org/doc.php/deletebig</p>
+</blockquote>
+<p>Set back the delimiter to <code>;</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; DELIMITER ;
+</span></code></pre>
+<p>And that's it, to call the store procedure and start deleting records use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; CALL archive_table();
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

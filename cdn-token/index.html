@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+cdn token &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;cdn-token&#x2F;">cdn token</a></h2>
+<div class="post-header">
+    <span class="post-date">November 22, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cloudfront/">cloudfront</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cdn/">cdn</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/token/">token</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="restrict-access-only-to-the-cdn-cloudfront"><a class="zola-anchor" href="#restrict-access-only-to-the-cdn-cloudfront" aria-label="Anchor link for: restrict-access-only-to-the-cdn-cloudfront">🔗</a>Restrict access only to the CDN (cloudfront)</h1>
+<p>To only allow, handle request from the CDN you could add a custom header/token
+and check on your backend (nginx/haproxy) if is matching otherwise return a 401</p>
+<p>If using AWS cloudfront you edit your origins like this:</p>
+<p><img src="/img/x-cf-token.png" alt="cloudfront x-cf-token" /></p>
+<p>The token can be any UUID / has or common secret between the CDN and the
+backend.</p>
+<p>If your backends are using nginx you could verify the token like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>server {
+</span><span>	listen 80;
+</span><span>	server_name _;
+</span><span>
+</span><span>	if ($http_x_cf_token != &#39;4147E877-7C6D-4B4E-96CE-B173B6F0B755&#39;) {
+</span><span>		return 401;
+</span><span>	}
+</span><span>	...
+</span></code></pre>
+<p>In this case the token is an UUID and if the request come with no token they
+will got a 401.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

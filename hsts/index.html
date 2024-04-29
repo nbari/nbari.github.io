@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+HSTS &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;hsts&#x2F;">HSTS</a></h2>
+<div class="post-header">
+    <span class="post-date">February 06, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/https/">https</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssl/">ssl</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hsts/">hsts</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="http-will-change-to-https"><a class="zola-anchor" href="#http-will-change-to-https" aria-label="Anchor link for: http-will-change-to-https">🔗</a>http://... will change to https://...</h1>
+<p>If you own a site that you would like to see included in the preloaded HSTS list
+you can submit it at https://hstspreload.appspot.com.</p>
+<h2 id="verify-http-strict-transport-security-hsts-header-with-curl"><a class="zola-anchor" href="#verify-http-strict-transport-security-hsts-header-with-curl" aria-label="Anchor link for: verify-http-strict-transport-security-hsts-header-with-curl">🔗</a>verify HTTP Strict Transport Security (HSTS) header with curl</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ curl -Is https://google.com | grep -i stric
+</span><span>Strict-Transport-Security: max-age=15552000; includeSubDomains
+</span></code></pre>
+<h2 id="remove-domain-from-chrome"><a class="zola-anchor" href="#remove-domain-from-chrome" aria-label="Anchor link for: remove-domain-from-chrome">🔗</a>Remove domain from chrome</h2>
+<p>Search for the domain in: <a href="chrome://net-internals/#hsts">chrome://net-internals/#hsts</a>
+and delete it.</p>
+<h2 id="http-strict-transport-security"><a class="zola-anchor" href="#http-strict-transport-security" aria-label="Anchor link for: http-strict-transport-security">🔗</a>HTTP Strict Transport Security</h2>
+<p>The issue that HSTS addresses is that users tend to type http:// at best, and
+omit the scheme entirely most of the time. In the latter case, browsers will
+insert http:// for them.</p>
+<p>However, HTTP is insecure. An attacker can grab that connection, manipulate
+it and only the most eagle eyed users might notice that it redirected to
+https://www.bank0famerica.com or some such. From then on, the user is under the
+control of the attacker, who can intercept passwords etc at will.</p>
+<p>An HSTS enabled server can include the following header in an HTTPS reply:</p>
+<p>Strict-Transport-Security: max-age=16070400; includeSubDomains</p>
+<p>When the browser sees this, it will remember, for the given number of seconds,
+that the current domain should only be contacted over HTTPS. In the future, if
+the user types http:// or omits the scheme, HTTPS is the default. In fact, all
+requests for URLs in the current domain will be redirected to HTTPS. (So you
+have to make sure that you can serve them all!).</p>
+<p>More info: https://www.chromium.org/hsts</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Syslogd 8 bit &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;syslogd-8-bit&#x2F;">Syslogd 8 bit</a></h2>
+<div class="post-header">
+    <span class="post-date">July 23, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>If want to log full utf-8 strings &quot;emoji's&quot; use the option <code>-8</code>, example on <code>/etc/rc.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>syslogd_flags=&quot;-ssC8&quot;
+</span></code></pre>
+<p>The optiosn are:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> -s      Operate in secure mode.  Do not log messages from remote
+</span><span>         machines.  If specified twice, no network socket will be opened
+</span><span>         at all, which also disables logging to remote machines.
+</span><span>
+</span><span> -C      Create log files that do not exist (permission is set to 0600).
+</span><span>
+</span><span> -8      Tells syslogd not to interfere with 8-bit data.  Normally syslogd
+</span><span>         will replace C1 control characters (ISO 8859 and Unicode
+</span><span>         characters) with their “M-x” equivalent.  Note, this option does
+</span><span>         not change the way syslogd alters control characters (see
+</span><span>         iscntrl(3)).  They will always be replaced with their “^x”
+</span><span>         equivalent.
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

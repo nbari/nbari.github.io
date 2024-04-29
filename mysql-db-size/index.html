@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mysql db size &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mysql-db-size&#x2F;">mysql db size</a></h2>
+<div class="post-header">
+    <span class="post-date">May 07, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>How big is your data:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#b48ead;">SELECT</span><span> IFNULL(</span><span style="color:#d08770;">B</span><span>.</span><span style="color:#d08770;">engine</span><span>,&#39;</span><span style="color:#a3be8c;">Total</span><span>&#39;) &quot;</span><span style="color:#a3be8c;">Storage Engine</span><span>&quot;,
+</span><span>CONCAT(LPAD(REPLACE(FORMAT(</span><span style="color:#d08770;">B</span><span>.</span><span style="color:#d08770;">DSize</span><span>/POWER(</span><span style="color:#d08770;">1024</span><span>,pw),</span><span style="color:#d08770;">3</span><span>),&#39;</span><span style="color:#a3be8c;">,</span><span>&#39;,&#39;&#39;),</span><span style="color:#d08770;">17</span><span>,&#39; &#39;),&#39; &#39;,
+</span><span>SUBSTR(&#39;</span><span style="color:#a3be8c;"> KMGTP</span><span>&#39;,pw+</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">1</span><span>),&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;) &quot;</span><span style="color:#a3be8c;">Data Size</span><span>&quot;, CONCAT(LPAD(REPLACE(
+</span><span>FORMAT(</span><span style="color:#d08770;">B</span><span>.</span><span style="color:#d08770;">ISize</span><span>/POWER(</span><span style="color:#d08770;">1024</span><span>,pw),</span><span style="color:#d08770;">3</span><span>),&#39;</span><span style="color:#a3be8c;">,</span><span>&#39;,&#39;&#39;),</span><span style="color:#d08770;">17</span><span>,&#39; &#39;),&#39; &#39;,
+</span><span>SUBSTR(&#39;</span><span style="color:#a3be8c;"> KMGTP</span><span>&#39;,pw+</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">1</span><span>),&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;) &quot;</span><span style="color:#a3be8c;">Index Size</span><span>&quot;, CONCAT(LPAD(REPLACE(
+</span><span>FORMAT(</span><span style="color:#d08770;">B</span><span>.</span><span style="color:#d08770;">TSize</span><span>/POWER(</span><span style="color:#d08770;">1024</span><span>,pw),</span><span style="color:#d08770;">3</span><span>),&#39;</span><span style="color:#a3be8c;">,</span><span>&#39;,&#39;&#39;),</span><span style="color:#d08770;">17</span><span>,&#39; &#39;),&#39; &#39;,
+</span><span>SUBSTR(&#39;</span><span style="color:#a3be8c;"> KMGTP</span><span>&#39;,pw+</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">1</span><span>),&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;) &quot;</span><span style="color:#a3be8c;">Table Size</span><span>&quot; </span><span style="color:#b48ead;">FROM
+</span><span>(</span><span style="color:#b48ead;">SELECT</span><span> engine,</span><span style="color:#96b5b4;">SUM</span><span>(data_length) DSize,</span><span style="color:#96b5b4;">SUM</span><span>(index_length) ISize,
+</span><span style="color:#96b5b4;">SUM</span><span>(data_length+index_length) TSize </span><span style="color:#b48ead;">FROM
+</span><span style="color:#d08770;">information_schema</span><span>.</span><span style="color:#d08770;">tables </span><span style="color:#b48ead;">WHERE</span><span> table_schema NOT IN
+</span><span>(&#39;</span><span style="color:#a3be8c;">mysql</span><span>&#39;,&#39;</span><span style="color:#a3be8c;">information_schema</span><span>&#39;,&#39;</span><span style="color:#a3be8c;">performance_schema</span><span>&#39;) AND
+</span><span>engine IS NOT </span><span style="color:#d08770;">NULL </span><span style="color:#b48ead;">GROUP BY</span><span> engine </span><span style="color:#b48ead;">WITH</span><span> ROLLUP) B,
+</span><span>(</span><span style="color:#b48ead;">SELECT </span><span style="color:#d08770;">3</span><span> pw) A </span><span style="color:#b48ead;">ORDER BY</span><span> TSize;
+</span></code></pre>
+<p>This will print something like:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span>+</span><span style="color:#65737e;">----------------+----------------------+----------------------+----------------------+
+</span><span>| Storage Engine | Data Size            | Index Size           | Table Size           |
+</span><span>+</span><span style="color:#65737e;">----------------+----------------------+----------------------+----------------------+
+</span><span>| InnoDB         |            </span><span style="color:#d08770;">10</span><span>.</span><span style="color:#d08770;">412</span><span> GB |             </span><span style="color:#d08770;">2</span><span>.</span><span style="color:#d08770;">917</span><span> GB |            </span><span style="color:#d08770;">13</span><span>.</span><span style="color:#d08770;">330</span><span> GB |
+</span><span>| Total          |            </span><span style="color:#d08770;">10</span><span>.</span><span style="color:#d08770;">412</span><span> GB |             </span><span style="color:#d08770;">2</span><span>.</span><span style="color:#d08770;">917</span><span> GB |            </span><span style="color:#d08770;">13</span><span>.</span><span style="color:#d08770;">330</span><span> GB |
+</span><span>+</span><span style="color:#65737e;">----------------+----------------------+----------------------+----------------------+
+</span><span style="color:#d08770;">2</span><span> rows in </span><span style="color:#b48ead;">set</span><span> (</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">06</span><span> sec)
+</span></code></pre>
+<p>To get size of databases:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#b48ead;">SELECT</span><span> table_schema                                        &quot;</span><span style="color:#a3be8c;">DB Name</span><span>&quot;,
+</span><span>   Round(</span><span style="color:#96b5b4;">Sum</span><span>(data_length + index_length) / </span><span style="color:#d08770;">1024 </span><span>/ </span><span style="color:#d08770;">1024</span><span>, </span><span style="color:#d08770;">1</span><span>) &quot;</span><span style="color:#a3be8c;">DB Size in MB</span><span>&quot;
+</span><span>   </span><span style="color:#b48ead;">FROM   </span><span style="color:#d08770;">information_schema</span><span>.</span><span style="color:#d08770;">tables
+</span><span>   </span><span style="color:#b48ead;">GROUP  BY</span><span> table_schema;
+</span></code></pre>
+<p>Get usage and free size available:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#b48ead;">SELECT</span><span> table_schema &quot;</span><span style="color:#a3be8c;">Data Base Name</span><span>&quot;,
+</span><span style="color:#96b5b4;">sum</span><span>( data_length + index_length ) / </span><span style="color:#d08770;">1024 </span><span>/
+</span><span style="color:#d08770;">1024 </span><span>&quot;</span><span style="color:#a3be8c;">Data Base Size in MB</span><span>&quot;,
+</span><span style="color:#96b5b4;">sum</span><span>( data_free )/ </span><span style="color:#d08770;">1024 </span><span>/ </span><span style="color:#d08770;">1024 </span><span>&quot;</span><span style="color:#a3be8c;">Free Space in MB</span><span>&quot;
+</span><span style="color:#b48ead;">FROM </span><span style="color:#d08770;">information_schema</span><span>.</span><span style="color:#d08770;">TABLES
+</span><span style="color:#b48ead;">GROUP BY</span><span> table_schema;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

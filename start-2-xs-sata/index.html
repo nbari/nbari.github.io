@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Start 2 XS SATA &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;start-2-xs-sata&#x2F;">Start 2 XS SATA</a></h2>
+<div class="post-header">
+    <span class="post-date">September 03, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/online-net/">online.net</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/rescue/">rescue</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To install FreeBSD using the rescue system on a <code>Start-2-XS-SATA</code> from online.net:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh -x
+</span><span style="color:#bf616a;">USER</span><span>=</span><span style="color:#a3be8c;">monkey
+</span><span style="color:#bf616a;">PASSWORD</span><span>=</span><span style="color:#a3be8c;">secret
+</span><span>
+</span><span style="color:#bf616a;">gpart</span><span> destroy</span><span style="color:#bf616a;"> -F</span><span> ada0
+</span><span style="color:#bf616a;">gpart</span><span> create</span><span style="color:#bf616a;"> -s</span><span> gpt ada0
+</span><span style="color:#bf616a;">gpart</span><span> bootcode</span><span style="color:#bf616a;"> -b</span><span> /boot/pmbr</span><span style="color:#bf616a;"> -p</span><span> /boot/gptboot</span><span style="color:#bf616a;"> -i</span><span> 1 ada0
+</span><span style="color:#bf616a;">gpart</span><span> add</span><span style="color:#bf616a;"> -t</span><span> freebsd-boot</span><span style="color:#bf616a;"> -l</span><span> boot</span><span style="color:#bf616a;"> -s</span><span> 128K ada0
+</span><span style="color:#bf616a;">gpart</span><span> add</span><span style="color:#bf616a;"> -t</span><span> freebsd-swap</span><span style="color:#bf616a;"> -l</span><span> swap</span><span style="color:#bf616a;"> -s</span><span> 4g ada0
+</span><span style="color:#bf616a;">gpart</span><span> add</span><span style="color:#bf616a;"> -t</span><span> freebsd-ufs</span><span style="color:#bf616a;"> -l</span><span> root ada0
+</span><span style="color:#bf616a;">gpart</span><span> set</span><span style="color:#bf616a;"> -a</span><span> active ada0
+</span><span style="color:#bf616a;">newfs</span><span> /dev/gpt/root
+</span><span style="color:#bf616a;">mount</span><span> /dev/gpt/root /mnt
+</span><span style="color:#96b5b4;">cd</span><span> /tmp
+</span><span style="color:#bf616a;">fetch</span><span> http://ftp.fr.freebsd.org/pub/FreeBSD/releases/amd64/12.0-RELEASE/base.txz
+</span><span style="color:#bf616a;">fetch</span><span> http://ftp.fr.freebsd.org/pub/FreeBSD/releases/amd64/12.0-RELEASE/kernel.txz
+</span><span style="color:#96b5b4;">cd</span><span> /mnt
+</span><span style="color:#bf616a;">tar</span><span> xJf /tmp/base.txz
+</span><span style="color:#bf616a;">tar</span><span> xJf /tmp/kernel.txz
+</span><span style="color:#bf616a;">rm</span><span> /tmp/*.txz
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt; /mnt/etc/fstab
+</span><span style="color:#a3be8c;">/dev/gpt/root / ufs rw,noatime 1 1
+</span><span style="color:#a3be8c;">/dev/gpt/swap none swap sw 0 0
+</span><span style="color:#b48ead;">EOF
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt; /mnt/etc/rc.conf
+</span><span style="color:#a3be8c;">ifconfig_igb0=&quot;DHCP&quot;
+</span><span style="color:#a3be8c;">sshd_enable=&quot;YES&quot;
+</span><span style="color:#b48ead;">EOF
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt; /mnt/boot/loader.conf
+</span><span style="color:#a3be8c;">boot_multicons=&quot;YES&quot;
+</span><span style="color:#a3be8c;">boot_serial=&quot;YES&quot;
+</span><span style="color:#a3be8c;">comconsole_speed=&quot;9600&quot;
+</span><span style="color:#a3be8c;">console=&quot;comconsole&quot;
+</span><span style="color:#a3be8c;">comconsole_port=&quot;0x2F8&quot;
+</span><span style="color:#b48ead;">EOF
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt;&gt; /mnt/etc/ttys
+</span><span style="color:#a3be8c;">ttyu1   &quot;/usr/libexec/getty std.9600&quot;   vt100   on  secure
+</span><span style="color:#b48ead;">EOF
+</span><span style="color:#bf616a;">chroot</span><span> /mnt pw useradd ${</span><span style="color:#bf616a;">USER</span><span>}</span><span style="color:#bf616a;"> -m -G</span><span> wheel</span><span style="color:#bf616a;"> -s</span><span> /bin/csh</span><span style="color:#bf616a;"> -h</span><span> 0 &lt;&lt;</span><span style="color:#b48ead;">EOP
+</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">PASSWORD</span><span style="color:#a3be8c;">}
+</span><span style="color:#b48ead;">EOP
+</span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">terminated</span><span>&quot;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+GPG RemoteForward &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;gpg-remoteforward&#x2F;">GPG RemoteForward</a></h2>
+<div class="post-header">
+    <span class="post-date">December 08, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/a/">-A</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To Forward your SSH session if using a Yubikey and <code>gpg-agent</code>:</p>
+<p>For example to connect from a MacOS to a Linux VM:</p>
+<p>On the client, add this to your <code>~/.ssh/config</code></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">Host</span><span> foo
+</span><span>    </span><span style="color:#bf616a;">Hostname</span><span> X.X.X.X
+</span><span>    </span><span style="color:#bf616a;">ForwardAgent</span><span> yes
+</span><span>    </span><span style="color:#bf616a;">RemoteForward</span><span> /run/user/1000/gnupg/S.gpg-agent     /Users/monkey/.gnupg/S.gpg-agent.extra
+</span><span>    </span><span style="color:#bf616a;">RemoteForward</span><span> /run/user/1000/gnupg/S.gpg-agent.ssh /Users/monkey/.gnupg/S.gpg-agent.extra.ssh
+</span><span>                            (</span><span style="color:#bf616a;">remote</span><span> socket)                  (local socket)
+</span></code></pre>
+<p>To find the local socket in your mac/client do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpgconf --list-dirs</span><span> agent-extra-socket
+</span></code></pre>
+<p>To find the remove socket, in the Linux VM, do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpgconf --list-dirs</span><span> agent-socket
+</span></code></pre>
+<p>In the remote host (the Linux VM) in <code>.bashrc</code> I have:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpgconf --create-socketdir
+</span></code></pre>
+<p>If can't login, remove the socket: <code>rm -f /run/user/1000/gnupg/S.gpg-agent</code>, if posible add this to the /etc/ssh/sshd_config: <code>StreamLocalBindUnlink yes</code></p>
+<blockquote>
+<p>Optional If you do not have root access to the remote machine to edit /etc/ssh/sshd_config, you will need to remove the socket (located at gpgconf --list-dir agent-socket) on the remote machine before forwarding works. For example, rm /run/user/1000/gnupg/S.gpg-agent - https://github.com/drduh/YubiKey-Guide#remote-machines-gpg-agent-forwarding</p>
+</blockquote>
+<p>Add your public key to the remove host:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpg -a -o</span><span> pub.key</span><span style="color:#bf616a;"> --export</span><span> your@key
+</span></code></pre>
+<p>In the remote host import your key and trust it:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpg --import</span><span> pub.key
+</span><span style="color:#bf616a;">gpg --edit-key</span><span> KEYID
+</span><span style="color:#bf616a;">trust
+</span><span style="color:#bf616a;">5
+</span><span style="color:#bf616a;">save
+</span></code></pre>
+<p>You could also use:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ssh -R</span><span> /run/user/1000/gnupg/S.gpg-agent:/Users/monkey/.gnupg/S.gpg-agent.extra</span><span style="color:#bf616a;"> -o </span><span>&quot;</span><span style="color:#a3be8c;">StreamLocalBindUnlink=yes</span><span>&quot; user@x.x.x.x
+</span></code></pre>
+<p>In the remote host test with something like:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ssh -T</span><span> git@github.com
+</span></code></pre>
+<p>Also you could list all your current keys with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ssh-add -L
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

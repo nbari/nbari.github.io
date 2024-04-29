@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+moosefs &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;moosefs&#x2F;">moosefs</a></h2>
+<div class="post-header">
+    <span class="post-date">June 12, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/zfs/">zfs</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/moosefs/">moosefs</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dfs/">dfs</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create a small distributed file system using 2 servers one acting as a mater/chunkserver and other only as a chunkserver.</p>
+<p>Install the required packages:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install moosefs3-cgi moosefs3-cgiserv moosefs3-chunkserver moosefs3-client
+</span></code></pre>
+<p>For the master just add:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install moosefs3-master
+</span></code></pre>
+<p>In all the servers add to your <code>/etc/hosts</code> and entry for the <code>mfsmaster</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>X.X.X.X     mfsmaster
+</span></code></pre>
+<p>Before starting the master, crate the file <code>/var/mfs/metadata.mfs</code> with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>MFSM NEW
+</span></code></pre>
+<p>Create a pool to share:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zfs create tank/mfs -o mountpoint=/mfs tank/mfs
+</span><span>chown mfs:mfs /mfs
+</span><span>chmod 770 /mfs
+</span></code></pre>
+<p>Add to <code>/usr/local/etc/mfs/mfshdd.cfg</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/mfs
+</span></code></pre>
+<p>And to <code>/etc/fstab</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mfsmount_magic  /mnt/mfs moosefs  rw,mfsmaster=mfsmaster,mfscachemode=DIRECT,mountprog=/usr/local/bin/mfsmount,failok  0  0
+</span></code></pre>
+<blockquote>
+<p>notice the <code>failok</code> it will allow to boot in case master is down</p>
+</blockquote>
+<p>As an alternative to <code>/etc/fstab</code>, edit <code>/usr/local/etc/mfs/mfsmount.cfg</code> with something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>rw
+</span><span>mfsmaster=mfsmaster
+</span><span>mfscachemode=DIRECT
+</span><span>/mnt/mfs
+</span></code></pre>
+<p>Then just by typing <code>mfsmount</code> will mount it.</p>
+<p>Create the mount point:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mkdir /mnt/mfs
+</span></code></pre>
+<p>Add to <code>/etc/rc.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mfscgiserv_enable=&quot;YES&quot;
+</span><span>mfschunkserver_enable=&quot;YES&quot;
+</span></code></pre>
+<p>And for the mater:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mfsmaster_enable=&quot;YES&quot;
+</span></code></pre>
+<p>Then load <code>fuse</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>kldload fuse
+</span></code></pre>
+<p>Or by adding it to <code>/boot/loader.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>fuse_load=&quot;YES&quot;
+</span></code></pre>
+<p>reboot and try to access: http://x.x.x.x:9425/mfs.cgi you should see the moosefs admin page, also try to check your mount points, change to <code>/mnt/mfs</code> and give a try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dd if=/dev/zero of=/mnt/mfs/testfile bs=1G count=1
+</span></code></pre>
+<p>In both server you may have the same file, to check the directory info:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mfsdirinfo -l *
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

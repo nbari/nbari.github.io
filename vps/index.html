@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vps &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vps&#x2F;">vps</a></h2>
+<div class="post-header">
+    <span class="post-date">December 04, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/raw/">raw</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/images/">images</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vps/">vps</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ipv6/">ipv6</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tso/">tso</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>VPS providers that allow use your own image/kernel</p>
+<h2 id="google-cloud-only-ipv4"><a class="zola-anchor" href="#google-cloud-only-ipv4" aria-label="Anchor link for: google-cloud-only-ipv4">🔗</a>Google cloud (only ipv4)</h2>
+<p>Allows to upload compreses raw images:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>tar --format=gnutar -Szcf disk.tar.gz disk.raw
+</span></code></pre>
+<p><a href="https://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU</a>
+needs to be set to 1460 and in some cases disable the
+<a href="/post/checksum-offload/">checksum offload</a></p>
+<h2 id="amazon-aws-only-ipv4"><a class="zola-anchor" href="#amazon-aws-only-ipv4" aria-label="Anchor link for: amazon-aws-only-ipv4">🔗</a>Amazon AWS (only ipv4)</h2>
+<p>Images can't be uploaded compressed, ans disabling <a href="https://en.wikipedia.org/wiki/Large_segment_offload">TSO</a> is required:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ifconfig_DEFAULT=&quot;SYNCDHCP -tso&quot;
+</span></code></pre>
+<h1 id="ipv6-support"><a class="zola-anchor" href="#ipv6-support" aria-label="Anchor link for: ipv6-support">🔗</a>IPV6 support</h1>
+<h2 id="vultr"><a class="zola-anchor" href="#vultr" aria-label="Anchor link for: vultr">🔗</a>vultr</h2>
+<p>https://www.vultr.com/</p>
+<p>Instead of uploading the raw images, they will be fetched, a URL needs to be
+provider from where the image can be downloaded.</p>
+<h2 id="netcup-avoid-warning"><a class="zola-anchor" href="#netcup-avoid-warning" aria-label="Anchor link for: netcup-avoid-warning">🔗</a>netcup (avoid ⚠️ )</h2>
+<p>https://www.netcup.eu/</p>
+<p>Very good prices, Images need to be uploaded via FTP.</p>
+<p>There is an issue while rebooting instances due a bug on QEMU/KVM.</p>
+<ul>
+<li>https://redmine.pfsense.org/issues/4377</li>
+<li>https://bugs.launchpad.net/qemu/+bug/1329956</li>
+</ul>
+<p>To replicate once login is up and running just reboot and later will stuck in
+the booting process like this:</p>
+<p><img src="/img/usbus0-netcup.png" alt="usb2-netcup" /></p>
+<p>To fix this, the virtual machine needs to be moved to another updated server.</p>
+<blockquote>
+<p>headsup about German Provider Policies</p>
+</blockquote>
+<h2 id="lunanode"><a class="zola-anchor" href="#lunanode" aria-label="Anchor link for: lunanode">🔗</a>lunanode</h2>
+<p>https://lunanode.com</p>
+<p>Similar to netcup but only IPv4 and with &quot;Floating IPs&quot;</p>
+<p>Images need to be in QCOW2 format</p>
+<h1 id="script-to-create-images"><a class="zola-anchor" href="#script-to-create-images" aria-label="Anchor link for: script-to-create-images">🔗</a>script to create images:</h1>
+<p>https://fabrik.red</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
