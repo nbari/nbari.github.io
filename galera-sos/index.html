@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+galera SOS &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;galera-sos&#x2F;">galera SOS</a></h2>
+<div class="post-header">
+    <span class="post-date">April 10, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/galera/">galera</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cluster/">cluster</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mariadb/">mariadb</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Check status of cluster: https://nbari.com/post/galera/</p>
+<p>Find process list not sleeping:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT user, time, state, info FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND time &gt;= 2 ORDER BY time DESC, id;
+</span></code></pre>
+<p>Doing a heavy <code>DDL</code> (<code>ALTER</code>):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT * FROM information_schema.processlist WHERE command != &#39;Sleep&#39; AND info LIKE &#39;alter%&#39; AND time &gt;= 2 ORDER BY time DESC, id LIMIT 1;
+</span></code></pre>
+<blockquote>
+<p>DDL stands for data definition language. It is a set of SQL statements that work on the database as a whole, rather than an individual table or row. Create, alter, and drop are elements of this language.</p>
+</blockquote>
+<p>Get locked tables:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>show open tables where in_use &gt; 0;
+</span></code></pre>
+<p>Finding locks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>show engine innodb status;
+</span></code></pre>
+<p>At the end:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>---TRANSACTION 1135701157, ACTIVE 6768 sec
+</span><span>MySQL thread id 5208136, OS thread handle 0x7f2982e91700, query id 882213399 xxxIPxxx 82.235.36.49 my_user cleaning up
+</span></code></pre>
+<p>kill the transaction thread:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> KILL 5208136;
+</span></code></pre>
+<p>Information about all locks transactions are waiting for:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>select * from information_schema.innodb_lock_waits;
+</span></code></pre>
+<p>A list of blocking transactions:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT * FROM information_schema.INNODB_LOCKS WHERE LOCK_TRX_ID IN (SELECT BLOCKING_TRX_ID FROM INNODB_LOCK_WAITS);
+</span></code></pre>
+<p>Or:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT INNODB_LOCKS.* FROM information_schema.INNODB_LOCKS JOIN INNODB_LOCK_WAITS ON (INNODB_LOCKS.LOCK_TRX_ID = INNODB_LOCK_WAITS.BLOCKING_TRX_ID);
+</span></code></pre>
+<p>A list of transactions waiting for locks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT TRX_ID, TRX_REQUESTED_LOCK_ID, TRX_MYSQL_THREAD_ID, TRX_QUERY FROM information_schema.INNODB_TRX WHERE TRX_STATE = &#39;LOCK WAIT&#39;;
+</span></code></pre>
+<p>To check logs with <code>pt-query-digest</code>, first get the binlog and do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysqlbinlog --start-datetime=&quot;2019-04-10 10:40:00&quot; --stop-datetime=&quot;2019-04-10 11:00:00&quot; mysql-bin.0013* &gt; out.sql
+</span></code></pre>
+<p>Then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pt-query-digest --type binlog --group-by fingerprint --limit &quot;100%&quot; out.sql &gt; report.txt
+</span></code></pre>
+<blockquote>
+<p>in macOS if getting a segmentation fault use the full path
+<code>/usr/local/Cellar/percona-toolkit/3.0.13/libexec/bin/pt-query-digest</code> or download
+the lates version from https://www.percona.com/get/pt-query-digest</p>
+</blockquote>
+<p>Get all table sizes for specific database in MB:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT
+</span><span>    table_schema &#39;Database Name&#39;,
+</span><span>    SUM(data_length + index_length) &#39;Size in Bytes&#39;,
+</span><span>    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) &#39;Size in MiB&#39;
+</span><span>FROM information_schema.tables
+</span><span>GROUP BY table_schema
+</span><span>ORDER BY 2 DESC limit 10;
+</span></code></pre>
+<p>For a specific database:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT
+</span><span>    table_schema &#39;Database Name&#39;,
+</span><span>    SUM(data_length + index_length) &#39;Size in Bytes&#39;,
+</span><span>    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) &#39;Size in MiB&#39;
+</span><span>FROM information_schema.tables
+</span><span>WHERE table_schema = &#39;your_db_name&#39;;
+</span></code></pre>
+<p>Get a specific table size for a database in MB:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT table_name AS &quot;Table&quot;,
+</span><span>ROUND(((data_length + index_length) / 1024 / 1024), 2) AS &quot;Size (MB)&quot;
+</span><span>FROM information_schema.TABLES
+</span><span>WHERE table_schema = &quot;database_name&quot;
+</span><span>ORDER BY (data_length + index_length) DESC;
+</span></code></pre>
+<p>How to calculate a good InnoDB log file size: (http://code.openark.org/blog/mysql/how-to-calculate-a-good-innodb-log-file-size-recap)</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT
+</span><span>  innodb_os_log_written_per_minute*60
+</span><span>    AS estimated_innodb_os_log_written_per_hour,
+</span><span>  CONCAT(ROUND(innodb_os_log_written_per_minute*60/1024/1024, 1), &#39;MB&#39;)
+</span><span>    AS estimated_innodb_os_log_written_per_hour_mb
+</span><span>FROM
+</span><span>  (SELECT SUM(value) AS innodb_os_log_written_per_minute FROM (
+</span><span>    SELECT -VARIABLE_VALUE AS value
+</span><span>      FROM INFORMATION_SCHEMA.GLOBAL_STATUS
+</span><span>      WHERE VARIABLE_NAME = &#39;innodb_os_log_written&#39;
+</span><span>    UNION ALL
+</span><span>    SELECT SLEEP(60)
+</span><span>      FROM DUAL
+</span><span>    UNION ALL
+</span><span>    SELECT VARIABLE_VALUE
+</span><span>      FROM INFORMATION_SCHEMA.GLOBAL_STATUS
+</span><span>      WHERE VARIABLE_NAME = &#39;innodb_os_log_written&#39;
+</span><span>  ) s1
+</span><span>) s2;
+</span></code></pre>
+<p>Find if a <code>mysqldump</code> is running:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SELECT * FROM information_schema.processlist WHERE info LIKE &#39;SELECT /*!40001 SQL_NO_CACHE */%&#39;;
+</span></code></pre>
+<p>Free some space in case <code>--log-bin</code> is enabled:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PURGE BINARY LOGS BEFORE NOW();
+</span></code></pre>
+<p>Or for an specific date:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PURGE BINARY LOGS BEFORE &#39;20XX-01-01 00:00:00&#39;;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

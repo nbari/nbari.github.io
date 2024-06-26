@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aws network acl &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-network-acl&#x2F;">aws network acl</a></h2>
+<div class="post-header">
+    <span class="post-date">May 31, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/network-acl/">network ACL</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="aws-network-acl-deny-rule"><a class="zola-anchor" href="#aws-network-acl-deny-rule" aria-label="Anchor link for: aws-network-acl-deny-rule">🔗</a>AWS network ACL deny rule</h1>
+<p>To block full access from an list of IP's within AWS:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> count=0; </span><span style="color:#b48ead;">for</span><span> i </span><span style="color:#b48ead;">in </span><span>`</span><span style="color:#bf616a;">cat</span><span> ips.txt`
+</span><span style="color:#bf616a;">count</span><span>=$</span><span style="color:#a3be8c;">((count </span><span>+ </span><span style="color:#d08770;">1</span><span style="color:#a3be8c;">)) </span><span>&amp;&amp; </span><span style="color:#bf616a;">aws</span><span> ec2 create-network-acl-entry</span><span style="color:#bf616a;"> --network-acl-id</span><span> acl-XXXXXXXX</span><span style="color:#bf616a;"> --ingress --rule-number </span><span>$</span><span style="color:#bf616a;">count --protocol</span><span> all</span><span style="color:#bf616a;"> --port-range</span><span> From=0,To=65535</span><span style="color:#bf616a;"> --cidr-block </span><span>$</span><span style="color:#bf616a;">i</span><span>/32</span><span style="color:#bf616a;"> --rule-action</span><span> deny
+</span></code></pre>
+<p>In where <code>ips.txt</code> is a file containing the IP addresses, for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>169.254.2.2
+</span><span>169.254.1.2
+</span><span>...
+</span></code></pre>
+<h1 id="warning"><a class="zola-anchor" href="#warning" aria-label="Anchor link for: warning">🔗</a>WARNING</h1>
+<p>The default limit for a single network ACL rules set by AWS is 20 for ingress
+and 20 for egress rules including the default rules. The network ACL should not
+be used as a Firewall, depending on the use case is better to use a CDN, WAF,
+vm-firewall, etc.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

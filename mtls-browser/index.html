@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mTLS Browser  &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mtls-browser&#x2F;">mTLS Browser </a></h2>
+<div class="post-header">
+    <span class="post-date">April 18, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mtls/">mtls</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/firefox/">firefox</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/brave/">brave</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To use <a href="https://developers.cloudflare.com/cloudflare-one/identity/devices/mutual-tls-authentication/">mTLS</a> from your browser, first convert the cert to p12 format:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> openssl pkcs12</span><span style="color:#bf616a;"> -export -in</span><span> server.crt</span><span style="color:#bf616a;"> -inkey</span><span> server.key</span><span style="color:#bf616a;"> -out</span><span> server.p12
+</span></code></pre>
+<blockquote>
+<p>For MacOS you need to add an export password</p>
+</blockquote>
+<p>Then import the <code>server.p12</code> in to keychain or Firefox, example:</p>
+<p><img src="/img/mtls-firefox.png" alt="mtls-firefox" /></p>
+<p>Delete your Active logins to test:</p>
+<p><img src="/img/mtls-firefox2.png" alt="mtls-firefox" /></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

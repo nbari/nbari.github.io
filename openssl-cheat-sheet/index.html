@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+openssl cheat sheet &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;openssl-cheat-sheet&#x2F;">openssl cheat sheet</a></h2>
+<div class="post-header">
+    <span class="post-date">June 22, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/openssl/">openssl</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To display the contents of a <a href="http://serverfault.com/a/9717/94862">PEM</a> formatted certificate:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl x509 -in the-cert.pm -text
+</span></code></pre>
+<p>Connecting to the server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl s_client -showcerts -connect imap.ejemplo.org:993 &lt; /dev/null
+</span></code></pre>
+<p>Test smtp 587:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl s_client -host smtp.gmail.com -port 587 -starttls smtp -crlf
+</span></code></pre>
+<p>Checking the Validity Date:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl s_client -showcerts -connect nbari.com:443 2&gt;/dev/null | openssl x509 -noout -dates
+</span></code></pre>
+<p>Encode base64 a file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl enc -base64 -in file.txt -out file.txt.enc
+</span></code></pre>
+<blockquote>
+<p>if no ssl: python -m base64 -d</p>
+</blockquote>
+<p>Create pair of keys (self signed certificate):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout example.key -out example.crt -subj &quot;/CN=example.com&quot; -days 3650
+</span></code></pre>
+<p>Test speed of signatures:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl speed sha256 sha512
+</span></code></pre>
+<p>Change pass-phrase of a key, you will need to specify the old pass-phrase and
+then spedify a new one:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl rsa -des3 -in example.key -out example.key.new
+</span></code></pre>
+<h2 id="encrypt-decrypt"><a class="zola-anchor" href="#encrypt-decrypt" aria-label="Anchor link for: encrypt-decrypt">🔗</a>encrypt / decrypt</h2>
+<p>Encrypt:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl aes-256-cbc -a -salt -in file.txt -out file.txt.enc
+</span></code></pre>
+<p>Decrypt:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl aes-256-cbc -d -a -in file.txt.enc -out file.txt
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
