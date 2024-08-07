@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+letsencrypt + cloudfare using DNS &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;letsencrypt-cloudfare&#x2F;">letsencrypt + cloudfare using DNS</a></h2>
+<div class="post-header">
+    <span class="post-date">August 22, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/letsencrypt/">letsencrypt</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cloudfare/">cloudfare</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>It's not necessary to disable CloudFlare to use Let's Encrypt,</p>
+<h1 id="installation"><a class="zola-anchor" href="#installation" aria-label="Anchor link for: installation">🔗</a>Installation:</h1>
+<p>On mac os X:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git clone https://github.com/lukas2511/letsencrypt.sh
+</span><span>$ cd letsencrypt.sh
+</span><span>$ mkdir hooks
+</span><span>$ git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare
+</span><span>$ pip install -r hooks/cloudflare/requirements-python-2.txt
+</span></code></pre>
+<h1 id="configuration"><a class="zola-anchor" href="#configuration" aria-label="Anchor link for: configuration">🔗</a>Configuration</h1>
+<p>Your account's CloudFlare email and API key are expected to be in the environment:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ export CF_EMAIL=&quot;your@email&quot;
+</span><span>$ export CF_KEY=&quot;Global API Key&quot;
+</span><span>$ export CF_DNS_SERVERS=&#39;8.8.8.8 8.8.4.4&#39;
+</span></code></pre>
+<h1 id="usage"><a class="zola-anchor" href="#usage" aria-label="Anchor link for: usage">🔗</a>Usage</h1>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ./letsencrypt.sh -c -d imap.ejemplo.org -t dns-01 -k &quot;hooks/cloudflare/hook.py&quot;
+</span><span>#
+</span><span># !! WARNING !! No main config file found, using default config!
+</span><span>#
+</span><span>Processing imap.ejemplo.org
+</span><span> + Signing domains...
+</span><span> + Generating private key...
+</span><span> + Generating signing request...
+</span><span> + Requesting challenge for imap.ejemplo.org...
+</span><span> + CloudFlare hook executing: deploy_challenge
+</span><span> + Settling down for 10s...
+</span><span> + DNS not propagated, waiting 30s...
+</span><span> + Responding to challenge for imap.ejemplo.org...
+</span><span> + CloudFlare hook executing: clean_challenge
+</span><span> + Challenge is valid!
+</span><span> + Requesting certificate...
+</span><span> + Checking certificate...
+</span><span> + Done!
+</span><span> + Creating fullchain.pem...
+</span><span> + CloudFlare hook executing: deploy_cert
+</span><span> + ssl_certificate: /Users/user/projects/letsencrypt.sh/certs/imap.ejemplo.org/fullchain.pem
+</span><span> + ssl_certificate_key: /Users/user/projects/letsencrypt.sh/certs/imap.ejemplo.org/privkey.pem
+</span><span> + Done!
+</span></code></pre>
+<h1 id="automated-certificate-renewal"><a class="zola-anchor" href="#automated-certificate-renewal" aria-label="Anchor link for: automated-certificate-renewal">🔗</a>Automated certificate renewal</h1>
+<p>Put all your domain names in letsencrypt.sh/domains.txt, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ejemplo.org www.ejemplo.org imap.ejemplo.org
+</span></code></pre>
+<p>Create a <code>cron.sh</code> script:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    #!/bin/sh
+</span><span>    export CF_EMAIL=&quot;your@email&quot;
+</span><span>    export CF_KEY=&quot;Global API Key&quot;
+</span><span>    export CF_DNS_SERVERS=&#39;8.8.8.8 8.8.4.4&#39;
+</span><span>
+</span><span>    /path/to//letsencrypt.sh --cron --challenge dns-01 \
+</span><span>        --hook &#39;/path/to/letsencrypt.sh/hooks/cloudfare/hook.py&#39;
+</span><span>
+</span><span>    service dovecot restart
+</span></code></pre>
+<p>Add the cron:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>0 4 * * * /path/to/cron.sh &gt;&gt; /path/to/cron.log 2&gt;&amp;1
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

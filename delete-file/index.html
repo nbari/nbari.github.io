@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+delete file &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;delete-file&#x2F;">delete file</a></h2>
+<div class="post-header">
+    <span class="post-date">May 06, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/rm/">rm</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/files/">files</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Ways to delete a file starting with a dash / hyphen:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>rm -- -file
+</span></code></pre>
+<p>The option <code>--</code>  means the end of options for the command.</p>
+<p>Another option is to indicate where is the file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>rm ./-file
+</span></code></pre>
+<p><code>.</code> is current directory , path to <code>-file</code> is <code>./-file</code></p>
+<p>Using find:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>find . -type f -exec rm {} \;
+</span></code></pre>
+<p>Finding the inode:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ls -li
+</span></code></pre>
+<p>Then using <code>find</code> and the inode it can be removed with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>find . -type f -inum &lt;inum&gt; -delete
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
