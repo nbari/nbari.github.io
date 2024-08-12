@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Webcrypto and Go &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;webcrypto-and-go&#x2F;">Webcrypto and Go</a></h2>
+<div class="post-header">
+    <span class="post-date">August 17, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/crypto/">crypto</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/go/">go</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aesgcm/">aesgcm</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Encrypt on client side using javascript
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">WebCrypto</a> and
+decrypt on backend using <a href="https://golang.org/">go</a>:</p>
+<p>javascript code:</p>
+<pre data-lang="javascript" style="background-color:#2b303b;color:#c0c5ce;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#b48ead;">async function </span><span style="color:#8fa1b3;">aesGcmEncrypt</span><span>(</span><span style="color:#bf616a;">plaintext</span><span>, </span><span style="color:#bf616a;">password</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">pwUtf8 </span><span>= new TextEncoder().</span><span style="color:#8fa1b3;">encode</span><span>(</span><span style="color:#bf616a;">password</span><span>);                                 </span><span style="color:#65737e;">// encode password as UTF-8
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">pwHash </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">digest</span><span>(&#39;</span><span style="color:#a3be8c;">SHA-256</span><span>&#39;, </span><span style="color:#bf616a;">pwUtf8</span><span>);                      </span><span style="color:#65737e;">// hash the password
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">iv </span><span>= </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#8fa1b3;">getRandomValues</span><span>(new Uint8Array(</span><span style="color:#d08770;">12</span><span>));                             </span><span style="color:#65737e;">// get 96-bit random iv
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">alg </span><span>= { name: &#39;</span><span style="color:#a3be8c;">AES-GCM</span><span>&#39;, iv: </span><span style="color:#bf616a;">iv </span><span>};                                           </span><span style="color:#65737e;">// specify algorithm to use
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">key </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">importKey</span><span>(&#39;</span><span style="color:#a3be8c;">raw</span><span>&#39;, </span><span style="color:#bf616a;">pwHash</span><span>, </span><span style="color:#bf616a;">alg</span><span>, </span><span style="color:#d08770;">false</span><span>, [&#39;</span><span style="color:#a3be8c;">encrypt</span><span>&#39;]); </span><span style="color:#65737e;">// generate key from pw
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ptUint8 </span><span>= new TextEncoder().</span><span style="color:#8fa1b3;">encode</span><span>(</span><span style="color:#bf616a;">plaintext</span><span>);                               </span><span style="color:#65737e;">// encode plaintext as UTF-8
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctBuffer </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">encrypt</span><span>(</span><span style="color:#bf616a;">alg</span><span>, </span><span style="color:#bf616a;">key</span><span>, </span><span style="color:#bf616a;">ptUint8</span><span>);                   </span><span style="color:#65737e;">// encrypt plaintext using key
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctArray </span><span>= </span><span style="color:#ebcb8b;">Array</span><span>.</span><span style="color:#8fa1b3;">from</span><span>(new Uint8Array(</span><span style="color:#bf616a;">ctBuffer</span><span>));                              </span><span style="color:#65737e;">// ciphertext as byte array
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctStr </span><span>= </span><span style="color:#bf616a;">ctArray</span><span>.</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">byte </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">String</span><span>.</span><span style="color:#96b5b4;">fromCharCode</span><span>(</span><span style="color:#bf616a;">byte</span><span>)).</span><span style="color:#96b5b4;">join</span><span>(&#39;&#39;);             </span><span style="color:#65737e;">// ciphertext as string
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctBase64 </span><span>= </span><span style="color:#8fa1b3;">btoa</span><span>(</span><span style="color:#bf616a;">ctStr</span><span>);                                                      </span><span style="color:#65737e;">// encode ciphertext as base64
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ivHex </span><span>= </span><span style="color:#ebcb8b;">Array</span><span>.</span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">iv</span><span>).</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">b </span><span style="color:#b48ead;">=&gt; </span><span>(&#39;</span><span style="color:#a3be8c;">00</span><span>&#39; + </span><span style="color:#bf616a;">b</span><span>.</span><span style="color:#96b5b4;">toString</span><span>(</span><span style="color:#d08770;">16</span><span>)).</span><span style="color:#96b5b4;">slice</span><span>(-</span><span style="color:#d08770;">2</span><span>)).</span><span style="color:#96b5b4;">join</span><span>(&#39;&#39;); </span><span style="color:#65737e;">// iv as hex string
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">ivHex</span><span>+</span><span style="color:#bf616a;">ctBase64</span><span>;                                                             </span><span style="color:#65737e;">// return iv+ciphertext
+</span><span>}
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">async function </span><span style="color:#8fa1b3;">aesGcmDecrypt</span><span>(</span><span style="color:#bf616a;">ciphertext</span><span>, </span><span style="color:#bf616a;">password</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">pwUtf8 </span><span>= new TextEncoder().</span><span style="color:#8fa1b3;">encode</span><span>(</span><span style="color:#bf616a;">password</span><span>);                                 </span><span style="color:#65737e;">// encode password as UTF-8
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">pwHash </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">digest</span><span>(&#39;</span><span style="color:#a3be8c;">SHA-256</span><span>&#39;, </span><span style="color:#bf616a;">pwUtf8</span><span>);                      </span><span style="color:#65737e;">// hash the password
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">iv </span><span>= </span><span style="color:#bf616a;">ciphertext</span><span>.</span><span style="color:#96b5b4;">slice</span><span>(</span><span style="color:#d08770;">0</span><span>,</span><span style="color:#d08770;">24</span><span>).</span><span style="color:#96b5b4;">match</span><span>(/</span><span style="color:#d08770;">.</span><span>{2}/</span><span style="color:#b48ead;">g</span><span>).</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">byte </span><span style="color:#b48ead;">=&gt; </span><span style="color:#96b5b4;">parseInt</span><span>(</span><span style="color:#bf616a;">byte</span><span>, </span><span style="color:#d08770;">16</span><span>));  </span><span style="color:#65737e;">// get iv from ciphertext
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">alg </span><span>= { name: &#39;</span><span style="color:#a3be8c;">AES-GCM</span><span>&#39;, iv: new Uint8Array(</span><span style="color:#bf616a;">iv</span><span>) };                           </span><span style="color:#65737e;">// specify algorithm to use
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">key </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">importKey</span><span>(&#39;</span><span style="color:#a3be8c;">raw</span><span>&#39;, </span><span style="color:#bf616a;">pwHash</span><span>, </span><span style="color:#bf616a;">alg</span><span>, </span><span style="color:#d08770;">false</span><span>, [&#39;</span><span style="color:#a3be8c;">decrypt</span><span>&#39;]); </span><span style="color:#65737e;">// use pw to generate key
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctStr </span><span>= </span><span style="color:#8fa1b3;">atob</span><span>(</span><span style="color:#bf616a;">ciphertext</span><span>.</span><span style="color:#96b5b4;">slice</span><span>(</span><span style="color:#d08770;">24</span><span>));                                          </span><span style="color:#65737e;">// decode base64 ciphertext
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ctUint8 </span><span>= new Uint8Array(</span><span style="color:#bf616a;">ctStr</span><span>.</span><span style="color:#96b5b4;">match</span><span>(/</span><span style="color:#d08770;">.</span><span>/</span><span style="color:#b48ead;">g</span><span>).</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">ch </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">ch</span><span>.</span><span style="color:#96b5b4;">charCodeAt</span><span>(</span><span style="color:#d08770;">0</span><span>)));     </span><span style="color:#65737e;">// ciphertext as Uint8Array
+</span><span>    </span><span style="color:#65737e;">// note: why doesn&#39;t ctUint8 = new TextEncoder().encode(ctStr) work?
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">plainBuffer </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">crypto</span><span>.</span><span style="color:#bf616a;">subtle</span><span>.</span><span style="color:#8fa1b3;">decrypt</span><span>(</span><span style="color:#bf616a;">alg</span><span>, </span><span style="color:#bf616a;">key</span><span>, </span><span style="color:#bf616a;">ctUint8</span><span>);                </span><span style="color:#65737e;">// decrypt ciphertext using key
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">plaintext </span><span>= new TextDecoder().</span><span style="color:#8fa1b3;">decode</span><span>(</span><span style="color:#bf616a;">plainBuffer</span><span>);                           </span><span style="color:#65737e;">// decode password from UTF-8
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">plaintext</span><span>;                                                                  </span><span style="color:#65737e;">// return the plaintext
+</span><span>}
+</span></code></pre>
+<p>Backend code:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>package main
+</span><span>
+</span><span>import (
+</span><span>	&quot;bytes&quot;
+</span><span>	&quot;crypto/aes&quot;
+</span><span>	&quot;crypto/cipher&quot;
+</span><span>	&quot;crypto/sha256&quot;
+</span><span>	&quot;encoding/base64&quot;
+</span><span>	&quot;encoding/hex&quot;
+</span><span>	&quot;fmt&quot;
+</span><span>	&quot;io&quot;
+</span><span>	&quot;log&quot;
+</span><span>)
+</span><span>
+</span><span>func main() {
+</span><span>	data := &quot;e2f4b56b1961ca12d38031420DVbsv0o5Tux4MUCGG0ZcMUZ7yZHlSWn3DsZJmbg&quot;
+</span><span>
+</span><span>	message := bytes.Buffer{}
+</span><span>	iv, err := hex.DecodeString(data[:24])
+</span><span>	if err != nil {
+</span><span>		log.Fatal(err)
+</span><span>	}
+</span><span>	message.Write(iv)
+</span><span>
+</span><span>	payload, err := base64.StdEncoding.DecodeString(data[24:])
+</span><span>	if err != nil {
+</span><span>		fmt.Println(&quot;decode error:&quot;, err)
+</span><span>		return
+</span><span>	}
+</span><span>	message.Write(payload)
+</span><span>
+</span><span>	h := sha256.New()
+</span><span>	io.WriteString(h, &quot;pw&quot;)
+</span><span>	key := h.Sum(nil)
+</span><span>
+</span><span>	out, err := Decrypt(key, message.Bytes())
+</span><span>	if err != nil {
+</span><span>		fmt.Println(&quot;decode error:&quot;, err)
+</span><span>		return
+</span><span>	}
+</span><span>
+</span><span>	fmt.Printf(&quot;message: %s\n&quot;, out)
+</span><span>}
+</span><span>
+</span><span>// Decrypt AES-256 GCM
+</span><span>func Decrypt(password, message []byte) ([]byte, error) {
+</span><span>	c, err := aes.NewCipher(password)
+</span><span>	if err != nil {
+</span><span>		return nil, err
+</span><span>	}
+</span><span>
+</span><span>	gcm, err := cipher.NewGCM(c)
+</span><span>	if err != nil {
+</span><span>		return nil, err
+</span><span>	}
+</span><span>
+</span><span>	nonce := make([]byte, gcm.NonceSize())
+</span><span>	copy(nonce, message[:gcm.NonceSize()])
+</span><span>
+</span><span>	out, err := gcm.Open(nil, nonce, message[gcm.NonceSize():], nil)
+</span><span>	if err != nil {
+</span><span>		return nil, err
+</span><span>	}
+</span><span>	return out, nil
+</span><span>}
+</span></code></pre>
+<p>Example of web page <code>index.html</code>:</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>&lt;!</span><span style="color:#b48ead;">DOCTYPE </span><span style="color:#d08770;">html</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">html</span><span>&gt;
+</span><span>
+</span><span>&lt;</span><span style="color:#bf616a;">head</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">meta </span><span style="color:#d08770;">charset</span><span>=&quot;</span><span style="color:#a3be8c;">UTF-8</span><span>&quot; /&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">meta </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">viewport</span><span>&quot; </span><span style="color:#d08770;">content</span><span>=&quot;</span><span style="color:#a3be8c;">width=device-width</span><span>&quot; /&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">title</span><span>&gt;test webcrypto&lt;/</span><span style="color:#bf616a;">title</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">script </span><span style="color:#d08770;">src</span><span>=&quot;</span><span style="color:#a3be8c;">common.js</span><span>&quot;&gt;&lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span>        (</span><span style="color:#b48ead;">async</span><span>() </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">ciphertext </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">aesGcmEncrypt</span><span>(&quot;</span><span style="color:#a3be8c;">my secret text</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">pw</span><span>&quot;);
+</span><span>            </span><span style="color:#bf616a;">out </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">aesGcmDecrypt</span><span>(</span><span style="color:#bf616a;">ciphertext</span><span>, &quot;</span><span style="color:#a3be8c;">pw</span><span>&quot;);
+</span><span>            console.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">ciphertext</span><span>, </span><span style="color:#bf616a;">out</span><span>);
+</span><span>        })()
+</span><span>    &lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">head</span><span>&gt;
+</span><span>
+</span><span>&lt;</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>check your console.log
+</span><span>&lt;/</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>
+</span><span>&lt;/</span><span style="color:#bf616a;">html</span><span>&gt;
+</span></code></pre>
+<p>To test create a directory with <code>index.html</code> and <code>common.js</code> and execute command
+<a href="https://github.com/nbari/www">www</a>:</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

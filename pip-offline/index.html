@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+pip offline &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;pip-offline&#x2F;">pip offline</a></h2>
+<div class="post-header">
+    <span class="post-date">August 12, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>To install pip packages offline first download all the packages, for example to
+install <code>pgcli</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pip</span><span> download pgcli</span><span style="color:#bf616a;"> -d</span><span> packages_downloads
+</span></code></pre>
+<p>Then you can <code>tar</code> and share the file to your offline server:</p>
+<pre data-lang="share" style="background-color:#2b303b;color:#c0c5ce;" class="language-share "><code class="language-share" data-lang="share"><span>tar -cf pgcli.tar.gz package_downloads/
+</span></code></pre>
+<p>In the server without internet you can unarchive to dir named <code>wrk</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">tar -xvf</span><span> pgcli.tar.gz wrk
+</span></code></pre>
+<p>Then to install do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pip</span><span> install</span><span style="color:#bf616a;"> --no-index --find-links </span><span>&quot;</span><span style="color:#a3be8c;">./wrk/</span><span>&quot; ./wrk/pgcli-4.1.0-py3-none-any.whl
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

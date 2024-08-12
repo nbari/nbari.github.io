@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+proxmox vlan &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;proxmox-vlan&#x2F;">proxmox vlan</a></h2>
+<div class="post-header">
+    <span class="post-date">June 26, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>If you have a single network interface and want to have your VM's in a VLAN,
+modify the <code>/etc/network/interfaces</code> to look something like:</p>
+<pre data-lang="config" style="background-color:#2b303b;color:#c0c5ce;" class="language-config "><code class="language-config" data-lang="config"><span style="color:#bf616a;">auto </span><span>lo
+</span><span style="color:#bf616a;">iface </span><span>lo inet loopback
+</span><span>
+</span><span style="color:#bf616a;">iface </span><span>eno1 inet manual
+</span><span>
+</span><span style="color:#bf616a;">auto </span><span>vmbr0
+</span><span style="color:#bf616a;">iface </span><span>vmbr0 inet static
+</span><span>	</span><span style="color:#bf616a;">address </span><span style="color:#d08770;">192.168.0.2/24
+</span><span>	</span><span style="color:#bf616a;">gateway </span><span style="color:#d08770;">192.168.0.1
+</span><span>	</span><span style="color:#bf616a;">bridge-ports </span><span>eno1
+</span><span>	</span><span style="color:#bf616a;">bridge-stp </span><span style="color:#d08770;">off
+</span><span>	</span><span style="color:#bf616a;">bridge-fd </span><span style="color:#d08770;">0
+</span><span>
+</span><span style="color:#bf616a;">auto </span><span>vmbr1
+</span><span style="color:#bf616a;">iface </span><span>vmbr1 inet manual
+</span><span>	</span><span style="color:#bf616a;">bridge-ports </span><span>eno1.</span><span style="color:#d08770;">20
+</span><span>	</span><span style="color:#bf616a;">bridge-stp </span><span style="color:#d08770;">off
+</span><span>	</span><span style="color:#bf616a;">bridge-fd </span><span style="color:#d08770;">0
+</span><span>
+</span><span style="color:#bf616a;">iface </span><span>eno1.</span><span style="color:#d08770;">20</span><span> inet manual
+</span><span>	</span><span style="color:#bf616a;">vlan-raw-device </span><span>eno1
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">source </span><span>/etc/network/interfaces.d</span><span style="color:#65737e;">/*
+</span></code></pre>
+<p>After modifying apply the changes:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> restart networking
+</span></code></pre>
+<p>In this case, thee is only one interface <code>eno1</code> and the VLAN-ID is <code>20</code></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

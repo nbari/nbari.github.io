@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Fat16 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;fat16&#x2F;">Fat16</a></h2>
+<div class="post-header">
+    <span class="post-date">March 23, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/fat16/">fat16</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/fat32/">fat32</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>When trying to update a bios from an USB pen, probably you will need FAT16 or FAT32, to do this from macOS try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>diskutil partitiondisk /dev/disk3 1 MBR &quot;MS-DOS FAT16&quot; &quot;NONAME&quot; 0B
+</span></code></pre>
+<ul>
+<li>/dev/disk3 - disk device to be partitioned, found with 'diskutil list'</li>
+<li>1 - number of partitions, optional, but if given must match</li>
+<li>MBR - partition Scheme (eg, DOS=MBR, Mac=GPT)</li>
+<li>MS-DOS FAT16 - partition type (or fat32) *</li>
+<li>NONAME - partition name</li>
+<li>0B - partition size (0B=maximum)</li>
+</ul>
+<p>Then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sudo newfs_msdos -F 16 /dev/disk3s1
+</span></code></pre>
+<p>See more: https://pbxbook.com/other/dosfat16.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ssh escape sequences &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ssh-escape-sequences&#x2F;">ssh escape sequences</a></h2>
+<div class="post-header">
+    <span class="post-date">February 05, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>While using ssh your connection may become idle or unresponsive in any case
+instead of waiting you can simple terminate the connection by sending a escape
+sequence:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>~.
+</span></code></pre>
+<h1 id="ssh-escape-sequences"><a class="zola-anchor" href="#ssh-escape-sequences" aria-label="Anchor link for: ssh-escape-sequences">🔗</a>SSH escape sequences</h1>
+<table><thead><tr><th>sequence</th><th>description</th></tr></thead><tbody>
+<tr><td>~.</td><td>terminate connection (and any multiplexed sessions)</td></tr>
+<tr><td>~B</td><td>send a BREAK to the remote system</td></tr>
+<tr><td>~C</td><td>open a command line</td></tr>
+<tr><td>~R</td><td>request rekey</td></tr>
+<tr><td>~V/v</td><td>decrease/increase verbosity (LogLevel)</td></tr>
+<tr><td>~^Z</td><td>suspend ssh</td></tr>
+<tr><td>~#</td><td>list forwarded connections</td></tr>
+<tr><td>~&amp;</td><td>background ssh (when waiting for connections to terminate)</td></tr>
+<tr><td>~?</td><td>this message</td></tr>
+<tr><td>~~</td><td>send the escape character by typing it twice</td></tr>
+</tbody></table>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
