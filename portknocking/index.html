@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Port knocking &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;portknocking&#x2F;">Port knocking</a></h2>
+<div class="post-header">
+    <span class="post-date">June 19, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/pf/">pf</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/nc/">nc</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <blockquote>
+<p>In computer networking, port knocking is a method of externally opening ports on
+a firewall by generating a connection attempt on a set of prespecified closed
+ports. Once a correct sequence of connection attempts is received, the firewall
+rules are dynamically modified to allow the host which sent the connection
+attempts to connect over specific port(s).</p>
+</blockquote>
+<p>For example, Using <a href="https://www.freebsd.org/doc/handbook/firewalls-pf.html">PF</a> on <a href="http://www.freebsd.org">FreeBSD</a> to only open <code>port 22</code> after X number of
+attempts to connect on <code>port 1234</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># Table for allowed IPs - gets auto populated via portknocking
+</span><span style="color:#bf616a;">table </span><span>&lt;portknock_ssh&gt; persist
+</span><span>
+</span><span style="color:#bf616a;">block</span><span> drop </span><span style="color:#65737e;"># block policy
+</span><span style="color:#65737e;"># Allow everyone to hit &#39;any&#39; on port &#39;1234&#39; - pf proxies tcp connection
+</span><span style="color:#65737e;">#  [if not using &#39;synproxy&#39;, the connection is never established to
+</span><span style="color:#65737e;">#    &#39;overload&#39; the rule]
+</span><span style="color:#65737e;">#  5 attempts in 15 seconds
+</span><span style="color:#bf616a;">pass</span><span> in log quick proto tcp from any to any port {1234} synproxy state \
+</span><span>  (max-src-conn-rate 5/15, overload &lt;portknock_ssh&gt;)
+</span><span>
+</span><span style="color:#65737e;">#Allow IPs that have been &#39;overload&#39;ed into the portknock_ssh table
+</span><span style="color:#bf616a;">pass</span><span> in log quick proto tcp from {&lt;portknock_ssh&gt;} to any port {ssh}
+</span><span>
+</span><span style="color:#65737e;"># Allow out trafic
+</span><span style="color:#bf616a;">pass</span><span> out all
+</span></code></pre>
+<p>In case you want to use this on an AWS instance using also VPN (NAT):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>table &lt;portknock_ssh&gt; persist
+</span><span>
+</span><span>scrub in all
+</span><span>nat on xn0 from !xn0:0 to any -&gt; (xn0)
+</span><span>set skip on {lo0, tun0, ng0}
+</span><span>
+</span><span>pass in log quick proto tcp from any to any port {1234} synproxy state \
+</span><span>  (max-src-conn-rate 5/15, overload &lt;portknock_ssh&gt;)
+</span><span>pass in log quick proto tcp from {&lt;portknock_ssh&gt;} to any port {ssh}
+</span><span>block in quick on xn0 proto tcp to port ssh
+</span><span>
+</span><span>pass all
+</span></code></pre>
+<p>An entry in <code>/etc/crontab</code> or a expiretable could be used to expire all IP's
+in that table that have not been referenced in 60 seconds:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>* * * * *       root    /sbin/pfctl -vt portknock_ssh -T expire 60
+</span></code></pre>
+<h1 id="how-to-nock"><a class="zola-anchor" href="#how-to-nock" aria-label="Anchor link for: how-to-nock">🔗</a>how to nock</h1>
+<p>Via terminal:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ for i in {1..10}
+</span><span>nc -z host.tld 1234
+</span><span>Connection to host.tld port 1234 [tcp/search-agent] succeeded!
+</span><span>Connection to host.tld port 1234 [tcp/search-agent] succeeded!
+</span><span>Connection to host.tld port 1234 [tcp/search-agent] succeeded!
+</span><span>Connection to host.tld port 1234 [tcp/search-agent] succeeded!
+</span><span>Connection to host.tld port 1234 [tcp/search-agent] succeeded!
+</span><span>..
+</span></code></pre>
+<p>On the server to see the current IP on the <code>portknock_ssh</code> table:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pfctl -t portknock_ssh -T show
+</span><span>96.129.22.100
+</span><span>10.0.2.34
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

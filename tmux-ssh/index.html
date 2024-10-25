@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+tmux ssh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tmux-ssh&#x2F;">tmux ssh</a></h2>
+<div class="post-header">
+    <span class="post-date">May 19, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tmux/">tmux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="tmux-multiple-ssh-connections-with-synchronized-panels"><a class="zola-anchor" href="#tmux-multiple-ssh-connections-with-synchronized-panels" aria-label="Anchor link for: tmux-multiple-ssh-connections-with-synchronized-panels">🔗</a>Tmux multiple ssh connections with synchronized panels</h1>
+<p>If need to debug/check in real-time multiple servers via ssh, this can be used.</p>
+<h1 id="tmux-script"><a class="zola-anchor" href="#tmux-script" aria-label="Anchor link for: tmux-script">🔗</a>tmux script</h1>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span>
+</span><span style="color:#bf616a;">TARGET</span><span>=&quot;</span><span style="color:#a3be8c;">tmux-ssh</span><span>&quot;
+</span><span style="color:#bf616a;">SSH_USER</span><span>=&quot;</span><span style="color:#a3be8c;">devops</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">i</span><span>=</span><span style="color:#a3be8c;">0
+</span><span style="color:#b48ead;">while </span><span style="color:#96b5b4;">read</span><span> line
+</span><span style="color:#b48ead;">do
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>$</span><span style="color:#bf616a;">i </span><span>== 0 </span><span style="color:#96b5b4;">]
+</span><span>    </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#bf616a;">tmux</span><span> new-window</span><span style="color:#bf616a;"> -a -n </span><span>${</span><span style="color:#bf616a;">TARGET</span><span>} &quot;</span><span style="color:#a3be8c;">ssh -l </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">SSH_USER</span><span style="color:#a3be8c;">} </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">line</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">else
+</span><span>        </span><span style="color:#bf616a;">tmux</span><span> split-window</span><span style="color:#bf616a;"> -t </span><span>&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">TARGET</span><span style="color:#a3be8c;">}</span><span>&quot; &quot;</span><span style="color:#a3be8c;">ssh -l </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">SSH_USER</span><span style="color:#a3be8c;">} </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">line</span><span style="color:#a3be8c;">}</span><span>&quot; &amp;&amp; \
+</span><span>            </span><span style="color:#bf616a;">tmux</span><span> select-layout</span><span style="color:#bf616a;"> -t </span><span>&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">TARGET</span><span style="color:#a3be8c;">}</span><span>&quot; tiled
+</span><span>    </span><span style="color:#b48ead;">fi
+</span><span>    </span><span style="color:#96b5b4;">let</span><span> i++
+</span><span style="color:#b48ead;">done </span><span>&lt; &quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">1</span><span>:-</span><span style="color:#a3be8c;">/dev/stdin}</span><span>&quot;
+</span><span style="color:#bf616a;">tmux</span><span> set-window-option</span><span style="color:#bf616a;"> -t </span><span>${</span><span style="color:#bf616a;">TARGET</span><span>} synchronize-panes on
+</span></code></pre>
+<h3 id="hosts"><a class="zola-anchor" href="#hosts" aria-label="Anchor link for: hosts">🔗</a>hosts</h3>
+<p>If the input is json, <a href="https://stedolan.github.io/jq/">jq</a> can be used to
+extract hosts, assuming your output is similar to:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>  &quot;</span><span style="color:#a3be8c;">serverA</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">hosts</span><span>&quot;: [
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.20.23.24</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.20.12.37</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.50.10.21</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.50.13.20</span><span>&quot;
+</span><span>    ]
+</span><span>  },
+</span><span>  &quot;</span><span style="color:#a3be8c;">serverB</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">hosts</span><span>&quot;: [
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.20.23.116</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.50.10.39</span><span>&quot;
+</span><span>    ]
+</span><span>  },
+</span><span>  &quot;</span><span style="color:#a3be8c;">serverC</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">hosts</span><span>&quot;: [
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.20.8.9</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">127.50.16.130</span><span>&quot;
+</span><span>    ]
+</span><span>  }
+</span></code></pre>
+<p>To get only the hosts and ssh into them you could do something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cat hosts | jq &quot;.serverA.hosts[]&quot; -r | tmux-ssh.sh
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

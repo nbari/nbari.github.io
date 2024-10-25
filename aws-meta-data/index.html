@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aws meta data &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-meta-data&#x2F;">aws meta data</a></h2>
+<div class="post-header">
+    <span class="post-date">May 30, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/meta-data/">meta-data</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="aws-meta-data"><a class="zola-anchor" href="#aws-meta-data" aria-label="Anchor link for: aws-meta-data">🔗</a>AWS meta-data</h1>
+<p>Instance metadata is data about your instance that you can use to configure or
+manage the running instance. Instance metadata is divided into categories. For
+more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories">Instance Metadata Categories.</a></p>
+<p>To view all the categories:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/latest/meta-data/
+</span></code></pre>
+<p>To obtain the private IP address:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/latest/meta-data/local-ipv4
+</span></code></pre>
+<p>To obtain the public IP address:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/latest/meta-data/public-ipv4
+</span></code></pre>
+<p>To obtain the ssh public key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/1.0/meta-data/public-keys/0/openssh-key
+</span></code></pre>
+<p>To obtain the instance name:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/latest/meta-data/instance-id
+</span></code></pre>
+<p>To obtain the availability-zone:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl http://169.254.169.254/latest/meta-data/placement/availability-zone
+</span></code></pre>
+<h1 id="169-254-16"><a class="zola-anchor" href="#169-254-16" aria-label="Anchor link for: 169-254-16">🔗</a>169.254/16</h1>
+<p><a href="https://en.wikipedia.org/wiki/Link-local_address">Link-local address</a>
+In a computer network, a link-local address is a network address that is valid
+only for communications within the network segment (link) or the broadcast
+domain that the host is connected to. Link-local addresses are not guaranteed
+to be unique beyond a single network segment. Routers therefore do not forward
+packets with link-local addresses. For protocols that have only link-local
+addresses, such as Ethernet, hardware addresses assigned by manufacturers in
+networking elements are unique, consisting of a vendor identification and a
+serial identifier. Link-local addresses for IPv4 are defined in the address
+block 169.254.0.0/16 in CIDR notation. In IPv6, they are assigned the address
+block fe80::/64.[1]</p>
+<p>See <a href="https://tools.ietf.org/html/rfc3927">Dynamic Configuration of IPv4 Link-Local Addresses</a>
+This document describes how a host may automatically configure an interface with
+an IPv4 address within the 169.254/16 prefix that is valid for communication
+with other devices connected to the same physical (or logical) link.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
