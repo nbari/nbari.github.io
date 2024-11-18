@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Nginx Reverse Proxy Cache &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;nginx-reverse-proxy-cache&#x2F;">Nginx Reverse Proxy Cache</a></h2>
+<div class="post-header">
+    <span class="post-date">August 10, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>This is the full configuration for <code>nginx.conf</code>:</p>
+<pre data-lang="nginx" style="background-color:#2b303b;color:#c0c5ce;" class="language-nginx "><code class="language-nginx" data-lang="nginx"><span>
+</span><span>user www www;
+</span><span>worker_processes  auto;
+</span><span>
+</span><span>events {
+</span><span>    use kqueue;
+</span><span>    worker_connections  1024;
+</span><span>}
+</span><span>
+</span><span>http {
+</span><span>    include       mime.types;
+</span><span>    default_type  application/octet-stream;
+</span><span>
+</span><span>    sendfile on;
+</span><span>    tcp_nopush on;
+</span><span>    tcp_nodelay on;
+</span><span>
+</span><span>    client_max_body_size 30M;
+</span><span>    keepalive_timeout    10 10;
+</span><span>
+</span><span>    gzip            on;
+</span><span>    gzip_static     on;
+</span><span>    gzip_vary       on;
+</span><span>    gzip_min_length 0;
+</span><span>    gzip_comp_level 9;
+</span><span>    gzip_buffers    16 8k;
+</span><span>    gzip_proxied    any;
+</span><span>    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml;
+</span><span>
+</span><span>    charset   utf-8;
+</span><span>    server_tokens off;
+</span><span>    server_name_in_redirect off;
+</span><span>
+</span><span>    proxy_buffering    on;
+</span><span>    proxy_cache_path   /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off;
+</span><span>    proxy_buffer_size  8k;
+</span><span>    proxy_buffers      8 24k;
+</span><span>
+</span><span>    server {
+</span><span>        listen       80;
+</span><span>        server_name  _;
+</span><span>
+</span><span>        location / {
+</span><span>            proxy_cache rubygems;
+</span><span>            proxy_cache_use_stale updating error timeout invalid_header http_500 http_502 http_503 http_504;
+</span><span>            proxy_cache_revalidate on;
+</span><span>            proxy_cache_min_uses 1;
+</span><span>            proxy_cache_lock on;
+</span><span>            proxy_cache_valid 200 301 304 2d;
+</span><span>            proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie;
+</span><span>
+</span><span>            proxy_redirect off;
+</span><span>            proxy_set_header X-Real-IP $remote_addr;
+</span><span>            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span><span>            proxy_set_header X-Forwarded-Proto $scheme;
+</span><span>            proxy_set_header Host rubygems.org;
+</span><span>            proxy_set_header Connection &quot;&quot;;
+</span><span>            proxy_http_version 1.1;
+</span><span>            proxy_pass https://rubygems.org/;
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>In this case Nginx is used to cache packages from <a href="https://rubygems.org">rubygems.org</a>.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

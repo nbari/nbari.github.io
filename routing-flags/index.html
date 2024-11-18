@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+routing flags &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;routing-flags&#x2F;">routing flags</a></h2>
+<div class="post-header">
+    <span class="post-date">March 21, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/netstat/">netstat</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>From netstat(1) man page:</p>
+<table><thead><tr><th>Letter</th><th>Flag</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>1</td><td>RTF_PROTO1</td><td>Protocol specific routing flag #1</td></tr>
+<tr><td>2</td><td>RTF_PROTO2</td><td>Protocol specific routing flag #2</td></tr>
+<tr><td>3</td><td>RTF_PROTO3</td><td>Protocol specific routing flag #3</td></tr>
+<tr><td>B</td><td>RTF_BLACKHOLE</td><td>Just discard packets (during updates)</td></tr>
+<tr><td>b</td><td>RTF_BROADCAST</td><td>The route represents a broadcast address</td></tr>
+<tr><td>C</td><td>RTF_CLONING</td><td>Generate new routes on use</td></tr>
+<tr><td>c</td><td>RTF_PRCLONING</td><td>Protocol-specified generate new routes on use</td></tr>
+<tr><td>D</td><td>RTF_DYNAMIC</td><td>Created dynamically (by redirect)</td></tr>
+<tr><td>G</td><td>RTF_GATEWAY</td><td>Destination requires forwarding by intermediary</td></tr>
+<tr><td>H</td><td>RTF_HOST</td><td>Host entry (net otherwise)</td></tr>
+<tr><td>I</td><td>RTF_IFSCOPE</td><td>Route is associated with an interface scope</td></tr>
+<tr><td>i</td><td>RTF_IFREF</td><td>Route is holding a reference to the interface</td></tr>
+<tr><td>L</td><td>RTF_LLINFO</td><td>Valid protocol to link address translation</td></tr>
+<tr><td>M</td><td>RTF_MODIFIED</td><td>Modified dynamically (by redirect)</td></tr>
+<tr><td>m</td><td>RTF_MULTICAST</td><td>The route represents a multicast address</td></tr>
+<tr><td>R</td><td>RTF_REJECT</td><td>Host or net unreachable</td></tr>
+<tr><td>r</td><td>RTF_ROUTER</td><td>Host is a default router</td></tr>
+<tr><td>S</td><td>RTF_STATIC</td><td>Manually added</td></tr>
+<tr><td>U</td><td>RTF_UP</td><td>Route usable</td></tr>
+<tr><td>W</td><td>RTF_WASCLONED</td><td>Route was generated as a result of cloning</td></tr>
+<tr><td>X</td><td>RTF_XRESOLVE</td><td>External daemon translates proto to link address</td></tr>
+<tr><td>Y</td><td>RTF_PROXY</td><td>Proxying; cloned routes will not be scoped</td></tr>
+</tbody></table>
+<p>To find current gateway when using a VPN:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> netstat -rna -f inet | grep UGHS | awk &#39;{print $1}&#39;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

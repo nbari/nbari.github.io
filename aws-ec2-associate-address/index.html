@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aws ec2 associate address &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-ec2-associate-address&#x2F;">aws ec2 associate address</a></h2>
+<div class="post-header">
+    <span class="post-date">August 30, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/autoscaling/">autoscaling</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/remap/">remap</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If doing more than 100 requests implying the AWS CLI <code>associate-address</code>
+sub-command, subsequent calls will cost <strong>$0.10</strong> each, so If doing to much
+scale in/out or have a monitoring/automated tool that frecuenly make API calls using
+this sub-command, the bill is not going to be cheap:</p>
+<ul>
+<li>Scale in  (remove instances)</li>
+<li>Scale out (add instances)</li>
+</ul>
+<p><img src="/img/aws-ec2-associate-address.png" alt="additional remap" /></p>
+<p>Long story short, The <code>associate-address</code> sub-command, is an idempotent
+operation, if you call "aws ec2 associate-address" with the same combination
+of instance and EIP as the one currently in place, it won't return an error;
+instead, it will return and count as successful, regardless of whether an actual
+allocation was done or not. Consequently, being it counted as a successful
+request, you'll be billed accordingly.</p>
+<blockquote>
+<p>Idempotent operations take an important role, basically because you expect
+that operation will not result in different results no matter how many times you
+operate the idempotent operations. (Idempotent = Re-runnable).</p>
+</blockquote>
+<p>This can be avoided by using private addresses and Load balancers, but in cases where
+you need to deal with <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP's</a> this maybe an issue, mainly for monitoring scripts or periodic checks, or use the <a href="http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-addresses.html">describe-address</a> and based on the result decide to use or not the <code>associate=address</code> sub-command</p>
+<h1 id="associate-address"><a class="zola-anchor" href="#associate-address" aria-label="Anchor link for: associate-address">🔗</a>associate-address</h1>
+<p>Associates an Elastic IP address with an instance or a network interface. This
+is an idempotent operation. If you perform the operation more than once, Amazon
+EC2 doesn't return an error, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ aws ec2 associate-address --instance-id i-24ea6379 --allocation-id eipalloc-b58d24da
+</span><span>{
+</span><span>    &quot;AssociationId&quot;: &quot;eipassoc-b7b117df&quot;
+</span><span>}
+</span></code></pre>
+<p>http://docs.aws.amazon.com/cli/latest/reference/ec2/associate-address.html</p>
+<p>After running the previous command 100 times, the following requests will cost
+each <code>$0.10 per Elastic IP address remap</code> either the association didn't
+succeed or if it was made to an existing IP.</p>
+<p>Basically this means that if you have something that periodically checks your
+instances and tries to remap or ensure that your elastic IP is pointing you a
+desired instance:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    10.0.1.3 ---&gt; 58.41.28.32
+</span></code></pre>
+<p>After doing 100 calls, the following request will cost <strong>$0.10</strong> each.</p>
+<h2 id="auto-scaling"><a class="zola-anchor" href="#auto-scaling" aria-label="Anchor link for: auto-scaling">🔗</a>Auto scaling</h2>
+<p>While creating an auto-scaling group, could be the need to map each of the
+instances to use an Elastic IP's, based on the scaling in/out policies
+this would imply that after reaching the 100 limit, each reboot will cost
+<strong>$0.10</strong>.</p>
+<h1 id="example-of-how-to-use-the-associate-address-from-a-startup-script"><a class="zola-anchor" href="#example-of-how-to-use-the-associate-address-from-a-startup-script" aria-label="Anchor link for: example-of-how-to-use-the-associate-address-from-a-startup-script">🔗</a>Example of how to use the <code>associate-address</code> from a startup script</h1>
+<pre data-lang="shell" style="background-color:#2b303b;color:#c0c5ce;" class="language-shell "><code class="language-shell" data-lang="shell"><span>#!/bin/sh
+</span><span>
+</span><span># KEYWORD: firstboot
+</span><span># PROVIDE: set_hostname
+</span><span># REQUIRE: NETWORKING
+</span><span># BEFORE:  SERVERS
+</span><span>
+</span><span>. /etc/rc.subr
+</span><span>
+</span><span>name=&quot;set_hostname&quot;
+</span><span>rcvar=set_hostname_enable
+</span><span>start_cmd=&quot;set_hostname_run&quot;
+</span><span>stop_cmd=&quot;:&quot;
+</span><span>
+</span><span>export AWS_ACCESS_KEY_ID=aws_access_key_id
+</span><span>export AWS_SECRET_ACCESS_KEY=aws_secret_access_key
+</span><span>export AWS_DEFAULT_REGION=the_region
+</span><span>
+</span><span>TAG_NAME=&quot;Salt&quot;
+</span><span>INSTANCE_ID=$(/usr/local/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id)
+</span><span>REGION=$(/usr/local/bin/curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed &#39;s/.$//&#39;)
+</span><span>TAG_VALUE=$(/usr/local/bin/aws ec2 describe-tags --filters &quot;Name=resource-id,Values=${INSTANCE_ID}&quot; &quot;Name=key,Values=$TAG_NAME&quot; --region ${REGION} --output=text | cut -f5)
+</span><span>
+</span><span>set_hostname_run()
+</span><span>{
+</span><span>	hostname ${INSTANCE_ID}
+</span><span>	sysrc hostname=&quot;${INSTANCE_ID}&quot;
+</span><span>	sysrc salt_minion_enable=&quot;YES&quot;
+</span><span>	echo ${INSTANCE_ID} &gt; /usr/local/etc/salt/minion_id
+</span><span>	pw usermod root -c &quot;root on ${INSTANCE_ID}&quot;
+</span><span>	if [ ! -z &quot;${TAG_VALUE}&quot; ]; then
+</span><span>		echo &quot;node_type: ${TAG_VALUE}&quot; &gt; /usr/local/etc/salt/grains
+</span><span>	fi
+</span><span>	# allocate IP X.X.X.X
+</span><span>	/usr/local/bin/aws ec2 associate-address --instance-id $INSTANCE_ID --allocation-id eipalloc-xxxxxxxx
+</span><span>}
+</span><span>
+</span><span>load_rc_config $name
+</span><span>run_rc_command &quot;$1&quot;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

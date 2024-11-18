@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mtr &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mtr&#x2F;">mtr</a></h2>
+<div class="post-header">
+    <span class="post-date">April 25, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mtr/">mtr</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/traceroute/">traceroute</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="mtr-to-create-a-text-file-report"><a class="zola-anchor" href="#mtr-to-create-a-text-file-report" aria-label="Anchor link for: mtr-to-create-a-text-file-report">🔗</a>mtr to create a text file report</h1>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo mtr --report --report-cycles 10 immortal.run &gt; /tmp/immortal-mtr.txt
+</span></code></pre>
+<p>Example of output:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">Start:</span><span> Tue Apr 25 17:58:11 2017
+</span><span style="color:#bf616a;">HOST:</span><span> M20160001.local             Loss%   Snt   Last   Avg  Best  Wrst StDev
+</span><span>  </span><span style="color:#bf616a;">1.</span><span>|</span><span style="color:#bf616a;">--</span><span> 10.19.15.254               0.0%    10   41.7  41.2  25.1  81.6  16.8
+</span><span>  </span><span style="color:#bf616a;">2.</span><span>|</span><span style="color:#bf616a;">--</span><span> 10.19.0.1                  0.0%    10    0.5   0.5   0.4   0.6   0.0
+</span><span>  </span><span style="color:#bf616a;">3.</span><span>|</span><span style="color:#bf616a;">--</span><span> 23.189.27.97               0.0%    10    1.2   8.5   1.0  74.4  23.2
+</span><span>  </span><span style="color:#bf616a;">4.</span><span>|</span><span style="color:#bf616a;">--</span><span> 89.27.149.117             80.0%    10    1.3  18.4   1.3  35.4  24.1
+</span><span>  </span><span style="color:#bf616a;">5.</span><span>|</span><span style="color:#bf616a;">--</span><span> 62.214.33.237              0.0%    10    7.0   2.3   1.1   7.0   2.2
+</span><span>  </span><span style="color:#bf616a;">6.</span><span>|</span><span style="color:#bf616a;">--</span><span> 62.214.37.118              0.0%    10    5.1   3.5   1.5  12.8   3.6
+</span><span>  </span><span style="color:#bf616a;">7.</span><span>|</span><span style="color:#bf616a;">--</span><span> cloudflare.bcix.de         0.0%    10    1.8   2.5   1.6   8.4   2.0
+</span><span>  </span><span style="color:#bf616a;">8.</span><span>|</span><span style="color:#bf616a;">--</span><span> 104.18.53.220              0.0%    10    1.9   2.1   1.6   3.6   0.3
+</span></code></pre>
+<p>mtr on specific port:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mtr -w -c 100 -b -T -P 587 smtp.server.tld &gt; smtp-mtr.txt
+</span></code></pre>
+<p>The <code>-w -c 100 -b -T</code> runs a verbose report 100x, logging both IPs &amp; Hostnames,
+for a good dataset. This also runs the queries through TCP, to avoid ICMP
+de-prioritization.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
