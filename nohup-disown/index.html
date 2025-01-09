@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+nohup - disown &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;nohup-disown&#x2F;">nohup - disown</a></h2>
+<div class="post-header">
+    <span class="post-date">March 10, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/nohup/">nohup</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/disown/">disown</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/terminal/">terminal</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>In case you don't have screen/tmux and need to run a process that won't be
+terminated after closing the terminal:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ nohup your command &amp;
+</span><span>$ exit
+</span></code></pre>
+<p>Or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ your command &amp;
+</span><span>$ disown
+</span><span>$ exit
+</span></code></pre>
+<p>If you have multiple commands:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sleep 3600 &amp;
+</span><span>$ sleep 86400 &amp;
+</span></code></pre>
+<p>By typing <code>jobs</code> something like this appears:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[1]  - running    sleep 3600
+</span><span>[2]  + running    sleep 86400
+</span></code></pre>
+<p>To <code>disown</code> let's say only job 2:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ disown %2
+</span></code></pre>
+<h1 id="process-already-running"><a class="zola-anchor" href="#process-already-running" aria-label="Anchor link for: process-already-running">🔗</a>process already running</h1>
+<p>You can pause it <code>ctrl+z</code>,  something like this will appear:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sleep 3600
+</span><span>^Z
+</span><span>zsh: suspended  sleep 3600
+</span></code></pre>
+<p>Then type <code>bg</code> to put it in background:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bg
+</span><span>[1]  + continued  sleep 3600
+</span></code></pre>
+<p>After that you can disown and exit:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ disown
+</span><span>$ exit
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
