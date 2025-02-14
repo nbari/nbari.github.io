@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ssh proxy &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ssh-proxy&#x2F;">ssh proxy</a></h2>
+<div class="post-header">
+    <span class="post-date">February 07, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/proxy/">proxy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tunnel/">tunnel</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="ssh-socks5-proxy"><a class="zola-anchor" href="#ssh-socks5-proxy" aria-label="Anchor link for: ssh-socks5-proxy">🔗</a>SSH SOCKS5 proxy</h1>
+<p>Route web traffic securely without a VPN using a SOCKS tunnel with ssh:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -D 8080 -f -C -q -N user@remote.host
+</span></code></pre>
+<ul>
+<li>-D 8080 tells ssh to launch a SOCKS server on port 8080 locally.</li>
+<li>-f Forks the process to the background.</li>
+<li>-C Compresses the data before sending it.</li>
+<li>-q  Uses quiet mode.</li>
+<li>-N Tells SSH that no command will be sent once the tunnel is up.</li>
+</ul>
+<h2 id="configure-firefox"><a class="zola-anchor" href="#configure-firefox" aria-label="Anchor link for: configure-firefox">🔗</a>Configure firefox</h2>
+<p><img src="/img/ssh-proxy.png" alt="ssh-proxy" /></p>
+<h2 id="curl"><a class="zola-anchor" href="#curl" aria-label="Anchor link for: curl">🔗</a>curl</h2>
+<p>To use socks5 in curl try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl -x socks5h://localhost:8080 http://myip.country
+</span></code></pre>
+<h1 id="ssh-tunnel-tcp-forwarding"><a class="zola-anchor" href="#ssh-tunnel-tcp-forwarding" aria-label="Anchor link for: ssh-tunnel-tcp-forwarding">🔗</a>SSH tunnel / TCP forwarding</h1>
+<p>If you only need to access an open port on the remote server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -L 8080:localhost:1234 -Nf user@your-remote-server.com
+</span></code></pre>
+<p>The option <code>-L</code> will do a local port forwarding from port <code>8080</code> (your computer)
+to port <code>1234</code> in <code>localhost</code> (the remote server), then in your browser just enter:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    http://localhost:8080
+</span></code></pre>
+<p>If this is a web server you will see hopefully the content, but you could also
+use this technique for a database, for example</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -L 3307:localhost:3306 user@your-remote-server.com
+</span></code></pre>
+<p>This will forward port 3307 (your computer) to <code>3306</code> remotely (mysql server)</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mysql -h localhost -P 3307
+</span></code></pre>
+<p>You can read/remember this as <code>-L</code> forward my local port <code>XXXX</code> to <code>remote address (localhost/google.com/any-server.tld</code> at port <code>YYYY</code> through
+<code>user@remote-server.com</code></p>
+<h1 id="manage-your-pfsense"><a class="zola-anchor" href="#manage-your-pfsense" aria-label="Anchor link for: manage-your-pfsense">🔗</a>Manage your pfsense</h1>
+<p>If you could could ssh to a server within your infrastructure you could do then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ssh -L 8443:192.168.1.1:443 -Nf &lt;user&gt;@host
+</span></code></pre>
+<p>Then in your browser:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>https://localhost:8443
+</span></code></pre>
+<h1 id="provide-internet-to-a-server-behind-a-firewall"><a class="zola-anchor" href="#provide-internet-to-a-server-behind-a-firewall" aria-label="Anchor link for: provide-internet-to-a-server-behind-a-firewall">🔗</a>Provide internet to a server behind a firewall</h1>
+<p>Enable ssh on your desktop/laptop (from where you are connecting) and then run
+(it will ask your local ssh password and then the remotes ssh password):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ssh -t -D 1080 localhost ssh -R 1080:localhost:1080 user@10.0.0.8
+</span></code></pre>
+<blockquote>
+<p>check that in the remote host has <code>AllowTcpForwarding yes</code></p>
+</blockquote>
+<p>Then you could use socks5 from the remote server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl --socks5-hostname 127.0.0.1:1080 http://myip.country
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>curl -x socks5h://127.0.0.1:1080 http://myip.country
+</span></code></pre>
+<p>Then to use it:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>export http_proxy=socks5h://127.0.0.1:1080
+</span><span>export https_proxy=socks5h://127.0.0.1:1080
+</span></code></pre>
+<p>If need to install  <code>pipenv</code> you may need <code>privoxy</code></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>yum install privoxy
+</span></code></pre>
+<p>Edit the configuration file <code>/etc/privoxy/config</code> and add this line:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>forward-socks5 / 127.0.0.1:1080 .
+</span></code></pre>
+<p>Start the service and then you could use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>export http_proxy=http://127.0.0.1:8118
+</span><span>export https_proxy=http://127.0.0.1:8118
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

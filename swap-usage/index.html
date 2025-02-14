@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Swap usage &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;swap-usage&#x2F;">Swap usage</a></h2>
+<div class="post-header">
+    <span class="post-date">August 07, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Get a swap usage by pid/command:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ps -e -o</span><span> pid,comm</span><span style="color:#bf616a;"> --no-headers </span><span>| </span><span style="color:#b48ead;">while </span><span style="color:#96b5b4;">read </span><span style="color:#bf616a;">-r</span><span> pid comm; </span><span style="color:#b48ead;">do </span><span style="color:#bf616a;">swap</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">grep</span><span style="color:#a3be8c;"> Swap /proc/</span><span>$</span><span style="color:#bf616a;">pid</span><span style="color:#a3be8c;">/smaps </span><span style="color:#d08770;">2</span><span>&gt;</span><span style="color:#a3be8c;">/dev/null </span><span>| </span><span style="color:#bf616a;">awk </span><span>&#39;</span><span style="color:#a3be8c;">{ sum += $2 } END { print sum }</span><span>&#39;</span><span style="color:#a3be8c;">)</span><span>; </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-n </span><span>&quot;$</span><span style="color:#bf616a;">swap</span><span>&quot; </span><span style="color:#96b5b4;">] </span><span>&amp;&amp; </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">PID: </span><span>$</span><span style="color:#bf616a;">pid</span><span style="color:#a3be8c;"> - Swap used: </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">swap</span><span>:-</span><span style="color:#a3be8c;">0} kB - Command: </span><span>$</span><span style="color:#bf616a;">comm</span><span>&quot;; </span><span style="color:#b48ead;">done </span><span>| </span><span style="color:#bf616a;">sort -k6 -nr
+</span></code></pre>
+<p>Using Top:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">top -o</span><span> SWAP</span><span style="color:#bf616a;"> -bn1 </span><span>| </span><span style="color:#bf616a;">head -n20
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vim &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vim&#x2F;">vim</a></h2>
+<div class="post-header">
+    <span class="post-date">August 08, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vim/">vim</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tips/">tips</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h2 id="quote-unquote-words"><a class="zola-anchor" href="#quote-unquote-words" aria-label="Anchor link for: quote-unquote-words">🔗</a>Quote/unquote words:</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ciw&#39;Ctrl+r&quot;&#39;
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ciw &#39;&#39; Esc p
+</span></code></pre>
+<p><code>p</code> paste after the cursor, <code>P</code> will paste before the cursor.</p>
+<h2 id="search-matches-gn-with-the-dot-command"><a class="zola-anchor" href="#search-matches-gn-with-the-dot-command" aria-label="Anchor link for: search-matches-gn-with-the-dot-command">🔗</a>Search matches (gn with the dot command)</h2>
+<p>Suppose that we have a document containing several occurrences of the word
+‘Normal’ and we’d like to change each occurrence to ‘Visual’. We can run <code>/Normal</code>
+to search for the word ‘Normal’, then type <code>cgnVisual&lt;Esc&gt;</code> to change the next
+match to the word ‘Visual’ and by pressing <code>.</code> it will change the next match.
+No need to use <code>n.</code> (http://vimcasts.org/episodes/operating-on-search-matches-using-gn/)</p>
+<h2 id="habit-breaking"><a class="zola-anchor" href="#habit-breaking" aria-label="Anchor link for: habit-breaking">🔗</a>Habit breaking</h2>
+<p>Moving your Vim cursor around using the arrow keys is a bad habit, and like many
+bad habits it’s a difficult one to break! Putting these lines into your vimrc can
+help:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nnoremap &lt;up&gt;    &lt;nop&gt;
+</span><span>nnoremap &lt;down&gt;  &lt;nop&gt;
+</span><span>nnoremap &lt;left&gt;  &lt;nop&gt;
+</span><span>nnoremap &lt;right&gt; &lt;nop&gt;
+</span><span>inoremap &lt;up&gt;    &lt;nop&gt;
+</span><span>inoremap &lt;down&gt;  &lt;nop&gt;
+</span><span>inoremap &lt;left&gt;  &lt;nop&gt;
+</span><span>inoremap &lt;right&gt; &lt;nop&gt;
+</span></code></pre>
+<p>This snippet causes each of the arrow keys to execute no operation, or in other
+words: it disables them.</p>
+<h2 id="traversing-test-in-insert-mode"><a class="zola-anchor" href="#traversing-test-in-insert-mode" aria-label="Anchor link for: traversing-test-in-insert-mode">🔗</a>Traversing test in insert mode</h2>
+<p>While in insert mode, use <code>Ctrl-O</code> to go to normal mode for just one command</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>CTRL-o h  move cursor left
+</span><span>CTRL-o l  move cursor right
+</span><span>CTRL-o j  move cursor down
+</span><span>CTRL-o k  move cursor up
+</span><span>
+</span><span>CTRL-w    delete word to the left of cursor
+</span><span>CTRL-o D  delete everything to the right of cursor
+</span><span>CTRL-u    delete everything to the left of cursor
+</span><span>CTRL-h    backspace/delete
+</span><span>CTRL-j    insert newline (easier than reaching for the return key)
+</span><span>CTRL-t    indent current line
+</span><span>CTRL-d    un-indent current line
+</span></code></pre>
+<h2 id="vim-tmux-layout"><a class="zola-anchor" href="#vim-tmux-layout" aria-label="Anchor link for: vim-tmux-layout">🔗</a>vim + tmux layout</h2>
+<p>Screen shot while playing with immortal</p>
+<p>![vim screen shot](/img/Screen Shot 2016-08-21 at 02.18.15.png)</p>
+<p>No Axis</p>
+<p><img src="/img/vim-clean-no-axis.png" alt="vim screen shot clean" /></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
