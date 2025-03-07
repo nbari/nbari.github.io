@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Measuring the Listen Queue &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;measuring-the-listen-queue&#x2F;">Measuring the Listen Queue</a></h2>
+<div class="post-header">
+    <span class="post-date">December 01, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/netstat/">netstat</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sysctl/">sysctl</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Run the command:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>netstat -Lan
+</span></code></pre>
+<p>The command output may be the following:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">Current</span><span> listen queue sizes (qlen/incqlen/maxqlen)
+</span><span style="color:#bf616a;">Proto</span><span> Listen                           Local Address
+</span><span style="color:#bf616a;">tcp46</span><span> 1863/0/32768                     *.80
+</span><span style="color:#bf616a;">tcp4</span><span>  0/0/128                          *.31025
+</span><span style="color:#bf616a;">tcp6</span><span>  0/0/128                          *.31025
+</span><span style="color:#bf616a;">Some</span><span> tcp sockets may have been deleted.
+</span><span style="color:#bf616a;">unix</span><span>  0/0/32768                        /var/run/immortal/tuip/immortal.sock
+</span><span style="color:#bf616a;">unix</span><span>  0/0/255                          /var/db/syslog-ng.ctl
+</span><span style="color:#bf616a;">unix</span><span>  0/0/4                            /var/run/devd.pipe
+</span><span style="color:#bf616a;">unix</span><span>  0/0/4                            /var/run/devd.seqpacket.pipe
+</span></code></pre>
+<p>The command output shows that there are <strong>1863</strong> unaccepted connections in the listen
+queue on Port 80, while the connection limit is <strong>32768</strong> connections, and this
+situation is normal.</p>
+<p>However, the command output may be as follows:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Current listen queue sizes (qlen/incqlen/maxqlen)
+</span><span>Listen         Local Address
+</span><span>0/0/128        *.12345
+</span><span>192/0/128        *.80
+</span><span>0/0/128        *.8080
+</span></code></pre>
+<p>The command output shows <strong>192</strong> unaccepted connections which exceeds the limit of
+<strong>128</strong> connections. This is quite common when a web site experience heavy traffic.</p>
+<h2 id="tuning-the-operating-system"><a class="zola-anchor" href="#tuning-the-operating-system" aria-label="Anchor link for: tuning-the-operating-system">🔗</a>Tuning the Operating System</h2>
+<p>Increase the value of the <code>somaxconn</code> key from its default value (<strong>128</strong>)
+to the value high enough to be able to handle a high burst of traffic:</p>
+<p>For FreeBSD:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysctl kern.ipc.somaxconn=4096
+</span></code></pre>
+<p>For Linux:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sudo sysctl -w net.core.somaxconn=4096
+</span></code></pre>
+<h2 id="tuning-nginx"><a class="zola-anchor" href="#tuning-nginx" aria-label="Anchor link for: tuning-nginx">🔗</a>Tuning NGINX</h2>
+<p>If you set the somaxconn key to a value greater than <strong>512</strong>, change the backlog
+parameter of the NGINX listen directive to match:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>server {
+</span><span>    listen 80 backlog=4096;
+</span><span>    # The rest of server configuration
+</span><span>}
+</span></code></pre>
+<p>See also:</p>
+<ul>
+<li><a href="/post/time_wait">Time Wait</a></li>
+<li>https://www.nginx.com/resources/admin-guide/serving-static-content/</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+haproxy ssh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;haproxy-ssh&#x2F;">haproxy ssh</a></h2>
+<div class="post-header">
+    <span class="post-date">May 30, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/haproxy/">haproxy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="https-and-ssh-on-the-same-port"><a class="zola-anchor" href="#https-and-ssh-on-the-same-port" aria-label="Anchor link for: https-and-ssh-on-the-same-port">🔗</a>HTTPS and SSH on the same port</h1>
+<p>Using HAProxy to server SSH and SSL available on the same port:</p>
+<pre data-lang="haproxy" style="background-color:#2b303b;color:#c0c5ce;" class="language-haproxy "><code class="language-haproxy" data-lang="haproxy"><span>global
+</span><span>    maxconn 1000000
+</span><span>    spread-checks 3
+</span><span>    log /var/run/log local0 notice
+</span><span>    daemon
+</span><span>    tune.ssl.default-dh-param 2048
+</span><span>
+</span><span>defaults
+</span><span>    mode http
+</span><span>    balance roundrobin
+</span><span>    option http-server-close
+</span><span>    option abortonclose
+</span><span>    option dontlognull
+</span><span>    option redispatch
+</span><span>
+</span><span>    timeout check           3s
+</span><span>    timeout client          30s  # Client and server timeout must match the longest
+</span><span>    timeout connect         5s
+</span><span>    timeout http-keep-alive 5s
+</span><span>    timeout http-request    10s  # A complete request may never take that long.
+</span><span>    timeout queue           1m   # Don&#39;t queue requests too long if saturated.
+</span><span>    timeout server          10s  # Time we may wait for a response from the server.
+</span><span>
+</span><span>    retries 3
+</span><span>    log global
+</span><span>
+</span><span># ----------------------------------------------------------------------------
+</span><span># stats
+</span><span># ----------------------------------------------------------------------------
+</span><span>listen stats
+</span><span>    bind *:81
+</span><span>    stats enable
+</span><span>    stats uri /
+</span><span>    stats show-node
+</span><span>    stats show-legends
+</span><span>    stats refresh 5s
+</span><span>
+</span><span># ------------------------------------------------------------------------------
+</span><span>#  https + ssh
+</span><span># ------------------------------------------------------------------------------
+</span><span>frontend ssl
+</span><span>    mode tcp
+</span><span>    bind *:443 ssl crt /usr/local/etc/haproxy/your.cert
+</span><span>    option tcplog
+</span><span>    tcp-request inspect-delay 5s
+</span><span>    tcp-request content accept if HTTP
+</span><span>
+</span><span>    # 5353482d322e30 is the binary representation of the string &#39;SSH-2.0&#39;
+</span><span>    acl client_attempts_ssh payload(0,7) -m bin 5353482d322e30
+</span><span>
+</span><span>    use_backend ssh if !HTTP
+</span><span>    use_backend ssh if client_attempts_ssh
+</span><span>    use_backend http if HTTP
+</span><span>
+</span><span>backend http
+</span><span>    mode http
+</span><span>    http-request set-header X-Forwarded-Port %[dst_port]
+</span><span>    server www 10.10.8.3:8000 maxconn 50 check
+</span><span>
+</span><span>backend ssh
+</span><span>    mode tcp
+</span><span>    option tcplog
+</span><span>    server ssh 10.10.8.4:22
+</span><span>    timeout server 2h
+</span></code></pre>
+<h1 id="connecting-from-an-ssh-client"><a class="zola-anchor" href="#connecting-from-an-ssh-client" aria-label="Anchor link for: connecting-from-an-ssh-client">🔗</a>Connecting from an SSH client</h1>
+<p>To connect throught the HAProxy on port 443 edit the ~/.ssh/config:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">Host</span><span> ssh-over-https
+</span><span>    </span><span style="color:#bf616a;">ProxyCommand</span><span> openssl s_client</span><span style="color:#bf616a;"> -connect</span><span> your.haproxy.com:443</span><span style="color:#bf616a;"> -quiet
+</span></code></pre>
+<h1 id="how-does-this-work"><a class="zola-anchor" href="#how-does-this-work" aria-label="Anchor link for: how-does-this-work">🔗</a>how does this work ?</h1>
+<p>The <a href="https://tools.ietf.org/html/rfc4253#section-4.2">RFC 4253</a>, section 4.2
+states that clients must send a string that starts with 'SSH-2.0':</p>
+<pre data-lang="pre" style="background-color:#2b303b;color:#c0c5ce;" class="language-pre "><code class="language-pre" data-lang="pre"><span>4.2.  Protocol Version Exchange
+</span><span>
+</span><span>   When the connection has been established, both sides MUST send an
+</span><span>   identification string.  This identification string MUST be
+</span><span>
+</span><span>      SSH-protoversion-softwareversion SP comments CR LF
+</span><span>
+</span><span>   Since the protocol being defined in this set of documents is version
+</span><span>   2.0, the &#39;protoversion&#39; MUST be &quot;2.0&quot;.
+</span></code></pre>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>&gt;&gt;&gt; &quot;</span><span style="color:#a3be8c;">5353482d322e30</span><span>&quot;.</span><span style="color:#bf616a;">decode</span><span>(&quot;</span><span style="color:#a3be8c;">hex</span><span>&quot;)
+</span><span>&#39;</span><span style="color:#a3be8c;">SSH-2.0</span><span>&#39;
+</span></code></pre>
+<p><code>5353482d322e30</code> is the binary representation of the string 'SSH-2.0'. So
+everything boils down to this line:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>acl client_attempts_ssh payload(0,7) -m bin 5353482d322e30
+</span></code></pre>
+<p>When a new connection is made on the port 443, HAproxy decrypts the SSL layer,
+and checks whether the stream of data sent by the client starts with this string.</p>
+<p>src: http://blog.chmd.fr/ssh-over-ssl-episode-4-a-haproxy-based-configuration.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

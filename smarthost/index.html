@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+smarthost &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;smarthost&#x2F;">smarthost</a></h2>
+<div class="post-header">
+    <span class="post-date">April 26, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/smtp/">smtp</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/smarthost/">smarthost</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/postfix/">postfix</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="smarthost-with-postfix"><a class="zola-anchor" href="#smarthost-with-postfix" aria-label="Anchor link for: smarthost-with-postfix">🔗</a>Smarthost with postfix</h1>
+<blockquote>
+<p>A smart host is a type of email message transfer agent that allows a Simple
+Mail Transfer Protocol (SMTP) server to route email to an intermediate
+mailserver rather than directly to the recipient's server</p>
+</blockquote>
+<p>https://en.wikipedia.org/wiki/Smart_host</p>
+<p>Setup postfix to forward all emails using an external SMTP server, for example
+sendgrid.net, <code>main.cf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>smtp_sasl_auth_enable = yes
+</span><span>smtp_sasl_password_maps = static:username:password
+</span><span>smtp_sasl_security_options = noanonymous
+</span><span>smtp_tls_security_level = encrypt
+</span><span>header_size_limit = 4096000
+</span><span>relayhost = [smtp.sendgrid.net]:587
+</span></code></pre>
+<p>Within a VPC or private network you can open relay to all your class:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mynetworks_style = class
+</span></code></pre>
+<p>Some tunings:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>smtp_connect_timeout = 5
+</span><span>smtp_helo_timeout = 5
+</span><span>disable_dns_lookups = yes
+</span></code></pre>
+<p>To check list of queued mail:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>postqueue -p
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

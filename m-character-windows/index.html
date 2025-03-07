@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+removing the ^M character &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;m-character-windows&#x2F;">removing the ^M character</a></h2>
+<div class="post-header">
+    <span class="post-date">February 07, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vim/">vim</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/windows/">windows</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>In vim, to remove the <code>^M</code> character you could do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>:e ++ff=dos
+</span></code></pre>
+<p>The <code>:e ++ff=dos</code> command tells Vim to read the file again, forcing dos file
+format. Vim will remove CRLF and LF-only line endings, leaving only the text of
+each line in the buffer.</p>
+<p>Then set filetype to unix:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>:set ff=unix
+</span></code></pre>
+<p>And save the file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>:x
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
