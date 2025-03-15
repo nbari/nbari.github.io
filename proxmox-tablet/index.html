@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+proxmox tablet &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;proxmox-tablet&#x2F;">proxmox tablet</a></h2>
+<div class="post-header">
+    <span class="post-date">July 30, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>If you are not using GUI remove "use pointe for tablet" to save some CPU:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">mapfile </span><span style="color:#bf616a;">-t</span><span> vm_ids &lt; &lt;(</span><span style="color:#bf616a;">qm</span><span> list | </span><span style="color:#bf616a;">awk </span><span>&#39;</span><span style="color:#a3be8c;">NR&gt;1 {print $1}</span><span>&#39;)
+</span><span style="color:#b48ead;">for</span><span> vm </span><span style="color:#b48ead;">in </span><span>&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">vm_ids[@]</span><span style="color:#a3be8c;">}</span><span>&quot;; </span><span style="color:#b48ead;">do
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">qm</span><span> set &quot;$</span><span style="color:#bf616a;">vm</span><span>&quot;</span><span style="color:#bf616a;"> --tablet</span><span> 0; </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Successfully disabled tablet for VM ID: </span><span>$</span><span style="color:#bf616a;">vm</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">else
+</span><span>        </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Failed to disable tablet for VM ID: </span><span>$</span><span style="color:#bf616a;">vm</span><span>&quot; &gt;&amp;</span><span style="color:#d08770;">2
+</span><span>    </span><span style="color:#b48ead;">fi
+</span><span style="color:#b48ead;">done
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

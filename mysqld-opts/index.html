@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+MYSQLD_OPTS &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mysqld-opts&#x2F;">MYSQLD_OPTS</a></h2>
+<div class="post-header">
+    <span class="post-date">April 20, 2023</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mariadb/">mariadb</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysqld-opts/">mysqld_opts</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/systemd/">systemd</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If need to temporarily disable binary logs or set innodb_force_recovery you
+can set this in an environment variable instead of modifying the <code>my.cnf</code> directly, for example:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> set-environment MYSQLD_OPTS=&quot;</span><span style="color:#a3be8c;">--innodb_force_recovery=1</span><span>&quot;
+</span></code></pre>
+<p>or</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> set-environment MYSQLD_OPTS=&quot;</span><span style="color:#a3be8c;">--skip-log-bin=1</span><span>&quot;
+</span></code></pre>
+<p>Then restart;</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> restart mariadb
+</span></code></pre>
+<p>To remove the environment var:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> unset-environment MYSQLD_OPTS
+</span></code></pre>
+<p>To check the contents of the environment vars:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">systemctl</span><span> show-environment
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
