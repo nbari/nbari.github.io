@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+lshw &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;lshw&#x2F;">lshw</a></h2>
+<div class="post-header">
+    <span class="post-date">December 04, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To print information about your Linux system hardware, run this command.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> $ apt-get install lshw
+</span></code></pre>
+<h2 id="lshw"><a class="zola-anchor" href="#lshw" aria-label="Anchor link for: lshw">🔗</a>lshw</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">root@server:/#</span><span> lshw</span><span style="color:#bf616a;"> -short
+</span><span style="color:#bf616a;">H/W</span><span> path        Device      Class      Description
+</span><span>=</span><span style="color:#a3be8c;">=================================================
+</span><span>                            </span><span style="color:#bf616a;">system</span><span>     Computer
+</span><span style="color:#bf616a;">/0</span><span>                          bus        Motherboard
+</span><span style="color:#bf616a;">/0/0</span><span>                        memory     3020MiB System memory
+</span><span style="color:#bf616a;">/0/1</span><span>                        processor  Intel(R) </span><span style="color:#bf616a;">Xeon</span><span>(R) </span><span style="color:#bf616a;">CPU</span><span> E5-2660 v3 @ 2.60GHz
+</span><span style="color:#bf616a;">/0/2</span><span>                        processor  Intel(R) </span><span style="color:#bf616a;">Xeon</span><span>(R) </span><span style="color:#bf616a;">CPU</span><span> E5-2660 v3 @ 2.60GHz
+</span><span style="color:#bf616a;">/0/100</span><span>                      bridge     440FX - 82441FX PMC </span><span style="color:#b48ead;">[</span><span>Natoma</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">/0/100/1</span><span>                    bridge     82371SB PIIX3 ISA </span><span style="color:#b48ead;">[</span><span>Natoma/Triton II</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">/0/100/1.1</span><span>                  storage    82371SB PIIX3 IDE </span><span style="color:#b48ead;">[</span><span>Natoma/Triton II</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">/0/100/1.2</span><span>                  bus        82371SB PIIX3 USB </span><span style="color:#b48ead;">[</span><span>Natoma/Triton II</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">/0/100/1.2/1</span><span>    usb1        bus        UHCI Host Controller
+</span><span style="color:#bf616a;">/0/100/1.2/1/1</span><span>              input      QEMU USB Tablet
+</span><span style="color:#bf616a;">/0/100/1.3</span><span>                  bridge     82371AB/EB/MB PIIX4 ACPI
+</span><span style="color:#bf616a;">/0/100/2</span><span>                    display    GD 5446
+</span><span style="color:#bf616a;">/0/100/3</span><span>        eth0        network    Virtio network device
+</span><span style="color:#bf616a;">/0/100/4</span><span>                    storage    Virtio SCSI
+</span><span style="color:#bf616a;">/0/100/5</span><span>                    generic    Virtio memory balloon
+</span><span style="color:#bf616a;">/0/3</span><span>            scsi2       storage
+</span><span style="color:#bf616a;">/0/3/0.0.0</span><span>      /dev/sda    disk       257GB SCSI Disk
+</span><span style="color:#bf616a;">/0/3/0.0.0/1</span><span>    /dev/sda1   volume     9748KiB data partition
+</span><span style="color:#bf616a;">/0/3/0.0.0/2</span><span>    /dev/sda2   volume     3899MiB Linux swap volume
+</span><span style="color:#bf616a;">/0/3/0.0.0/3</span><span>    /dev/sda3   volume     236GiB EXT4 volume
+</span><span style="color:#bf616a;">/0/4</span><span>            scsi1       storage
+</span><span style="color:#bf616a;">/0/4/0.0.0</span><span>      /dev/cdrom  disk       DVD reader
+</span></code></pre>
+<h2 id="lscpu"><a class="zola-anchor" href="#lscpu" aria-label="Anchor link for: lscpu">🔗</a>lscpu</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">root@server:/#</span><span> lscpu
+</span><span style="color:#bf616a;">Architecture:</span><span>          x86_64
+</span><span style="color:#bf616a;">CPU</span><span> op-mode(s)</span><span style="color:#96b5b4;">:</span><span>        32-bit, 64-bit
+</span><span style="color:#bf616a;">Byte</span><span> Order:            Little Endian
+</span><span style="color:#bf616a;">CPU</span><span>(s)</span><span style="color:#96b5b4;">:</span><span>                2
+</span><span style="color:#bf616a;">On-line</span><span> CPU(s) </span><span style="color:#bf616a;">list:</span><span>   0,1
+</span><span style="color:#bf616a;">Thread</span><span>(s) </span><span style="color:#bf616a;">per</span><span> core:    1
+</span><span style="color:#bf616a;">Core</span><span>(s) </span><span style="color:#bf616a;">per</span><span> socket:    1
+</span><span style="color:#bf616a;">Socket</span><span>(s)</span><span style="color:#96b5b4;">:</span><span>             2
+</span><span style="color:#bf616a;">NUMA</span><span> node(s)</span><span style="color:#96b5b4;">:</span><span>          1
+</span><span style="color:#bf616a;">Vendor</span><span> ID:             GenuineIntel
+</span><span style="color:#bf616a;">CPU</span><span> family:            6
+</span><span style="color:#bf616a;">Model:</span><span>                 63
+</span><span style="color:#bf616a;">Model</span><span> name:            Intel(R) </span><span style="color:#bf616a;">Xeon</span><span>(R) </span><span style="color:#bf616a;">CPU</span><span> E5-2660 v3 @ 2.60GHz
+</span><span style="color:#bf616a;">Stepping:</span><span>              2
+</span><span style="color:#bf616a;">CPU</span><span> MHz:               2596.988
+</span><span style="color:#bf616a;">BogoMIPS:</span><span>              5193.97
+</span><span style="color:#bf616a;">Hypervisor</span><span> vendor:     KVM
+</span><span style="color:#bf616a;">Virtualization</span><span> type:   full
+</span><span style="color:#bf616a;">L1d</span><span> cache:             32K
+</span><span style="color:#bf616a;">L1i</span><span> cache:             32K
+</span><span style="color:#bf616a;">L2</span><span> cache:              256K
+</span><span style="color:#bf616a;">L3</span><span> cache:              25600K
+</span><span style="color:#bf616a;">NUMA</span><span> node0 CPU(s)</span><span style="color:#96b5b4;">:</span><span>     0,1
+</span></code></pre>
+<h2 id="lsblk"><a class="zola-anchor" href="#lsblk" aria-label="Anchor link for: lsblk">🔗</a>lsblk</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">root@server:/#</span><span> lsblk
+</span><span style="color:#bf616a;">NAME</span><span>   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+</span><span style="color:#bf616a;">sda</span><span>      8:0    0   240G  0 disk
+</span><span>|</span><span style="color:#bf616a;">-sda1</span><span>   8:1    0   9.5M  0 part
+</span><span>|</span><span style="color:#bf616a;">-sda2</span><span>   8:2    0   3.8G  0 part </span><span style="color:#b48ead;">[</span><span>SWAP</span><span style="color:#b48ead;">]
+</span><span>`</span><span style="color:#bf616a;">-sda3</span><span>   8:3    0 236.2G  0 part /
+</span><span style="color:#bf616a;">sr0</span><span>     11:0    1  1024M  0 rom
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Import large dump &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;import-large-dump&#x2F;">Import large dump</a></h2>
+<div class="post-header">
+    <span class="post-date">June 12, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dump/">dump</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/source/">source</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/csplit/">csplit</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To import a large dump (~300GB) you could do:</p>
+<p>Split your file first:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>csplit -s -ftable dump.sql &quot;/-- Table structure for table/&quot; {999}
+</span></code></pre>
+<p>You could also use the pattern <code>{*}</code> but you need the <code>gcsplit</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install coreutils
+</span></code></pre>
+<blockquote>
+<p>BSD csplit don't support <code>{*}</code></p>
+</blockquote>
+<p>Then try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gcsplit -s -ftable dump.sql &quot;/-- Table structure for table/&quot; {*}
+</span></code></pre>
+<p>Create small <code>INSERT</code> chunks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gsplit -a 3 -d -n l/200 table05 x_
+</span></code></pre>
+<blockquote>
+<p><code>l/N</code>  split into N files without splitting lines/records</p>
+</blockquote>
+<p>Set bulk_insert_buffer_size to 1GB:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; SET bulk_insert_buffer_size = 1024 * 1024 * 1024;
+</span></code></pre>
+<p>Or in the <code>my.cnf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[mysqld]
+</span><span>bulk_insert_buffer_size = 1G
+</span></code></pre>
+<blockquote>
+<p>needs a restart</p>
+</blockquote>
+<p>Set network buffer and maximum allowed packet size length to a large byte number.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; SET GLOBAL net_buffer_length=1000000;
+</span><span>mysql&gt; SET GLOBAL max_allowed_packet=1000000000;
+</span><span>mysql&gt; SET foreign_key_checks = 0;
+</span><span>mysql&gt; SET unique_checks = 0;
+</span><span>mysql&gt; SET autocommit = 0;
+</span></code></pre>
+<p>Import the file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; source file.sql
+</span></code></pre>
+<p>Ugly way to prevent mysql consuming all memory:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>for t in x_*
+</span><span>(echo $t; mysql db_name &lt; $t &amp;&amp; service mysql-server restart &amp;&amp; sleep 2)
+</span></code></pre>
+<p>Set back the checks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; SET foreign_key_checks = 1;
+</span><span>mysql&gt; SET unique_checks = 1;
+</span><span>mysql&gt; SET autocommit = 1;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

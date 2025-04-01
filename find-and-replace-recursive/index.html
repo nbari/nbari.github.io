@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Find and replace recursive &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;find-and-replace-recursive&#x2F;">Find and replace recursive</a></h2>
+<div class="post-header">
+    <span class="post-date">January 17, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sed/">sed</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/find/">find</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p><strong>Note:</strong> Do not run this command on a folder including a git repo - changes to
+.git could corrupt your get index.</p>
+<p>For example to replace an IP on multiple files:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>find /tmp/path -type f -exec sed -i &#39;&#39; &#39;s/193.111.141.1/82.14.220.137/g&#39; {} +
+</span></code></pre>
+<p>Multiple AMI's</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>find . -type f -name &quot;variables.tf&quot; -exec sed -i &#39;s/ami-0e4168a4236171887/ami-00bec4c01ec9355e2/g&#39; {} +
+</span></code></pre>
+<blockquote>
+<p>On BSD, MAC by passing an empty string to sed's -i args will create no backup</p>
+</blockquote>
+<h2 id="perl-pi-e"><a class="zola-anchor" href="#perl-pi-e" aria-label="Anchor link for: perl-pi-e">🔗</a>perl -pi -e</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>perl -pi -e &#39;s/replace_this/with_this/&#39; files-*
+</span></code></pre>
+<p>This is useful when you don't want to change the file ending like in <code>sed</code> that
+adds an <code>\n</code> ad the end of the file</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
