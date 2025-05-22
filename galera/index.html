@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Galera &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;galera&#x2F;">Galera</a></h2>
+<div class="post-header">
+    <span class="post-date">February 06, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/galera/">galera</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mariadb/">mariadb</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cluster/">cluster</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To periodically check status of the cluster, create a script (<code>/tmp/xx</code>):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#!/bin/sh
+</span><span>mysql -e \
+</span><span>&quot;SHOW GLOBAL STATUS WHERE Variable_name IN (
+</span><span>&#39;wsrep_cert_deps_distance&#39;,
+</span><span>&#39;wsrep_cluster_size&#39;,
+</span><span>&#39;wsrep_cluster_status&#39;,
+</span><span>&#39;wsrep_connected&#39;,
+</span><span>&#39;wsrep_evs_delayed&#39;,
+</span><span>&#39;wsrep_flow_control_paused&#39;,
+</span><span>&#39;wsrep_flow_control_paused_ns&#39;,
+</span><span>&#39;wsrep_flow_control_recv&#39;,
+</span><span>&#39;wsrep_flow_control_sent&#39;,
+</span><span>&#39;wsrep_local_index&#39;,
+</span><span>&#39;wsrep_local_state&#39;,
+</span><span>&#39;wsrep_local_state_comment&#39;,
+</span><span>&#39;wsrep_ready&#39;,
+</span><span>&#39;wsrep_replicated&#39;,
+</span><span>&#39;wsrep_replicated_bytes&#39;);&quot;
+</span></code></pre>
+<blockquote>
+<p>if credentials are in a custom path: <code>mysql --defaults-file=/path/to/.my.cnf -s -e</code></p>
+</blockquote>
+<p>And run it with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>watch sh /tmp/xx
+</span></code></pre>
+<p>If single node alive (ERROR 1047 WSREP has not yet prepared node for application use):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SET GLOBAL wsrep_provider_options=&#39;pc.bootstrap=YES&#39;;
+</span></code></pre>
+<p>This node can be used now has the new master so others nodes can recover from it.</p>
+<p>The below statement will give us an idea of the amount of data replicated by
+Galera. Run the following statement on one of the Galera nodes during peak hours
+(tested on MariaDB &gt;10.0 and PXC &gt;5.6, galera &gt;3.x):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SET @start := (SELECT SUM(VARIABLE_VALUE/1024/1024) FROM information_schema.global_status WHERE VARIABLE_NAME LIKE &#39;WSREP%bytes&#39;); do sleep(60); SET @end := (SELECT SUM(VARIABLE_VALUE/1024/1024) FROM information_schema.global_status WHERE VARIABLE_NAME LIKE &#39;WSREP%bytes&#39;); SET @gcache := (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(@@GLOBAL.wsrep_provider_options,&#39;gcache.size = &#39;,-1), &#39;M&#39;, 1)); SELECT ROUND((@end - @start),2) AS `MB/min`, ROUND((@end - @start),2) * 60 as `MB/hour`, @gcache as `gcache Size(MB)`, ROUND(@gcache/round((@end - @start),2),2) as `Time to full(minutes)`;
+</span></code></pre>
+<p>Will output something like:
++--------+---------+-----------------+-----------------------+
+| MB/min | MB/hour | gcache Size(MB) | Time to full(minutes) |
++--------+---------+-----------------+-----------------------+
+|   7.95 |  477.00 |  128            |                 16.10 |
++--------+---------+-----------------+-----------------------+</p>
+<blockquote>
+<p>src: https://severalnines.com/database-blog/improve-performance-galera-cluster-mysql-or-mariadb</p>
+</blockquote>
+<h2 id="grastate-dat"><a class="zola-anchor" href="#grastate-dat" aria-label="Anchor link for: grastate-dat">🔗</a>grastate.dat</h2>
+<p>Try to recover from the node with max <code>seqno</code>, for example this is a node that shows a graceful shutdown:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>version: 2.1
+</span><span>uuid: cbd332a9-f617-11e2-b77d-3ee9fa637069
+</span><span>seqno: 43760
+</span></code></pre>
+<p>This <code>grastate.dat</code> file shows <code>-1</code> in the <code>seqno</code>. This node crashed during transaction processing:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>version: 2.1
+</span><span>uuid: cbd332a9-f617-11e2-b77d-3ee9fa637069
+</span><span>seqno: -1
+</span></code></pre>
+<p>This node crashed during DDL:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>version: 2.1
+</span><span>uuid: 00000000-0000-0000-0000-000000000000
+</span><span>seqno: -1
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
