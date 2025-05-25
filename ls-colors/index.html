@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+LS_COLORS &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ls-colors&#x2F;">LS_COLORS</a></h2>
+<div class="post-header">
+    <span class="post-date">September 06, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ls/">ls</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/colors/">colors</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/shell/">shell</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To remove the blinking of symbolic links when doing <code>ls</code> in Linux:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>LS_COLORS=&quot;ln=35&quot; export LS_COLORS
+</span></code></pre>
+<p>That will set the <code>ln=35</code> symbolic links to color purple.</p>
+<p>Params for <code>LS_COLORS</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>di  Directory
+</span><span>fi  File
+</span><span>ln  Symbolic Link
+</span><span>pi  Fifo file
+</span><span>so  Socket file
+</span><span>bd  Block (buffered) special file
+</span><span>cd  Character (unbuffered) special file
+</span><span>or  Symbolic Link pointing to a non-existent file (orphan)
+</span><span>mi  Non-existent file pointed to by a symbolic link (visible when you type ls -l)
+</span><span>ex  File which is executable (ie. has &#39;x&#39; set in permissions).
+</span></code></pre>
+<p>Another way is to edit <code>~/.dircolors</code>  and replace the <code>05</code> (blinking) for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ORPHAN  05;37;45
+</span><span>MISSING 05;37;45
+</span></code></pre>
+<p>Change to:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ORPHAN  35
+</span><span>MISSING 35
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

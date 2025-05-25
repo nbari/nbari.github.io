@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+rsyslog 2 syslog-ng &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;rsyslog2syslog-ng&#x2F;">rsyslog 2 syslog-ng</a></h2>
+<div class="post-header">
+    <span class="post-date">November 16, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/rsyslog/">rsyslog</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/syslog/">syslog</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/syslog-ng/">syslog-ng</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/5242/">5242</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To forward all logs from <code>rsyslog</code> to <code>syslog-ng</code>, add at the end of file <code>/etc/rsyslog.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>*.* @@(o)log.server.tld:601;RSYSLOG_SyslogProtocol23Format
+</span></code></pre>
+<ul>
+<li>
+<p><code>@@</code> is for sending logs via TCP on port 601</p>
+</li>
+<li>
+<p><code>(o)</code> configures proper framing</p>
+</li>
+<li>
+<p><code>RSYSLOG_SyslogProtocol23Format</code> adds the RFC5424 template</p>
+</li>
+</ul>
+<p>Using the RFC5424 syslog protocol with plain TCP between rsyslog and syslog-ng: https://www.balabit.com/blog/using-rfc5424-syslog-protocol-plain-tcp-rsyslog-syslog-ng/</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

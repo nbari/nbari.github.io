@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+wait_for_connection &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;wait-for-connection&#x2F;">wait_for_connection</a></h2>
+<div class="post-header">
+    <span class="post-date">March 07, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ansible/">ansible</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/reboot/">reboot</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Reboot and wait until server is reachable/usable:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>- name: Something that may reboot
+</span><span>  shell: echo &quot;true&quot;
+</span><span>  register: should_reboot
+</span><span>
+</span><span>- name: Rebooting ...
+</span><span>  shell: sleep 2 &amp;&amp; /sbin/shutdown -r now &quot;Reboot required&quot;
+</span><span>  async: 1
+</span><span>  poll: 0
+</span><span>  ignore_errors: true
+</span><span>  register: rebooting
+</span><span>  when: should_reboot.stdout == &quot;true&quot;
+</span><span>
+</span><span>- name: Wait for rebooted servers to come back
+</span><span>  wait_for_connection:
+</span><span>    connect_timeout: 20
+</span><span>    sleep: 5
+</span><span>    delay: 5
+</span><span>    timeout: 60
+</span><span>  when: rebooting|changed
+</span></code></pre>
+<p>For checking/testing if a remote host/service is up:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>- name: Wait for service to be ready
+</span><span>  wait_for:
+</span><span>    port: 8080
+</span><span>    host: 127.0.0.1
+</span><span>    connect_timeout: 3
+</span><span>    delay: 3
+</span><span>    timeout: 30
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

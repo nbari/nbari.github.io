@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Bhyve Ubuntu &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bhyve-ubuntu&#x2F;">Bhyve Ubuntu</a></h2>
+<div class="post-header">
+    <span class="post-date">June 02, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bhyve/">bhyve</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ubuntu/">ubuntu</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>In <code>/etc.rc.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cloned_interfaces=&quot;lo1 bridge0 tap0&quot;
+</span><span>config_lo1=&quot;inet 127.0.1.1/8&quot;
+</span><span>autobridge_interfaces=&quot;bridge0&quot;
+</span><span>autobridge_bridge0=&quot;tap* igb0&quot;
+</span><span>ifconfig_bridge0=&quot;addm igb0 addm tap0 up description bhyve&quot;
+</span></code></pre>
+<p>In <code>/boot/loader.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vmm_load=&quot;YES&quot;
+</span><span>nmdm_load=&quot;YES&quot;
+</span></code></pre>
+<p>Check that you have:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysctl net.link.tap.up_on_open=1
+</span></code></pre>
+<p>Create the volume:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zfs create -V100G -o volmode=dev tank/ubuntuvm
+</span></code></pre>
+<p>Install:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install uefi-edk2-bhyve
+</span></code></pre>
+<blockquote>
+<p>this will create /usr/local/share/uefi-firmware/BHYVE_UEFI.fd</p>
+</blockquote>
+<p>Setup and install:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>bhyve -AHP -w \
+</span><span>-s 1:0,lpc \
+</span><span>-s 2:0,virtio-net,tap0 \
+</span><span>-s 3:0,ahci-cd,/tank/iso/ubuntu-20.04.2-live-server-amd64.iso \
+</span><span>-s 4:0,virtio-blk,/dev/zvol/tank/ubuntuvm \
+</span><span>-s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
+</span><span>-l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+</span><span>-c 4 -m 8G ubuntu
+</span></code></pre>
+<p>Install when ask to reboot, destroy the vm:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>bhyvectl --destroy --vm=ubuntu
+</span></code></pre>
+<p>Then to start just remove the CD <code>ahci-cd</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>while true; do
+</span><span>bhyve -AHP -w \
+</span><span>-s 1:0,lpc \
+</span><span>-s 2:0,virtio-net,tap0 \
+</span><span>-s 4:0,virtio-blk,/dev/zvol/tank/ubuntuvm \
+</span><span>-s 29,fbuf,tcp=0.0.0.0:5900,w=800,h=600,wait \
+</span><span>-l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
+</span><span>-c 4 -m 8G ubuntu
+</span><span>bhyve_exit=$?
+</span><span>if [ $bhyve_exit -ne 0 ]; then
+</span><span>    break
+</span><span>fi
+</span><span>done
+</span><span>/usr/sbin/bhyvectl --destroy --vm=ubuntu
+</span></code></pre>
+<h2 id="debian"><a class="zola-anchor" href="#debian" aria-label="Anchor link for: debian">🔗</a>debian</h2>
+<p>Boot using EFI file grupx64.efi then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/BOOT/bootx64.efi
+</span></code></pre>
+<p>To connect using the VNC client you can install it using this cask:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install --cask vnc-viewer
+</span></code></pre>
+<p>More info:</p>
+<ul>
+<li>https://docs.freebsd.org/doc/13.0-RELEASE/usr/local/share/doc/freebsd/handbook/virtualization-host-bhyve.html</li>
+<li>https://www.cyberciti.biz/faq/how-to-install-linux-vm-on-freebsd-using-bhyve-and-zfs/</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

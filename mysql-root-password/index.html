@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mysql root password &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mysql-root-password&#x2F;">mysql root password</a></h2>
+<div class="post-header">
+    <span class="post-date">April 10, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="reset-root-password-on-mysql-5-7-17"><a class="zola-anchor" href="#reset-root-password-on-mysql-5-7-17" aria-label="Anchor link for: reset-root-password-on-mysql-5-7-17">🔗</a>Reset root password on mysql &gt;= 5.7.17</h1>
+<p>Edit <code>/etc/rc.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql_args=&quot;--skip-grant-tables --skip-networking&quot;
+</span></code></pre>
+<p>Restart mysql:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>service mysql-server restart
+</span></code></pre>
+<p>Login like root:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; UPDATE mysql.user SET authentication_string = PASSWORD(&#39;aaaa&#39;) WHERE User = &#39;root&#39; AND Host = &#39;localhost&#39;;
+</span><span>mysql&gt; FLUSH PRIVILEGES;
+</span><span>mysql&gt; quit
+</span></code></pre>
+<p>Remove or comment:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># mysql_args=&quot;--skip-grant-tables --skip-networking&quot;
+</span></code></pre>
+<p>Restart mysql:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>service mysql-server restart
+</span></code></pre>
+<h1 id="mysqldump-couldn-t-execute-show-variables-like-gtid-mode"><a class="zola-anchor" href="#mysqldump-couldn-t-execute-show-variables-like-gtid-mode" aria-label="Anchor link for: mysqldump-couldn-t-execute-show-variables-like-gtid-mode">🔗</a>mysqldump: Couldn't execute 'SHOW VARIABLES LIKE 'gtid_mode'':</h1>
+<p>To fix that try this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># mysql_upgrade -u root -p --force
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

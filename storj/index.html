@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+storj &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;storj&#x2F;">storj</a></h2>
+<div class="post-header">
+    <span class="post-date">October 18, 2020</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/storj/">storj</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/coin/">coin</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/crytp/">crytp</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Setup up and configure your jail, then create user <code>storj</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pw useradd -n storj -m
+</span></code></pre>
+<p>Clone and get and install latest version:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>git clone -b v1.14.7 https://github.com/storj/storj.git storj
+</span><span>cd storj
+</span><span>go install -race -v storj.io/storj/cmd/...
+</span></code></pre>
+<p>Create a dir to contanin the identity and storage:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mkdir /mnt/storj
+</span><span>chown -R storj:storj /mnt/storj
+</span></code></pre>
+<p>In the main host create the file system to be used in the jail:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zfs create tank/storj
+</span></code></pre>
+<p>Create <code>fstat.storj</code> with something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/tank/storj     /jails/storj/mnt/storj    nullfs  rw      0       0
+</span></code></pre>
+<blockquote>
+<p><code>mkdir /jails/storej/mnt/storj</code> before starting the jail</p>
+</blockquote>
+<p>Change to user <code>storj</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>su - storj
+</span></code></pre>
+<p>Setup the node:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/home/storj/go/bin/storagenode setup --config-dir /mnt/storj --identity-dir /mnt/storj/identity
+</span></code></pre>
+<p>Config lools somethinig like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>contact.external-address: &quot;IP or FQDN:28967&quot;
+</span><span>identity.cert-path: /mnt/storj/identity/identity.cert
+</span><span>identity.key-path: /mnt/storj/identity/identity.key
+</span><span>log.level: info
+</span><span>operator.email: &quot;your email address&quot;
+</span><span>operator.wallet: &quot;your wallet address&quot;
+</span><span>server.address: :28967
+</span><span>server.private-address: 127.0.0.1:7778
+</span><span>server.revocation-dburl: bolt:///mnt/storj/storage/revocations.db
+</span><span>storage.allocated-disk-space: 2.00 TB
+</span><span>storage.path: /mnt/storj/storage
+</span></code></pre>
+<p>Create an identity:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/home/storj/go/bin/identity --config-dir /mnt/storj/identity create storagenode
+</span></code></pre>
+<blockquote>
+<p>this will take hours</p>
+</blockquote>
+<p>Backup before you continue, it should be quick! 🙏
+This allows you to restore your Node in case of an unfortunate hardware or OS incident.</p>
+<p>Authorize the identity:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/home/storj/go/bin/identity authorize storagenode &lt;email:characterstring&gt;
+</span></code></pre>
+<p>https://documentation.storj.io/dependencies/identity</p>
+<p>Startup using immortal:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install immortal
+</span></code></pre>
+<p>Create <code>/usr/local/etc/immortal/storj.yml</code> with something like:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">cmd</span><span>: </span><span style="color:#a3be8c;">/home/storj/go/bin/storagenode run --config-dir /mnt/storj/storage --identity-dir /mnt/storj/identity
+</span><span style="color:#bf616a;">user</span><span>: </span><span style="color:#a3be8c;">storj
+</span><span style="color:#bf616a;">log</span><span>:
+</span><span>  </span><span style="color:#bf616a;">file</span><span>: </span><span style="color:#a3be8c;">/var/log/storj.log
+</span></code></pre>
+<p>Enable <code>immortaldir_enable</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysrc immortaldir_enable=&quot;YES&quot;
+</span></code></pre>
+<p>Start it:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>service immortaldir start
+</span></code></pre>
+<p>Follow up: https://github.com/storj/storj/issues/3935</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
