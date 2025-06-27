@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ssh update Host Keys &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ssh-update-host-keys&#x2F;">ssh update Host Keys</a></h2>
+<div class="post-header">
+    <span class="post-date">December 26, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/keys/">keys</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To create new ssh keys on the server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N &#39;&#39; -t rsa
+</span><span>ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N &#39;&#39; -t ecdsa -b 521
+</span></code></pre>
+<p>To check the fingerprint:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ssh-keygen -lf ssh_host_ecdsa_key
+</span></code></pre>
+<p>On the client side:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</span><span>@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+</span><span>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</span><span>IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+</span><span>Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+</span><span>It is also possible that a host key has just been changed.
+</span><span>The fingerprint for the ECDSA key sent by the remote host is
+</span><span>SHA256:kY/TymCiskD0nhhyWaovohYvfCyZ7ymrEsmujeawaww.
+</span><span>Please contact your system administrator.
+</span><span>Add correct host key in /Users/monkey/.ssh/known_hosts to get rid of this message.
+</span><span>Offending ECDSA key in /Users/monkey/.ssh/known_hosts:236
+</span><span>ECDSA host key for [76.9.57.82]:2222 has changed and you have requested strict checking.
+</span><span>Host key verification failed.
+</span></code></pre>
+<p>To see the key on line 236:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>awk &#39;NR==236&#39; know_hosts
+</span></code></pre>
+<p>To remove the key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ssh-keygen -R &quot;[76.9.57.82]:2222&quot;
+</span></code></pre>
+<p>Try to ssh again and veriy the key matches the one on the server.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
