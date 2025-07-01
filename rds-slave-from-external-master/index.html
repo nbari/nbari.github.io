@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+rds slave from external master &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;rds-slave-from-external-master&#x2F;">rds slave from external master</a></h2>
+<div class="post-header">
+    <span class="post-date">February 10, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/rds/">rds</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/slave/">slave</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/master/">master</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h2 id="setup-aws-mysql-rds-instance-as-slave-of-an-external-master"><a class="zola-anchor" href="#setup-aws-mysql-rds-instance-as-slave-of-an-external-master" aria-label="Anchor link for: setup-aws-mysql-rds-instance-as-slave-of-an-external-master">🔗</a>Setup AWS MySQL RDS instance as slave of an external master</h2>
+<p>Configure external mysql to become master:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>server-id=1
+</span><span>binlog-format= mixed
+</span><span>log-bin=mysql-bin
+</span><span>binlog-do-db=databasename
+</span></code></pre>
+<p>Setup the master replica user:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; create user `replica`@`%` identified by &#39;PASSWORD&#39;;
+</span><span>mysql&gt; grant replication slave on *.* to &#39;replica&#39;@&#39;%&#39;;
+</span></code></pre>
+<p>Use the following command to ensure that nothing can write to the master
+database during a database dump. Also note the filename and position of the
+binary log because you will need these values to complete the replication
+configuration:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; FLUSH TABLES WITH READ LOCK;
+</span><span>mysql&gt; show master status;
+</span><span>+-------------------+-----------+--------------+--------------------------------------------------+
+</span><span>| File              | Position  | Binlog_Do_DB | Binlog_Ignore_DB                                 |
+</span><span>+-------------------+-----------+--------------+--------------------------------------------------+
+</span><span>| mysqld-bin.000205 | 207450664 | epazote      | test,information_schema,performance_schema,mysql |
+</span><span>+-------------------+-----------+--------------+--------------------------------------------------+
+</span><span>1 row in set (0.00 sec)
+</span></code></pre>
+<p>If this is a replica do this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; show slave status\G
+</span></code></pre>
+<p>And look for:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Master_Log_File: mysql-bin-changelog.023713
+</span><span>Read_Master_Log_Pos: 1934704
+</span></code></pre>
+<p>Within AWS RDS you can also do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_stop_replication;
+</span><span>mysql&gt; show slave status\G
+</span></code></pre>
+<p>Take a dump:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysqldump -h host.tld --user=&#39;user&#39; --password=&#39;secret&#39; --add-drop-database --compress --hex-blob --opt --skip-comments --skip-lock-tables --single-transaction db_name &gt; out.sql
+</span></code></pre>
+<blockquote>
+<p>to dump all databases use <code>--all-databases</code></p>
+</blockquote>
+<p>To get the the log position this can be used:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>--master-data=1
+</span></code></pre>
+<p>example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysqldump -h host.tld --master-data=1 --compress --hex-blob --opt --skip-comments --skip-lock-tables --single-transaction db_name -u user -p &gt; out.sql
+</span></code></pre>
+<p>Then, lift the read lock from the master:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; UNLOCK TABLES;
+</span></code></pre>
+<p>or within AWS use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_start_replication;
+</span></code></pre>
+<blockquote>
+<p>If you get a Last_IO_Error: Got fatal error 1236..., if you can afford it, don't unlock/start the replication after having the dump</p>
+</blockquote>
+<p>Load the dump:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql --compress -h host.tld -u user database &lt; out.sql
+</span></code></pre>
+<blockquote>
+<p>--compress seems to improve the speed</p>
+</blockquote>
+<p>After loading a full dump to RDS, Call the stored procedure <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html">mysql.rds_set_external_master</a> like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_set_external_master (&#39;servername&#39;, port, &#39;user&#39;, &#39;password&#39;, &#39;binlog-file&#39;, binlog-offset, 0);
+</span></code></pre>
+<p>Example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_set_external_master (&#39;10.10.3.2&#39;, 3306, &#39;replica&#39;, &#39;password&#39;, &#39;mysql-bin-changelog.122&#39;, 108433, 0);
+</span></code></pre>
+<p>Then start the replication by doing:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_start_replication;
+</span></code></pre>
+<p>Check if slave is running:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; show slave status;
+</span></code></pre>
+<h2 id="promote-rds-to-master"><a class="zola-anchor" href="#promote-rds-to-master" aria-label="Anchor link for: promote-rds-to-master">🔗</a>Promote RDS to master</h2>
+<p>This will promote the slave to become master:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; call mysql.rds_stop_replication;
+</span><span>mysql&gt; call mysql.rds_reset_external_master;
+</span></code></pre>
+<h2 id="mysql-rds-set-configuration"><a class="zola-anchor" href="#mysql-rds-set-configuration" aria-label="Anchor link for: mysql-rds-set-configuration">🔗</a>mysql.rds_set_configuration</h2>
+<p>In Amazon RDS, The default value of binlog retention hours is NULL (do not
+retain binary logs), to keep logs for 7 days use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>call mysql.rds_set_configuration(&#39;binlog retention hours&#39;, 168);
+</span></code></pre>
+<p>This could help to prevent getting the error:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Got fatal error 1236 from master when reading data from binary log: &#39;Could not find first log file name in binary log index file&#39;, Error_code: 1236
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
