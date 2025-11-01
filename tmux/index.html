@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+tmux &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tmux&#x2F;">tmux</a></h2>
+<div class="post-header">
+    <span class="post-date">December 07, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tmux/">tmux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Set window title:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;,
+</span></code></pre>
+<p>Get pannel number:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;q
+</span></code></pre>
+<p>Show clock:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;t
+</span></code></pre>
+<p>Move pane to a new window:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;!
+</span></code></pre>
+<p>Join panes:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;: join-pane -s 0 -t 3  move pane 1 to window 3
+</span><span>&lt;c-b&gt;: join-pane -t :1      move current pane to window 1
+</span></code></pre>
+<p>Create a new session:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;: new -s &lt;name&gt;
+</span></code></pre>
+<p>List sessions:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;s
+</span><span>&lt;c-b&gt;w  expanded
+</span></code></pre>
+<p>Move pane to a another session:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;m              mark the pane
+</span><span>&lt;c-b&gt;w              go to the destination window/session
+</span><span>&lt;c-b&gt;: join-pane
+</span></code></pre>
+<p>or go to the pane you want to move, check the session name and windows you would like to move and try:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;: move-pane -t docker:0
+</span></code></pre>
+<blockquote>
+<p>docker is the name of the session and 0 the window</p>
+</blockquote>
+<p>Split full window:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;: split-window -fv      like &lt;c-b&gt;&quot;
+</span><span>&lt;c-b&gt;: split-window -fh      like &lt;c-b&gt;%
+</span></code></pre>
+<p>Rotate panes:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;&lt;c-o&gt;
+</span></code></pre>
+<p>List buffers:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;=
+</span></code></pre>
+<p>Disconnect / Detach users:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;c-b&gt;D
+</span></code></pre>
+<p>Attach to an existing session:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>tmux a -t &lt;name of session&gt;
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

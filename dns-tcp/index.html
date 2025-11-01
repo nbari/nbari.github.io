@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+DNS TCP &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;dns-tcp&#x2F;">DNS TCP</a></h2>
+<div class="post-header">
+    <span class="post-date">June 01, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dns/">dns</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tcp/">tcp</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/unbound/">unbound</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Unbound using DNS over TCP:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>server:
+</span><span>private-domain: &quot;plex.direct&quot;
+</span><span>forward-zone:
+</span><span>  name: &quot;.&quot;
+</span><span>  forward-ssl-upstream: yes
+</span><span>  forward-addr: 1.1.1.1@853
+</span><span>  forward-addr: 9.9.9.9@853
+</span><span>  forward-addr: 1.0.0.1@853
+</span><span>  forward-addr: 149.112.112.112@853
+</span><span>  forward-addr: 2606:4700:4700::1111@853
+</span><span>  forward-addr: 2606:4700:4700::1001@853
+</span><span>  forward-addr: 2620:fe::fe@853;
+</span><span>  forward-addr: 2620:fe::9@853;
+</span></code></pre>
+<p>To test do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># unbound-control -c /var/unbound/unbound.conf lookup .
+</span></code></pre>
+<p>It should return something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>The following name servers are used for lookup of .
+</span><span>forwarding request:
+</span><span>Delegation with 0 names, of which 0 can be examined to query further addresses.
+</span><span>It provides 8 IP addresses.
+</span><span>1.1.1.1                 rto 401 msec, ttl 880, ping 33 var 92 rtt 401, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>9.9.9.9                 not in infra cache.
+</span><span>1.0.0.1                 rto 397 msec, ttl 899, ping 13 var 96 rtt 397, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>149.112.112.112         rto 418 msec, ttl 880, ping 58 var 90 rtt 418, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>2606:4700:4700::1111    rto 376 msec, ttl 880, ping 0 var 94 rtt 376, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>2606:4700:4700::1001    rto 376 msec, ttl 888, ping 0 var 94 rtt 376, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>2620:fe::fe             rto 376 msec, ttl 884, ping 0 var 94 rtt 376, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span><span>2620:fe::9              rto 376 msec, ttl 899, ping 0 var 94 rtt 376, tA 0, tAAAA 0, tother 0, EDNS 0 assumed.
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

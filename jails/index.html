@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+FreeBSD jails &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;jails&#x2F;">FreeBSD jails</a></h2>
+<div class="post-header">
+    <span class="post-date">June 19, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">FreeBSD</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/jails/">jails</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/docker/">docker</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>The <a href="https://www.freebsd.org/doc/handbook/jails.html">FreeBSD jail</a> mechanism
+is an implementation of <em>operating system-level virtualization</em> that allows
+administrators to partition a FreeBSD-based computer system into several
+independent mini-systems called jails.</p>
+<blockquote>
+<p><strong>Operating-system-level virtualization</strong> is a server virtualization method in which
+the kernel of an operating system allows the existence of multiple isolated
+user-space instances, instead of just one. Such instances, which are sometimes
+called containers, software containers, virtualization engines (VEs) or jails
+(FreeBSD jail or chroot jail), may look and feel like a real server from the
+point of view of its owners and users.</p>
+</blockquote>
+<p>On Unix-like operating systems, this technology can be seen as an advanced
+implementation of the standard chroot mechanism. In addition to isolation
+mechanisms, the kernel often provides resource-management features to limit the
+impact of one container's activities on other containers.</p>
+<h1 id="freebsd-the-big-picture"><a class="zola-anchor" href="#freebsd-the-big-picture" aria-label="Anchor link for: freebsd-the-big-picture">🔗</a>FreeBSD the big picture</h1>
+<p><img src="/img/jails.png" alt="jails" /></p>
+<h1 id="freebsd-jails-docker"><a class="zola-anchor" href="#freebsd-jails-docker" aria-label="Anchor link for: freebsd-jails-docker">🔗</a>FreeBSD jails != docker</h1>
+<p>Jails are rock solid proven technology used by
+<a href="https://www.freebsd.org/doc/handbook/nutshell.html">many companies</a>
+the workflow and concept is very different from <a href="http://www.docker.com">docker</a>
+and because of that is not possible to do a comparison between them.</p>
+<p>Try to compare them is difficult and unfair, for example, doing a very bad
+analogy I would say that <a href="http://kubernetes.io/">kubernetes</a> + Docker is
+something similar to what you get when using <strong>jails</strong> on the Linux ecosystem,
+not even mentioning the <a href="https://www.freebsd.org/doc/handbook/zfs.html">ZFS</a>
+capabilities and full network stack support available within a jail.</p>
+<h1 id="creating-a-jail"><a class="zola-anchor" href="#creating-a-jail" aria-label="Anchor link for: creating-a-jail">🔗</a>Creating a jail</h1>
+<p>Create the dataset for the jails:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># zfs create -o mountpoint=/jails tank/jails
+</span><span># zfs create tank/jails/base
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

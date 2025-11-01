@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mysql pager &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mysql-pager&#x2F;">mysql pager</a></h2>
+<div class="post-header">
+    <span class="post-date">May 15, 2019</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mysql/">mysql</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/pager/">pager</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To use <code>less</code> command to vie the output of a mysql result you could use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; \P less
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; pager less
+</span></code></pre>
+<p>Then run something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; show engine innodb status\G
+</span></code></pre>
+<p>In some cases you may need to search for something in specific for this <code>grep</code>
+could be used, for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; \P grep -A7 &quot;ROW OPERATIONS&quot;
+</span><span>PAGER set to &#39;grep -A7 &quot;ROW OPERATIONS&quot;&#39;
+</span></code></pre>
+<p>Then when running the command it will only return 7 lines after "ROW OPERATIONS"</p>
+<h2 id="disable"><a class="zola-anchor" href="#disable" aria-label="Anchor link for: disable">🔗</a>disable</h2>
+<p>To disable the pager type <code>\n</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysql&gt; \n
+</span><span>Pager disabled.
+</span><span>Time: 0.000s
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

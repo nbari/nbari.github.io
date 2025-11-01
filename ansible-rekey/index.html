@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ansible rekey &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ansible-rekey&#x2F;">ansible rekey</a></h2>
+<div class="post-header">
+    <span class="post-date">November 01, 2025</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create new key:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">openssl</span><span> ecparam</span><span style="color:#bf616a;"> -name</span><span> prime256v1</span><span style="color:#bf616a;"> -genkey -noout -out</span><span> private.ec.key
+</span></code></pre>
+<p>Save key in 1password:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">op</span><span> document create private.ec.key</span><span style="color:#bf616a;"> --title </span><span>&quot;</span><span style="color:#a3be8c;">Ansible Vault EC Key</span><span>&quot;</span><span style="color:#bf616a;"> --vault </span><span>&quot;</span><span style="color:#a3be8c;">Private</span><span>&quot;
+</span></code></pre>
+<p>Test that you can get the key back out:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">op</span><span> read &quot;</span><span style="color:#a3be8c;">op://Private/Ansible Vault EC Key/private.ec.key</span><span>&quot;
+</span></code></pre>
+<p>Shred old key:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">shred -u</span><span> private.ec.key
+</span></code></pre>
+<p>Edit your ansible config file and change the current value of <code>vault_password_file</code> to point to the old vault password file:</p>
+<pre data-lang="ini" style="background-color:#2b303b;color:#c0c5ce;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#bf616a;">vault_password_file </span><span>= vaultpw-old.sh
+</span></code></pre>
+<p>Run the rekey command:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ansible-vault</span><span> rekey</span><span style="color:#bf616a;"> --new-vault-password-file</span><span>=vaultpw-new.sh your-vault-file.yml
+</span></code></pre>
+<p>The contents of vaultpw-new.sh should be:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;">#!/bin/bash
+</span><span style="color:#bf616a;">op</span><span> read &quot;</span><span style="color:#a3be8c;">op://Private/Ansible Vault EC Key/private.ec.key</span><span>&quot;
+</span></code></pre>
+<p>To rekey all yoour vault files, you can use find:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">find</span><span> .</span><span style="color:#bf616a;"> -type</span><span> f </span><span style="color:#96b5b4;">\(</span><span style="color:#bf616a;"> -name </span><span>&quot;</span><span style="color:#a3be8c;">*.yml</span><span>&quot;</span><span style="color:#bf616a;"> -o -name </span><span>&quot;</span><span style="color:#a3be8c;">*.yaml</span><span>&quot; </span><span style="color:#96b5b4;">\) </span><span>| </span><span style="color:#b48ead;">while </span><span style="color:#96b5b4;">read</span><span> file; </span><span style="color:#b48ead;">do
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">head -1 </span><span>&quot;$</span><span style="color:#bf616a;">file</span><span>&quot; </span><span style="color:#d08770;">2</span><span>&gt;/dev/null | </span><span style="color:#bf616a;">grep -q </span><span>&#39;</span><span style="color:#a3be8c;">$ANSIBLE_VAULT;</span><span>&#39;; </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Rekeying: </span><span>$</span><span style="color:#bf616a;">file</span><span>&quot;
+</span><span>        </span><span style="color:#bf616a;">ansible-vault</span><span> rekey</span><span style="color:#bf616a;"> --new-vault-password-file</span><span>=vaultpw.sh &quot;$</span><span style="color:#bf616a;">file</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">fi
+</span><span style="color:#b48ead;">done
+</span></code></pre>
+<p>Finally, update your ansible config file to point to the new vault password file:</p>
+<pre data-lang="ini" style="background-color:#2b303b;color:#c0c5ce;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#bf616a;">vault_password_file </span><span>= vaultpw-new.sh
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+dnsmasq &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;dnsmasq&#x2F;">dnsmasq</a></h2>
+<div class="post-header">
+    <span class="post-date">September 30, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dnsmasq/">dnsmasq</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dns/">dns</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ubuntu/">ubuntu</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="dnsmasq-forwarding-zones"><a class="zola-anchor" href="#dnsmasq-forwarding-zones" aria-label="Anchor link for: dnsmasq-forwarding-zones">🔗</a>dnsmasq forwarding zones</h1>
+<p>If you are using <a href="https://en.wikipedia.org/wiki/Dnsmasq">dnsmasq</a>
+and need to forward a DNS zone to a specific DNS server,
+add this to your <code>/etc/dnsmasq.conf</code></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>server=/test/10.10.0.4
+</span><span>server=/sopas/10.20.0.4
+</span></code></pre>
+<p>If you don't have the file <code>/etc/dnsmasq.conf</code> check for directory
+<code>/etc/dnsmasq.d</code> and there create a file named <code>/etc/dnsmasq.d/my-zones</code>
+with the content of your zones</p>
+<p>That means that requests made do <code>*.test</code> will be forwarded to 10.10.0.4
+for <code>*.sopas</code> to 10.20.0.4 and so on</p>
+<p>In case you have the file <code>/etc/resolv.conf</code> it probably contains a like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>nameserver 127.0.0.1
+</span></code></pre>
+<p>That means that you "probably" you are using dnsmasq.</p>
+<h2 id="dnsmasq-test"><a class="zola-anchor" href="#dnsmasq-test" aria-label="Anchor link for: dnsmasq-test">🔗</a>dnsmasq --test</h2>
+<p>To check configuration file(s) syntax, execute:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ dnsmasq --test
+</span></code></pre>
+<p>After doing this, you can test by doing a ping or dig, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dig @127.0.0.1 my-app.test +short
+</span></code></pre>
+<blockquote>
+<p>assuming 127.0.0.1 is running dnsmasq</p>
+</blockquote>
+<p>To test that your domain can be resolved from the specified DNS's:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dig @10.10.0.4 domain.test +short
+</span></code></pre>
+<p>A full <code>/etc/dnsmasq.conf</code> example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># send &#39;domain=home.lan&#39; in DHCP response so that machines
+</span><span># configured through DHCP will come under &#39;home.lan&#39; domain.
+</span><span>domain=home.lan
+</span><span>
+</span><span># will not read /etc/resolv.conf to get upsteram nameservers
+</span><span>no-resolv
+</span><span>
+</span><span># Tells dnsmasq to forward anything with the domain of test to dns server 10.10.0.4
+</span><span>server=/test/10.10.0.4
+</span><span>
+</span><span># upstream nameserver
+</span><span>server=4.2.2.2
+</span><span>server=8.8.8.8
+</span><span>
+</span><span># Listen to requests only coming from the local machine
+</span><span>listen-address=127.0.0.1
+</span><span>
+</span><span># cache 1000 names
+</span><span>cache-size=1000
+</span></code></pre>
+<h2 id="find-the-conf-dir"><a class="zola-anchor" href="#find-the-conf-dir" aria-label="Anchor link for: find-the-conf-dir">🔗</a>Find the <code>--conf-dir</code></h2>
+<p>In some systems the <code>dnsmasq.conf</code> in not located in <code>/etc/dnsmasq.conf</code> to find
+what <code>--config-dir</code> is used, you can try to do this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ps -ef | grep -i dnsmasq
+</span><span>nbody    3655  1056  0 09:00 ?        00:00:00 /usr/sbin/dnsmasq --no-resolv --keep-in-foreground --no-hosts --bind-interfaces --pid-file=/var/run/NetworkManager/dnsmasq.pid --listen-address=127.0.1.1 --cache-size=0 --conf-file=/dev/null --proxy-dnssec --enable-dbus=org.freedesktop.NetworkManager.dnsmasq --conf-dir=/etc/NetworkManager/dnsmasq.d
+</span></code></pre>
+<p>In this example the configuration directory is:  <code>--conf-dir=/etc/NetworkManager/dnsmasq.d</code></p>
+<p>For getting the command line arguments passed to a running process this can be used:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ps -fp &lt;pid&gt;
+</span></code></pre>
+<p>or  if you have a <a href="https://en.wikipedia.org/wiki/Procfs">procfs</a>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cat /proc/&lt;pid&gt;/cmdline
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

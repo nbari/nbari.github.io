@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+convertfromraw &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;convertfromraw&#x2F;">convertfromraw</a></h2>
+<div class="post-header">
+    <span class="post-date">November 07, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">FreeBSD</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mkimg/">mkimg</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/virtualbox/">VirtualBox</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vboxmanage/">VBoxManage</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="convert-from-raw-to-vdi"><a class="zola-anchor" href="#convert-from-raw-to-vdi" aria-label="Anchor link for: convert-from-raw-to-vdi">🔗</a>Convert from RAW to VDI</h1>
+<p>When creating custom "RAW" images using <a href="https://www.freebsd.org/cgi/man.cgi?query=mkimg&amp;sektion=1">mkimg</a>
+they can be use in VirtualBox by converting them to "VDI" format, example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ VBoxManage convertfromraw ec2.raw ec2.vdi --format VDI
+</span><span>Converting from raw image file=&quot;ec2.raw&quot; to file=&quot;ec2.vdi&quot;...
+</span><span>Creating dynamic image with size 3221292544 bytes (3073MB)...
+</span></code></pre>
+<p>Once the image is in "VDI" format it can be resized using:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ VBoxManage modifyhd ec2.vdi --resize 8192
+</span><span>0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+</span></code></pre>
+<p>The above command will resize the image to 8GB.</p>
+<h2 id="vmware"><a class="zola-anchor" href="#vmware" aria-label="Anchor link for: vmware">🔗</a>VMware</h2>
+<p>If using VMware, virtual disks can be expanded using this ESXi/ESX command:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vmkfstools -X &lt;new size&gt; &lt;virtual disk&gt;.vmdk
+</span></code></pre>
+<p>For example, use this command to grow the virtual disk to 25GB in size:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vmkfstools -X 25g /vmfs/volumes/xxxx/vmname/vmname.vmdk
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+IDNA &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;idna&#x2F;">IDNA</a></h2>
+<div class="post-header">
+    <span class="post-date">April 29, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/idna/">idna</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/encode/">encode</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/decode/">decode</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To encode/decode a domain using "Internationalized Domain Names"</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ python
+</span><span>&gt;&gt;&gt; x = u&#39;qép.com&#39;
+</span><span>&gt;&gt;&gt; x.encode(&#39;idna&#39;)
+</span><span>b&#39;xn--qp-bja.com&#39;
+</span><span>&gt;&gt;&gt; x.encode(&#39;idna&#39;).decode(&#39;idna&#39;)
+</span><span>&#39;qép.com&#39;
+</span><span>&gt;&gt;&gt; x == x.encode(&#39;idna&#39;).decode(&#39;idna&#39;)
+</span><span>True
+</span></code></pre>
+<blockquote>
+<p>To prevent non-international domain names containing hyphens from being accidentally interpreted as Punycode, international domain name Punycode sequences have a so-called ASCII Compatible Encoding (ACE) prefix, "xn--", prepended.[2] Thus the domain name "bücher.tld" would be represented in ASCII as "xn--bcher-kva.tld".</p>
+</blockquote>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

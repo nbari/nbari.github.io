@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+bastion ssh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bastion-ssh&#x2F;">bastion ssh</a></h2>
+<div class="post-header">
+    <span class="post-date">April 28, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bastion/">bastion</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/multiplex/">multiplex</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="proxyjump"><a class="zola-anchor" href="#proxyjump" aria-label="Anchor link for: proxyjump">🔗</a>ProxyJump</h1>
+<p>This is the easiest (new) way:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Host 10.*
+</span><span>    ProxyJump user@bastion.tld:2222
+</span></code></pre>
+<h2 id="using-proxycommand"><a class="zola-anchor" href="#using-proxycommand" aria-label="Anchor link for: using-proxycommand">🔗</a>Using ProxyCommand</h2>
+<p>Replace <code>your.bastion.tld</code> with your bastion server and set your bastion
+username in the <code>ProxyCommand</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Host bastion
+</span><span>  Hostname your.bastion.tld
+</span><span>  ForwardAgent yes
+</span><span>
+</span><span>Host 10.10.*
+</span><span>  ProxyCommand ssh &lt;your-username&gt;@bastion -W %h:%p
+</span></code></pre>
+<h2 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">🔗</a>example</h2>
+<p>To login with user devops to server 10.10.3.4:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -l devops 10.10.3.4
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh devops@10.10.3.4
+</span></code></pre>
+<h1 id="ssh-sockets"><a class="zola-anchor" href="#ssh-sockets" aria-label="Anchor link for: ssh-sockets">🔗</a>SSH sockets</h1>
+<p>To speed up more when using the bastion host things this can be added at the  top of the <code>~/.ssh/config</code> file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>  ControlPath ~/.ssh/sockets/%r@%h:%p
+</span><span>  ControlMaster auto
+</span><span>  ControlPersist 10m
+</span></code></pre>
+<blockquote>
+<p>You need to create the sockets dir: <code>mkdir ~/.ssh/sockets</code></p>
+</blockquote>
+<p>Or you could add it per bastion configuration:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Host bastion
+</span><span>  Hostname your.bastion.tld
+</span><span>  ForwardAgent yes
+</span><span>  ControlPath ~/.ssh/sockets/%r@%h:%p
+</span><span>  ControlMaster auto
+</span><span>  ControlPersist 10m
+</span></code></pre>
+<ul>
+<li>
+<p>The <code>ControlPath</code> entry specifies where to store the “control socket” for the multiplexed connections. In this case, %r refers to the remote login name, %h refers to the target host name, and %p refers to the destination port.</p>
+</li>
+<li>
+<p>The <code>ControlMaster</code> setting is what activates multiplexing. With the auto setting, SSH will try to use a master connection if one exists, but if one doesn’t exist it will create a new one</p>
+</li>
+<li>
+<p>The <code>ControlPersist</code> setting keeps the master connection alive for the specified period of time after it has remained idle (no connections). After that time, the master connection will be closed. In this example, we’ve specified that the master connection should remain open for 10 minutes after becoming idle. Subsequent SSH sessions made while the master connection is open will leverage the master connection and will reset the idle timer.</p>
+</li>
+</ul>
+<h1 id="check-the-status-of-multiplexing"><a class="zola-anchor" href="#check-the-status-of-multiplexing" aria-label="Anchor link for: check-the-status-of-multiplexing">🔗</a>Check the status of multiplexing</h1>
+<p>Use the <code>-O &lt;option&gt;</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -O check user@host.tld
+</span><span>Master running (pid=32015)
+</span></code></pre>
+<p>To stop multiplexed connections:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -O stop user@host.tld
+</span></code></pre>
+<p>To exit and remove the control socket besides terminating all existing connections:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -O exit user@host.tld
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

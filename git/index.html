@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+git basics &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;git&#x2F;">git basics</a></h2>
+<div class="post-header">
+    <span class="post-date">March 25, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/git/">git</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h3 id="git-branch-a"><a class="zola-anchor" href="#git-branch-a" aria-label="Anchor link for: git-branch-a">🔗</a>git branch -a</h3>
+<p>This will print all branches, local or remote, to see only local branches:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git branch
+</span></code></pre>
+<p>To only see remote branches:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git branch -r
+</span></code></pre>
+<p>When you clone a repo after typing <code>git branch -a</code> the output will look
+something like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git branch -a
+</span><span>* master
+</span><span>  remotes/origin/HEAD -&gt; origin/master
+</span><span>  remotes/origin/master
+</span></code></pre>
+<p><code>master</code> is a branch in the local repository, <code>remotes/origin/master</code> is a branch named master on the remote named <code>origin</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>remotes/origin/master
+</span><span>          |      |
+</span><span>          |    name of branch
+</span><span>   name of remote
+</span></code></pre>
+<p>The branch can be referred as either <code>orign/master</code> or <code>remotes/origin/master</code></p>
+<p><code>remotes/origin/HEAD</code> is the default branch for the remote named <code>origin</code></p>
+<h2 id="clean-extra-files"><a class="zola-anchor" href="#clean-extra-files" aria-label="Anchor link for: clean-extra-files">🔗</a>Clean extra files</h2>
+<p>For testing within your repository do this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ touch foo{001..100}.tmp
+</span></code></pre>
+<p>To remove all the files and untracked directories you can do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git clean -fd
+</span></code></pre>
+<h2 id="search-for-commit-content"><a class="zola-anchor" href="#search-for-commit-content" aria-label="Anchor link for: search-for-commit-content">🔗</a>Search for commit content</h2>
+<p>To search for commit content, actual lines of source:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git grep &lt;regexp&gt; $(git rev-list --all)
+</span></code></pre>
+<p>or in case you get "Argument list too long":</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git rev-list --all | xargs git grep expression
+</span></code></pre>
+<h2 id="merge-squash-rebase"><a class="zola-anchor" href="#merge-squash-rebase" aria-label="Anchor link for: merge-squash-rebase">🔗</a>merge, squash, rebase</h2>
+<p>So you are working on branch <code>master</code> haven't add &amp; commit your changes but
+there has been an update on the origin/master, you would like to keep your
+changes, update master to be in sync with the origin and later in in one single
+commit once you are done working submit your changes.</p>
+<p>So if you are in <code>master</code> branch:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git fetch -p
+</span></code></pre>
+<blockquote>
+<p>The -p is for prune and clean unused branches</p>
+</blockquote>
+<p>Now save your changes by creating a new branch:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git checkout -b my-changes
+</span></code></pre>
+<p>Add and commit your changes:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git add .
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git commit -a -m &quot;some changes&quot;
+</span></code></pre>
+<p>To update master:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git checkout master
+</span></code></pre>
+<p>And then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git pull
+</span></code></pre>
+<p>To continue working on your changes go back to your branch:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git checkout my-changes
+</span></code></pre>
+<p>You can work here commit etc, but once you are done if you would like to just
+have 1 single commit, you can <code>squash</code> your commits, for example to squash your
+latest 6 commits, run this <code>git log --pretty=oneline --abbrev-commit</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> 1	    * 2018-03-28 dd34521 (HEAD -&gt; my-changes) 5 &lt;nbari&gt; (1 second ago)
+</span><span> 2	    * 2018-03-28 f31a830 4 &lt;nbari&gt; (8 seconds ago)
+</span><span> 3	    * 2018-03-28 15a6af0 3 &lt;nbari&gt; (18 seconds ago)
+</span><span> 4	    * 2018-03-28 9aaf8b3 2 &lt;nbari&gt; (24 seconds ago)
+</span><span> 5	    * 2018-03-28 452b764 1 &lt;nbari&gt; (29 seconds ago)
+</span><span> 6	    * 2018-03-28 447dae2 my changes for foo bar &lt;nbari&gt; (42 seconds ago)
+</span><span>      | * 2018-03-28 4dcbf9b (origin/master, origin/HEAD) --- remote origin master --- &lt;nbari&gt; (9 minutes ago)
+</span><span>      | * 2018-03-28 b8c35f4 Update date.txt &lt;nbari&gt; (37 minutes ago)
+</span><span>      | * 2018-03-28 fae7a75 udpate &lt;nbari&gt; (49 minutes ago)
+</span><span>      | * 2018-03-28 7ff5384 Update date.txt &lt;nbari&gt; (77 minutes ago)
+</span><span>      |/
+</span></code></pre>
+<p>Create an alias <code>gl</code> with this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>git log --decorate --graph --oneline --all --date=short --pretty=format:&#39;%C(bold blue)%ad%Creset %C(yellow)%h%Creset%C(auto)%d%Creset %s %C(dim magenta)&lt;%an    &gt;%Creset %C(dim green)(%ar)%Creset&#39;&quot;
+</span></code></pre>
+<p>To squash the latest commits:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git rebase -i HEAD~6
+</span></code></pre>
+<p>This will open your editor probably with something like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pick 447dae2 my changes for foo bar
+</span><span>s 452b764 1
+</span><span>s 9aaf8b3 2
+</span><span>s 15a6af0 3
+</span><span>s f31a830 4
+</span><span>s dd34521 5
+</span><span>
+</span><span># Rebase 5302aa0..dd34521 onto 5302aa0 (6 commands)
+</span><span>#
+</span><span># Commands:
+</span><span># p, pick = use commit
+</span><span># r, reword = use commit, but edit the commit message
+</span><span># e, edit = use commit, but stop for amending
+</span><span># s, squash = use commit, but meld into previous commit
+</span><span># f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
+</span><span># x, exec = run command (the rest of the line) using shell
+</span><span># d, drop = remove commit
+</span></code></pre>
+<p>Once you are done if you would like to merge (fast forward) you could rebase
+your <code>my-changes</code> branch with <code>master</code>, so beeing in <code>my-changes</code> branch, do:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git rebase master
+</span></code></pre>
+<p>If you have conflics fix them  <code>git rebase --continue</code></p>
+<p>Then to merge your changes on master:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git checkout master
+</span></code></pre>
+<p>And finally:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git merge my-changes
+</span></code></pre>
+<h2 id="git-pull-rebase"><a class="zola-anchor" href="#git-pull-rebase" aria-label="Anchor link for: git-pull-rebase">🔗</a>git pull --rebase</h2>
+<p>In some cases you may not want to create a branch to keep your changes and just
+would like to have the lates changes, so if some cases this can be achived by
+doing:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git  pull --rebase
+</span></code></pre>
+<h2 id="reset-local-repository-branch-to-be-just-like-remote-repository"><a class="zola-anchor" href="#reset-local-repository-branch-to-be-just-like-remote-repository" aria-label="Anchor link for: reset-local-repository-branch-to-be-just-like-remote-repository">🔗</a>reset local repository branch to be just like remote repository</h2>
+<p>In case you want have the repositories in sync:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git fetch origin
+</span><span>$ git reset --hard origin/master
+</span></code></pre>
+<p>You can do the same for a local branch:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ git reset --hard master
+</span></code></pre>
+<p>Set fork to be the same as upstream:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>git remote add upstream https://github.com/some_user/some_repo
+</span><span>git fetch upstream
+</span><span>git checkout master
+</span><span>git reset --hard upstream/master
+</span><span>git push origin master --force
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

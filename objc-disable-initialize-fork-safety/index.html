@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;objc-disable-initialize-fork-safety&#x2F;">OBJC_DISABLE_INITIALIZE_FORK_SAFETY</a></h2>
+<div class="post-header">
+    <span class="post-date">March 22, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/python/">python</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/fork/">fork</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mac/">mac</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>In macOS High Sierra if getting this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called.
+</span><span>objc[55492]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.
+</span></code></pre>
+<p>Define:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+</span></code></pre>
+<p>This will fix temporally fix the problem and allow program to continue
+executing, more about this issue here: http://sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

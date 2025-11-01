@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+zsh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;zsh&#x2F;">zsh</a></h2>
+<div class="post-header">
+    <span class="post-date">March 23, 2019</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Edit environment variables:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vared PATH
+</span></code></pre>
+<p>Diff command output creating temporary normal files</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vimdiff =(ls /bin) =(ls /usr/bin)
+</span></code></pre>
+<p>Print path</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>print -l $path
+</span></code></pre>
+<p>Run a command detached <code>&amp;!</code> or <code>&amp;|</code> put it in background and disown the process,
+exiting the shell will leave it running:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sleep 300 &amp;!
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

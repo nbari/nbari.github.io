@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+DRAC5 Update &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;drac5-update&#x2F;">DRAC5 Update</a></h2>
+<div class="post-header">
+    <span class="post-date">December 28, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Download the firmware: http://www.dell.com/support/home/de/de/debsdt1/Drivers/DriversDetails?driverId=F3FXW</p>
+<p>In mac you can unzip the exe:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>unzip f_drac5v160_A00.exe
+</span></code></pre>
+<p>On the DRAC web interface go to "Remote Access" and upload the file <strong>firmimg.d5</strong></p>
+<p>If getting errors like:</p>
+<blockquote>
+<p>Unsigned application requesting unrestricted access to system. The following resource is signed with a weak signature algorithm MD5withRSA and is treated as unsigned.</p>
+</blockquote>
+<p>In windows file is in: <code>c:\Program Files\Java\jre7\lib\security\java.security</code></p>
+<p>On mac os, edit this file: <code>/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/security/java.security</code> and comment this lines:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># jdk.jar.disabledAlgorithms=MD2, MD5, RSA keySize &lt; 1024
+</span></code></pre>
+<p>This one is if while connecting you get an  Error when reading from SSL socket connection:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># jdk.tls.disabledAlgorithms=SSLv3, RC4, MD5withRSA, DH keySize &lt; 768, \
+</span><span># EC keySize &lt; 224
+</span></code></pre>
+<p>To load the <strong>Virtual Media</strong> you may need a 32 bit version of java
+(virtualbox/windows), and deleting the <code>java.security</code> file works</p>
+<p><img src="/img/drac-virtual-media.png" alt="drac virtual media" /></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

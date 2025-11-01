@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Get vault token &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;get-vault-token&#x2F;">Get vault token</a></h2>
+<div class="post-header">
+    <span class="post-date">August 06, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Get a <code>vault</code> token and request a new one only if expired using direnv and 1password cli:</p>
+<p>The script:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/bash
+</span><span>
+</span><span style="color:#65737e;"># Determine the full path of the current script
+</span><span style="color:#bf616a;">SCRIPT_PATH</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">realpath </span><span>&quot;$</span><span style="color:#bf616a;">0</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span>
+</span><span style="color:#65737e;"># Extract directory names for the suffix
+</span><span style="color:#bf616a;">SCRIPT_DIR</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">dirname </span><span>&quot;$</span><span style="color:#bf616a;">SCRIPT_PATH</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span style="color:#bf616a;">CURRENT_DIR</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">basename </span><span>&quot;$</span><span style="color:#bf616a;">SCRIPT_DIR</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span style="color:#bf616a;">PARENT_DIR</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">basename </span><span>&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">dirname </span><span>&quot;$</span><span style="color:#bf616a;">SCRIPT_DIR</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span style="color:#bf616a;">GRANDPARENT_DIR</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">basename </span><span>&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">dirname </span><span>&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">dirname </span><span>&quot;$</span><span style="color:#bf616a;">SCRIPT_DIR</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span>
+</span><span style="color:#65737e;"># Construct the suffix and token file path
+</span><span style="color:#bf616a;">SUFFIX</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">GRANDPARENT_DIR</span><span style="color:#a3be8c;">}-</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">PARENT_DIR</span><span style="color:#a3be8c;">}-</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">CURRENT_DIR</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span style="color:#bf616a;">TOKEN_FILE</span><span>=&quot;$</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/.vault_token-</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">SUFFIX</span><span style="color:#a3be8c;">}.json</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Function to fetch a new token from Vault
+</span><span style="color:#8fa1b3;">fetch_new_token</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">retries</span><span>=</span><span style="color:#a3be8c;">3
+</span><span>    </span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">attempt</span><span>=</span><span style="color:#a3be8c;">1
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">while </span><span>((attempt &lt;= retries)); </span><span style="color:#b48ead;">do
+</span><span>        </span><span style="color:#bf616a;">GITHUB_TOKEN</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">op</span><span style="color:#a3be8c;"> read </span><span>&quot;</span><span style="color:#a3be8c;">op://Private/Github/token</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span>        </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">vault</span><span> login</span><span style="color:#bf616a;"> -method</span><span>=github token=&quot;$</span><span style="color:#bf616a;">GITHUB_TOKEN</span><span>&quot;</span><span style="color:#bf616a;"> -format</span><span>=json | </span><span style="color:#bf616a;">tee </span><span>&quot;$</span><span style="color:#bf616a;">TOKEN_FILE</span><span>&quot; &gt;/dev/null; </span><span style="color:#b48ead;">then
+</span><span>            </span><span style="color:#b48ead;">return</span><span> 0
+</span><span>        </span><span style="color:#b48ead;">fi
+</span><span>
+</span><span>        </span><span style="color:#bf616a;">sleep</span><span> 2
+</span><span>        ((attempt++))
+</span><span>    </span><span style="color:#b48ead;">done
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Failed to fetch token after </span><span>$</span><span style="color:#bf616a;">retries</span><span style="color:#a3be8c;"> attempts. Exiting.</span><span>&quot;
+</span><span>    </span><span style="color:#96b5b4;">exit</span><span> 1
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;"># Check if the token file exists and is valid
+</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-f </span><span>&quot;$</span><span style="color:#bf616a;">TOKEN_FILE</span><span>&quot; </span><span style="color:#96b5b4;">]</span><span>; </span><span style="color:#b48ead;">then
+</span><span>    </span><span style="color:#bf616a;">LEASE_DURATION</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.auth.lease_duration</span><span>&#39; &quot;$</span><span style="color:#bf616a;">TOKEN_FILE</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span>    </span><span style="color:#bf616a;">FILE_CREATION_TIME</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">stat -c </span><span>%</span><span style="color:#bf616a;">Z </span><span>&quot;$</span><span style="color:#bf616a;">TOKEN_FILE</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span>    </span><span style="color:#bf616a;">CURRENT_TIME</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">date</span><span style="color:#a3be8c;"> +</span><span>%</span><span style="color:#bf616a;">s</span><span style="color:#a3be8c;">)
+</span><span>    </span><span style="color:#bf616a;">EXPIRATION_TIME</span><span>=$</span><span style="color:#a3be8c;">((FILE_CREATION_TIME </span><span>+</span><span style="color:#a3be8c;"> LEASE_DURATION))
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>&quot;$</span><span style="color:#bf616a;">CURRENT_TIME</span><span>&quot; </span><span style="color:#bf616a;">-ge </span><span>&quot;$</span><span style="color:#bf616a;">EXPIRATION_TIME</span><span>&quot; </span><span style="color:#96b5b4;">]</span><span>; </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#bf616a;">fetch_new_token
+</span><span>    </span><span style="color:#b48ead;">fi
+</span><span style="color:#b48ead;">else
+</span><span>    </span><span style="color:#bf616a;">fetch_new_token
+</span><span style="color:#b48ead;">fi
+</span><span>
+</span><span style="color:#65737e;"># Export the token
+</span><span style="color:#bf616a;">VAULT_TOKEN</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.auth.client_token</span><span>&#39; &quot;$</span><span style="color:#bf616a;">TOKEN_FILE</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>&quot;$</span><span style="color:#bf616a;">VAULT_TOKEN</span><span>&quot; = &quot;&quot; </span><span style="color:#96b5b4;">]</span><span>; </span><span style="color:#b48ead;">then
+</span><span>    </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Error: Failed to read VAULT_TOKEN from </span><span>$</span><span style="color:#bf616a;">TOKEN_FILE</span><span style="color:#a3be8c;">.</span><span>&quot;
+</span><span>    </span><span style="color:#96b5b4;">exit</span><span> 1
+</span><span style="color:#b48ead;">fi
+</span><span>
+</span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">export VAULT_TOKEN=</span><span style="color:#96b5b4;">\&quot;</span><span>$</span><span style="color:#bf616a;">VAULT_TOKEN</span><span style="color:#96b5b4;">\&quot;</span><span>&quot;
+</span></code></pre>
+<p>In <code>.envrc</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#b48ead;">export </span><span style="color:#bf616a;">VAULT_ADDR</span><span>=</span><span style="color:#a3be8c;">https://vault.your.host
+</span><span style="color:#96b5b4;">eval </span><span>&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">./get_token.sh</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span></code></pre>
+<p>This will create and store the token in <code>$HOME/.vault_token-&lt;path&gt;.json</code>, for
+example, if your project is in <code>/home/projects/company/vault/test</code>, file will be stored in:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>~/.vault_token-company-vault-test.json
+</span></code></pre>
+<p>That will cover your <code>TEST</code> env, for <code>PROD</code> maybe you have something like:
+<code>/home/projects/company/vault/prod</code>, file will be stored in:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>~/.vault_token-company-vault-prod.json
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

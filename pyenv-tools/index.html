@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+pyenv pipx &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;pyenv-tools&#x2F;">pyenv pipx</a></h2>
+<div class="post-header">
+    <span class="post-date">June 27, 2025</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create a <code>tools</code> virtual environment using <code>pyenv</code>, to install tools like <code>pipx</code> and other Python utilities.:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pyenv</span><span> virtualenv tools
+</span></code></pre>
+<p>if need a special Python version, use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pyenv</span><span> virtualenv 3.13.5 tools
+</span></code></pre>
+<p>Activate the tools virtual environment:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pyenv</span><span> activate tools
+</span></code></pre>
+<p>Install <code>pipx</code> in the tools virtual environment:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pip</span><span> install pipx
+</span></code></pre>
+<p>Now run the <code>pipx ensurepath</code> command to ensure that the <code>pipx</code> binary is in your PATH:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pipx</span><span> ensurepath
+</span></code></pre>
+<blockquote>
+<p>Normally the path is <code>$HOME/.local/bin</code>, and the apps will be simlinked there.</p>
+</blockquote>
+<p>Now install ansible using <code>pipx</code>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pipx</span><span> install ansible
+</span></code></pre>
+<p>Or a specicfic version of Ansible, like for example to cover this problem: <a href="https://nbari.com/pipx-ansible/">SyntaxError: future feature annotations is not defined</a>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pipx</span><span> install ansible-core==2.16.8
+</span><span style="color:#bf616a;">pipx</span><span> inject ansible-core passlib
+</span></code></pre>
+<p>You can now deactivate the tools virtual environment:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">pyenv</span><span> deactivate
+</span></code></pre>
+<p>Then for example to install ansible collections, you can use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ansible-galaxy</span><span> collection install ansible.posix
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install ansible.utils
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install community.crypto
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install community.general
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install community.hashi_vault
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install community.mysql
+</span><span style="color:#bf616a;">ansible-galaxy</span><span> collection install community.postgresql
+</span></code></pre>
+<p>To list the installed collections, you can use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ansible-galaxy</span><span> collection list
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

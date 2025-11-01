@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+self CA &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;self-ca&#x2F;">self CA</a></h2>
+<div class="post-header">
+    <span class="post-date">August 27, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ca/">ca</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tls/">tls</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/self-signed/">self-signed</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create a self signed CA (Certificate Authority)</p>
+<p>Generate private key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl genrsa -des3 -out CA.key 4096
+</span></code></pre>
+<p>To create a private key without password:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl genrsa -out CA.key 4096
+</span></code></pre>
+<p>Create a root certificate:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl req -x509 -new -nodes -key CA.key -sha256 -out CA.pem -subj &quot;/CN=example.com&quot; -days 365
+</span></code></pre>
+<p>In one single command create the private key and the certificate:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout CA.key -out CA.pem -subj &quot;/CN=myCA.tld&quot; -days 365
+</span></code></pre>
+<p>Import this cert in your system (trust it)</p>
+<h2 id="create-certificates-to-be-signed-with-your-ca"><a class="zola-anchor" href="#create-certificates-to-be-signed-with-your-ca" aria-label="Anchor link for: create-certificates-to-be-signed-with-your-ca">🔗</a>Create certificates to be signed with your CA:</h2>
+<p>Create a certificate requests <code>.csr</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mkdir example.tld
+</span><span>$ cd example.tld
+</span><span>$ openssl req -newkey rsa:4096 -sha256 -nodes -keyout example.key -out example.csr -subj &quot;/CN=example.tld&quot;
+</span></code></pre>
+<p>Sign the certificate with the <code>CA</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl x509 -days 3065 -sha256 -req -in example.csr -CA ../CA.pem -CAkey ../CA.key -set_serial 01 -out example.tld.crt
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

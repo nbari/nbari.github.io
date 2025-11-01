@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Time wait &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;time-wait&#x2F;">Time wait</a></h2>
+<div class="post-header">
+    <span class="post-date">September 05, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/time-wait/">time_wait</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/msl/">msl</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/socket/">socket</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Reduce TIME_WAIT connections</p>
+<p>How many TIME_WAITs you have hanging out (run this like root):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n
+</span></code></pre>
+<p>On Linux:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>netstat -nat | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n
+</span></code></pre>
+<p>Output will be something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># netstat -na -p tcp | awk &#39;{print $6}&#39; | sort | uniq -c | sort -n
+</span><span>   1
+</span><span>   1 Foreign
+</span><span>   1 LAST_ACK
+</span><span>   1 been
+</span><span>   3 LISTEN
+</span><span>  25 SYN_RCVD
+</span><span>1455 CLOSE_WAIT
+</span><span>17518 ESTABLISHED
+</span></code></pre>
+<p>The formula to calculate the value (net.inet.tcp.msl) to time of seconds is 2
+times of the net.inet.tcp.msl value. which means the value of net.inet.tcp.msl
+with 30000 means 60000ms (because 2x30000), thus 60 seconds. In order set
+net.inet.tcp.msl to 15 seconds, change the value of net.inet.tcp.msl to 7500.
+for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysctl net.inet.tcp.msl=7500
+</span></code></pre>
+<p>This will cause the TIME_WAIT sockets to terminate after waiting for 15 seconds,
+if no reply from the destination that this connection can be terminated.</p>
+<p>This  can be added to the <code>/etc/sysctl.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>net.inet.tcp.fast_finwait2_recycle=1 # recycle FIN/WAIT states quickly
+</span><span>net.inet.tcp.finwait2_timeout=15000  # TCP FIN_WAIT_2 timeout waiting for client FIN packet before state close (default 60000, 60 sec)
+</span><span>net.inet.tcp.msl=2500                # Maximum Segment Lifetime, time the connection spends in TIME_WAIT state (default 30000, 2*MSL = 60 sec)
+</span></code></pre>
+<blockquote>
+<p>notice the <strong>2500</strong> it will be set to 5 seconds</p>
+</blockquote>
+<p>On Linux edit <code>/etc/sysctl.conf</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Decrease TIME_WAIT seconds
+</span><span>net.ipv4.tcp_fin_timeout = 15
+</span><span>
+</span><span>net.ipv4.tcp_tw_reuse = 1
+</span></code></pre>
+<blockquote>
+<p>net.ipv4.tcp_tw_recycle has been removed from Linux 4.12. https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux</p>
+</blockquote>
+<p><img src="/img/tcp_state_diagram.png" alt="tcp state diagram" /></p>
+<p>Transmission Control Protocol (TCP) is designed to be a bidirectional, ordered,
+and reliable data transmission protocol between two end points (programs). In
+this context, the term reliable means that it will retransmit the packets if
+it gets lost in the middle. TCP guarantees the reliability by sending back
+Acknowledgment (ACK) packets back for a single or a range of packets received
+from the peer.</p>
+<p>This goes same for the control signals such as termination request/response.
+[RFC 793][1] defines the TIME-WAIT state to be as follows:</p>
+<blockquote>
+<p>TIME-WAIT - represents waiting for enough time to pass to be sure the remote
+TCP received the acknowledgment of its connection termination request.</p>
+</blockquote>
+<p>TCP is a bidirectional communication protocol, so when the connection is
+established, there is not a difference between the client and the server. Also,
+either one can call quits, and both peers needs to agree on closing to fully
+close an established TCP connection.</p>
+<p>Let's call the first one to call the quits as the active closer, and the other
+peer the passive closer. When the active closer sends FIN, the state goes to
+FIN-WAIT-1. Then it receives an ACK for the sent FIN and the state goes to
+FIN-WAIT-2. Once it receives FIN also from the passive closer, the active closer
+sends the ACK to the FIN and the state goes to TIME-WAIT. In case the passive
+closer did not received the ACK to the second FIN, it will retransmit the FIN
+packet.</p>
+<p><a href="https://tools.ietf.org/html/rfc793">RFC 793</a> sets the TIME-OUT to be twice the
+Maximum Segment Lifetime, or 2MSL. Since MSL, the maximum time a packet can
+wander around Internet, is set to 2 minutes, 2MSL is 4 minutes. Since there is
+no ACK to an ACK, the active closer can't do anything but to wait 4 minutes if
+it adheres to the TCP/IP protocol correctly, just in case the passive sender has
+not received the ACK to its FIN (theoretically).</p>
+<p>In reality, missing packets are probably rare, and very rare if it's all
+happening within the LAN or within a single machine.</p>
+<p>See also:</p>
+<ul>
+<li>https://calomel.org/freebsd_network_tuning.html</li>
+<li>http://www.linuxbrigade.com/reduce-time_wait-socket-connections/</li>
+<li>https://serverfault.com/a/329846/94862</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

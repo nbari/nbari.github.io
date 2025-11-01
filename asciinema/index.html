@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+asciinema &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;asciinema&#x2F;">asciinema</a></h2>
+<div class="post-header">
+    <span class="post-date">July 20, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/video/">video</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/asciiname/">asciiname</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/tmux/">tmux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p><a href="https://asciinema.org/">asciinema</a> [as-kee-nuh-muh] is a free and open source solution for recording
+terminal sessions and sharing them on the web.</p>
+<h2 id="install"><a class="zola-anchor" href="#install" aria-label="Anchor link for: install">🔗</a>Install</h2>
+<p>FreeBSD:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pkg install asciiname
+</span></code></pre>
+<p>OS X:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew update &amp;&amp; brew install asciinema
+</span></code></pre>
+<h2 id="recording-tmux-session"><a class="zola-anchor" href="#recording-tmux-session" aria-label="Anchor link for: recording-tmux-session">🔗</a>Recording tmux session</h2>
+<p>Setup your tmux session create windows, splits, start processes in them:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>tmux new -s name
+</span></code></pre>
+<p>Detach (prefix+d) and start recording with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>asciinema rec -c &quot;tmux attach -t name&quot; /tmp/play.json
+</span></code></pre>
+<p>When you're finished, just detach the session again and play it with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>asciinema play /tmp/play.json
+</span></code></pre>
+<h2 id="upload"><a class="zola-anchor" href="#upload" aria-label="Anchor link for: upload">🔗</a>upload</h2>
+<p>To upload the video</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> asciinema upload /tmp/play.json
+</span></code></pre>
+<p>To claim ownership:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> asciinema auth
+</span></code></pre>
+<p>Example file <a href="/json/unicorn.json">unicorn.json</a></p>
+<p>Video: <a href="https://asciinema.org/a/85f9a4xefp83wzcw2bmiby2rn"><img src="https://asciinema.org/a/85f9a4xefp83wzcw2bmiby2rn.png" alt="asciicast" /></a></p>
+<p>Example file <a href="/json/immortal.json">immortal.json</a></p>
+<p>Video: <a href="https://asciinema.org/a/eii21k6u0h8oat56a1mrfwgti"><img src="https://asciinema.org/a/eii21k6u0h8oat56a1mrfwgti.png" alt="asciicast" /></a></p>
+<p>Example file <a href="/json/runit.json">runit.json</a></p>
+<p>Video: <a href="https://asciinema.org/a/8avsk45wk62r9ruorsl49nnjj"><img src="https://asciinema.org/a/8avsk45wk62r9ruorsl49nnjj.png" alt="asciicast" /></a></p>
+<p>Example file <a href="/json/immortal-logger.json">immortal-logger.json</a></p>
+<p>Video: <a href="https://asciinema.org/a/80376"><img src="https://asciinema.org/a/80376.png" alt="asciicast" /></a></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

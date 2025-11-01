@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+grpc &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;grpc&#x2F;">grpc</a></h2>
+<div class="post-header">
+    <span class="post-date">June 23, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/grpc/">grpc</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/protobuf/">protobuf</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="what-is-grpc"><a class="zola-anchor" href="#what-is-grpc" aria-label="Anchor link for: what-is-grpc">🔗</a>What is gRPC?</h1>
+<p>A remote procedure call
+(<a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>)
+framework that by default uses
+<a href="https://developers.google.com/protocol-buffers/docs/overview">protocol buffers</a>
+as the Interface Definition Language (IDL). One of the initial benefits is
+the ability to be able to define and codify your service requirements via a
+<strong>.proto</strong> file.</p>
+<p>It uses HTTP/2 for transport but <strong>is not yet available for use within the
+browser</strong>, therefore currently mainly in use for Inter-Process Communication (IPC)
+within microservices.</p>
+<h1 id="the-workflow-to-create-a-grpc-service"><a class="zola-anchor" href="#the-workflow-to-create-a-grpc-service" aria-label="Anchor link for: the-workflow-to-create-a-grpc-service">🔗</a>The workflow to create a gRPC service</h1>
+<ol>
+<li>Create the service definition and payload structure in the <code>.proto</code> file.</li>
+<li>Generate the gRPC code from the <code>.proto</code> file.</li>
+<li>Implement the server in one of the supported languages.</li>
+<li>Create the client that invokes the service thought the Stub.</li>
+<li>Run the server and client(s).</li>
+</ol>
+<h3 id="proto"><a class="zola-anchor" href="#proto" aria-label="Anchor link for: proto">🔗</a>.proto</h3>
+<p>The first step when working with protocol buffers is to define the structure for
+the data you want to serialize in a proto file: this is an ordinary text file
+with a <strong>.proto</strong> extension. Protocol buffer data is structured as messages,
+where each message is a small logical record of information containing a series
+of name-value pairs called fields. Here’s a simple example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>message Person {
+</span><span>  string name = 1;
+</span><span>  int32 id = 2;
+</span><span>  bool has_ponycopter = 3;
+</span><span>}
+</span></code></pre>
+<p>Once you have your service defined, you can utilise a command line compiler to
+generate stubs and code in multiple programming languages. So you can generate
+a client and server with the Go programming language, and then using the same
+<strong>.proto</strong> file generate a client/server with Ruby.</p>
+<h1 id="install-grpc"><a class="zola-anchor" href="#install-grpc" aria-label="Anchor link for: install-grpc">🔗</a>Install gRPC</h1>
+<p>To install this package, you need to install Go and setup your Go workspace on
+your computer. The simplest way to install the library is to run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ go get -u google.golang.org/grpc
+</span></code></pre>
+<p>Next, install the protoc plugin for Go:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ go get -u github.com/golang/protobuf/protoc-gen-go
+</span></code></pre>
+<h1 id="hello-world-service-example"><a class="zola-anchor" href="#hello-world-service-example" aria-label="Anchor link for: hello-world-service-example">🔗</a>Hello World service example</h1>
+<p>Example of a service definition <code>helloworld.proto</code> using syntatx <a href="https://developers.google.com/protocol-buffers/docs/proto3#specifying-field-types">proto3</a></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>syntax = &quot;proto3&quot;;
+</span><span>
+</span><span>package helloworld;
+</span><span>
+</span><span>// The greeting service definition.
+</span><span>service Greeter {
+</span><span>  // Sends a greeting
+</span><span>  rpc SayHello (HelloRequest) returns (HelloReply) {}
+</span><span>}
+</span><span>
+</span><span>// The request message containing the user&#39;s name.
+</span><span>message HelloRequest {
+</span><span>  string name = 1;
+</span><span>}
+</span><span>
+</span><span>// The response message containing the greetings
+</span><span>message HelloReply {
+</span><span>  string message = 1;
+</span><span>}
+</span></code></pre>
+<blockquote>
+<p>The package value is used (conveniently) as the name of the Go package, in this case "helloworld"</p>
+</blockquote>
+<p>The service <code>Greeter</code> exposes a method named <code>SayHello</code> if you would like more
+methods you could do something like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// The greeting service definition.
+</span><span>service Greeter {
+</span><span>  rpc SayHello (HelloRequest) returns (HelloReply) {}
+</span><span>  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+</span><span>}
+</span></code></pre>
+<p>Now service <code>Greeter</code> exposes method <code>SayHello</code> and <code>SayHelloAgain</code>.</p>
+<h2 id="syntax-explanation"><a class="zola-anchor" href="#syntax-explanation" aria-label="Anchor link for: syntax-explanation">🔗</a>Syntax Explanation</h2>
+<p>Inside the <code>service</code> statement <code>Greeter</code> we state that we want a RPC service
+that as a <code>SayHello</code> method and that method accepts something of type
+<code>HelloRequest</code> and returns something of type <code>HelloReply</code>. The <code>message</code>
+statement defines what <code>HelloRequest</code> and <code>HelloReply</code> look like.</p>
+<p>The numbers assigned to the property (e.g. both <code>name = 1</code> and <code>message = 1</code>)
+are known as 'tags'. Effectively, tags with a number between 1 and 15 take one
+byte to encode where as tags between 16 and 2047 take two bytes to encode.
+The idea is that you should reserve the tags 1 through 15 for very frequently
+occurring message elements.</p>
+<h1 id="create-the-code-protoc"><a class="zola-anchor" href="#create-the-code-protoc" aria-label="Anchor link for: create-the-code-protoc">🔗</a>Create the code protoc</h1>
+<p>When using go you could keep this per repository in this case the package name
+is <code>helloworld</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cd $GOPATH/src/github.com/&lt;your thing&gt;/helloworld
+</span></code></pre>
+<p>And then:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>protoc -I helloworld/ helloworld/helloworld.proto --go_out=plugins=grpc:helloworld
+</span></code></pre>
+<p>This will create go code in a file named
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/helloworld/helloworld.pb.go">helloworld.pb.go</a>
+and can be used to create the
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/server/main.go">server</a>
+and
+<a href="https://github.com/nbari/go-sandbox/blob/master/grpc/client/main.go">client</a></p>
+<h3 id="when-should-you-use-rest"><a class="zola-anchor" href="#when-should-you-use-rest" aria-label="Anchor link for: when-should-you-use-rest">🔗</a>When should you use REST?</h3>
+<p>If interoperability is your primary concern, nothing beats REST. There are no
+special technologies needed, and you can leverage all of the widely deployed
+infrastructure and tools that support the modern Web.</p>
+<h3 id="when-should-you-use-rpc"><a class="zola-anchor" href="#when-should-you-use-rpc" aria-label="Anchor link for: when-should-you-use-rpc">🔗</a>When should you use RPC?</h3>
+<p>If performance is your primary concern, RPC can provide an edge by leveraging
+serialized data formats and alternative transport mechanisms.</p>
+<p>{{<youtube XaMr--wAuSI>}}</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

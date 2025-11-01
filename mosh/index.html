@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+mosh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;mosh&#x2F;">mosh</a></h2>
+<div class="post-header">
+    <span class="post-date">August 10, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mosh/">mosh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="mosh-mobile-shell"><a class="zola-anchor" href="#mosh-mobile-shell" aria-label="Anchor link for: mosh-mobile-shell">🔗</a>mosh (mobile shell)</h1>
+<blockquote>
+<p>Remote terminal application that allows roaming, supports intermittent
+connectivity, and provides intelligent local echo and line editing of user
+keystrokes. Mosh is a replacement for SSH. It's more robust and responsive,
+especially over Wi-Fi, cellular, and long-distance links.</p>
+</blockquote>
+<h2 id="how-to-install"><a class="zola-anchor" href="#how-to-install" aria-label="Anchor link for: how-to-install">🔗</a>How to install</h2>
+<h3 id="server"><a class="zola-anchor" href="#server" aria-label="Anchor link for: server">🔗</a>server</h3>
+<p>FreeBSD:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pkg install net/mosh
+</span></code></pre>
+<p>Edit <code>/etc/login.conf</code> and add this to the default:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    :charset=UTF-8:\
+</span><span>    :lang=en_US.UTF-8:\
+</span><span>    :setenv=LC_COLLATE=C:
+</span></code></pre>
+<p>After editing <code>/etc/locing.conf</code> run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cap_mkdb /etc/login.conf
+</span></code></pre>
+<h3 id="client"><a class="zola-anchor" href="#client" aria-label="Anchor link for: client">🔗</a>Client</h3>
+<p>In a mac OS X;</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ brew install mosh
+</span></code></pre>
+<h2 id="how-to-use"><a class="zola-anchor" href="#how-to-use" aria-label="Anchor link for: how-to-use">🔗</a>How to use</h2>
+<p>Basically just type <code>mosh</code> instead of <code>ssh</code>, Mosh will log the user in via
+SSH, then start a connection on a UDP port between 60000 and 61000., Mosh will
+log the user in via SSH, then start a connection on a UDP port between 60000 and
+61000.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh your.server.tld
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh user@your.server.tld
+</span></code></pre>
+<p>Selecting SSH port:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh --ssh=&quot;ssh -p 2222&quot; your.server.tld
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh user@your.server.tld --ssh=&quot;ssh -p 2222&quot;
+</span></code></pre>
+<p>Specify ssh key:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh --ssh=&quot;ssh -i ./identity&quot; your.server.tld
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh --ssh=&quot;ssh -i ~/.ssh/id_rsa_devops -p 2222&quot; 192.168.1.4
+</span></code></pre>
+<p>With tmux:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ mosh host --ssh=&quot;ssh -p 3333&quot; -- sh -c &quot;tmux -2 attach -t $USER -d || tmux -2 new -s $USER&quot;
+</span></code></pre>
+<p>More info: https://mosh.mit.edu/</p>
+<p><a href="http://www.youtube.com/watch?v=XsIxNYl0oyU"><img src="http://img.youtube.com/vi/XsIxNYl0oyU/0.jpg" alt="mosh" /></a></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+brew macos &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;brew&#x2F;">brew macos</a></h2>
+<div class="post-header">
+    <span class="post-date">July 30, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/git/">git</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/mac/">mac</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/zsh/">zsh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vim/">vim</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p><a href="http://brew.sh">Homebrew</a> installs the stuff you need that Apple didn’t.</p>
+<p>For example to update python and avoid many SSL warnings:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install python
+</span></code></pre>
+<p>To use an updated version of git on mac use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install git --whitout-completion
+</span></code></pre>
+<p>To update vim:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install vim --with-override-system-vi
+</span></code></pre>
+<p>Updating zsh:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># check the zsh info
+</span><span>brew info zsh
+</span><span>
+</span><span># install zsh
+</span><span>brew install zsh
+</span><span>
+</span><span># add shell path
+</span><span>sudo vim /etc/shells
+</span><span>
+</span><span># add the following line into the very end of the file(/etc/shells)
+</span><span>/usr/local/bin/zsh
+</span><span>
+</span><span># change default shell
+</span><span>chsh -s /usr/local/bin/zsh
+</span></code></pre>
+<p>Install some extra packages in oneline:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install tree colordiff ack autossh ipcalc iperf par pstree git-flow-avh
+</span></code></pre>
+<p>To list all installed packges:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew list
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

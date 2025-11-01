@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+GIT_SSH_COMMAND &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;git-ssh-command&#x2F;">GIT_SSH_COMMAND</a></h2>
+<div class="post-header">
+    <span class="post-date">April 21, 2023</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/github/">github</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/keys/">keys</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If you want to use multiple GitHub accounts, and have your ssh keys stored
+in <a href="https://developer.1password.com/docs/ssh/agent/advanced/#match-key-with-host">1Password</a>, the environment variable <code>GIT_SSH_COMMAND</code> can be used as an alternative to modify your
+<code>~/.ssh/config</code> file</p>
+<p>For example if you need to use <code>key1</code> for <code>project1</code> define it like this:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#b48ead;">export </span><span style="color:#bf616a;">GIT_SSH_COMMAND</span><span>=&quot;</span><span style="color:#a3be8c;">ssh -i ~/.ssh/key1.pub -F none</span><span>&quot;
+</span></code></pre>
+<blockquote>
+<p>you can add it to your <code>.envrc</code> and make it global for all projects within a directory.</p>
+</blockquote>
+<p>The option <code>-F none</code> or <code>-F /dev/null</code> makes that no configuration file will be read.</p>
+<p>If you then do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ssh -T</span><span> git@github.com
+</span></code></pre>
+<p>It will use the key from user <code>key1</code> without the need to modify to changte the git URL.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

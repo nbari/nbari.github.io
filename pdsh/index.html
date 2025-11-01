@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+pdsh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;pdsh&#x2F;">pdsh</a></h2>
+<div class="post-header">
+    <span class="post-date">June 03, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/parallel/">parallel</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>pdsh - issue commands to groups of hosts in parallel</p>
+<p>Install:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>brew install pdsh
+</span></code></pre>
+<p>Usage:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pdsh -R ssh -w ^servers.txt &quot;&lt;command&gt;&quot;
+</span></code></pre>
+<p>In where <code>servers.txt</code> is something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>10.8.4.2
+</span><span>10.8.4.3
+</span><span>10.8.4.4
+</span></code></pre>
+<p>one-liner:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pdsh -b -w &quot;10.8.4.2, 10.8.4.3, 10.8.4.4&quot; &quot;&lt;command&gt;&quot;
+</span></code></pre>
+<blockquote>
+<p>-b Disable ctrl-C status feature so that a single ctrl-C kills parallel job. (Batch Mode)</p>
+</blockquote>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

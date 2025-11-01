@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Ansible Patterns &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ansible-patterns&#x2F;">Ansible Patterns</a></h2>
+<div class="post-header">
+    <span class="post-date">April 19, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ansible/">ansible</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hosts/">hosts</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To match hosts only starting with certain string a <code>regex</code> could be used for example to match hosts starting with the word <code>fabrik</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>---
+</span><span>- hosts: ~fabrik.*
+</span><span>  become: True
+</span><span>  tasks:
+</span><span>    - name: uname
+</span><span>      shell: uname -a
+</span><span>      register: uname
+</span><span>
+</span><span>    - debug:
+</span><span>        var: uname.stdout
+</span></code></pre>
+<blockquote>
+<p>notice the <code>~</code></p>
+</blockquote>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

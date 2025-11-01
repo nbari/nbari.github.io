@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+FreeBSD dedibox setup &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;freebsd-zfs-dedibox&#x2F;">FreeBSD dedibox setup</a></h2>
+<div class="post-header">
+    <span class="post-date">August 27, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/zfs/">zfs</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/dedibox/">dedibox</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Boot server in rescue mode and select FreeBSD rescue image, after login fetch sources:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># cd /tmp
+</span><span># fetch http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/13.1-RELEASE/base.txz
+</span><span># fetch http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/13.1-RELEASE/kernel.txz
+</span></code></pre>
+<p>Destroy existing partitions, for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gpart destroy -F ada0
+</span></code></pre>
+<p>Install using something like this:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span style="color:#bf616a;">PASSWORD</span><span>=</span><span style="color:#a3be8c;">fabrik
+</span><span style="color:#bf616a;">USER</span><span>=</span><span style="color:#a3be8c;">devops
+</span><span style="color:#bf616a;">ZPOOL</span><span>=</span><span style="color:#a3be8c;">zroot
+</span><span style="color:#bf616a;">mddev</span><span>=</span><span style="color:#a3be8c;">ada0
+</span><span>
+</span><span style="color:#bf616a;">gpart</span><span> create</span><span style="color:#bf616a;"> -s</span><span> gpt ${</span><span style="color:#bf616a;">mddev</span><span>}
+</span><span style="color:#bf616a;">gpart</span><span> add</span><span style="color:#bf616a;"> -a</span><span> 4k</span><span style="color:#bf616a;"> -s</span><span> 512k</span><span style="color:#bf616a;"> -t</span><span> freebsd-boot ${</span><span style="color:#bf616a;">mddev</span><span>}
+</span><span style="color:#bf616a;">gpart</span><span> bootcode</span><span style="color:#bf616a;"> -b</span><span> /boot/pmbr</span><span style="color:#bf616a;"> -p</span><span> /boot/gptzfsboot</span><span style="color:#bf616a;"> -i</span><span> 1 ${</span><span style="color:#bf616a;">mddev</span><span>}
+</span><span style="color:#bf616a;">gpart</span><span> add</span><span style="color:#bf616a;"> -a</span><span> 1m</span><span style="color:#bf616a;"> -t</span><span> freebsd-zfs</span><span style="color:#bf616a;"> -l</span><span> disk0 ${</span><span style="color:#bf616a;">mddev</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">sysctl</span><span> vfs.zfs.min_auto_ashift=12
+</span><span>
+</span><span style="color:#96b5b4;">set </span><span style="color:#bf616a;">-v
+</span><span style="color:#bf616a;">zpool</span><span> create</span><span style="color:#bf616a;"> -o</span><span> cachefile=/tmp/${</span><span style="color:#bf616a;">ZPOOL</span><span>}.cache</span><span style="color:#bf616a;"> -o</span><span> altroot=/mnt</span><span style="color:#bf616a;"> -o</span><span> autoexpand=on</span><span style="color:#bf616a;"> -O</span><span> compress=lz4</span><span style="color:#bf616a;"> -O</span><span> atime=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>} /dev/gpt/disk0
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -V</span><span> 1G</span><span style="color:#bf616a;"> -o</span><span> org.freebsd:swap=on</span><span style="color:#bf616a;"> -o</span><span> checksum=off</span><span style="color:#bf616a;"> -o</span><span> compression=off</span><span style="color:#bf616a;"> -o</span><span> dedup=off</span><span style="color:#bf616a;"> -o</span><span> sync=disabled</span><span style="color:#bf616a;"> -o</span><span> primarycache=none ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/swap
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=none ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/ROOT
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=/ ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/ROOT/default
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=/tmp</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/tmp
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=/usr</span><span style="color:#bf616a;"> -o</span><span> canmount=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/doc
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/home
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/obj
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/local
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/ports
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/ports/distfiles
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/ports/packages
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/usr/src
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=/var</span><span style="color:#bf616a;"> -o</span><span> canmount=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/audit
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/crash
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/db
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/db/pkg
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/log
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> readonly=on ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/empty
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> atime=on</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=gzip ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/mail
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/spool
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=gzip ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/spool/clientmqueue
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> setuid=off</span><span style="color:#bf616a;"> -o</span><span> compression=lz4 ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/tmp
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/var/ports
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> mountpoint=/jails ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/jails
+</span><span style="color:#bf616a;">zfs</span><span> create ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/jails/base
+</span><span style="color:#bf616a;">zfs</span><span> create</span><span style="color:#bf616a;"> -o</span><span> exec=off</span><span style="color:#bf616a;"> -o</span><span> setuid=off ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/jails/base/tmp
+</span><span style="color:#bf616a;">zfs</span><span> set quota=10G ${</span><span style="color:#bf616a;">ZPOOL</span><span>}/jails/base
+</span><span style="color:#bf616a;">zpool</span><span> set bootfs=${</span><span style="color:#bf616a;">ZPOOL</span><span>}/ROOT/default ${</span><span style="color:#bf616a;">ZPOOL</span><span>}
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">/usr/bin/tar -C</span><span> /mnt</span><span style="color:#bf616a;"> -x -f</span><span> /tmp/base.txz
+</span><span style="color:#bf616a;">/usr/bin/tar -C</span><span> /mnt</span><span style="color:#bf616a;"> -x -f</span><span> /tmp/kernel.txz
+</span><span>
+</span><span style="color:#bf616a;">chroot</span><span> /mnt pw useradd ${</span><span style="color:#bf616a;">USER</span><span>}</span><span style="color:#bf616a;"> -m -G</span><span> wheel</span><span style="color:#bf616a;"> -s</span><span> /bin/csh</span><span style="color:#bf616a;"> -h</span><span> 0 &lt;&lt;</span><span style="color:#b48ead;">EOP
+</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">PASSWORD</span><span style="color:#a3be8c;">}
+</span><span style="color:#b48ead;">EOP
+</span><span>
+</span><span style="color:#bf616a;">touch</span><span> /mnt/etc/fstab
+</span><span>
+</span><span style="color:#65737e;"># /boot/loader.conf
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt; /mnt/boot/loader.conf
+</span><span style="color:#a3be8c;">autoboot_delay=&quot;-1&quot;
+</span><span style="color:#a3be8c;">beastie_disable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">boot_multicons=&quot;YES&quot;
+</span><span style="color:#a3be8c;">console=&quot;comconsole,vidconsole&quot;
+</span><span style="color:#a3be8c;">hw.broken_txfifo=&quot;1&quot;
+</span><span style="color:#a3be8c;">hw.memtest.test=&quot;0&quot;
+</span><span style="color:#a3be8c;">hw.vtnet.mq_disable=&quot;1&quot;
+</span><span style="color:#a3be8c;">kern.geom.label.disk_ident.enable=&quot;0&quot;
+</span><span style="color:#a3be8c;">kern.geom.label.gptid.enable=&quot;0&quot;
+</span><span style="color:#a3be8c;">zfs_load=&quot;YES&quot;
+</span><span style="color:#b48ead;">EOF
+</span><span>
+</span><span style="color:#65737e;"># /etc/rc.conf
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt; </span><span style="color:#b48ead;">EOF </span><span>&gt; /mnt/etc/rc.conf
+</span><span style="color:#a3be8c;">zfs_enable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">gateway_enable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">hostname=&quot;fabrik&quot; # change to your desired hostname
+</span><span style="color:#a3be8c;">ifconfig_DEFAULT=&quot;SYNCDHCP&quot;
+</span><span style="color:#a3be8c;">clear_tmp_enable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">dumpdev=&quot;NO&quot;
+</span><span style="color:#a3be8c;">ntpd_enable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">ntpd_sync_on_start=&quot;YES&quot;
+</span><span style="color:#a3be8c;">sendmail_enable=&quot;NONE&quot;
+</span><span style="color:#a3be8c;">sshd_enable=&quot;YES&quot;
+</span><span style="color:#a3be8c;">syslogd_flags=&quot;-ssC&quot;
+</span><span style="color:#b48ead;">EOF
+</span><span>
+</span><span style="color:#bf616a;">cp</span><span> /tmp/${</span><span style="color:#bf616a;">ZPOOL</span><span>}.cache /mnt/boot/zfs/zpool.cache
+</span><span style="color:#bf616a;">zpool</span><span> export ${</span><span style="color:#bf616a;">ZPOOL</span><span>}
+</span></code></pre>
+<p>Reboot and in the https://panel.op-net.com/ set server back to boot in normal mode</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

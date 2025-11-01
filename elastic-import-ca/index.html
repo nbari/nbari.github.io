@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+elastic enrollment token &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;elastic-import-ca&#x2F;">elastic enrollment token</a></h2>
+<div class="post-header">
+    <span class="post-date">January 07, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>When trying to create a node token with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">./bin/elasticsearch-create-enrollment-token -s</span><span> node
+</span></code></pre>
+<p>If get the error:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ERROR: Unable to create an enrollment token. Elasticsearch node HTTP layer SSL configuration is not configured with a keystore, with exit code 73
+</span></code></pre>
+<p>After creating the ca and http:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>./bin/elasticsearch-certutil ca
+</span><span>
+</span><span> &amp;
+</span><span>
+</span><span>./bin/elasticsearch-certutil http
+</span></code></pre>
+<p>Do this:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">cd</span><span> /usr/share/elasticsearch/jdk/bin
+</span><span style="color:#bf616a;">./keytool -importkeystore -destkeystore</span><span> /etc/elasticsearch/certs/http.p12</span><span style="color:#bf616a;"> -srckeystore</span><span> /usr/share/elasticsearch/elastic-stack-ca.p12</span><span style="color:#bf616a;"> -srcstoretype</span><span> PKCS12
+</span></code></pre>
+<blockquote>
+<p><code>keytool</code>  overwrite and try again, should fix the problem</p>
+</blockquote>
+<p>Then try adding nodes with:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">./elasticsearch-reconfigure-node --enrollment-token </span><span>&lt;token&gt;
+</span></code></pre>
+<p>If you already installed <code>elastic</code>, you need to <code>apt --purge remove elasticsearch</code> then
+install again <code>apt install elasticsearch</code> (remove /var/lib/elasticsearch) and
+before starting enroll the new n</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

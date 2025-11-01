@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+yubikey &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;yubikey&#x2F;">yubikey</a></h2>
+<div class="post-header">
+    <span class="post-date">May 28, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/gpg/">gpg</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/yubico/">Yubico</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/yubikey/">yubikey</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Install ykman:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">brew</span><span> install ykman
+</span></code></pre>
+<p>Configure your 2 slot for static password:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ykman</span><span> otp static 2</span><span style="color:#bf616a;"> --keyboard-layout</span><span> US
+</span></code></pre>
+<blockquote>
+<p>The <code>--keyboard-layout US</code> is to prevent getting <code>Error: Unsupported character: xxx</code></p>
+</blockquote>
+<h2 id="reset-pin"><a class="zola-anchor" href="#reset-pin" aria-label="Anchor link for: reset-pin">🔗</a>reset pin</h2>
+<p>To reset all data:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> ykman piv reset
+</span><span style="color:#bf616a;">WARNING!</span><span> This will delete all stored PIV data and restore factory settings. Proceed? </span><span style="color:#b48ead;">[</span><span>y/N</span><span style="color:#b48ead;">]</span><span>: y
+</span><span style="color:#bf616a;">Resetting</span><span> PIV data...
+</span><span style="color:#bf616a;">Success!</span><span> All PIV data have been cleared from the YubiKey.
+</span><span style="color:#bf616a;">Your</span><span> YubiKey now has the default PIN, PUK and Management Key:
+</span><span>        </span><span style="color:#bf616a;">PIN:</span><span>    123456
+</span><span>        </span><span style="color:#bf616a;">PUK:</span><span>    12345678
+</span><span>        </span><span style="color:#bf616a;">Management</span><span> Key: 010203040506070801020304050607080102030405060708
+</span></code></pre>
+<p>Change the PIN from 123456 to 654321:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ykman</span><span> piv access change-pin</span><span style="color:#bf616a;"> --pin</span><span> 123456</span><span style="color:#bf616a;"> --new-pin</span><span> 654321
+</span></code></pre>
+<p>Change the PUK</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ykman</span><span> piv change-puk
+</span></code></pre>
+<p>Generate a random management key and store it on the device, protected with the PIN.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ykman</span><span> piv change-management-key</span><span style="color:#bf616a;"> --generate --protect
+</span></code></pre>
+<h2 id="gpg"><a class="zola-anchor" href="#gpg" aria-label="Anchor link for: gpg">🔗</a>GPG</h2>
+<p>To reset all GPG data:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ykman</span><span> openpgp reset
+</span></code></pre>
+<p>Set the Admin and pin using:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> gpg</span><span style="color:#bf616a;"> --edit-card
+</span><span style="color:#bf616a;">gpg/card</span><span>&gt; admin
+</span><span style="color:#bf616a;">Admin</span><span> commands are allowed
+</span><span>
+</span><span style="color:#bf616a;">gpg/card</span><span>&gt;passwd
+</span></code></pre>
+<p>To use the key in another system just import the public key and trust it:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL</span><span> https://github.com/nbari.gpg | </span><span style="color:#bf616a;">gpg --import
+</span><span style="color:#bf616a;">$</span><span> gpg</span><span style="color:#bf616a;"> --edit-key</span><span> nbari@tequila.io
+</span><span style="color:#bf616a;">trust
+</span><span style="color:#bf616a;">5
+</span><span style="color:#bf616a;">save
+</span></code></pre>
+<p>Restart the gpg-agent:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gpgconf --kill</span><span> gpg-agent
+</span><span style="color:#bf616a;">gpgconf --kill</span><span> scdaemon
+</span></code></pre>
+<blockquote>
+<p>Remove password from gpg key to import it to yubikey.</p>
+</blockquote>
+<p>Check: https://developers.yubico.com/PGP/Importing_keys.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

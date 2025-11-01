@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+postgres &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;postgres&#x2F;">postgres</a></h2>
+<div class="post-header">
+    <span class="post-date">November 30, 2016</span>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="read-only-user"><a class="zola-anchor" href="#read-only-user" aria-label="Anchor link for: read-only-user">🔗</a>Read only user</h1>
+<p>Create user first:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>CREATE USER theuser WITH PASSWORD &#39;secret&#39;;
+</span><span>GRANT SELECT ON ALL TABLES IN SCHEMA public TO theuser;
+</span><span>GRANT CONNECT ON DATABASE mydb TO dbuser;
+</span></code></pre>
+<p>Test:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>psql -h host -U theuser mydb
+</span></code></pre>
+<p>To see the list of tables:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mydb=&gt;\d+
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

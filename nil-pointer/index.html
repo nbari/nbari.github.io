@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+nil pointer &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;nil-pointer&#x2F;">nil pointer</a></h2>
+<div class="post-header">
+    <span class="post-date">March 17, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/go/">go</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To check that <code>x</code> implements <code>y</code>, example:</p>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span><span>
+</span><span style="color:#b48ead;">import </span><span>(
+</span><span>    &quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">io</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">os</span><span>&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">_ io</span><span>.</span><span style="color:#b48ead;">ReadCloser </span><span>= (*</span><span style="color:#bf616a;">os</span><span>.</span><span style="color:#bf616a;">File</span><span>)(</span><span style="color:#d08770;">nil</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">Hello, playground</span><span>&quot;)
+</span><span>}
+</span></code></pre>
+<p>https://play.golang.org/p/hoi5_GQEpD</p>
+<p>To check that <code>os.File</code> is an <code>io.ReadCloser</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>var _ io.ReadCloser = (*os.File)(nil)
+</span></code></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span><span>
+</span><span style="color:#b48ead;">import </span><span>(
+</span><span>	&quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span><span>	&quot;</span><span style="color:#a3be8c;">io</span><span>&quot;
+</span><span>	&quot;</span><span style="color:#a3be8c;">os</span><span>&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">_ io</span><span>.</span><span style="color:#b48ead;">ReadCloser </span><span>= (*</span><span style="color:#bf616a;">os</span><span>.</span><span style="color:#bf616a;">Process</span><span>)(</span><span style="color:#d08770;">nil</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">Hello, playground</span><span>&quot;)
+</span><span>}
+</span></code></pre>
+<p>https://play.golang.org/p/7uHmjn3ggT</p>
+<p>The error in this case would be:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>main.go:9: cannot use (*os.Process)(nil) (type *os.Process) as type io.ReadCloser in assignment:
+</span><span>*os.Process does not implement io.ReadCloser (missing Close method)
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

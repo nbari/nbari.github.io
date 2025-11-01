@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+UseKeychain &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;usekeychain&#x2F;">UseKeychain</a></h2>
+<div class="post-header">
+    <span class="post-date">February 13, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/keychain/">keychain</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To save SSH keys in macOS Sierra keychain add this to <code>~/.ssh/config</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Host *
+</span><span>    AddKeysToAgent yes
+</span><span>    UseKeychain yes
+</span></code></pre>
+<h2 id="keychain-changes"><a class="zola-anchor" href="#keychain-changes" aria-label="Anchor link for: keychain-changes">🔗</a>Keychain changes</h2>
+<p>Prior to macOS Sierra, ssh would present a dialog asking for your passphrase and
+would offer the option to store it into the keychain. This UI was deprecated
+some time ago and has been removed.</p>
+<p>Instead, a new UseKeychain option was introduced in macOS Sierra allowing users
+to specify whether they would like for the passphrase to be stored in the
+keychain. This option was enabled by default on macOS Sierra, which caused all
+passphrases to be stored in the keychain.</p>
+<p>This was not the intended default behavior, so this has been changed in macOS
+10.12.2. To store passphrases in the keychain, set this option in your ssh
+configuration file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>UseKeychain yes
+</span></code></pre>
+<p>https://developer.apple.com/library/content/technotes/tn2449/_index.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

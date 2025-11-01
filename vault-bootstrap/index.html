@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vault bootstrap &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vault-bootstrap&#x2F;">vault bootstrap</a></h2>
+<div class="post-header">
+    <span class="post-date">April 20, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vault/">vault</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/policy/">policy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/github/">github</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create an admin policy <code>admin-policy.hcl</code>:</p>
+<pre data-lang="hcl" style="background-color:#2b303b;color:#c0c5ce;" class="language-hcl "><code class="language-hcl" data-lang="hcl"><span># Allow managing leases
+</span><span>path &quot;sys/leases/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># Read system health check
+</span><span>path &quot;sys/health&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;read&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># Create and manage ACL policies broadly across Vault
+</span><span>
+</span><span># List existing policies
+</span><span>path &quot;sys/policies/acl&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;list&quot;]
+</span><span>}
+</span><span>
+</span><span># Create and manage ACL policies
+</span><span>path &quot;sys/policies/acl/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># Manage auth methods broadly across Vault
+</span><span>path &quot;auth/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># Create, update, and delete auth methods
+</span><span>path &quot;sys/auth/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># List auth methods
+</span><span>path &quot;sys/auth&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;read&quot;]
+</span><span>}
+</span><span>
+</span><span># Enable and manage the key/value secrets engine at  path
+</span><span>
+</span><span># List, create, update, and delete key/value secrets
+</span><span>path &quot;secret/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># Manage secrets engines
+</span><span>path &quot;sys/mounts/*&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;sudo&quot;]
+</span><span>}
+</span><span>
+</span><span># List existing secrets engines.
+</span><span>path &quot;sys/mounts&quot;
+</span><span>{
+</span><span>  capabilities = [&quot;read&quot;]
+</span><span>}
+</span></code></pre>
+<p>Load the policy:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault policy write admin admin-policy.hcl
+</span></code></pre>
+<p>Enable GitHub:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault auth enable github
+</span></code></pre>
+<p>Allow only your organization:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write auth/github/config organization=myorg
+</span></code></pre>
+<p>Add the <code>admin-policy</code> to a team in your GitHub org named <code>devops</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write auth/github/map/teams/devops value=admin
+</span></code></pre>
+<p>Change the default lease time:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault auth tune</span><span style="color:#bf616a;"> -default-lease-ttl</span><span>=72h github/
+</span></code></pre>
+<p>Login using your GitHub Token</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/sh
+</span><span style="color:#96b5b4;">unset</span><span> ADMIN_TOKEN
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">ADMIN_TOKEN</span><span>=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">vault</span><span style="color:#a3be8c;"> login</span><span style="color:#bf616a;"> -method</span><span>=</span><span style="color:#a3be8c;">github token=ghp_ABC</span><span style="color:#bf616a;"> -format</span><span>=</span><span style="color:#a3be8c;">json </span><span>|  </span><span style="color:#bf616a;">jq -r </span><span>&quot;</span><span style="color:#a3be8c;">.auth.client_token</span><span>&quot;</span><span style="color:#a3be8c;">)
+</span></code></pre>
+<p>Lookup:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault token lookup
+</span></code></pre>
+<h2 id="adding-auth-aws"><a class="zola-anchor" href="#adding-auth-aws" aria-label="Anchor link for: adding-auth-aws">🔗</a>Adding auth AWS</h2>
+<p>Use path <code>my-project</code>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault auth enable</span><span style="color:#bf616a;"> -path</span><span>=my-project aws
+</span></code></pre>
+<p>Add AWS secret key:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault write auth/my-project/config/client secret_key=SECRET_KEY access_key=ACCESS_KEY
+</span></code></pre>
+<p>Create a policy for only read and and only allow a VPC:</p>
+<pre data-lang="hcl" style="background-color:#2b303b;color:#c0c5ce;" class="language-hcl "><code class="language-hcl" data-lang="hcl"><span>vault policy write &quot;my-project-ro&quot; -&lt;&lt;EOF
+</span><span>path &quot;secret/my-project/*&quot; {
+</span><span>  capabilities = [&quot;read&quot;]
+</span><span>}
+</span><span>EOF
+</span><span>
+</span><span>vault write \
+</span><span>  auth/my-project/role/my-project \
+</span><span>  auth_type=ec2 \
+</span><span>  policies=my-project-ro \
+</span><span>  max_ttl=5m \
+</span><span>  bound_vpc_id=vpc-XXX
+</span></code></pre>
+<p>Create a <code>kv</code> secrets version 1:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> vault secrets enable</span><span style="color:#bf616a;"> -path</span><span>=secret/my-project</span><span style="color:#bf616a;"> -version</span><span>=1 kv
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

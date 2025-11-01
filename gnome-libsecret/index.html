@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+gnome-libsecret &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;gnome-libsecret&#x2F;">gnome-libsecret</a></h2>
+<div class="post-header">
+    <span class="post-date">June 16, 2024</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/secret/">secret</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hyperland/">hyperland</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If running Gnome, Hyperland and want to use
+<a href="https://www.getmailspring.com/">Mailspring</a>, modify:
+<code>/usr/share/applications/Mailspring.desktop</code> to use <code>gnome-libsecret</code> change line:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Exec=mailspring %U
+</span></code></pre>
+<p>to:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Exec=mailspring --password-store=&quot;gnome-libsecret&quot; %U
+</span></code></pre>
+<p>File may looks something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[Desktop Entry]
+</span><span>Name=Mailspring
+</span><span>Comment=The best email app for people and teams at work
+</span><span>GenericName=Mail Client
+</span><span>Exec=mailspring --password-store=&quot;gnome-libsecret&quot; %U
+</span><span>Icon=mailspring
+</span><span>Type=Application
+</span><span>...
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

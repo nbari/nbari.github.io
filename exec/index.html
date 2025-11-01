@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+exec &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;exec&#x2F;">exec</a></h2>
+<div class="post-header">
+    <span class="post-date">May 14, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/exec/">exec</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/shell/">shell</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/syscall/">syscall</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p><strong>exec</strong> is a functionality of an operating system that runs an executable
+file in the context of an already existing process, replacing the previous
+executable. https://en.wikipedia.org/wiki/Exec_(system_call)</p>
+<p><code>exec</code> replaces the current program in the current process, without <code>fork</code>ing a
+new process.</p>
+<p>Examples to use:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>exec csh
+</span></code></pre>
+<blockquote>
+<p>This will just replace the existing shell with <code>csh</code> and only need to type
+<code>exit</code> once</p>
+</blockquote>
+<p>Within a script to startup python scripts, for example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#!/bin/sh
+</span><span>ENV_FOO=$(uname -a)
+</span><span>exec gunicorn
+</span></code></pre>
+<p>In this case the <code>exec</code> tells sh to replace itself with <code>gunicorn</code> this helps to
+send signals directly to <code>gunicorn</code></p>
+<p>When using <code>exec</code> if command is not specified, any redirections take effect in the current shell:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#!/bin/sh
+</span><span>exec 2&gt;&amp;1
+</span><span>command
+</span></code></pre>
+<p>If then calling the script:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ./script 1&gt; out 2&gt; err
+</span></code></pre>
+<p>All the output will be combined in <code>out</code></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

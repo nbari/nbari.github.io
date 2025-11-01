@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ethtool tso offloading &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ethtool-tso&#x2F;">ethtool tso offloading</a></h2>
+<div class="post-header">
+    <span class="post-date">March 07, 2025</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>If you are experiencing slow network performance on a Linux server, it might be
+due to offloading features of the network card. Offloading is a technique used
+by network cards to offload the processing of network traffic from the CPU to
+the network card. This can improve performance by reducing the load on the CPU,
+but it can also cause problems if the network card is not properly configured.</p>
+<p>To check the current offloading settings of a network card, you can use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ethool -k</span><span> eth0
+</span></code></pre>
+<p>To disable offloading features, you can use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ethtool -K</span><span> eth1 tso off gso off gro off
+</span></code></pre>
+<p>To enable them again, you can use:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ethtool -K</span><span> eth1 tso on gso on gro on
+</span></code></pre>
+<p>For example, this is the output of <code>iperf3</code> with offloading enabled:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>-----------------------------------------------------------
+</span><span>[ ID] Interval           Transfer     Bitrate
+</span><span>[  5]   0.00-1.00   sec  83.4 MBytes   700 Mbits/sec
+</span><span>[  5]   1.00-2.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   2.00-3.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   3.00-4.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   4.00-5.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   5.00-6.00   sec  82.6 MBytes   693 Mbits/sec
+</span><span>[  5]   6.00-7.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   7.00-8.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   8.00-9.00   sec  82.5 MBytes   692 Mbits/sec
+</span><span>[  5]   9.00-10.00  sec  82.4 MBytes   691 Mbits/sec
+</span><span>[  5]  10.00-10.00  sec   191 KBytes   691 Mbits/sec
+</span><span>- - - - - - - - - - - - - - - - - - - - - - - - -
+</span><span>[ ID] Interval           Transfer     Bitrate
+</span><span>[  5]   0.00-10.00  sec   826 MBytes   693 Mbits/sec                  receiver
+</span><span>-----------------------------------------------------------
+</span><span>Server listening on 5201 (test #3)
+</span><span>
+</span></code></pre>
+<p>And after disabling offloading:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+</span><span>[  5]   0.00-1.00   sec   113 MBytes   948 Mbits/sec    0    379 KBytes
+</span><span>[  5]   1.00-2.00   sec   113 MBytes   945 Mbits/sec    0    379 KBytes
+</span><span>[  5]   2.00-3.00   sec   112 MBytes   942 Mbits/sec    0    397 KBytes
+</span><span>[  5]   3.00-4.00   sec   112 MBytes   942 Mbits/sec    0    414 KBytes
+</span><span>[  5]   4.00-5.00   sec   112 MBytes   939 Mbits/sec    0    414 KBytes
+</span><span>[  5]   5.00-6.00   sec   112 MBytes   941 Mbits/sec    0    414 KBytes
+</span><span>[  5]   6.00-7.00   sec   112 MBytes   943 Mbits/sec    0    414 KBytes
+</span><span>[  5]   7.00-8.00   sec   112 MBytes   941 Mbits/sec    0    414 KBytes
+</span><span>[  5]   8.00-9.00   sec   112 MBytes   942 Mbits/sec    0    414 KBytes
+</span><span>[  5]   9.00-10.00  sec   112 MBytes   939 Mbits/sec    0    414 KBytes
+</span><span>- - - - - - - - - - - - - - - - - - - - - - - - -
+</span><span>[ ID] Interval           Transfer     Bitrate         Retr
+</span><span>[  5]   0.00-10.00  sec  1.10 GBytes   942 Mbits/sec    0             sender
+</span><span>[  5]   0.00-10.00  sec  1.10 GBytes   941 Mbits/sec                  receiver
+</span></code></pre>
+<p>if you disable offloading you may notice more CPU usage, but the network performance should be better.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

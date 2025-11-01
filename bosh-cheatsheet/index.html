@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Bosh cheatsheet &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bosh-cheatsheet&#x2F;">Bosh cheatsheet</a></h2>
+<div class="post-header">
+    <span class="post-date">August 23, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bosh/">bosh</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cheat/">cheat</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/cheatsheet/">cheatsheet</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sheet/">sheet</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p><a href="https://bosh.io/">BOSH</a> is a project that unifies release engineering, deployment, and lifecycle management of small and large-scale cloud software.</p>
+<p>Check your environment:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh env
+</span></code></pre>
+<p>Set your deployment environment:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ export BOSH_DEPLOYMENT=foo
+</span></code></pre>
+<blockquote>
+<p>if have multiple deployments in same <code>dir</code> better to use -d
+<code>&lt;deployment-name&gt;</code> since many commands are bound to this variable.</p>
+</blockquote>
+<p>To recreate your environment (virtualbox), remove the line that start with
+<code>current_manifest</code> from the file <code>state.json</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sed -i &quot;&quot; &#39;/current_manifest_sha/d&#39; state.json
+</span></code></pre>
+<p>Deploy your manifest:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh deploy deployments/foo.yml
+</span></code></pre>
+<p>Check your instances:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh instances
+</span></code></pre>
+<p>To check processes within instances:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh instances --ps
+</span></code></pre>
+<blockquote>
+<p>this is the output of <code>monit summary</code></p>
+</blockquote>
+<p>To ssh into the instance of your deployment:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh ssh
+</span></code></pre>
+<p>If you have multiple instances:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh ssh worker/C17C59B3-FE07-4BAE-BD51-398010295BAD
+</span></code></pre>
+<p>To login without the <code>uuid</code>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh ssh worker/0
+</span></code></pre>
+<p>Show all your deployments:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh deployments
+</span></code></pre>
+<p>Follow logs via ssh:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh logs -f
+</span></code></pre>
+<p>Get logs only for a specifying <code>job</code> (<code>/var/vcap/jobs/&lt;job name&gt;</code>):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh logs -f --job foo
+</span></code></pre>
+<p>Within an instance:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># tail -f /var/vcap/sys/log/{*.log,*/*.log}
+</span></code></pre>
+<p>View a BOSH director's Cloud Config:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh cloud-config
+</span></code></pre>
+<p>Update params in default config:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh cloud-config &gt; cloud.yml
+</span></code></pre>
+<p>Do you changes and then update the config:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh update-cloud-config cloud.yml
+</span></code></pre>
+<p>Update the running manifest:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh -d &lt;your-deployment&gt; manifest &gt; manifest.yml
+</span></code></pre>
+<p>Do your changes and then re-deploy:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh -d &lt;your-deployment&gt; deploy manifest.yml
+</span></code></pre>
+<p>List available stemcells:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh stemcells
+</span></code></pre>
+<p>Get recent tasks</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh tasks --recent
+</span></code></pre>
+<p>Debug output for a task:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ bosh task &lt;id&gt; --debug
+</span></code></pre>
+<h1 id="bosh-lite"><a class="zola-anchor" href="#bosh-lite" aria-label="Anchor link for: bosh-lite">🔗</a>Bosh-lite</h1>
+<p>To add more cpu, memory to the VM within virtualbox, edit <code>virtualbox/cpi.yml</code>:</p>
+<pre data-lang="diff" style="background-color:#2b303b;color:#c0c5ce;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#bf616a;">-    cpus: 2
+</span><span style="color:#bf616a;">-    memory: 4096
+</span><span style="color:#bf616a;">-    ephemeral_disk: 16_384
+</span><span style="color:#a3be8c;">+    cpus: 6
+</span><span style="color:#a3be8c;">+    memory: 16_384
+</span><span style="color:#a3be8c;">+    ephemeral_disk: 51_200
+</span></code></pre>
+<p>To suspend (prevent bosh not starting when rebooting):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#!/bin/sh
+</span><span>
+</span><span>VBoxManage controlvm $(jq -r &#39;.current_vm_cid&#39; state.json) savestate
+</span></code></pre>
+<p>To start:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#!/bin/sh
+</span><span>
+</span><span>VBoxManage startvm $(jq -r &#39;.current_vm_cid&#39; state.json) --type headless
+</span></code></pre>
+<h1 id="delete-every-orphaned-disk"><a class="zola-anchor" href="#delete-every-orphaned-disk" aria-label="Anchor link for: delete-every-orphaned-disk">🔗</a>Delete every orphaned disk</h1>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>bosh disks --orphaned | awk &#39;NR&gt;0 {print $1}&#39; |  xargs -L1 bosh delete-disk -n
+</span><span># or
+</span><span>bosh disks --orphaned | awk &#39;$1 ~ /^disk-/ {print $1}&#39; | xargs -L1 bosh delete-disk -n
+</span></code></pre>
+<p>To clean all including orphaned disks:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>bosh clean-up --all
+</span></code></pre>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
