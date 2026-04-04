@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+ssmtp &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;ssmtp&#x2F;">ssmtp</a></h2>
+<div class="post-header">
+    <span class="post-date">December 06, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/email/">email</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/smtp/">smtp</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="ssmtp-send-a-message-using-smtp"><a class="zola-anchor" href="#ssmtp-send-a-message-using-smtp" aria-label="Anchor link for: ssmtp-send-a-message-using-smtp">🔗</a>ssmtp - send a message using smtp</h1>
+<p>When having sendmail disabled:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>sendmail_enable=&quot;NONE&quot;</span></span></code></pre>
+<p><a rel="external" href="https://wiki.archlinux.org/index.php/SSMTP">ssmtp</a> helps to send email using an
+SMTP server:</p>
+<p>Install ssmtp:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pkg install ssmtp</span></span></code></pre>
+<p>Configure to use you provider <a rel="external" href="https://www.mailgun.com/">mailgun</a> in this
+example <code>/usr/local/etc/ssmtp/ssmtp.conf</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span>root</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">monitor@domain.tld</span></span>
+<span class="giallo-l"><span>mailhub</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">smtp.mailgun.org</span></span>
+<span class="giallo-l"><span>AuthUser</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">postmaster@your.domain</span></span>
+<span class="giallo-l"><span>AuthPass</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">yourpassword</span></span>
+<span class="giallo-l"><span>UseTLS</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">Yes</span></span>
+<span class="giallo-l"><span>UseSTARTTLS</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">YES</span></span>
+<span class="giallo-l"><span>FromLineOverride</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">YES</span></span></code></pre>
+<p>Edit <code>/etc/mail/mailer.conf</code> to use ssmtp:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">sendmail</span><span style="color: #C3E88D;">        /usr/local/sbin/ssmtp</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">send-mail</span><span style="color: #C3E88D;">       /usr/local/sbin/ssmtp</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">mailq</span><span style="color: #C3E88D;">           /usr/local/sbin/ssmtp</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">newaliases</span><span style="color: #C3E88D;">      /usr/local/sbin/ssmtp</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">hoststat</span><span style="color: #C3E88D;">        /usr/bin/</span><span style="color: #89DDFF;">true</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">purgestat</span><span style="color: #C3E88D;">       /usr/bin/</span><span style="color: #89DDFF;">true</span></span></code></pre>
+<p>Now all email sent to <code>root</code> will be sent to <code>monitor@domain.tld</code> for example to
+email the current kernel options:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>sysctl kern.conftxt | mail root</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

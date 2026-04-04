@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Bhyve + IPv6 &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;bhyve-ipv6&#x2F;">Bhyve + IPv6</a></h2>
+<div class="post-header">
+    <span class="post-date">October 20, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>bhyve + ipv6</p>
+<p>This is how to set assign IPv6 addresses to guest within
+<a rel="external" href="http://bhyve.org/">bhyve</a> on a server with one single network card, the trick
+to make this to work is to assign the/handle the IPs within the bridge in
+<code>auto_linklocal</code> mode.</p>
+<p>The <code>rc.conf</code> file:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span>ifconfig_igb0</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">inet X.X.X.X netmask 255.255.255.XXX</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>defaultrouter</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">X.X.X.X</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>gateway_enable</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>ipv6_activate_all_interfaces</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>ipv6_defaultrouter</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">fe80::1%bridge0</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>ipv6_gateway_enable</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>cloned_interfaces</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">bridge0 tap0</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>autobridge_interfaces</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">bridge0</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>autobridge_bridge0</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">tap* igb0</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>ifconfig_bridge0</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">addm igb0 addm tap0 up description bhyve</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>ifconfig_bridge0_ipv6</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">inet6 2a01:4f8:350:84ec::1 prefixlen 64 auto_linklocal</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>rtadvd_enable</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>rtadvd_interfaces</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">bridge0</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+<p>The <code>rtadvd.conf</code> file:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">bridge0:\</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    :addr=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">2a01:4f8:350:84ec::</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">:prefixlen#64:</span><span>\</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    :rdnss=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">2a01:4f8:350:84ec::1</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">:</span><span>\</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    :dnssl=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">nbari.com</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">:</span></span></code></pre>
+<p>By doing this, the bhyve guest VM's can ping the main host, and use local
+services like unbound for DNS resolution.</p>
+<p>In the logs you will notice something like this:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>bridge0: IPv6 addresses on igb0 have been removed before adding it as a member to prevent IPv6 address scope violation.</span></span></code></pre>
+<p>This can be avoided by using:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>sysctl net.link.bridge.allow_llz_overlap=1</span></span></code></pre>
+<p>But will cause in terms that the guests may get an IP but not the router gateway.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

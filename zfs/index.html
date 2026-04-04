@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+zfs &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;zfs&#x2F;">zfs</a></h2>
+<div class="post-header">
+    <span class="post-date">December 10, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/zfs/">zfs</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/freebsd/">freebsd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/raw/">raw</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/image/">image</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="freebsd-zfs-disk-image"><a class="zola-anchor" href="#freebsd-zfs-disk-image" aria-label="Anchor link for: freebsd-zfs-disk-image">🔗</a>FreeBSD zfs disk image</h1>
+<p>Use <a rel="external" href="https://www.virtualbox.org/">VirtualBox</a> to install
+<a rel="external" href="https://www.freebsd.org/where.html">FreeBSD</a> using UFS.</p>
+<p>After having FreeBSD installed, update your sources and build a custom world and
+kernel based on your needs for the new image to be created:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span># cd /usr/src</span></span>
+<span class="giallo-l"><span># make -j4 buildworld buildkernel</span></span></code></pre>
+<blockquote>
+<p>adjust -j4 to the number or cpu cores</p>
+</blockquote>
+<p>Use this script to create the image: https://github.com/nbari/freebsd/blob/master/zfs/zfs.sh</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ mkdir /raw &amp;&amp; cd /raw</span></span>
+<span class="giallo-l"><span>$ fetch --no-verify-peer https://raw.githubusercontent.com/nbari/freebsd/master/zfs/zfs.sh</span></span>
+<span class="giallo-l"><span>$ ./zfs.sh</span></span></code></pre>
+<p>If everything runs fine, on new files of 1GB size called <code>disk.raw</code> will be
+created.</p>
+<p>To test your image in virtualbox, download the disk.raw and convert it to <code>VDI</code> format:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ VBoxManage convertfromraw disk.raw ec2.vdi --format VDI</span></span></code></pre>
+<p>Since the disk is only 1GB, you may want to increase the size, this can be done
+like this:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ VBoxManage modifyhd disk.vdi --resize 8192</span></span></code></pre>
+<p>After booting the pool need to be increased:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ gpart show da0</span></span></code></pre>
+<p>Example of output:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">root@/:~</span><span style="color: #464B5D;font-style: italic;"> # gpart show</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">=</span><span>&gt;</span><span style="color: #F78C6C;">       40  503316400</span><span style="color: #C3E88D;">  da0  GPT</span><span>  (240G)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">         40</span><span style="color: #F78C6C;">       1024    1</span><span style="color: #C3E88D;">  freebsd-boot</span><span>  (512K)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">       1064</span><span style="color: #F78C6C;">    2097152    2</span><span style="color: #C3E88D;">  freebsd-swap</span><span>  (1.0G)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    2098216</span><span style="color: #F78C6C;">        984</span><span style="color: #C3E88D;">       - free -</span><span>  (492K)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    2099200</span><span style="color: #F78C6C;">    2093056    3</span><span style="color: #C3E88D;">  freebsd-zfs</span><span>  (1.0G)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    4192256</span><span style="color: #F78C6C;">  499124184</span><span style="color: #C3E88D;">       - free -</span><span>  (1.0M)</span></span></code></pre>
+<p>Then type <code>gpart recover da0</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ gpart recover da0</span></span>
+<span class="giallo-l"><span>da0 recovered</span></span></code></pre>
+<p>And next resize <code>gpart resize -i 3 da0</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ gpart resize -i 3 da0</span></span>
+<span class="giallo-l"><span>da0 resized</span></span></code></pre>
+<blockquote>
+<p>-i 3,  3 is the freebsd-zfs</p>
+</blockquote>
+<p>After resizing:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">root@/:~</span><span style="color: #464B5D;font-style: italic;"> # gpart show</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">=</span><span>&gt;</span><span style="color: #F78C6C;">       40  503316400</span><span style="color: #C3E88D;">  da0  GPT</span><span>  (240G)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">         40</span><span style="color: #F78C6C;">       1024    1</span><span style="color: #C3E88D;">  freebsd-boot</span><span>  (512K)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">       1064</span><span style="color: #F78C6C;">    2097152    2</span><span style="color: #C3E88D;">  freebsd-swap</span><span>  (1.0G)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    2098216</span><span style="color: #F78C6C;">        984</span><span style="color: #C3E88D;">       - free -</span><span>  (492K)</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    2099200</span><span style="color: #F78C6C;">  501217240    3</span><span style="color: #C3E88D;">  freebsd-zfs</span><span>  (239G)</span></span></code></pre>
+<p>Get zpool information by typing:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ zdb</span></span></code></pre>
+<p>Find the children guid from the output:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>zroot -&gt; vdev_tree -&gt; children[0] -&gt; guid</span></span></code></pre><pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">root@:/raw</span><span style="color: #464B5D;font-style: italic;"> # zdb</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">zroot:</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    version:</span><span style="color: #F78C6C;"> 5000</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    name:</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">zroot</span><span style="color: #89DDFF;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    state:</span><span style="color: #F78C6C;"> 0</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    txg:</span><span style="color: #F78C6C;"> 422</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    pool_guid:</span><span style="color: #F78C6C;"> 5388488397555579451</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    hostid:</span><span style="color: #F78C6C;"> 4037738314</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    hostname:</span><span style="color: #89DDFF;"> &#39;&#39;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    com.delphix:has_per_vdev_zaps</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    vdev_children:</span><span style="color: #F78C6C;"> 1</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    vdev_tree:</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        type</span><span style="color: #C3E88D;">:</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">root</span><span style="color: #89DDFF;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        id:</span><span style="color: #F78C6C;"> 0</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        guid:</span><span style="color: #F78C6C;"> 5388488397555579451</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        create_txg:</span><span style="color: #F78C6C;"> 4</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        children[0]:</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">            type</span><span style="color: #C3E88D;">:</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">disk</span><span style="color: #89DDFF;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            id:</span><span style="color: #F78C6C;"> 0</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            guid:</span><span style="color: #F78C6C;"> 2304114010935459478</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            path:</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">/dev/gpt/disk0</span><span style="color: #89DDFF;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            whole_disk:</span><span style="color: #F78C6C;"> 1</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            metaslab_array:</span><span style="color: #F78C6C;"> 37</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            metaslab_shift:</span><span style="color: #F78C6C;"> 24</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            ashift:</span><span style="color: #F78C6C;"> 12</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            asize:</span><span style="color: #F78C6C;"> 8584429568</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            is_log:</span><span style="color: #F78C6C;"> 0</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            create_txg:</span><span style="color: #F78C6C;"> 4</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            com.delphix:vdev_zap_leaf:</span><span style="color: #F78C6C;"> 35</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">            com.delphix:vdev_zap_top:</span><span style="color: #F78C6C;"> 36</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    features_for_read:</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        com.delphix:hole_birth</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">        com.delphix:embedded_data</span></span></code></pre>
+<p>Resize the pool:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ zpool online -e zroot 2304114010935459478</span></span></code></pre>
+<p>Check the pool:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">root@:/raw</span><span style="color: #464B5D;font-style: italic;"> # zpool list</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">NAME</span><span style="color: #C3E88D;">    SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">zroot</span><span style="color: #C3E88D;">  7.98G   258M  7.73G         -     2%     3%  1.00x  ONLINE  -</span></span></code></pre><h2 id="readonly-off"><a class="zola-anchor" href="#readonly-off" aria-label="Anchor link for: readonly-off">🔗</a>readonly=off</h2>
+<p>Set the <code>/</code> to readonly off:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ zfs set readonly=off zroot/ROOT/default</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

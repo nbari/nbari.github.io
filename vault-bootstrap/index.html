@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vault bootstrap &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vault-bootstrap&#x2F;">vault bootstrap</a></h2>
+<div class="post-header">
+    <span class="post-date">April 20, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vault/">vault</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/policy/">policy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/github/">github</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create an admin policy <code>admin-policy.hcl</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="hcl"><span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Allow managing leases</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/leases/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Read system health check</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/health</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Create and manage ACL policies broadly across Vault</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># List existing policies</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/policies/acl</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Create and manage ACL policies</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/policies/acl/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Manage auth methods broadly across Vault</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">auth/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Create, update, and delete auth methods</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/auth/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># List auth methods</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/auth</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Enable and manage the key/value secrets engine at  path</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># List, create, update, and delete key/value secrets</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">secret/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Manage secrets engines</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/mounts/*</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">create</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">update</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">delete</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">list</span><span style="color: #89DDFF;">&quot;</span><span>, </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sudo</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># List existing secrets engines.</span></span>
+<span class="giallo-l"><span>path </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">sys/mounts</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>  capabilities</span><span style="color: #89DDFF;"> =</span><span> [</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">read</span><span style="color: #89DDFF;">&quot;</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
+<p>Load the policy:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault policy write admin admin-policy.hcl</span></span></code></pre>
+<p>Enable GitHub:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault auth enable github</span></span></code></pre>
+<p>Allow only your organization:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write auth/github/config organization=myorg</span></span></code></pre>
+<p>Add the <code>admin-policy</code> to a team in your GitHub org named <code>devops</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write auth/github/map/teams/devops value=admin</span></span></code></pre>
+<p>Change the default lease time:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault auth tune -default-lease-ttl=72h github/</span></span></code></pre>
+<p>Login using your GitHub Token</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#!/bin/sh</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">unset</span><span style="color: #C3E88D;"> ADMIN_TOKEN</span></span>
+<span class="giallo-l"><span style="color: #C792EA;">export</span><span> ADMIN_TOKEN</span><span style="color: #89DDFF;">=$(</span><span style="color: #FFCB6B;">vault</span><span style="color: #C3E88D;"> login -method=github token=ghp_ABC -format=json</span><span style="color: #89DDFF;"> |</span><span style="color: #FFCB6B;">  jq</span><span style="color: #C3E88D;"> -r</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">.auth.client_token</span><span style="color: #89DDFF;">&quot;)</span></span></code></pre>
+<p>Lookup:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault token lookup</span></span></code></pre><h2 id="adding-auth-aws"><a class="zola-anchor" href="#adding-auth-aws" aria-label="Anchor link for: adding-auth-aws">🔗</a>Adding auth AWS</h2>
+<p>Use path <code>my-project</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault auth enable -path=my-project aws</span></span></code></pre>
+<p>Add AWS secret key:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write auth/my-project/config/client secret_key=SECRET_KEY access_key=ACCESS_KEY</span></span></code></pre>
+<p>Create a policy for only read and and only allow a VPC:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="hcl"><span class="giallo-l"><span>vault policy write </span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">my-project-ro</span><span style="color: #89DDFF;">&quot; -&lt;&lt;</span><span style="color: #89DDFF;font-style: italic;">EOF</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">path &quot;secret/my-project/*&quot; {</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  capabilities = [&quot;read&quot;]</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">}</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">EOF</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>vault write \</span></span>
+<span class="giallo-l"><span>  auth</span><span style="color: #89DDFF;">/</span><span>my</span><span style="color: #89DDFF;">-</span><span>project</span><span style="color: #89DDFF;">/</span><span>role</span><span style="color: #89DDFF;">/</span><span>my</span><span style="color: #89DDFF;">-</span><span>project \</span></span>
+<span class="giallo-l"><span>  auth_type</span><span style="color: #89DDFF;">=</span><span>ec2 \</span></span>
+<span class="giallo-l"><span>  policies</span><span style="color: #89DDFF;">=</span><span>my</span><span style="color: #89DDFF;">-</span><span>project</span><span style="color: #89DDFF;">-</span><span>ro \</span></span>
+<span class="giallo-l"><span>  max_ttl</span><span style="color: #89DDFF;">=</span><span>5m \</span></span>
+<span class="giallo-l"><span>  bound_vpc_id</span><span style="color: #89DDFF;">=</span><span>vpc</span><span style="color: #89DDFF;">-</span><span>XXX</span></span></code></pre>
+<p>Create a <code>kv</code> secrets version 1:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault secrets enable -path=secret/my-project -version=1 kv</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+haproxy ssh &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;haproxy-ssh&#x2F;">haproxy ssh</a></h2>
+<div class="post-header">
+    <span class="post-date">May 30, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/haproxy/">haproxy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="https-and-ssh-on-the-same-port"><a class="zola-anchor" href="#https-and-ssh-on-the-same-port" aria-label="Anchor link for: https-and-ssh-on-the-same-port">🔗</a>HTTPS and SSH on the same port</h1>
+<p>Using HAProxy to server SSH and SSL available on the same port:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>global</span></span>
+<span class="giallo-l"><span>    maxconn 1000000</span></span>
+<span class="giallo-l"><span>    spread-checks 3</span></span>
+<span class="giallo-l"><span>    log /var/run/log local0 notice</span></span>
+<span class="giallo-l"><span>    daemon</span></span>
+<span class="giallo-l"><span>    tune.ssl.default-dh-param 2048</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>defaults</span></span>
+<span class="giallo-l"><span>    mode http</span></span>
+<span class="giallo-l"><span>    balance roundrobin</span></span>
+<span class="giallo-l"><span>    option http-server-close</span></span>
+<span class="giallo-l"><span>    option abortonclose</span></span>
+<span class="giallo-l"><span>    option dontlognull</span></span>
+<span class="giallo-l"><span>    option redispatch</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    timeout check           3s</span></span>
+<span class="giallo-l"><span>    timeout client          30s  # Client and server timeout must match the longest</span></span>
+<span class="giallo-l"><span>    timeout connect         5s</span></span>
+<span class="giallo-l"><span>    timeout http-keep-alive 5s</span></span>
+<span class="giallo-l"><span>    timeout http-request    10s  # A complete request may never take that long.</span></span>
+<span class="giallo-l"><span>    timeout queue           1m   # Don&#39;t queue requests too long if saturated.</span></span>
+<span class="giallo-l"><span>    timeout server          10s  # Time we may wait for a response from the server.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    retries 3</span></span>
+<span class="giallo-l"><span>    log global</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span># ----------------------------------------------------------------------------</span></span>
+<span class="giallo-l"><span># stats</span></span>
+<span class="giallo-l"><span># ----------------------------------------------------------------------------</span></span>
+<span class="giallo-l"><span>listen stats</span></span>
+<span class="giallo-l"><span>    bind *:81</span></span>
+<span class="giallo-l"><span>    stats enable</span></span>
+<span class="giallo-l"><span>    stats uri /</span></span>
+<span class="giallo-l"><span>    stats show-node</span></span>
+<span class="giallo-l"><span>    stats show-legends</span></span>
+<span class="giallo-l"><span>    stats refresh 5s</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span># ------------------------------------------------------------------------------</span></span>
+<span class="giallo-l"><span>#  https + ssh</span></span>
+<span class="giallo-l"><span># ------------------------------------------------------------------------------</span></span>
+<span class="giallo-l"><span>frontend ssl</span></span>
+<span class="giallo-l"><span>    mode tcp</span></span>
+<span class="giallo-l"><span>    bind *:443 ssl crt /usr/local/etc/haproxy/your.cert</span></span>
+<span class="giallo-l"><span>    option tcplog</span></span>
+<span class="giallo-l"><span>    tcp-request inspect-delay 5s</span></span>
+<span class="giallo-l"><span>    tcp-request content accept if HTTP</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    # 5353482d322e30 is the binary representation of the string &#39;SSH-2.0&#39;</span></span>
+<span class="giallo-l"><span>    acl client_attempts_ssh payload(0,7) -m bin 5353482d322e30</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    use_backend ssh if !HTTP</span></span>
+<span class="giallo-l"><span>    use_backend ssh if client_attempts_ssh</span></span>
+<span class="giallo-l"><span>    use_backend http if HTTP</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>backend http</span></span>
+<span class="giallo-l"><span>    mode http</span></span>
+<span class="giallo-l"><span>    http-request set-header X-Forwarded-Port %[dst_port]</span></span>
+<span class="giallo-l"><span>    server www 10.10.8.3:8000 maxconn 50 check</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>backend ssh</span></span>
+<span class="giallo-l"><span>    mode tcp</span></span>
+<span class="giallo-l"><span>    option tcplog</span></span>
+<span class="giallo-l"><span>    server ssh 10.10.8.4:22</span></span>
+<span class="giallo-l"><span>    timeout server 2h</span></span></code></pre><h1 id="connecting-from-an-ssh-client"><a class="zola-anchor" href="#connecting-from-an-ssh-client" aria-label="Anchor link for: connecting-from-an-ssh-client">🔗</a>Connecting from an SSH client</h1>
+<p>To connect throught the HAProxy on port 443 edit the ~/.ssh/config:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">Host</span><span style="color: #C3E88D;"> ssh-over-https</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    ProxyCommand</span><span style="color: #C3E88D;"> openssl s_client -connect your.haproxy.com:443 -quiet</span></span></code></pre><h1 id="how-does-this-work"><a class="zola-anchor" href="#how-does-this-work" aria-label="Anchor link for: how-does-this-work">🔗</a>how does this work ?</h1>
+<p>The <a rel="external" href="https://tools.ietf.org/html/rfc4253#section-4.2">RFC 4253</a>, section 4.2
+states that clients must send a string that starts with 'SSH-2.0':</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>4.2.  Protocol Version Exchange</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>   When the connection has been established, both sides MUST send an</span></span>
+<span class="giallo-l"><span>   identification string.  This identification string MUST be</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>      SSH-protoversion-softwareversion SP comments CR LF</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>   Since the protocol being defined in this set of documents is version</span></span>
+<span class="giallo-l"><span>   2.0, the &#39;protoversion&#39; MUST be &quot;2.0&quot;.</span></span></code></pre><pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="python"><span class="giallo-l"><span style="color: #89DDFF;">&gt;&gt;&gt; &quot;</span><span style="color: #C3E88D;">5353482d322e30</span><span style="color: #89DDFF;">&quot;.</span><span style="color: #82AAFF;">decode</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">hex</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">&#39;</span><span style="color: #464B5D;font-style: italic;">SSH-2.0</span><span style="color: #89DDFF;font-style: italic;">&#39;</span></span></code></pre>
+<p><code>5353482d322e30</code> is the binary representation of the string 'SSH-2.0'. So
+everything boils down to this line:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>acl client_attempts_ssh payload(0,7) -m bin 5353482d322e30</span></span></code></pre>
+<p>When a new connection is made on the port 443, HAproxy decrypts the SSL layer,
+and checks whether the stream of data sent by the client starts with this string.</p>
+<p>src: http://blog.chmd.fr/ssh-over-ssl-episode-4-a-haproxy-based-configuration.html</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

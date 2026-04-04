@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+proxmox vlan &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;proxmox-vlan&#x2F;">proxmox vlan</a></h2>
+<div class="post-header">
+    <span class="post-date">June 26, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>If you have a single network interface and want to have your VM's in a VLAN,
+modify the <code>/etc/network/interfaces</code> to look something like:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>auto lo</span></span>
+<span class="giallo-l"><span>iface lo inet loopback</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>iface eno1 inet manual</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>auto vmbr0</span></span>
+<span class="giallo-l"><span>iface vmbr0 inet static</span></span>
+<span class="giallo-l"><span>	address 192.168.0.2/24</span></span>
+<span class="giallo-l"><span>	gateway 192.168.0.1</span></span>
+<span class="giallo-l"><span>	bridge-ports eno1</span></span>
+<span class="giallo-l"><span>	bridge-stp off</span></span>
+<span class="giallo-l"><span>	bridge-fd 0</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>auto vmbr1</span></span>
+<span class="giallo-l"><span>iface vmbr1 inet manual</span></span>
+<span class="giallo-l"><span>	bridge-ports eno1.20</span></span>
+<span class="giallo-l"><span>	bridge-stp off</span></span>
+<span class="giallo-l"><span>	bridge-fd 0</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>iface eno1.20 inet manual</span></span>
+<span class="giallo-l"><span>	vlan-raw-device eno1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>source /etc/network/interfaces.d/*</span></span></code></pre>
+<p>After modifying apply the changes:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">systemctl</span><span style="color: #C3E88D;"> restart networking</span></span></code></pre>
+<p>In this case, thee is only one interface <code>eno1</code> and the VLAN-ID is <code>20</code></p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aws-vault &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-vault&#x2F;">aws-vault</a></h2>
+<div class="post-header">
+    <span class="post-date">April 27, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vault/">vault</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/policy/">policy</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/getfederationtoken/">GetFederationToken</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/sts/">sts</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If using <code>vault</code> with <code>aws</code> secrets, you can request a pair of keys using:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$ vault</span><span style="color: #C3E88D;"> read aws/creds/readonly</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">Key</span><span style="color: #C3E88D;">                Value</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">---</span><span style="color: #C3E88D;">                -----</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">lease_id</span><span style="color: #C3E88D;">           aws/creds/readonly/BMRZyGlcUof2S71rgBpHamfE</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">lease_duration</span><span style="color: #C3E88D;">     12h</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">lease_renewable</span><span style="color: #89DDFF;">    true</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">access_key</span><span style="color: #C3E88D;">         AKIBVIJBTT64DFFGWVNV</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">secret_key</span><span style="color: #C3E88D;">         p1zzZdDbZ0GGe7azIBq/5GrQwsHRege6UhTfr59a</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">security_token</span><span style="color: #89DDFF;">     &lt;</span><span style="color: #C3E88D;">ni</span><span>l</span><span style="color: #89DDFF;">&gt;</span></span></code></pre>
+<p>If you would like to login via web using a Console password, install
+https://github.com/99designs/aws-vault</p>
+<p>Add your pair of keys:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> aws-vault add monkey</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">Enter</span><span style="color: #C3E88D;"> Access Key ID:</span></span></code></pre>
+<p>You may need to previously export the AWS region:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> export AWS_REGION=us-east-2</span></span></code></pre>
+<p>Then to login run:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> aws-vault login monkey</span></span></code></pre>
+<p>For this to work the AWS policy assigned to your keys needs to allow the to
+create a token, for example here a read only:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="hcl"><span class="giallo-l"><span style="color: #FFCB6B;">resource</span><span> &quot;vault_aws_secret_backend_role&quot; &quot;role&quot;</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span>  backend</span><span style="color: #89DDFF;">         =</span><span style="color: #F07178;"> vault_aws_secret_backend</span><span style="color: #89DDFF;">.</span><span>aws</span><span style="color: #89DDFF;">.</span><span>path</span></span>
+<span class="giallo-l"><span>  name</span><span style="color: #89DDFF;">            = &quot;</span><span style="color: #C3E88D;">readonly</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>  credential_type</span><span style="color: #89DDFF;"> = &quot;</span><span style="color: #C3E88D;">iam_user</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>  policy_arns</span><span style="color: #89DDFF;">     = [&quot;</span><span style="color: #C3E88D;">arn:aws:iam::aws:policy/ReadOnlyAccess</span><span style="color: #89DDFF;">&quot;]</span></span>
+<span class="giallo-l"><span>  policy_document</span><span style="color: #89DDFF;"> = &lt;&lt;</span><span style="color: #89DDFF;font-style: italic;">EOT</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">{</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;Version&quot;: &quot;2012-10-17&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;Statement&quot;: [</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    {</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;Effect&quot;: &quot;Allow&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;Action&quot;: &quot;sts:GetFederationToken&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;Resource&quot;: &quot;*&quot;</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    }</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  ]</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">}</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">EOT</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

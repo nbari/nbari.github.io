@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+webscraping &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;webscraping&#x2F;">webscraping</a></h2>
+<div class="post-header">
+    <span class="post-date">October 27, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/selenium/">selenium</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/scraper/">scraper</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/python/">python</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="webscraping-using-python-chrome"><a class="zola-anchor" href="#webscraping-using-python-chrome" aria-label="Anchor link for: webscraping-using-python-chrome">🔗</a>Webscraping using python + chrome</h1>
+<p>In mac OS X, install chromedriver and selenium:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>brew install chromedriver</span></span></code></pre>
+<p>Install selenium via pip:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pip install -U selenium</span></span></code></pre>
+<blockquote>
+<p>if required to install globally <code>sudo pip install selenium</code></p>
+</blockquote>
+<p>To test, open a terminal, type python and try:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>Python 2.7.12 (default, Oct 11 2016, 05:20:59)</span></span>
+<span class="giallo-l"><span>[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin</span></span>
+<span class="giallo-l"><span>Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span></span>
+<span class="giallo-l"><span>&gt;&gt;&gt; from selenium import webdriver</span></span>
+<span class="giallo-l"><span>&gt;&gt;&gt; driver = webdriver.Chrome()</span></span>
+<span class="giallo-l"><span>&gt;&gt;&gt; driver.get(&quot;https://nbari.com&quot;)</span></span>
+<span class="giallo-l"><span>&gt;&gt;&gt;</span></span></code></pre><h1 id="scraping"><a class="zola-anchor" href="#scraping" aria-label="Anchor link for: scraping">🔗</a>scraping</h1>
+<p>The following example will do:</p>
+<ol>
+<li>Fill a form,</li>
+<li>Parse links of the results.</li>
+<li>Open each link.</li>
+<li>Get text data from a div.</li>
+<li>Go back to step 2 until all links are parsed.</li>
+</ol>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="python"><span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">from</span><span> selenium</span><span style="color: #89DDFF;font-style: italic;"> import</span><span> webdriver</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">from</span><span> selenium</span><span style="color: #89DDFF;">.</span><span>webdriver</span><span style="color: #89DDFF;">.</span><span>common</span><span style="color: #89DDFF;">.</span><span>keys</span><span style="color: #89DDFF;font-style: italic;"> import</span><span> Keys</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>driver</span><span style="color: #89DDFF;"> =</span><span> webdriver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">Chrome</span><span style="color: #89DDFF;">()</span></span>
+<span class="giallo-l"><span>driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">get</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">https://search.cro.ie/company/CompanySearch.aspx</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span>inputElement</span><span style="color: #89DDFF;"> =</span><span> driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">find_element_by_id</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">ctl00_ContentPlaceHolder1_textCompanyName</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span>inputElement</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">send_keys</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">limo</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span>inputElement</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">send_keys</span><span style="color: #89DDFF;">(</span><span style="color: #82AAFF;">Keys</span><span style="color: #89DDFF;">.</span><span style="color: #F07178;">ENTER</span><span style="color: #89DDFF;">)</span></span>
+<span class="giallo-l"><span>links</span><span style="color: #89DDFF;"> =</span><span> driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">find_elements_by_xpath</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">//*[@id=&#39;ctl00_ContentPlaceHolder1_GridView1&#39;]/tbody/tr/td/a</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>data</span><span style="color: #89DDFF;"> = {}</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">for</span><span> i</span><span style="color: #89DDFF;font-style: italic;"> in</span><span> xrange</span><span style="color: #89DDFF;">(</span><span style="color: #F78C6C;">0</span><span style="color: #89DDFF;">,</span><span style="color: #82AAFF;"> len</span><span style="color: #89DDFF;">(</span><span style="color: #82AAFF;">links</span><span style="color: #89DDFF;">)):</span></span>
+<span class="giallo-l"><span>    links</span><span style="color: #89DDFF;"> =</span><span> driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">find_elements_by_xpath</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">//*[@id=&#39;ctl00_ContentPlaceHolder1_GridView1&#39;]/tbody/tr/td/a</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span>    idx_name</span><span style="color: #89DDFF;"> =</span><span> links</span><span style="color: #89DDFF;">[</span><span>i</span><span style="color: #89DDFF;">].</span><span style="color: #F07178;">text</span></span>
+<span class="giallo-l"><span>    links</span><span style="color: #89DDFF;">[</span><span>i</span><span style="color: #89DDFF;">].</span><span style="color: #82AAFF;">click</span><span style="color: #89DDFF;">()</span></span>
+<span class="giallo-l"><span>    div</span><span style="color: #89DDFF;"> =</span><span> driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">find_element_by_id</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">companyDetails</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span>    data</span><span style="color: #89DDFF;">[</span><span>idx_name</span><span style="color: #89DDFF;">] =</span><span> div</span><span style="color: #89DDFF;">.</span><span style="color: #F07178;">text</span></span>
+<span class="giallo-l"><span>    driver</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">execute_script</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #C3E88D;">window.history.go(-1)</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">for</span><span> key</span><span style="color: #89DDFF;">,</span><span> value</span><span style="color: #89DDFF;font-style: italic;"> in</span><span style="color: #82AAFF;"> sorted</span><span style="color: #89DDFF;">(</span><span style="color: #82AAFF;">data</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">iteritems</span><span style="color: #89DDFF;">()):</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">    print</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">-</span><span style="color: #89DDFF;">&quot; *</span><span style="color: #F78C6C;"> 64</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">    print</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #F78C6C;">%s</span><span>\n</span><span style="color: #F78C6C;">%s</span><span style="color: #89DDFF;">&quot; % (</span><span>key</span><span style="color: #89DDFF;">,</span><span> value</span><span style="color: #89DDFF;">)</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

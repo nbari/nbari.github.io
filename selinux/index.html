@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+SElinux &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;selinux&#x2F;">SElinux</a></h2>
+<div class="post-header">
+    <span class="post-date">February 21, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/selinux/">selinux</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To disable SElinux temporaly:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>setenforce 0</span></span></code></pre>
+<p>To disable SELinux Permanetly, edit file <code>/etc/sysconfig/selinux</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># This file controls the state of SELinux on the system.</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># SELINUX= can take one of these three values:</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     enforcing - SELinux security policy is enforced.</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     permissive - SELinux prints warnings instead of enforcing.</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     disabled - No SELinux policy is loaded.</span></span>
+<span class="giallo-l"><span>SELINUX</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">enforcing</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># SELINUXTYPE= can take one of three two values:</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     targeted - Targeted processes are protected,</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     minimum - Modification of targeted policy. Only selected processes are protected.</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#     mls - Multi Level Security protection.</span></span>
+<span class="giallo-l"><span>SELINUXTYPE</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">targeted</span></span></code></pre>
+<p>Change <code>SELINUX=enforcing</code> to <code>SELINUX=disabled</code></p>
+<p>Check the status of SELinux using <code>sestatus</code> command</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

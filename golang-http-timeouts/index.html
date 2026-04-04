@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Golang HTTP Timeouts &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;golang-http-timeouts&#x2F;">Golang HTTP Timeouts</a></h2>
+<div class="post-header">
+    <span class="post-date">December 01, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/go/">go</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/timeout/">timeout</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If this:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 40ms</span></span></code></pre>
+<p>Check that your go server is using proper timeouts, example:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="go"><span class="giallo-l"><span>srv</span><span style="color: #89DDFF;"> := &amp;</span><span style="color: #FFCB6B;">http</span><span style="color: #89DDFF;">.</span><span style="color: #FFCB6B;">Server</span><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span>        Addr</span><span style="color: #89DDFF;">:         &quot;</span><span style="color: #C3E88D;">:80</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span>        Handler</span><span style="color: #89DDFF;">:</span><span>      router</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span>        ReadTimeout</span><span style="color: #89DDFF;">:</span><span style="color: #F78C6C;">  5</span><span style="color: #89DDFF;"> *</span><span> time</span><span style="color: #89DDFF;">.</span><span>Second</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span>        WriteTimeout</span><span style="color: #89DDFF;">:</span><span style="color: #F78C6C;"> 10</span><span style="color: #89DDFF;"> *</span><span> time</span><span style="color: #89DDFF;">.</span><span>Second</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"><span>log</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">Fatal</span><span style="color: #89DDFF;">(</span><span>srv</span><span style="color: #89DDFF;">.</span><span style="color: #82AAFF;">ListenAndServe</span><span style="color: #89DDFF;">())</span></span></code></pre>
+<p>https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

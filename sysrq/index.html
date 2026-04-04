@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+SysRq &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;sysrq&#x2F;">SysRq</a></h2>
+<div class="post-header">
+    <span class="post-date">April 29, 2024</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/linux/">linux</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/reboot/">reboot</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/prtsc/">PrtSc</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/reisub/">REISUB</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To find the <code>SysRq</code> in your system, normally <code>PrtSc</code>, run:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">journalctl</span><span style="color: #C3E88D;"> -f</span></span></code></pre>
+<p>And then press keys <code>Alt Gr</code> + <code>PrtSc</code> + <code>h</code> that will print in the logs something like:</p>
+<blockquote>
+<p>the Right <code>Alt GR</code> only works printing the help</p>
+</blockquote>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>kernel: sysrq: HELP: loglevel(0-9) reboot(b) crash(c) terminate-all-tasks(e) memory-full-oom-kill(f)...</span></span></code></pre><h2 id="enabling"><a class="zola-anchor" href="#enabling" aria-label="Anchor link for: enabling">🔗</a>Enabling</h2>
+<p>create <code>/etc/sysctl.d/99-sysctl.conf</code> with:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>kernel.sysrq = 1</span></span></code></pre>
+<p>then:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">sysctl</span><span style="color: #C3E88D;"> --system</span></span></code></pre><h2 id="using-reisub"><a class="zola-anchor" href="#using-reisub" aria-label="Anchor link for: using-reisub">🔗</a>Using  REISUB</h2>
+<p>To reboot system in a crash run:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>Alt + SysRq (Hold down) + R, E, I, S, U, B</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>R: Switch the keyboard mode</span></span>
+<span class="giallo-l"><span>E: Send the SIGTERM signal to all processes except init</span></span>
+<span class="giallo-l"><span>I: Send the SIGKILL signal to all processes except init</span></span>
+<span class="giallo-l"><span>S: Sync all mounted filesystems</span></span>
+<span class="giallo-l"><span>U: Remount all mounted filesystems in read-only mode</span></span>
+<span class="giallo-l"><span>B: Reboot the system</span></span></code></pre>
+<p>To only reboot:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>ALT + SysRq + b</span></span></code></pre>
+<ul>
+<li>https://wiki.archlinux.org/title/Keyboard_shortcuts#Rebooting</li>
+<li>https://en.wikipedia.org/wiki/Magic_SysRq_key</li>
+</ul>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

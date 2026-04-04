@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aws ec2 associate address &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-ec2-associate-address&#x2F;">aws ec2 associate address</a></h2>
+<div class="post-header">
+    <span class="post-date">August 30, 2016</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/autoscaling/">autoscaling</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/remap/">remap</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>If doing more than 100 requests implying the AWS CLI <code>associate-address</code>
+sub-command, subsequent calls will cost <strong>$0.10</strong> each, so If doing to much
+scale in/out or have a monitoring/automated tool that frecuenly make API calls using
+this sub-command, the bill is not going to be cheap:</p>
+<ul>
+<li>Scale in  (remove instances)</li>
+<li>Scale out (add instances)</li>
+</ul>
+<p><img src="/img/aws-ec2-associate-address.png" alt="additional remap" /></p>
+<p>Long story short, The <code>associate-address</code> sub-command, is an idempotent
+operation, if you call "aws ec2 associate-address" with the same combination
+of instance and EIP as the one currently in place, it won't return an error;
+instead, it will return and count as successful, regardless of whether an actual
+allocation was done or not. Consequently, being it counted as a successful
+request, you'll be billed accordingly.</p>
+<blockquote>
+<p>Idempotent operations take an important role, basically because you expect
+that operation will not result in different results no matter how many times you
+operate the idempotent operations. (Idempotent = Re-runnable).</p>
+</blockquote>
+<p>This can be avoided by using private addresses and Load balancers, but in cases where
+you need to deal with <a rel="external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP's</a> this maybe an issue, mainly for monitoring scripts or periodic checks, or use the <a rel="external" href="http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-addresses.html">describe-address</a> and based on the result decide to use or not the <code>associate=address</code> sub-command</p>
+<h1 id="associate-address"><a class="zola-anchor" href="#associate-address" aria-label="Anchor link for: associate-address">🔗</a>associate-address</h1>
+<p>Associates an Elastic IP address with an instance or a network interface. This
+is an idempotent operation. If you perform the operation more than once, Amazon
+EC2 doesn't return an error, example:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ aws ec2 associate-address --instance-id i-24ea6379 --allocation-id eipalloc-b58d24da</span></span>
+<span class="giallo-l"><span>{</span></span>
+<span class="giallo-l"><span>    &quot;AssociationId&quot;: &quot;eipassoc-b7b117df&quot;</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>http://docs.aws.amazon.com/cli/latest/reference/ec2/associate-address.html</p>
+<p>After running the previous command 100 times, the following requests will cost
+each <code>$0.10 per Elastic IP address remap</code> either the association didn't
+succeed or if it was made to an existing IP.</p>
+<p>Basically this means that if you have something that periodically checks your
+instances and tries to remap or ensure that your elastic IP is pointing you a
+desired instance:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>    10.0.1.3 ---&gt; 58.41.28.32</span></span></code></pre>
+<p>After doing 100 calls, the following request will cost <strong>$0.10</strong> each.</p>
+<h2 id="auto-scaling"><a class="zola-anchor" href="#auto-scaling" aria-label="Anchor link for: auto-scaling">🔗</a>Auto scaling</h2>
+<p>While creating an auto-scaling group, could be the need to map each of the
+instances to use an Elastic IP's, based on the scaling in/out policies
+this would imply that after reaching the 100 limit, each reboot will cost
+<strong>$0.10</strong>.</p>
+<h1 id="example-of-how-to-use-the-associate-address-from-a-startup-script"><a class="zola-anchor" href="#example-of-how-to-use-the-associate-address-from-a-startup-script" aria-label="Anchor link for: example-of-how-to-use-the-associate-address-from-a-startup-script">🔗</a>Example of how to use the <code>associate-address</code> from a startup script</h1>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#!/bin/sh</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># KEYWORD: firstboot</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># PROVIDE: set_hostname</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># REQUIRE: NETWORKING</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># BEFORE:  SERVERS</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #82AAFF;">.</span><span style="color: #C3E88D;"> /etc/rc.subr</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>name</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">set_hostname</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>rcvar</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">set_hostname_enable</span></span>
+<span class="giallo-l"><span>start_cmd</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">set_hostname_run</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>stop_cmd</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">:</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C792EA;">export</span><span> AWS_ACCESS_KEY_ID</span><span style="color: #89DDFF;">=</span><span>aws_access_key_id</span></span>
+<span class="giallo-l"><span style="color: #C792EA;">export</span><span> AWS_SECRET_ACCESS_KEY</span><span style="color: #89DDFF;">=</span><span>aws_secret_access_key</span></span>
+<span class="giallo-l"><span style="color: #C792EA;">export</span><span> AWS_DEFAULT_REGION</span><span style="color: #89DDFF;">=</span><span>the_region</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>TAG_NAME</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">Salt</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>INSTANCE_ID</span><span style="color: #89DDFF;">=$(</span><span style="color: #FFCB6B;">/usr/local/bin/curl</span><span style="color: #C3E88D;"> -s http://169.254.169.254/latest/meta-data/instance-id</span><span style="color: #89DDFF;">)</span></span>
+<span class="giallo-l"><span>REGION</span><span style="color: #89DDFF;">=$(</span><span style="color: #FFCB6B;">/usr/local/bin/curl</span><span style="color: #C3E88D;"> -s http://169.254.169.254/latest/meta-data/placement/availability-zone</span><span style="color: #89DDFF;"> |</span><span style="color: #FFCB6B;"> sed</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">s/.$//</span><span style="color: #89DDFF;">&#39;)</span></span>
+<span class="giallo-l"><span>TAG_VALUE</span><span style="color: #89DDFF;">=$(</span><span style="color: #FFCB6B;">/usr/local/bin/aws</span><span style="color: #C3E88D;"> ec2 describe-tags --filters</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Name=resource-id,Values=</span><span style="color: #89DDFF;">${</span><span>INSTANCE_ID</span><span style="color: #89DDFF;">}&quot; &quot;</span><span style="color: #C3E88D;">Name=key,Values=</span><span>$TAG_NAME</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;"> --region</span><span style="color: #89DDFF;"> ${</span><span>REGION</span><span style="color: #89DDFF;">}</span><span style="color: #C3E88D;"> --output=text</span><span style="color: #89DDFF;"> |</span><span style="color: #FFCB6B;"> cut</span><span style="color: #C3E88D;"> -f5</span><span style="color: #89DDFF;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #82AAFF;">set_hostname_run</span><span style="color: #89DDFF;">()</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">	hostname</span><span style="color: #89DDFF;"> ${</span><span>INSTANCE_ID</span><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">	sysrc</span><span style="color: #C3E88D;"> hostname=</span><span style="color: #89DDFF;">&quot;${</span><span>INSTANCE_ID</span><span style="color: #89DDFF;">}&quot;</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">	sysrc</span><span style="color: #C3E88D;"> salt_minion_enable=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">	echo</span><span style="color: #89DDFF;"> ${</span><span>INSTANCE_ID</span><span style="color: #89DDFF;">} &gt;</span><span style="color: #C3E88D;"> /usr/local/etc/salt/minion_id</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">	pw</span><span style="color: #C3E88D;"> usermod root -c</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">root on </span><span style="color: #89DDFF;">${</span><span>INSTANCE_ID</span><span style="color: #89DDFF;">}&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">	if</span><span style="color: #89DDFF;"> [ ! -z &quot;${</span><span>TAG_VALUE</span><span style="color: #89DDFF;">}&quot; ];</span><span style="color: #89DDFF;font-style: italic;"> then</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">		echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">node_type: </span><span style="color: #89DDFF;">${</span><span>TAG_VALUE</span><span style="color: #89DDFF;">}&quot; &gt;</span><span style="color: #C3E88D;"> /usr/local/etc/salt/grains</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">	fi</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">	# allocate IP X.X.X.X</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">	/usr/local/bin/aws</span><span style="color: #C3E88D;"> ec2 associate-address --instance-id</span><span> $INSTANCE_ID</span><span style="color: #C3E88D;"> --allocation-id eipalloc-xxxxxxxx</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">load_rc_config</span><span> $name</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">run_rc_command</span><span style="color: #89DDFF;"> &quot;</span><span style="font-style: italic;">$1</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

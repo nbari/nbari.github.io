@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Slave Is Running &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;slave-is-running&#x2F;">Slave Is Running</a></h2>
+<div class="post-header">
+    <span class="post-date">July 19, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>Script to check if mysql replica (slave) is running:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #464B5D;font-style: italic;">#!/bin/sh</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>SLAVE_IS_RUNNING</span><span style="color: #89DDFF;">=$(</span><span style="color: #FFCB6B;">/usr/local/bin/mysql</span><span style="color: #C3E88D;"> -e</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">SHOW SLAVE STATUS\G</span><span style="color: #89DDFF;">&quot; |</span><span style="color: #FFCB6B;"> grep</span><span style="color: #C3E88D;"> Slave_SQL_Running:</span><span style="color: #89DDFF;"> |</span><span style="color: #FFCB6B;"> awk</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">{print $2}</span><span style="color: #89DDFF;">&#39;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">if</span><span style="color: #89DDFF;"> [ &quot;</span><span>$SLAVE_IS_RUNNING</span><span style="color: #89DDFF;">&quot; != &quot;</span><span style="color: #C3E88D;">Yes</span><span style="color: #89DDFF;">&quot; ]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">then</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">   # your options here</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">   /usr/local/bin/mysql</span><span style="color: #C3E88D;"> -e</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">STOP SLAVE; SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; START SLAVE;</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">fi</span></span></code></pre>
+<p>The username and password can be stored in a <code>.my.cnf</code> file, for example in <code>/root/.my.cnf</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>[client]</span></span>
+<span class="giallo-l"><span>user=dbadmin</span></span>
+<span class="giallo-l"><span>password=secret</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

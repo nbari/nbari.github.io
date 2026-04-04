@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Pipenv Pyinstaller &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;pipenv-pyinstaller&#x2F;">Pipenv Pyinstaller</a></h2>
+<div class="post-header">
+    <span class="post-date">April 24, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/pipenv/">pipenv</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/pyinstaller/">pyinstaller</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/flask/">flask</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Create a basic <code>hello world</code> using flask:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>mkdir /tmp/project</span></span>
+<span class="giallo-l"><span>cd /tmp/project</span></span></code></pre>
+<p>Create <code>app.py</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>from flask import Flask</span></span>
+<span class="giallo-l"><span>app = Flask(__name__)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>@app.route(&quot;/&quot;)</span></span>
+<span class="giallo-l"><span>def hello():</span></span>
+<span class="giallo-l"><span>    return &#39;Hello World!&#39;</span></span>
+<span class="giallo-l"><span>if __name__ == &#39;__main__&#39;:</span></span>
+<span class="giallo-l"><span>    app.run(host=&#39;0.0.0.0&#39;)</span></span></code></pre>
+<p>Instal flask:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span> pipenv install flask</span></span></code></pre>
+<p>test the app:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pipenv shell</span></span>
+<span class="giallo-l"><span>python app.py</span></span></code></pre>
+<p>Install <code>pyinstaller</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pipenv install pyinstaller</span></span></code></pre>
+<p>Create the <code>requirements.txt</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pipenv run pip freeze &gt; requirements.txt</span></span></code></pre>
+<p>Create the binary:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span> pyinstaller --onefile app.py</span></span></code></pre>
+<p>Test &amp; run:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>./dist/app</span></span></code></pre>
+<p>Done :-)</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

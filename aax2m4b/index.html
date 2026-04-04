@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+aax2m4b &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aax2m4b&#x2F;">aax2m4b</a></h2>
+<div class="post-header">
+    <span class="post-date">May 20, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aax/">aax</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/audible/">audible</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/m4a/">m4a</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/m4b/">m4b</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ffmpeg/">ffmpeg</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Convert an audiobook <code>.aax</code> to <code>.m4b</code> using ffmpeg</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">brew</span><span style="color: #C3E88D;"> install chromedriver ffmpeg</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">sudo</span><span style="color: #C3E88D;"> easy_install pip</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">pip</span><span style="color: #C3E88D;"> install selenium requests</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">git</span><span style="color: #C3E88D;"> clone https://github.com/inAudible-NG/audible-activator</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">cd</span><span style="color: #C3E88D;"> audible-activator</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">sed</span><span style="color: #C3E88D;"> -i</span><span style="color: #89DDFF;"> &#39;&#39; &#39;</span><span style="color: #C3E88D;">s,chromedriver_path = &quot;./chromedriver&quot;,chromedriver_path = &quot;/usr/local/bin/chromedriver&quot;,</span><span style="color: #89DDFF;">&#39;</span><span style="color: #C3E88D;"> audible-activator.py</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">./audible-activator.py</span></span></code></pre>
+<p>When running <code>audible-activator.py</code> It will ask for the audible
+username/password it will open chrome, and when finish print the activation
+bytes:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> ./audible-activator.py</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">Username:</span><span style="color: #C3E88D;"> your@email</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">Password:</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">[*]</span><span> Player ID is 1xmjyl5rSw0yVb/olWBYuU/NBxk</span><span style="color: #89DDFF;">=</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">activation_bytes:</span><span style="color: #C3E88D;"> b97f4709</span></span></code></pre>
+<p>One having the activation_bytes, use ffmpeg:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>ffmpeg -activation_bytes b97f4709 -i input.aax -vn -c:a copy output.m4a;mv output.m4{a,b}</span></span></code></pre>
+<p>More info: https://apple.stackexchange.com/a/243670/104123</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

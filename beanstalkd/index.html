@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+beanstalkd &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;beanstalkd&#x2F;">beanstalkd</a></h2>
+<div class="post-header">
+    <span class="post-date">May 18, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/beanstalkd/">beanstalkd</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/queue/">queue</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/jobs/">jobs</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <h1 id="beanstalkd"><a class="zola-anchor" href="#beanstalkd" aria-label="Anchor link for: beanstalkd">🔗</a>Beanstalkd</h1>
+<p>Beanstalkd is a big to-do list for your distributed application. If there
+is a unit of work that you want to defer to later (say, sending an email,
+pushing some data to a slow external service, pulling data from a slow external
+service, generating high-quality image thumbnails) you put a description of that
+work, a “job”, into beanstalkd. Some processes (such as web request handlers),
+“producers”, put jobs into the queue. Other processes, “workers”, take jobs out
+of the queue and run them. https://github.com/kr/beanstalkd/wiki/FAQ</p>
+<h3 id="high-availability"><a class="zola-anchor" href="#high-availability" aria-label="Anchor link for: high-availability">🔗</a>High availability</h3>
+<p>Put the instances behind a load balancer, <a rel="external" href="http://www.haproxy.org/">HAProxy</a> and
+run beanstalk with option <code>-b</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>beanstalkd -b /home/beanstalkd/queue</span></span></code></pre>
+<blockquote>
+<p>/home/beanstalkd/queue needs to be an existing directory</p>
+</blockquote>
+<p>The option <code>-b</code> will write all jobs to a binlog, if the power goes out, you can
+restart beasntalkd with the same option and it will recover the contents of the
+log.</p>
+<h3 id="immortalizing-beanstalkd"><a class="zola-anchor" href="#immortalizing-beanstalkd" aria-label="Anchor link for: immortalizing-beanstalkd">🔗</a>immortalizing beanstalkd</h3>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="yaml"><span class="giallo-l"><span style="color: #F07178;">cmd</span><span style="color: #89DDFF;">:</span><span style="color: #C3E88D;"> beanstalkd -V -b /home/beanstalkd/queue</span></span>
+<span class="giallo-l"><span style="color: #F07178;">log</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F07178;">  file</span><span style="color: #89DDFF;">:</span><span style="color: #C3E88D;"> /var/log/beanstalkd.log</span></span>
+<span class="giallo-l"><span style="color: #F07178;">  age</span><span style="color: #89DDFF;">:</span><span style="color: #F78C6C;"> 86400</span></span>
+<span class="giallo-l"><span style="color: #F07178;">  num</span><span style="color: #89DDFF;">:</span><span style="color: #F78C6C;"> 7</span></span>
+<span class="giallo-l"><span style="color: #F07178;">  size</span><span style="color: #89DDFF;">:</span><span style="color: #F78C6C;"> 1</span></span></code></pre><h3 id="port-11300"><a class="zola-anchor" href="#port-11300" aria-label="Anchor link for: port-11300">🔗</a>port 11300</h3>
+<p>Beanstalkd by default listen on port 11300</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

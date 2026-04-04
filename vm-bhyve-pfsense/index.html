@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vm-bhyve Pfsense &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vm-bhyve-pfsense&#x2F;">vm-bhyve Pfsense</a></h2>
+<div class="post-header">
+    <span class="post-date">December 30, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vm/">vm</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/bhyve/">bhyve</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/pfsense/">pfsense</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Install <code>vm-bhyve</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pkg add https://pkg.freebsd.org/FreeBSD:12:amd64/latest/All/vm-bhyve-1.4.2.pkg</span></span>
+<span class="giallo-l"><span>pkg add https://pkg.freebsd.org/FreeBSD:12:amd64/latest/All/uefi-edk2-bhyve-g20210226,2.pkg</span></span>
+<span class="giallo-l"><span>pkg add https://pkg.freebsd.org/FreeBSD:12:amd64/latest/All/uefi-edk2-bhyve-csm-0.2_3,1.pkg</span></span>
+<span class="giallo-l"><span>pkg add https://pkg.freebsd.org/FreeBSD:12:amd64/latest/All/bhyve-firmware-1.0_1.pkg</span></span></code></pre><span id="continue-reading"></span>
+<p>Add to <code>/etc/rc.conf.local</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span>vm_enable</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">YES</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>vm_dir</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">zfs:tank/vms</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>vm_delay</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">5</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+<p>Create zfs <code>tank/vms</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">zfs</span><span style="color: #C3E88D;"> create tank/vms</span></span></code></pre>
+<p>Initialize <code>vm</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> init</span></span></code></pre>
+<blockquote>
+<p>This should be run once after each host reboot before running any other vm commands</p>
+</blockquote>
+<p>Create switch in <code>pfSense</code> first and then using:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> switch create -t manual -b bridge0 public</span></span></code></pre>
+<blockquote>
+<p>in this case <code>bridge0</code> is the name of the bridge created from the GUI interface</p>
+</blockquote>
+<p>or crete one:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> switch create public</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> switch add public ixl1.20</span></span></code></pre>
+<p>Create ubuntu template: <code>/tank/vms/.templates/ubuntu.conf</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span>loader</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">uefi</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>cpu</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">2</span></span>
+<span class="giallo-l"><span>memory</span><span style="color: #89DDFF;">=</span><span style="color: #C3E88D;">2G</span></span>
+<span class="giallo-l"><span>network0_type</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">virtio-net</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>network0_switch</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">public</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>disk0_name</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">disk0</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>disk0_dev</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">sparse-zvol</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>disk0_type</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">virtio-blk</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>graphics</span><span style="color: #89DDFF;">=&quot;</span><span style="color: #C3E88D;">yes</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+<p>Download ubuntu:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> iso https://releases.ubuntu.com/20.04.3/ubuntu-20.04.3-live-server-amd64.iso</span></span></code></pre>
+<p>Create VM using template ubuntu:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> create -t ubuntu -s 40G m1</span></span></code></pre>
+<p>Install VM using the iso</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> install m1 ubuntu-20.04.3-live-server-amd64.iso</span></span></code></pre>
+<blockquote>
+<p>Use VNC client :5900</p>
+</blockquote>
+<p>To stop/start:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> stop m1</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> start m1</span></span></code></pre>
+<p>or using <code>bhyvectl</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">bhyvectl</span><span style="color: #C3E88D;"> --destroy --vm=debian</span></span></code></pre>
+<p>To enable on boot the VM:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">sysrc</span><span style="color: #C3E88D;"> vm_list=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">m1</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+<p>If you have multiple VM's:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">sysrc</span><span style="color: #C3E88D;"> vm_list=</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;">m1 m2 m3</span><span style="color: #89DDFF;">&quot;</span></span></code></pre>
+<p>To get a list of VM's:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">vm</span><span style="color: #C3E88D;"> list</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

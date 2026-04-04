@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+vault SSH &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;vault-ssh&#x2F;">vault SSH</a></h2>
+<div class="post-header">
+    <span class="post-date">April 16, 2022</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/vault/">vault</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ssh/">ssh</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Vault <code>SSH</code> Secrets Engine</p>
+<p>Enable the ssh engine:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault secrets enable ssh</span></span></code></pre>
+<p>or chosse a path:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault secrets enable -path=ssh-client-signer ssh</span></span></code></pre>
+<p>Configure Vault with a CA for signing client keys using the <code>/config/ca</code> endpoint:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write ssh/config/ca generate_signing_key=</span><span style="color: #89DDFF;">true</span></span></code></pre>
+<p>Get the public key:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> curl -s</span><span> $VAULT_ADDR</span><span style="color: #C3E88D;">/v1/ssh/public_key</span></span></code></pre>
+<p>Copy the key to your servers and add this to <code>sshd_config</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>TrustedUserCAKeys /etc/ssh/truasted-ca.pem</span></span>
+<span class="giallo-l"><span>AuthorizedKeysFile /dev/null</span></span>
+<span class="giallo-l"><span>PasswordAuthentication no</span></span>
+<span class="giallo-l"><span>ChallengeResponseAuthentication no</span></span></code></pre>
+<p>Create a role:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write ssh/roles/default -</span><span style="color: #89DDFF;">&lt;&lt;&quot;EOH&quot;</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">{</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;algorithm_signer&quot;: &quot;rsa-sha2-256&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;allow_user_certificates&quot;: true,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;allowed_users&quot;: &quot;*&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;allowed_extensions&quot;: &quot;permit-pty,permit-port-forwarding,permit-agent-forwarding&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;default_extensions&quot;: [</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    {</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;permit-pty&quot;: &quot;&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;permit-port-forwarding&quot;: &quot;&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">      &quot;permit-agent-forwarding&quot;: &quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">    }</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  ],</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;key_type&quot;: &quot;ca&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;default_user&quot;: &quot;devops&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">  &quot;ttl&quot;: &quot;30m0s&quot;</span></span>
+<span class="giallo-l"><span style="color: #C3E88D;">}</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">EOH</span></span></code></pre>
+<p>Ask Vault to sign your public key.</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write -field=signed_key ssh/sign/default public_key=@</span><span>$HOME</span><span style="color: #C3E88D;">/.ssh/id_rsa.pub</span><span style="color: #89DDFF;"> &gt;</span><span style="color: #C3E88D;"> ~/.ssh/id_rsa-cert.pub</span></span></code></pre>
+<p>For a specific user:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> vault write -field=signed_key ssh/sign/default public_key=@</span><span>$HOME</span><span style="color: #C3E88D;">/.ssh/id_rsa.pub valid_principals=nbari</span><span style="color: #89DDFF;"> &gt;</span><span style="color: #C3E88D;"> ~/.ssh/id_rsa-cert.pub</span></span></code></pre>
+<blockquote>
+<p>If you are saving the certificate directly beside your SSH keypair, suffix the
+name with -cert.pub (~/.ssh/id_rsa-cert.pub). With this naming scheme, OpenSSH
+will automatically use it during authentication.</p>
+</blockquote>
+<p>Examine the signed certificate:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> ssh-keygen -Lf ~/.ssh/id_rsa-cert.pub</span></span></code></pre>
+<p>Test:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">$</span><span style="color: #C3E88D;"> ssh -i id_rsa_cert.pub -i id_rsa username@host</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

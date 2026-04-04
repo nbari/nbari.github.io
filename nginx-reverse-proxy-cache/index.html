@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Nginx Reverse Proxy Cache &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;nginx-reverse-proxy-cache&#x2F;">Nginx Reverse Proxy Cache</a></h2>
+<div class="post-header">
+    <span class="post-date">August 10, 2017</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>This is the full configuration for <code>nginx.conf</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="nginx"><span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">user</span><span> www www</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">worker_processes</span><span>  auto</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C792EA;">events</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    use kqueue;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    worker_connections</span><span style="color: #F78C6C;">  1024</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C792EA;">http</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    include</span><span>       mime.types</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    default_type</span><span>  application/octet-stream</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    sendfile on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    tcp_nopush on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    tcp_nodelay on;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    client_max_body_size</span><span style="color: #F78C6C;"> 30M</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    keepalive_timeout</span><span style="color: #F78C6C;">    10 10</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip            on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_static     on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_vary       on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_min_length</span><span style="color: #F78C6C;"> 0</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_comp_level</span><span style="color: #F78C6C;"> 9</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_buffers</span><span style="color: #F78C6C;">    16 8k</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_proxied</span><span>    any</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    gzip_types</span><span> text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json application/javascript image/svg+xml</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    charset</span><span>   utf-8</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    server_tokens off;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    server_name_in_redirect off;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    proxy_buffering    on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    proxy_cache_path</span><span>   /home/cache levels=1:2 keys_zone=rubygems:256m max_size=5g inactive=24h use_temp_path=off</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    proxy_buffer_size</span><span style="color: #F78C6C;">  8k</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    proxy_buffers</span><span style="color: #F78C6C;">      8 24k</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C792EA;">    server</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        listen</span><span style="color: #F78C6C;">       80</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        server_name</span><span>  _</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C792EA;">        location</span><span style="color: #FFCB6B;"> / </span><span>{</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache</span><span> rubygems</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache_use_stale</span><span> updating </span><span style="color: #89DDFF;">error</span><span> timeout invalid_header http_500 http_502 http_503 http_504</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache_revalidate on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache_min_uses</span><span style="color: #F78C6C;"> 1</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache_lock on;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_cache_valid</span><span style="color: #F78C6C;"> 200 301 304 2d</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_ignore_headers</span><span> X-Accel-Expires Expires Cache-Control Set-Cookie</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_redirect off;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_set_header</span><span> X-Real-IP </span><span style="color: #89DDFF;">$</span><span>remote_addr</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_set_header</span><span> X-Forwarded-For </span><span style="color: #89DDFF;">$</span><span>proxy_add_x_forwarded_for</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_set_header</span><span> X-Forwarded-Proto </span><span style="color: #89DDFF;">$</span><span>scheme</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_set_header</span><span> Host rubygems.org</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_set_header</span><span> Connection </span><span style="color: #C3E88D;">&quot;&quot;</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_http_version</span><span style="color: #F78C6C;"> 1.1</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            proxy_pass</span><span> https://rubygems.org/</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>In this case Nginx is used to cache packages from <a rel="external" href="https://rubygems.org">rubygems.org</a>.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

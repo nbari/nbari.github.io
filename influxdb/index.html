@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Influxdb &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;influxdb&#x2F;">Influxdb</a></h2>
+<div class="post-header">
+    <span class="post-date">May 05, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/influxdb/">influxdb</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/time-series/">time-series</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/collectd/">collectd</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Basic influxdb queries, setup.</p>
+<p>You can use <code>influx</code> (the influxdb shell) or use the http API on port <code>:8086</code></p>
+<p>Create and apply retention policy to a database: <strong>warning</strong> this may remove/purge existing data</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>CREATE RETENTION POLICY &quot;30_days&quot; ON collectd DURATION 30d REPLICATION 1 default</span></span></code></pre>
+<blockquote>
+<p>notice the ending <code>default</code> that means to apply the created policy</p>
+</blockquote>
+<p>For 1 year, use <code>52w</code> (52 weeks)</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>CREATE RETENTION POLICY &quot;a_year&quot; ON telegraf DURATION 52w REPLICATION 1 default</span></span></code></pre>
+<p>Show retention policies:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>&gt; show retention policies</span></span>
+<span class="giallo-l"><span>name    duration shardGroupDuration replicaN default</span></span>
+<span class="giallo-l"><span>----    -------- ------------------ -------- -------</span></span>
+<span class="giallo-l"><span>autogen 0s       168h0m0s           1        false</span></span>
+<span class="giallo-l"><span>30_days 720h0m0s 24h0m0s            1        true</span></span></code></pre>
+<p>Show databases contents (measurements):</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>&gt; show measurements on collectd</span></span>
+<span class="giallo-l"><span>name: measurements</span></span>
+<span class="giallo-l"><span>name</span></span>
+<span class="giallo-l"><span>----</span></span>
+<span class="giallo-l"><span>cpu_value</span></span>
+<span class="giallo-l"><span>df_value</span></span>
+<span class="giallo-l"><span>disk_io_time</span></span>
+<span class="giallo-l"><span>disk_read</span></span>
+<span class="giallo-l"><span>disk_weighted_io_time</span></span>
+<span class="giallo-l"><span>disk_write</span></span>
+<span class="giallo-l"><span>filecount_value</span></span>
+<span class="giallo-l"><span>interface_rx</span></span>
+<span class="giallo-l"><span>interface_tx</span></span>
+<span class="giallo-l"><span>load_longterm</span></span>
+<span class="giallo-l"><span>load_midterm</span></span>
+<span class="giallo-l"><span>load_shortterm</span></span>
+<span class="giallo-l"><span>memory_value</span></span>
+<span class="giallo-l"><span>ntpd_value</span></span>
+<span class="giallo-l"><span>processes_value</span></span>
+<span class="giallo-l"><span>swap_value</span></span>
+<span class="giallo-l"><span>tcpconns_value</span></span>
+<span class="giallo-l"><span>uptime_value</span></span>
+<span class="giallo-l"><span>users_value</span></span></code></pre>
+<p>To see all series on a database:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>&gt; show series on collectd limit 4</span></span>
+<span class="giallo-l"><span>key</span></span>
+<span class="giallo-l"><span>---</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=idle</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=interrupt</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=nice</span></span></code></pre>
+<p>To get a specific serie:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>&gt; show series on collectd from cpu_value WHERE host = &#39;aruba&#39;</span></span>
+<span class="giallo-l"><span>key</span></span>
+<span class="giallo-l"><span>---</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=idle</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=interrupt</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=nice</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=system</span></span>
+<span class="giallo-l"><span>cpu_value,host=aruba,instance=0,type=percent,type_instance=user</span></span></code></pre><h2 id="loglevel-warn"><a class="zola-anchor" href="#loglevel-warn" aria-label="Anchor link for: loglevel-warn">🔗</a>loglevel warn</h2>
+<p>To avoid multiple log lines like:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>error=&quot;NaN is an unsupported value for field value&quot;</span></span></code></pre>
+<p>Set the log level to <code>warn</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>[logging]</span></span>
+<span class="giallo-l"><span>  format = &quot;auto&quot;</span></span>
+<span class="giallo-l"><span>  level = &quot;info&quot;</span></span>
+<span class="giallo-l"><span>  suppress-logo = false</span></span></code></pre>
+<blockquote>
+<p>If you don't have this entry add it to your <code>influxd.conf</code></p>
+</blockquote>
+<h1 id="drop-series-not-getting-data"><a class="zola-anchor" href="#drop-series-not-getting-data" aria-label="Anchor link for: drop-series-not-getting-data">🔗</a>Drop series not getting data</h1>
+<p>For example if using <code>collectd</code> and want to remove series that haven't receive data in less than 10 days:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>#!/bin/sh</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>HOSTS=$(influx -database &quot;collectd&quot; -execute &quot;SHOW TAG VALUES WITH KEY=host&quot; | awk &#39;/^host/ &amp;&amp; !a[$2]++ { print $2}&#39;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>for i in ${HOSTS}</span></span>
+<span class="giallo-l"><span>do</span></span>
+<span class="giallo-l"><span>    PURGE=$(influx -database &quot;collectd&quot; -execute &quot;SELECT last(value) FROM cpu_value WHERE host = &#39;${i}&#39; and time &gt; now() -10d&quot; | head -c1 | wc -c)</span></span>
+<span class="giallo-l"><span>    if [ ${PURGE} -eq 0 ]; then</span></span>
+<span class="giallo-l"><span>        echo &quot;droping ${i}&quot;</span></span>
+<span class="giallo-l"><span>        influx -database &quot;collectd&quot; -execute &quot;DROP series WHERE host=&#39;${i}&#39;&quot;</span></span>
+<span class="giallo-l"><span>    fi;</span></span>
+<span class="giallo-l"><span>done</span></span></code></pre><h1 id="time-format"><a class="zola-anchor" href="#time-format" aria-label="Anchor link for: time-format">🔗</a>Time format</h1>
+<p>Within the CLI use:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>&gt; precision rfc3339</span></span></code></pre>
+<p>Query using ssl:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ influx -ssl -unsafeSsl</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

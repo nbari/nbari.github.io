@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+GPG RemoteForward &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;gpg-remoteforward&#x2F;">GPG RemoteForward</a></h2>
+<div class="post-header">
+    <span class="post-date">December 08, 2021</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/gpg/">gpg</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>To Forward your SSH session if using a Yubikey and <code>gpg-agent</code>:</p>
+<p>For example to connect from a MacOS to a Linux VM:</p>
+<p>On the client, add this to your <code>~/.ssh/config</code></p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">Host</span><span style="color: #C3E88D;"> foo</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    Hostname</span><span style="color: #C3E88D;"> X.X.X.X</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    ForwardAgent</span><span style="color: #C3E88D;"> yes</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    RemoteForward</span><span style="color: #C3E88D;"> /run/user/1000/gnupg/S.gpg-agent     /Users/monkey/.gnupg/S.gpg-agent.extra</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">    RemoteForward</span><span style="color: #C3E88D;"> /run/user/1000/gnupg/S.gpg-agent.ssh /Users/monkey/.gnupg/S.gpg-agent.extra.ssh</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                            (</span><span style="color: #FFCB6B;">remote</span><span style="color: #C3E88D;"> socket</span><span style="color: #89DDFF;">)                  (</span><span>l</span><span style="color: #C3E88D;">ocal socket</span><span style="color: #89DDFF;">)</span></span></code></pre>
+<p>To find the local socket in your mac/client do:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">gpgconf</span><span style="color: #C3E88D;"> --list-dirs agent-extra-socket</span></span></code></pre>
+<p>To find the remove socket, in the Linux VM, do:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">gpgconf</span><span style="color: #C3E88D;"> --list-dirs agent-socket</span></span></code></pre>
+<p>In the remote host (the Linux VM) in <code>.bashrc</code> I have:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">gpgconf</span><span style="color: #C3E88D;"> --create-socketdir</span></span></code></pre>
+<p>If can't login, remove the socket: <code>rm -f /run/user/1000/gnupg/S.gpg-agent</code>, if posible add this to the /etc/ssh/sshd_config: <code>StreamLocalBindUnlink yes</code></p>
+<blockquote>
+<p>Optional If you do not have root access to the remote machine to edit /etc/ssh/sshd_config, you will need to remove the socket (located at gpgconf --list-dir agent-socket) on the remote machine before forwarding works. For example, rm /run/user/1000/gnupg/S.gpg-agent - https://github.com/drduh/YubiKey-Guide#remote-machines-gpg-agent-forwarding</p>
+</blockquote>
+<p>Add your public key to the remove host:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">gpg</span><span style="color: #C3E88D;"> -a -o pub.key --export your@key</span></span></code></pre>
+<p>In the remote host import your key and trust it:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">gpg</span><span style="color: #C3E88D;"> --import pub.key</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">gpg</span><span style="color: #C3E88D;"> --edit-key KEYID</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">trust</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">5</span></span>
+<span class="giallo-l"><span style="color: #FFCB6B;">save</span></span></code></pre>
+<p>You could also use:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">ssh</span><span style="color: #C3E88D;"> -R /run/user/1000/gnupg/S.gpg-agent:/Users/monkey/.gnupg/S.gpg-agent.extra -o</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">StreamLocalBindUnlink=yes</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;"> user@x.x.x.x</span></span></code></pre>
+<p>In the remote host test with something like:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">ssh</span><span style="color: #C3E88D;"> -T git@github.com</span></span></code></pre>
+<p>Also you could list all your current keys with:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">ssh-add</span><span style="color: #C3E88D;"> -L</span></span></code></pre><h2 id="scdaemon-conf"><a class="zola-anchor" href="#scdaemon-conf" aria-label="Anchor link for: scdaemon-conf">🔗</a>scdaemon.conf</h2>
+<p>In macOS, you can use the following <code>~/.gnupg/scdaemon.conf</code>:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pcsc-driver /System/Library/Frameworks/PCSC.framework/PCSC</span></span>
+<span class="giallo-l"><span>disable-ccid</span></span>
+<span class="giallo-l"><span>log-file /tmp/scdaemon.log</span></span></code></pre>
+<p>In Linux:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>pcsc-driver /usr/lib/libpcsclite.so</span></span>
+<span class="giallo-l"><span>disable-ccid</span></span>
+<span class="giallo-l"><span>log-file /tmp/scdaemon.log</span></span></code></pre>
+<blockquote>
+<p>you may need to install <code>libusb-compat</code> to use <code>libpcsclite.so</code> on some systems</p>
+</blockquote>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

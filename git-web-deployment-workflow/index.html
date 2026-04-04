@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+Git Web Deployment Workflow &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;git-web-deployment-workflow&#x2F;">Git Web Deployment Workflow</a></h2>
+<div class="post-header">
+    <span class="post-date">March 25, 2018</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/git/">git</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/deployment/">deployment</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/hooks/">hooks</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>The idea behind is to push to a remote repository on the same web/service server
+and a <code>post-receive</code> hook will checkout the files to the public directory.</p>
+<h2 id="configuring-the-server"><a class="zola-anchor" href="#configuring-the-server" aria-label="Anchor link for: configuring-the-server">🔗</a>Configuring the server</h2>
+<p>Create the repository:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ cd $HOME</span></span>
+<span class="giallo-l"><span>$ mkdir my-site.git</span></span>
+<span class="giallo-l"><span>$ cd my-site.git</span></span>
+<span class="giallo-l"><span>$ git init --bare</span></span></code></pre>
+<p>The idea of using <code>.git</code> as a suffix is just to distinguish between other
+directories.</p>
+<p>Crate the directory where you would like to deploy, for example:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ mkdir /home/sites/my-site</span></span></code></pre><h3 id="create-a-post-receive-hook"><a class="zola-anchor" href="#create-a-post-receive-hook" aria-label="Anchor link for: create-a-post-receive-hook">🔗</a>Create a post-receive hook</h3>
+<p>When you create a <strong>bare</strong> repo, normally you get this structure:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span> my-site.git</span></span>
+<span class="giallo-l"><span>├── HEAD</span></span>
+<span class="giallo-l"><span>├── config</span></span>
+<span class="giallo-l"><span>├── description</span></span>
+<span class="giallo-l"><span>├── hooks</span></span>
+<span class="giallo-l"><span>│   ├── applypatch-msg.sample</span></span>
+<span class="giallo-l"><span>│   ├── commit-msg.sample</span></span>
+<span class="giallo-l"><span>│   ├── fsmonitor-watchman.sample</span></span>
+<span class="giallo-l"><span>│   ├── post-update.sample</span></span>
+<span class="giallo-l"><span>│   ├── pre-applypatch.sample</span></span>
+<span class="giallo-l"><span>│   ├── pre-commit.sample</span></span>
+<span class="giallo-l"><span>│   ├── pre-push.sample</span></span>
+<span class="giallo-l"><span>│   ├── pre-rebase.sample</span></span>
+<span class="giallo-l"><span>│   ├── pre-receive.sample</span></span>
+<span class="giallo-l"><span>│   ├── prepare-commit-msg.sample</span></span>
+<span class="giallo-l"><span>│   └── update.sample</span></span>
+<span class="giallo-l"><span>├── info</span></span>
+<span class="giallo-l"><span>│   └── exclude</span></span>
+<span class="giallo-l"><span>├── objects</span></span>
+<span class="giallo-l"><span>│   ├── info</span></span>
+<span class="giallo-l"><span>│   └── pack</span></span>
+<span class="giallo-l"><span>└── refs</span></span>
+<span class="giallo-l"><span>    ├── heads</span></span>
+<span class="giallo-l"><span>    └── tags</span></span></code></pre>
+<p>The <code>post-receive</code> hook (located within the <code>hooks</code> directory) will
+be called after git has received commits, for example create the file
+<code>$HOME/my-site.git/hooks/post-receive</code> with this contents:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>#!/bin/sh</span></span>
+<span class="giallo-l"><span>git --work-tree=/home/sites/my-site checkout -f</span></span></code></pre>
+<p>Set <code>exec</code> permissions to the hook:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>chmod +x hooks/post-receive</span></span></code></pre><h2 id="configure-your-local-machine"><a class="zola-anchor" href="#configure-your-local-machine" aria-label="Anchor link for: configure-your-local-machine">🔗</a>Configure your local machine</h2>
+<p>Once you have setup your remote repository and the <code>post-receive</code> hook, you
+could add a second origin, something like:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ git remote add live ssh://username@your-host.tld/~/my-site.git</span></span></code></pre>
+<p>Normally your project already has a remote named "origin" in where you can
+continue pushing your changes, branches etc; this new remote named <code>live</code> will
+be only used to checkout/publish your changes after receiving a commit.</p>
+<h2 id="deploy"><a class="zola-anchor" href="#deploy" aria-label="Anchor link for: deploy">🔗</a>Deploy</h2>
+<p>Just need to push to your remote named <strong>live</strong> in this example:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>$ git push live master</span></span></code></pre>
+<p>After doing this, you could check your remote server and check the contents of
+<code>/home/sites/my-site</code> it should be updated to your latest changes.</p>
+
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

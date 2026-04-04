@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+AWS Policy Access by IP &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;aws-policy-access-by-ip&#x2F;">AWS Policy Access by IP</a></h2>
+<div class="post-header">
+    <span class="post-date">September 15, 2017</span>
+    
+    <div class="post-tags">
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/aws/">aws</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/ip/">ip</a></span>
+        
+        <span class="post-tag">#<a href="https://nbari.com/tags/policy/">policy</a></span>
+        
+    </div>
+    
+</div>
+
+    <div class="post-content">
+        <p>Policy to restrict <a rel="external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition">IAM</a> AWS API requests to a specific set of IP addresses.</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="json"><span class="giallo-l"><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    &quot;</span><span style="color: #C792EA;">Version</span><span style="color: #89DDFF;">&quot;: &quot;</span><span style="color: #C3E88D;">2012-10-17</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    &quot;</span><span style="color: #C792EA;">Statement</span><span style="color: #89DDFF;">&quot;: {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        &quot;</span><span style="color: #FFCB6B;">Effect</span><span style="color: #89DDFF;">&quot;: &quot;</span><span style="color: #C3E88D;">Deny</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        &quot;</span><span style="color: #FFCB6B;">Action</span><span style="color: #89DDFF;">&quot;: &quot;</span><span style="color: #C3E88D;">*</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        &quot;</span><span style="color: #FFCB6B;">Resource</span><span style="color: #89DDFF;">&quot;: &quot;</span><span style="color: #C3E88D;">*</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        &quot;</span><span style="color: #FFCB6B;">Condition</span><span style="color: #89DDFF;">&quot;: {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            &quot;</span><span style="color: #F78C6C;">NotIpAddress</span><span style="color: #89DDFF;">&quot;: {</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                &quot;</span><span style="color: #F07178;">aws:SourceIp</span><span style="color: #89DDFF;">&quot;: [</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                    &quot;</span><span style="color: #C3E88D;">10.13.0.0/16</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                    &quot;</span><span style="color: #C3E88D;">72.55.175.70/32</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                    &quot;</span><span style="color: #C3E88D;">10.100.0.0/16</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">                ]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            }</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        }</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    }</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
+<p>After applying this policy others may need to be applied or in case all in one
+required, something like this can be used:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>{</span></span>
+<span class="giallo-l"><span>    &quot;Version&quot;: &quot;2012-10-17&quot;,</span></span>
+<span class="giallo-l"><span>    &quot;Statement&quot;: [{</span></span>
+<span class="giallo-l"><span>        &quot;Effect&quot;: &quot;Deny&quot;,</span></span>
+<span class="giallo-l"><span>        &quot;Action&quot;: &quot;*&quot;,</span></span>
+<span class="giallo-l"><span>        &quot;Resource&quot;: &quot;*&quot;,</span></span>
+<span class="giallo-l"><span>        &quot;Condition&quot;: {</span></span>
+<span class="giallo-l"><span>            &quot;NotIpAddress&quot;: {</span></span>
+<span class="giallo-l"><span>                &quot;aws:SourceIp&quot;: [</span></span>
+<span class="giallo-l"><span>                    &quot;10.13.0.0/16&quot;,</span></span>
+<span class="giallo-l"><span>                    &quot;72.55.175.70/32&quot;,</span></span>
+<span class="giallo-l"><span>                    &quot;10.100.0.0/16&quot;</span></span>
+<span class="giallo-l"><span>                ]</span></span>
+<span class="giallo-l"><span>            }</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }, {</span></span>
+<span class="giallo-l"><span>        &quot;Effect&quot;: &quot;Allow&quot;,</span></span>
+<span class="giallo-l"><span>        &quot;Action&quot;: &quot;*&quot;,</span></span>
+<span class="giallo-l"><span>        &quot;Resource&quot;: &quot;*&quot;</span></span>
+<span class="giallo-l"><span>    }]</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>The expected error when policy is applied is similar to:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="plain"><span class="giallo-l"><span>Error loading state: AccessDenied: Access Denied</span></span>
+<span class="giallo-l"><span>status code: 403, request id: 5A14AE35A2D7CD1B, host id: ROyNOfAiBNojw7VTJ6tLsZeBjQ5YHILbjfubWg/D8R/C+4HORHGqcIw5ByyTr/HyOP3TWK8Ogbs=</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>

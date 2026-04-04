@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>
+proxmox cpu &middot; IT notes
+</title>
+    <link rel="stylesheet" href="https://nbari.com/slim.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet'
+        type='text/css'>
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        
+<div class="header">
+    <h1 class="site-title"><a href="https:&#x2F;&#x2F;nbari.com">IT notes</a></h1>
+    <p class="site-tagline"></p>
+    <div class="nav">
+        <a class="nav-btn" href="#">
+            <span class="ci ci-burger"></span>
+        </a>
+        <ul class="nav-list">
+            
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;about&#x2F;">About</a></li>
+            
+            <li><a href="https:&#x2F;&#x2F;nbari.com&#x2F;tags">Tags</a></li>
+            
+            
+            <li class="spacer">&ac;</li>
+            
+            
+            <li><a href="https://github.com/nbari">Github</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+        <div class="content">
+            <div class="posts">
+                
+<div class="post">
+    
+    
+<h2 class="post-title"><a href="https:&#x2F;&#x2F;nbari.com&#x2F;proxmox-cpu&#x2F;">proxmox cpu</a></h2>
+<div class="post-header">
+    <span class="post-date">July 30, 2024</span>
+    
+</div>
+
+    <div class="post-content">
+        <p>To change CPU type to <code>host</code>, unmount CD ISO and enable start on boot:</p>
+<pre class="giallo" style="color: #BABED8; background-color: #0F111A;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FFCB6B;">mapfile</span><span style="color: #C3E88D;"> -t vm_ids</span><span style="color: #89DDFF;"> &lt; &lt;(</span><span style="color: #FFCB6B;">qm</span><span style="color: #C3E88D;"> list</span><span style="color: #89DDFF;"> |</span><span style="color: #FFCB6B;"> awk</span><span style="color: #89DDFF;"> &#39;</span><span style="color: #C3E88D;">NR&gt;1 {print $1}</span><span style="color: #89DDFF;">&#39;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;"># Changing CPU type to host and enabling start on boot for each VM</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">for</span><span> vm</span><span style="color: #89DDFF;font-style: italic;"> in</span><span style="color: #89DDFF;"> &quot;${</span><span>vm_ids</span><span style="color: #89DDFF;">[@]}&quot;;</span><span style="color: #89DDFF;font-style: italic;"> do</span></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">    # Change CPU type to host</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    if</span><span style="color: #FFCB6B;"> qm</span><span style="color: #C3E88D;"> set</span><span style="color: #89DDFF;"> &quot;</span><span>$vm</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;"> --cpu host</span><span style="color: #89DDFF;">;</span><span style="color: #89DDFF;font-style: italic;"> then</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Successfully changed CPU type to host for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    else</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Failed to change CPU type to host for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot; &gt;&amp;2</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">    # Unmount CD ISO</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    if</span><span style="color: #FFCB6B;"> qm</span><span style="color: #C3E88D;"> set</span><span style="color: #89DDFF;"> &quot;</span><span>$vm</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;"> -ide2 none</span><span style="color: #89DDFF;">;</span><span style="color: #89DDFF;font-style: italic;"> then</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Successfully unmounted CD ISO for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    else</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Failed to unmount CD ISO for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot; &gt;&amp;2</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #464B5D;font-style: italic;">    # Enable start on boot</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    if</span><span style="color: #FFCB6B;"> qm</span><span style="color: #C3E88D;"> set</span><span style="color: #89DDFF;"> &quot;</span><span>$vm</span><span style="color: #89DDFF;">&quot;</span><span style="color: #C3E88D;"> --onboot</span><span style="color: #F78C6C;"> 1</span><span style="color: #89DDFF;">;</span><span style="color: #89DDFF;font-style: italic;"> then</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Successfully enabled start on boot for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    else</span></span>
+<span class="giallo-l"><span style="color: #82AAFF;">        echo</span><span style="color: #89DDFF;"> &quot;</span><span style="color: #C3E88D;">Failed to enable start on boot for VM ID: </span><span>$vm</span><span style="color: #89DDFF;">&quot; &gt;&amp;2</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">    fi</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;font-style: italic;">done</span></span></code></pre>
+    </div>
+    
+</div>
+
+            </div>
+            
+        </div>
+        
+<div class="footer">
+    
+    <p>🌱</p>
+    
+</div>
+
+    </div>
+    <script src="https://nbari.com/js/slim.js"></script>
+    
+</body>
+
+</html>
